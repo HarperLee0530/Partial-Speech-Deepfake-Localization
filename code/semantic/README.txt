@@ -1,6 +1,10 @@
 ﻿语义路线：词语对齐、类别统计与冻结统计特征
 
 一、当前实现对应研究方案的哪一步
+
+【组员精简数据】组员只需data/fixed10、对应fixed10预测目录（predictions.sqlite、metrics.json、status.json）及ASR/NER资源。
+manifest根据metrics.json中的data_profile定位精简或完整音频。下文历史full结果示例仅供拥有完整数据的负责人使用；
+组员应把--run替换为check列出的fixed10预测目录。完整数据不必传给组员。
 对应《语义辅助复查与区间收益修正完整研究方案》第五节“建立词汇与语义错误统计”，
 以及第九节“转写与时间对齐”的统计特征出口。
 

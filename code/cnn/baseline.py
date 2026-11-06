@@ -187,7 +187,12 @@ if str(_CODE_ROOT) not in sys.path:
 from project_config import DATA_ROOT
 
 
-def check_training_files():
+def check_training_files(data_profile='full'):
+    if data_profile == 'fixed10':
+        from tools.data_tools import validate_fixed10
+        for split in ('train', 'dev', 'eval'):
+            validate_fixed10(split)
+        return
     base = DATA_ROOT / 'PartialSpoof'
     required = [base/'database/train', base/'database/dev',
                 base/'database_train.tar.gz.extracted.json',
@@ -199,17 +204,23 @@ def check_training_files():
 
 
 def audit_splits(data_profile='full'):
-    root = DATA_ROOT/'PartialSpoof/database/segment_labels'
+    root = DATA_ROOT/('fixed10/PartialSpoof/database/segment_labels' if data_profile == 'fixed10'
+                     else 'PartialSpoof/database/segment_labels')
     ids = {split: set(np.load(root/f'{split}_seglab_0.16.npy', allow_pickle=True).item())
            for split in ('train', 'dev', 'eval')}
     for a, b in (('train', 'dev'), ('train', 'eval'), ('dev', 'eval')):
         if ids[a] & ids[b]:
             raise ValueError(f'Utterance ID leakage between {a} and {b}')
-    from tools.data_tools import read_manifest
+    from tools.data_tools import read_manifest, validate_fixed10
+    if data_profile == 'fixed10':
+        for split in ids:
+            validate_fixed10(split)
     selected = {s: set(read_manifest(s)['utterance_ids']) if data_profile == 'fixed10' else v for s, v in ids.items()}
     if any(not selected[s] <= ids[s] for s in ids):
         raise ValueError('Subset is not contained in the official split')
-    return dict(official_split_utterances={s: len(v) for s, v in ids.items()},
+    return dict(official_split_utterances={s: read_manifest(s)['official_count'] if data_profile == 'fixed10' else len(v)
+                                         for s, v in ids.items()},
+                official_count_source='shared_manifest' if data_profile == 'fixed10' else 'full_labels',
                 active_data_profile=data_profile, active_split_utterances={s: len(v) for s, v in selected.items()},
                 utterance_ids_disjoint=True,
                 source_recording_overlap='Not independently verified: source provenance map is not provided',
@@ -600,7 +611,7 @@ def train_epoch(model, loader, optimizer, device, progress=None):
 
 def train(config=None, progress=None):
     config = load_config() if config is None else validate_config(config)
-    check_training_files()
+    check_training_files(config['training_data_profile'])
     require_device_idle(config['device'])
     configure_runtime(config)
     record = RunRecord('train', training_dataset='PartialSpoof train', validation_dataset='PartialSpoof dev',
@@ -886,10 +897,10 @@ def check_setup():
     print('Current SAL results are public-checkpoint evaluation, not matched from-scratch training.')
     print(json.dumps(audit_splits(config['training_data_profile']), ensure_ascii=False, indent=2))
     try:
-        check_training_files()
+        check_training_files(config['training_data_profile'])
     except FileNotFoundError as error:
         print(str(error))
-        print('NOT READY: prepare the official PS train audio before clicking cnn/baseline.py.')
+        print('NOT READY: supply audio, labels and manifests for the selected data profile.')
         return 1
     print('TRAINING FILES PRESENT. Full audio/label ID coverage is checked when loading datasets.')
     print('CNN-BiGRU checkpoints:', len(list((DATA_ROOT/'models').glob('cnn_bigru_train_*_best.pt'))))

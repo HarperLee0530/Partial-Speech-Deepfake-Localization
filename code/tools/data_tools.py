@@ -40,6 +40,26 @@ def read_manifest(split):
     return manifest
 
 
+def validate_fixed10(split):
+    """Validate a portable subset without original audio or hard-link requirements."""
+    manifest = read_manifest(split)
+    reference = json.loads((CODE_ROOT/'manifests/fixed10'/f'{split}.json').read_text(encoding='utf-8'))
+    if manifest != reference:
+        raise ValueError(f'Fixed subset differs from the shared repository manifest: {split}')
+    audio, label_root = dataset_paths(split, 'fixed10')
+    name = 'cf_seglab_0.02.npy' if split == 'lps' else f'{split}_seglab_0.16.npy'
+    labels = np.load(label_root/name, allow_pickle=True).item()
+    audio_ids = [p.stem for p in audio.rglob('*.wav')]
+    expected = manifest['utterance_ids']
+    if len(audio_ids) != len(set(audio_ids)) or sorted(audio_ids) != expected or sorted(labels) != expected:
+        raise ValueError(f'Fixed subset audio/label/manifest coverage mismatch: {split}')
+    for uid, values in labels.items():
+        numeric = np.asarray(values).astype(float)
+        if numeric.ndim != 1 or not len(numeric) or not np.isin(numeric, [0, 1]).all():
+            raise ValueError(f'Invalid fixed subset labels: {split}/{uid}')
+    return manifest
+
+
 def profile_info(split, profile):
     if profile not in PROFILES:
         raise ValueError(f'Unknown data profile: {profile}')

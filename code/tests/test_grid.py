@@ -66,7 +66,10 @@ class GridIntegrationTests(unittest.TestCase):
             self.assertEqual(state['status'],'failed')
 
     def test_sal_profiles_use_same_official_model_and_separate_data(self):
-        fixed, fixed_model, fixed_data = training_config('fixed10')
+        # Configuration checks must also work on a code-only clone.
+        with patch('tools.data_tools.read_manifest', return_value=dict(seed=20261107, actual_fraction=.1,
+                   official_count=10, manifest_sha256='fixture')):
+            fixed, fixed_model, fixed_data = training_config('fixed10')
         full, full_model, full_data = training_config('full')
         self.assertEqual(fixed,full)
         self.assertEqual(fixed_model,full_model)
