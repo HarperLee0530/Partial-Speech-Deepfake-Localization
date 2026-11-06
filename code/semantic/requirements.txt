@@ -1,0 +1,5 @@
+# Core diagnostics reuse the existing project environment.
+numpy>=1.26,<3
+# Optional transcription / named-entity and POS annotation (local model required).
+faster-whisper>=1.1,<2
+spacy>=3.8,<4

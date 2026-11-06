@@ -1,0 +1,5 @@
+{
+  "data_root": "../data",
+  "result_root": "../result",
+  "python_path": ".venv/Scripts/python.exe"
+}

@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "utterances": 24844,
+    "label_frames": 560279,
+    "resolution_seconds": 0.16,
+    "max_label_duration_seconds": 15.36,
+    "median_label_duration_seconds": 3.36,
+    "exact_id_coverage": true
+  },
+  "eval": {
+    "utterances": 71237,
+    "label_frames": 1558425,
+    "resolution_seconds": 0.16,
+    "max_label_duration_seconds": 18.240000000000002,
+    "median_label_duration_seconds": 3.04,
+    "exact_id_coverage": true
+  },
+  "lps": {
+    "utterances": 76228,
+    "resolution_seconds": 0.02,
+    "label_frames": 23934213,
+    "max_duration_seconds": 56.54,
+    "median_duration_seconds": 5.17,
+    "exact_id_coverage": true
+  }
+}
