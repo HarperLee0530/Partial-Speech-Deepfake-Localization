@@ -488,7 +488,11 @@ def check():
 def make_manifest(run, output, limit):
     metrics = read_json(run/'metrics.json')
     split = metrics['split']
-    audio_root = DATA_ROOT/'LlamaPartialSpoof' if split=='lps' else DATA_ROOT/'PartialSpoof'/'database'/split
+    profile = metrics.get('data_profile', 'full')
+    if profile not in ('full', 'fixed10'):
+        raise ValueError('Unknown prediction data_profile: '+str(profile))
+    base = DATA_ROOT/'fixed10' if profile == 'fixed10' else DATA_ROOT
+    audio_root = base/'LlamaPartialSpoof' if split=='lps' else base/'PartialSpoof'/'database'/split
     db = database(run)
     try:
         query = 'SELECT uid,seconds FROM predictions ORDER BY ordinal' + (' LIMIT ?' if limit else '')

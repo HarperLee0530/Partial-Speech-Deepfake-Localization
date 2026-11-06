@@ -1,5 +1,15 @@
 项目代码说明（最终模块布局，2026-11-07）
 
+【组员精简数据适配】
+组员只需领取整个data/fixed10（约2.73 GiB），无需完整音频或完整数据解压标记。
+CNN不需要SAL权重；Setup.cmd仅检查环境。领取数据后运行：
+tools/check_environment.py --task cnn --data-profile fixed10。
+SAL公开模型评估可用--task sal检查所需权重；重训SAL只需预训练WavLM骨干。
+semantic/analysis.py manifest按预测metrics中的data_profile选择fixed10或full音频。
+sal/full_data.py继续使用完整数据，由负责人运行，未改成精简数据。
+数据通过组内网盘或移动硬盘传递，GitHub尚未提供实际音频下载链接。
+data_tools.py原有audit/prepare仍是完整来源审计/抽样工具，组员不用运行。
+
 项目根目录固定为四个大文件夹：code、data、result、visualization。
 code 放代码和配置；data 放音频、标签与模型权重；result 放训练记录、指标、日志和预测数据库；
 visualization 放全部独立绘图脚本、图表和可视化导出文件。没有启动正式训练或生成提交 ZIP。

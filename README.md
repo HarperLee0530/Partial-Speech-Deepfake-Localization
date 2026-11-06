@@ -5,6 +5,57 @@ Semantic-assisted reinspection and gain-based interval correction for partial sp
 
 本项目用于课程实验：评估 SAL、训练 CNN–BiGRU 新基线，并探索语义信息对伪造语音检测的辅助作用。日常对照实验统一使用 **固定 10% 数据集**，保留完整数据的 SAL 入口和完整测试集评估方式。
 
+## 组员先看：获取精简数据并运行
+
+组员只使用固定 10% 数据开发、训练和测试；完整数据实验由项目负责人在其电脑执行。**`sal/full_data.py` 仍使用完整数据，不会自动退回精简数据。**
+
+GitHub 提供代码和抽样 ID，不包含实际音频。由项目负责人通过组内网盘或移动硬盘提供下面的文件夹；目前尚未配置共享下载链接。不需要为此生成最终提交 ZIP。
+
+| 工作 | 需要领取的资源 |
+| --- | --- |
+| CNN 固定 10% 实验 | 整个 `data/fixed10/`，约 2.73 GiB（2.93 GB），包含音频、标签和抽样清单；无需 SAL 权重。 |
+| 固定 10% SAL 公开模型评估 | 上述数据及 `data/models/SAL_WavLM.ckpt`、`wavlm_large.pt`。 |
+| 固定 10% SAL 重新训练 | 上述数据及 `data/models/wavlm_large.pt`；训练结束后用本次权重评估。 |
+| 语义转写和错误统计 | 上述数据、对应 fixed10 预测目录中的 `predictions.sqlite`、`metrics.json`、`status.json`，以及本地 ASR/NER 模型或已有词级转录。分析已保存预测不需要加载 SAL 权重。 |
+
+组员将收到的 `fixed10` 文件夹放到克隆仓库的 `data` 内，不要放成 `data/fixed10/fixed10`。音频复制到另一台电脑后可以是普通文件，不要求继续保持与完整数据的硬链接关系。
+
+```text
+Partial-Speech-Deepfake-Localization/
+├── code/
+├── data/
+│   ├── fixed10/
+│   │   ├── manifests/                       四份 JSON 和 TXT 清单
+│   │   ├── PartialSpoof/database/
+│   │   │   ├── train/                       2,538 条音频
+│   │   │   ├── dev/                         2,484 条音频
+│   │   │   ├── eval/                        7,124 条音频
+│   │   │   └── segment_labels/              对应标签
+│   │   └── LlamaPartialSpoof/
+│   │       ├── cf/                          7,623 条音频
+│   │       └── segment_labels/              对应标签
+│   └── models/                             按任务准备权重
+├── result/                                 运行生成；语义分析还需接收预测目录
+└── visualization/
+```
+
+安装 Python 3.10 后，在克隆仓库的 `code` 目录打开 PowerShell：
+
+```powershell
+.\Setup.cmd
+.\.venv\Scripts\python.exe -B tools/check_environment.py --task cnn --data-profile fixed10
+.\.venv\Scripts\python.exe -B cnn/baseline.py --mode check
+.\.venv\Scripts\python.exe -B cnn/baseline.py --mode train
+.\.venv\Scripts\python.exe -B cnn/baseline.py --mode ps
+.\.venv\Scripts\python.exe -B cnn/baseline.py --mode lps
+```
+
+Setup 仅检查安装环境；后续命令核验精简音频、标签和仓库清单，不要求完整数据、原始压缩包或解压标记。默认训练设备是 NVIDIA CUDA；无可用 GPU 时可在对应模型配置中选择 `cpu`，运行会更慢。不要复制他人的 `.venv`。
+
+组员无需运行 `sal/full_data.py`、`--evaluation-data-profile full`、`data_tools.py --action prepare/audit/audit-full` 或整套原始数据下载脚本。这些完整数据准备、来源审计和完整测试由项目负责人执行。
+
+没有 `result/cnn_grid_best.json` 时，CNN 使用默认参数，也可以自行搜索。复用最优参数指针需要它引用的搜索记录和权重，不能只传一个 JSON。组员实验后交回修改代码、配置、训练记录和权重，负责人再单独运行完整测试。
+
 **语义模块目前能做转写、标注、对齐、错误统计、冻结统计和特征导出；尚未实现语义收益网络的训练。** 接手语义工作的同学可以先按第 5 节跑通数据流程，再按第 6 节开发后续模型，不能直接运行一个尚不存在的 `train` 命令。
 
 ## 1. 先看目录
@@ -109,7 +160,7 @@ cd code
 .\Setup.cmd
 ```
 
-需要先安装带 Windows Python Launcher 的 Python 3.10。Setup 会安装锁定的 PyTorch/CUDA 依赖；最后的检查如提示缺少数据或权重，需要补齐资源后重新检查。
+需要先安装带 Windows Python Launcher 的 Python 3.10。Setup 会安装锁定的 PyTorch/CUDA 依赖并仅检查环境；随后用 `tools/check_environment.py --task cnn --data-profile fixed10` 核验精简数据。`--task sal` 额外检查公开 SAL 评估所需的两个权重。
 
 由组内另行提供所需的音频、标签、模型权重及实验预测结果，按原目录结构放置。公开资源来源见 `code/manifests/resource_sources.json`。从公开来源重建时，先查看下载/解压脚本再执行；训练数据另由 CNN 的 `--mode prepare` 入口准备。`data_tools.py --action prepare` 需要完整源数据，会建立或核验固定子集，不是只凭 ID 清单下载 10% 的工具。
 
@@ -194,7 +245,7 @@ py -3.10 -m venv semantic/.venv
 - 一个已完成的预测目录，包含 `predictions.sqlite`、`metrics.json`，并保留对应 `status.json`。只有汇总分数 JSON 不够。
 - 对应录音音频。`check` 会列出本机已有预测目录；GitHub 克隆不包含这些实验结果。
 
-**当前 `manifest` 子命令会在完整音频目录中按 UID 查找文件，即使预测来自 fixed10 也如此。** 如果组员只拿到精简音频，可手动准备音频清单 JSONL，每行格式如下，并把 audio 换成实际存在、相对于 code 的路径：
+`manifest` 根据预测目录中 `metrics.json` 的 `data_profile` 定位音频：`fixed10` 使用精简目录，`full` 使用完整目录；旧结果缺少字段时按完整数据处理。组员须领取对应 fixed10 预测结果，不要改字段把全量结果冒充为精简结果。也可手动准备音频清单 JSONL，每行格式如下，并把 audio 换成实际存在、相对于 code 的路径：
 
 ```json
 {"uid":"实际录音ID","audio":"../data/fixed10/实际子目录/实际录音ID.flac","seconds":3.2}
@@ -210,7 +261,7 @@ py -3.10 -m venv semantic/.venv
 $run = '../result/替换为实际预测目录'
 $semPython = '.\semantic\.venv\Scripts\python.exe'
 
-# 有完整音频目录时自动生成清单；只有精简音频时用上节的手动清单
+# 按预测的数据档位自动查找音频；组员选择 fixed10 预测目录
 & $semPython semantic/analysis.py manifest --run $run --output ../data/semantic/smoke_audio.jsonl --limit 32
 
 # 默认 CPU int8；使用 GPU 需另加 --device cuda，并具备相应运行环境

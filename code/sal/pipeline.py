@@ -123,21 +123,26 @@ def prepare_lps_labels():
 
 def get_dataset(split, data_profile='full'):
     audio_root, label_root = dataset_paths(split, data_profile)
+    if data_profile == 'fixed10':
+        from tools.data_tools import validate_fixed10
+        validate_fixed10(split)
     if split == 'lps':
         from src.data.llama_partialspoof import LlamaPartialSpoofDataset
-        prepare_lps_labels()
-        root = STORE / 'LlamaPartialSpoof'
-        marker = root / 'R01TTS.0.a.tgz.extracted.json'
-        assert marker.exists(), 'LPS extraction incomplete'
+        if data_profile == 'full':
+            prepare_lps_labels()
+            root = STORE / 'LlamaPartialSpoof'
+            marker = root / 'R01TTS.0.a.tgz.extracted.json'
+            assert marker.exists(), 'LPS extraction incomplete'
         dataset = LlamaPartialSpoofDataset(root=str(audio_root), split='cf', sample_rate=16000,
             resolution=0.02, input_query='*.wav', label_root=str(label_root),
             max_label_len=200, pad_mode='test', add_label=False)
         resolution = 0.02
     else:
         from src.data.partialspoof import PartialSpoofDataset
-        root = STORE / 'PartialSpoof/database'
-        marker = root.parent / f'database_{split}.tar.gz.extracted.json'
-        assert marker.exists(), 'PS extraction incomplete'
+        if data_profile == 'full':
+            root = STORE / 'PartialSpoof/database'
+            marker = root.parent / f'database_{split}.tar.gz.extracted.json'
+            assert marker.exists(), 'PS extraction incomplete'
         dataset = PartialSpoofDataset(root=str(audio_root), split=split, sample_rate=16000,
             resolution=0.16, input_query='*.wav', label_root=str(label_root),
             max_label_len=25, pad_mode='test', add_label=False, use_augmentation=False)
