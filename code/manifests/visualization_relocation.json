@@ -1,0 +1,14 @@
+[
+  {
+    "old": "code/vendor/SAL/scripts/visualize/gradcam.py",
+    "new": "visualization/vendor_sal/gradcam.py",
+    "source_sha256": "1a85fc2794ed411c8994a2eb97bbc79ee6c315c3f2d7d86ca317e696338e2ce9",
+    "current_sha256": "afb78faa64cbc89eb39b3acf7d5df77b02cf6b273a5df74c2b8977acaf98ca1f"
+  },
+  {
+    "old": "code/vendor/SAL/scripts/visualize/part_error.py",
+    "new": "visualization/vendor_sal/part_error.py",
+    "source_sha256": "34a115335985fe0f9eae15dd4eeab2228cfb765afe7d2403064c655c2347e85a",
+    "current_sha256": "34a115335985fe0f9eae15dd4eeab2228cfb765afe7d2403064c655c2347e85a"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "checked_local": "2026-11-06T11:47:03.049354+08:00",
+  "original_source_files_unchanged": 108,
+  "dependency_packages": 114,
+  "dependency_check": "passed",
+  "weight_sha256_check": "passed",
+  "data_utterances": {
+    "dev": 24844,
+    "eval": 71237,
+    "lps": 76228
+  },
+  "relocation_and_record_tests": "passed",
+  "cuda_and_original_model_import": "passed",
+  "real_evaluation_started": false,
+  "result_initially_empty": true,
+  "note": "code/.venv is machine-local; recreate it after moving or sharing the project."
+}

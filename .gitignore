@@ -218,3 +218,41 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# SAL course project resources
+# Keep datasets, downloaded models and experiment outputs local.
+/data/
+/result/
+/visualization/outputs/
+
+# Large research assets should be downloaded separately, wherever they reside.
+*.ckpt
+*.pt
+*.pth
+*.sqlite
+*.sqlite3
+*.wav
+*.flac
+
+# Machine-specific Python environments and caches.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local credentials and temporary archives/logs.
+.env
+.env.*
+!.env.example
+*.log
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+
+# OS metadata.
+.DS_Store
+Thumbs.db
+desktop.ini

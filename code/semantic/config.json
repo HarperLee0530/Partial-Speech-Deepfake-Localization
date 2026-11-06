@@ -1,0 +1,13 @@
+{
+  "word_spoof_overlap": 0.5,
+  "minimum_word_confidence": 0.5,
+  "minimum_count": 20,
+  "smoothing_strength": 20.0,
+  "language": "en",
+  "type_priority": ["negation", "time", "person", "place", "organization", "quantity", "other"],
+  "lexicons": {
+    "negation": ["no", "not", "never", "neither", "nor", "nobody", "nothing", "nowhere", "without", "cannot"],
+    "quantity": ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "hundred", "thousand", "million", "billion", "percent"],
+    "time": ["today", "tomorrow", "yesterday", "tonight", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+  }
+}
