@@ -1,0 +1,63 @@
+{
+  "train_recordings": 2538,
+  "feature_order": [
+    "SAL_spoof_logit_minus_real_logit",
+    "intercept",
+    "ADJ",
+    "ADP",
+    "ADV",
+    "AUX",
+    "CCONJ",
+    "DET",
+    "INTJ",
+    "NOUN",
+    "NUM",
+    "PART",
+    "PRON",
+    "PROPN",
+    "SCONJ",
+    "VERB"
+  ],
+  "acoustic": {
+    "coefficients": [
+      1.079211249582057,
+      0.051840360563157835
+    ],
+    "penalty": 0.0,
+    "objective": 0.013643355948365753,
+    "iterations": 10,
+    "converged": true,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+  },
+  "semantic": {
+    "coefficients": [
+      1.096230539990869,
+      -0.0021308908291357335,
+      0.1798403998815669,
+      -0.44513952732725875,
+      0.10191785041498086,
+      0.0799189283677062,
+      0.047429750716888916,
+      0.08363885055429106,
+      0.11547076197396612,
+      -0.05434507592573312,
+      -0.060335784380190105,
+      -0.3028168204510494,
+      0.984314920638791,
+      -0.44819962722571777,
+      -0.19747791450945726,
+      0.06451702121727224
+    ],
+    "penalty": 0.0001,
+    "objective": 0.013381118839545186,
+    "iterations": 33,
+    "converged": true,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+  },
+  "selected_penalty": 0.0001,
+  "train_original_miss_seconds": 20.2875625,
+  "train_original_negative_seconds": 4098.695812500001,
+  "train_transcripts_sha256": "0956de23a09b6c1a5fe7404bdf8663ff017ddac19db2d04ae7c02e3c18ed78b3",
+  "train_prediction_metadata_sha256": "ae40b845f12a1ef0f72204e9839d6a4e0c135a354837e79f4805392337b9948f",
+  "checkpoint_sha256": "fde76030df782e140658aa5a2726d18ebffa9fa359e11ce2b237f6ec46114d2f"
+}

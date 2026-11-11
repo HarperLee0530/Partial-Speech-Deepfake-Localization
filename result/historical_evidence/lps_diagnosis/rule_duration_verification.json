@@ -1,0 +1,5 @@
+{
+  "status": "passed",
+  "cross_checks": 80,
+  "scope": "All duration-stratified probe totals and ratios; original bins agree with independent main analysis."
+}

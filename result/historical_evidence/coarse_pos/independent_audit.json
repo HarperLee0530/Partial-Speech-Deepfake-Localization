@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "train_recordings": 2538,
+  "dev_recordings": 2484,
+  "model_counts_and_formulas_recomputed": true,
+  "candidate_methods": 10,
+  "method": "Independent direct word/frame overlap recount plus serialized candidate interval integration",
+  "metrics": {
+    "sal_original": {
+      "candidate_seconds": 4644.555312499875,
+      "covered_fake_seconds": 4600.07006249999,
+      "recovered_miss_seconds": 0.0,
+      "added_real_seconds": 0.0,
+      "miss_intervals_touched": 0,
+      "miss_intervals_fully_covered": 0
+    },
+    "sal_score_1pct": {
+      "candidate_seconds": 4684.665312499882,
+      "covered_fake_seconds": 4617.954999999991,
+      "recovered_miss_seconds": 17.88493750000001,
+      "added_real_seconds": 22.225062500000014,
+      "miss_intervals_touched": 111,
+      "miss_intervals_fully_covered": 100
+    },
+    "score_bin_risk_1pct": {
+      "candidate_seconds": 4684.665312499882,
+      "covered_fake_seconds": 4617.954999999991,
+      "recovered_miss_seconds": 17.88493750000001,
+      "added_real_seconds": 22.225062500000014,
+      "miss_intervals_touched": 111,
+      "miss_intervals_fully_covered": 100
+    },
+    "score_bin_pos_risk_1pct": {
+      "candidate_seconds": 4684.56956249988,
+      "covered_fake_seconds": 4617.539249999991,
+      "recovered_miss_seconds": 17.46918750000001,
+      "added_real_seconds": 22.545062500000014,
+      "miss_intervals_touched": 107,
+      "miss_intervals_fully_covered": 99
+    },
+    "sal_score_5pct": {
+      "candidate_seconds": 4845.141999999893,
+      "covered_fake_seconds": 4642.219062499993,
+      "recovered_miss_seconds": 42.1489999999999,
+      "added_real_seconds": 158.43768749999825,
+      "miss_intervals_touched": 248,
+      "miss_intervals_fully_covered": 240
+    },
+    "score_bin_risk_5pct": {
+      "candidate_seconds": 4845.141999999893,
+      "covered_fake_seconds": 4642.219062499993,
+      "recovered_miss_seconds": 42.1489999999999,
+      "added_real_seconds": 158.43768749999825,
+      "miss_intervals_touched": 248,
+      "miss_intervals_fully_covered": 240
+    },
+    "score_bin_pos_risk_5pct": {
+      "candidate_seconds": 4845.2071249998835,
+      "covered_fake_seconds": 4632.673312499991,
+      "recovered_miss_seconds": 32.60325000000002,
+      "added_real_seconds": 168.04856249999835,
+      "miss_intervals_touched": 192,
+      "miss_intervals_fully_covered": 183
+    },
+    "sal_score_10pct": {
+      "candidate_seconds": 5045.871562499912,
+      "covered_fake_seconds": 4649.299374999993,
+      "recovered_miss_seconds": 49.22931249999978,
+      "added_real_seconds": 352.08693750000134,
+      "miss_intervals_touched": 281,
+      "miss_intervals_fully_covered": 275
+    },
+    "score_bin_risk_10pct": {
+      "candidate_seconds": 5045.871562499912,
+      "covered_fake_seconds": 4649.299374999993,
+      "recovered_miss_seconds": 49.22931249999978,
+      "added_real_seconds": 352.08693750000134,
+      "miss_intervals_touched": 281,
+      "miss_intervals_fully_covered": 275
+    },
+    "score_bin_pos_risk_10pct": {
+      "candidate_seconds": 5045.847124999848,
+      "covered_fake_seconds": 4632.833312499991,
+      "recovered_miss_seconds": 32.76325000000001,
+      "added_real_seconds": 368.5285624999978,
+      "miss_intervals_touched": 193,
+      "miss_intervals_fully_covered": 184
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "eer_percent": 19.490299224853516,
+  "f1_bonafide_percent": 83.99517059326172,
+  "accuracy_percent": 81.89286804199219,
+  "eer_margin_threshold": 2.9846043586730957,
+  "f1_spoof_percent": 79.15477351298644,
+  "frame_count": 1558425,
+  "utterance_count": 71237,
+  "confusion_true_rows_pred_columns_0_spoof_1_bonafide": [
+    [
+      535767,
+      238295
+    ],
+    [
+      43891,
+      740472
+    ]
+  ],
+  "f1_rule": "official F1Metric: binary-head argmax; positive class 1 = bonafide",
+  "eer_rule": "official EERMetric: sort logit_1 - logit_0 descending, nearest FPR/FNR crossing",
+  "data_profile": "full",
+  "evaluation_role": "test",
+  "dataset_scope": "complete official split",
+  "manifest_sha256": "6f905be5a085167c9753757f494fa8aaa596d7d35894475c605eeebd0c843eb2",
+  "training_data_profile": "full",
+  "checkpoint_sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+  "prediction_role": "test",
+  "audio_seconds": 243638.34668749908,
+  "inference_seconds": 5191.419553096639,
+  "real_time_factor": 0.021307891896653587,
+  "cpu_fallback_utterances": 0,
+  "planned_utterances": 71237,
+  "resolution_seconds": 0.16,
+  "split": "eval",
+  "run": "cnn_bigru_eval_full_20261110_212857_051038",
+  "smoke_test": false
+}

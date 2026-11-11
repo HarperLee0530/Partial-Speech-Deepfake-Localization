@@ -1,0 +1,100 @@
+{
+  "status": "passed",
+  "dataset": "LPS",
+  "resolution_seconds": 0.02,
+  "confusion": [
+    [
+      9183591,
+      7055335
+    ],
+    [
+      1945652,
+      5749635
+    ]
+  ],
+  "scopes": {
+    "partial": {
+      "recordings": 32194,
+      "frames": 9978106,
+      "truth_events": 113953,
+      "pred_events": 254649,
+      "fully_missed_events": 155,
+      "fragmented_events": 33380,
+      "merged_predictions": 30493,
+      "spurious_predictions": 100579,
+      "audio_seconds": 199562.05331249957,
+      "fake_seconds": 108731.80212500072,
+      "real_seconds": 90830.25118750044,
+      "false_negative_seconds": 22127.1791875025,
+      "false_positive_seconds": 37689.352187500765,
+      "complete_miss_seconds": 66.03999999999999,
+      "fragmented_truth_seconds": 43487.631312500125,
+      "fully_missed_recordings": 52,
+      "no_pred_recordings": 18,
+      "near_transition_160ms_fn_seconds": 2288.1799999997115,
+      "interior_160ms_fn_seconds": 19838.99918750181,
+      "near_transition_160ms_fp_seconds": 18498.68,
+      "interior_160ms_fp_seconds": 19190.672187500975,
+      "near_transition_160ms_total_seconds": 55079.25999999447,
+      "interior_160ms_total_seconds": 144482.7933124997
+    },
+    "genuine": {
+      "recordings": 10573,
+      "frames": 3153774,
+      "truth_events": 0,
+      "pred_events": 24575,
+      "fully_missed_events": 0,
+      "fragmented_events": 0,
+      "merged_predictions": 0,
+      "spurious_predictions": 24575,
+      "audio_seconds": 63075.45556249981,
+      "fake_seconds": 0.0,
+      "real_seconds": 63075.45556249981,
+      "false_negative_seconds": 0.0,
+      "false_positive_seconds": 1223.6673124999436,
+      "complete_miss_seconds": 0.0,
+      "fragmented_truth_seconds": 0.0,
+      "fully_missed_recordings": 0,
+      "no_pred_recordings": 2507,
+      "near_transition_160ms_fn_seconds": 0.0,
+      "interior_160ms_fn_seconds": 0.0,
+      "near_transition_160ms_fp_seconds": 0.0,
+      "interior_160ms_fp_seconds": 1223.6673124999436,
+      "near_transition_160ms_total_seconds": 0.0,
+      "interior_160ms_total_seconds": 63075.45556249981
+    },
+    "full_spoof": {
+      "recordings": 33461,
+      "frames": 10802333,
+      "truth_events": 33461,
+      "pred_events": 166700,
+      "fully_missed_events": 1205,
+      "fragmented_events": 23337,
+      "merged_predictions": 0,
+      "spurious_predictions": 0,
+      "audio_seconds": 216046.6574999995,
+      "fake_seconds": 216046.6574999995,
+      "real_seconds": 0.0,
+      "false_negative_seconds": 118979.51943749962,
+      "false_positive_seconds": 0.0,
+      "complete_miss_seconds": 7512.359875000001,
+      "fragmented_truth_seconds": 159645.35824999862,
+      "fully_missed_recordings": 1205,
+      "no_pred_recordings": 1205,
+      "near_transition_160ms_fn_seconds": 0.0,
+      "interior_160ms_fn_seconds": 118979.51943749962,
+      "near_transition_160ms_fp_seconds": 0.0,
+      "interior_160ms_fp_seconds": 0.0,
+      "near_transition_160ms_total_seconds": 0.0,
+      "interior_160ms_total_seconds": 216046.6574999995
+    }
+  },
+  "notes": [
+    "Native-grid fixed argmax, class 0 spoof; all counts are descriptive.",
+    "Complete miss means zero overlap with any predicted spoof interval.",
+    "Fragmentation means >=2 positive-overlap predicted intervals per true event; may coexist with merging.",
+    "Boundary error-band is +/-160ms around internal true label transitions; physical audio endpoints are not transitions.",
+    "Observed-band diagnostics use truth, are not deployed corrections or recoverable-gain bounds."
+  ],
+  "elapsed_seconds": 21.789348399965093
+}

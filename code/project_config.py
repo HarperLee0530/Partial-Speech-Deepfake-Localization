@@ -46,3 +46,71 @@ def checkpoint_digest():
     if value != expected:
         raise ValueError(f'Checkpoint SHA256 differs from the released research artifact: {path}')
     return value
+
+
+def check_environment(environment_only=False, task='sal', verify_hashes=False):
+    """Check the portable reduced project without requiring old full datasets."""
+    import importlib.metadata as metadata
+    import sys
+    errors = []
+    print('Python:', sys.executable)
+    if sys.version_info[:2] != (3, 10):
+        errors.append('Use Python 3.10 and run Setup.cmd.')
+    expected = {'torch': '2.2.1+cu121', 'torchaudio': '2.2.1+cu121',
+                'lightning': '2.0.8', 's3prl': '0.4.18', 'numpy': '1.26.4',
+                'torchmetrics': '1.3.2', 'transformers': '4.51.3'}
+    for name, version in expected.items():
+        try:
+            actual = metadata.version(name)
+            print(f'{name}: {actual}')
+            if actual != version:
+                errors.append(f'{name}: expected {version}, found {actual}')
+        except metadata.PackageNotFoundError:
+            errors.append(f'Missing package: {name}')
+    try:
+        import torch
+        if CONFIG[task].get('device', 'cuda') == 'cuda' and not torch.cuda.is_available():
+            errors.append('CUDA unavailable; select device=cpu in config.json or install the GPU environment.')
+        print('Device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU')
+    except Exception as exc:
+        errors.append(f'PyTorch import: {exc}')
+    if not environment_only:
+        try:
+            from data import validate_reduced
+            for role in ('train_detector', 'train_edit', 'train_review', 'dev', 'eval', 'lps'):
+                manifest = validate_reduced(role)
+                print(f'{role}: {manifest["count"]} recordings verified')
+        except Exception as exc:
+            errors.append(f'Reduced data: {exc}')
+        if task == 'sal' and not (DATA_ROOT/'models/wavlm_large.pt').is_file():
+            errors.append('Missing data/models/wavlm_large.pt (general WavLM pretraining).')
+    if verify_hashes:
+        sources = json.loads((CODE_ROOT/'manifests/resource_sources.json').read_text(encoding='utf-8-sig'))
+        for name in ('wavlm_large.pt', 'SAL_WavLM.ckpt'):
+            path = DATA_ROOT/'models'/name
+            if not path.is_file():
+                continue
+            h = hashlib.sha256()
+            with path.open('rb') as stream:
+                for block in iter(lambda: stream.read(8*1024*1024), b''):
+                    h.update(block)
+            expected_hash = next(x['sha256'] for x in sources if x['name'] == name)
+            if h.hexdigest() != expected_hash:
+                errors.append(f'SHA256 mismatch: {name}')
+    if errors:
+        raise RuntimeError('\n'.join(errors))
+    print('CHECK PASSED' + (' (environment only)' if environment_only else ''))
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check', action='store_true')
+    parser.add_argument('--environment-only', action='store_true')
+    parser.add_argument('--verify-hashes', action='store_true')
+    parser.add_argument('--task', choices=('sal', 'cnn'), default='sal')
+    args = parser.parse_args()
+    if args.check:
+        check_environment(args.environment_only, args.task, args.verify_hashes)
+    else:
+        parser.print_help()

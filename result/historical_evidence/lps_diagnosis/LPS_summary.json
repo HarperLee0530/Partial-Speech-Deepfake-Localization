@@ -1,0 +1,673 @@
+{
+  "dataset": "LPS",
+  "source": "D:\\Partial-Speech-Deepfake-Localization\\result\\sal_wavlm_lps_full_20261106_124753_722237",
+  "native_grid_s": 0.02,
+  "metrics": {
+    "eer_percent": 36.59830856323242,
+    "f1_bonafide_percent": 56.093299865722656,
+    "accuracy_percent": 62.39280700683594,
+    "eer_margin_threshold": 4.290972709655762,
+    "f1_spoof_percent": 67.11147537856844,
+    "frame_count": 23934213,
+    "utterance_count": 76228,
+    "confusion_true_rows_pred_columns_0_spoof_1_bonafide": [
+      [
+        9183591,
+        7055335
+      ],
+      [
+        1945652,
+        5749635
+      ]
+    ],
+    "f1_rule": "official F1Metric: binary-head argmax; positive class 1 = bonafide",
+    "eer_rule": "official EERMetric: sort logit_1 - logit_0 descending, nearest FPR/FNR crossing",
+    "run": "sal_wavlm_lps_full_20261106_124753_722237",
+    "split": "lps",
+    "resolution_seconds": 0.02,
+    "total_dataset": 76228,
+    "planned_utterances": 76228,
+    "smoke_test": false,
+    "precision": "float32",
+    "batch_size": 1,
+    "checkpoint": "../data/models/SAL_WavLM.ckpt",
+    "checkpoint_sha256": "fde76030df782e140658aa5a2726d18ebffa9fa359e11ce2b237f6ec46114d2f",
+    "official_source_commit": "b4e80d1d2fd98f3d8b9a85a47837ab3a73e12485",
+    "packages": {
+      "torch": "2.2.1+cu121",
+      "torchaudio": "2.2.1+cu121",
+      "s3prl": "0.4.18",
+      "lightning": "2.0.8",
+      "numpy": "1.26.4",
+      "torchmetrics": "1.3.2"
+    },
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "full_utterance": true,
+    "manifest_sha256": "640c2819c7e088bd5ce349b5fd3543265b8bc403546425ee0bb777223b8b99fe",
+    "audio_seconds": 479340.840875,
+    "inference_seconds": 12695.588999998028,
+    "real_time_factor": 0.02648551493509963,
+    "cpu_fallback_utterances": 0,
+    "completed_local": "2026-11-06T16:30:32"
+  },
+  "scope": {
+    "partial": {
+      "recordings": 32194,
+      "truth_events": 113953,
+      "pred_events": 254649,
+      "matched": 33626,
+      "complete_miss": 155,
+      "fragment": 33380,
+      "merge": 30493,
+      "spurious": 100579,
+      "audio_s": 199562.05331249957,
+      "fake_s": 108731.80212500072,
+      "real_s": 90830.25118750044,
+      "tp_s": 86604.6229375003,
+      "fn_s": 22127.1791875025,
+      "fp_s": 37689.352187500765,
+      "fn_whole_s": 66.03999999999999,
+      "fn_edge_s": 1050.4991874999525,
+      "fn_internal_s": 21010.64000000215,
+      "fp_spurious_s": 6603.99437500016,
+      "fp_edge_s": 14502.637812500978,
+      "fp_bridge_s": 16582.720000000332,
+      "boundary_near_fn_s": 2288.1799999997106,
+      "boundary_near_fp_s": 18498.68,
+      "error_far160_s": 39029.67137500099,
+      "error_near160_s": 20786.860000000197
+    },
+    "genuine": {
+      "recordings": 10573,
+      "truth_events": 0,
+      "pred_events": 24575,
+      "matched": 0,
+      "complete_miss": 0,
+      "fragment": 0,
+      "merge": 0,
+      "spurious": 24575,
+      "audio_s": 63075.45556249981,
+      "fake_s": 0.0,
+      "real_s": 63075.45556249981,
+      "tp_s": 0.0,
+      "fn_s": 0.0,
+      "fp_s": 1223.6673124999436,
+      "fn_whole_s": 0.0,
+      "fn_edge_s": 0.0,
+      "fn_internal_s": 0.0,
+      "fp_spurious_s": 1223.6673124999436,
+      "fp_edge_s": 0.0,
+      "fp_bridge_s": 0.0,
+      "boundary_near_fn_s": 0.0,
+      "boundary_near_fp_s": 0.0,
+      "error_far160_s": 1223.6673124999436,
+      "error_near160_s": 0.0
+    },
+    "full_spoof": {
+      "recordings": 33461,
+      "truth_events": 33461,
+      "pred_events": 166700,
+      "matched": 13077,
+      "complete_miss": 1205,
+      "fragment": 23337,
+      "merge": 0,
+      "spurious": 0,
+      "audio_s": 216046.6574999995,
+      "fake_s": 216046.6574999995,
+      "real_s": 0.0,
+      "tp_s": 97067.13806249862,
+      "fn_s": 118979.51943749962,
+      "fp_s": 0.0,
+      "fn_whole_s": 7512.359875000001,
+      "fn_edge_s": 26313.2595625009,
+      "fn_internal_s": 85153.8999999993,
+      "fp_spurious_s": 0.0,
+      "fp_edge_s": 0.0,
+      "fp_bridge_s": 0.0,
+      "boundary_near_fn_s": 0.0,
+      "boundary_near_fp_s": 0.0,
+      "error_far160_s": 118979.51943749962,
+      "error_near160_s": 0.0
+    }
+  },
+  "partial_topology": {
+    "fragmented": 33380,
+    "merged_with_others": 56141,
+    "single_matched": 20396,
+    "single_poor_overlap": 3881,
+    "complete_miss": 155
+  },
+  "partial_coverage_bins": {
+    "50–90%": 10601,
+    "90–100%": 88894,
+    "10–50%": 10846,
+    "0–10%": 3457,
+    "zero": 155
+  },
+  "partial_collar_sensitivity": {
+    "0.02": {
+      "near_fn_s": 96.93999999999902,
+      "near_fp_s": 3699.0799999988963,
+      "far_fn_s": 22030.239187502204,
+      "far_fp_s": 33990.2721875008
+    },
+    "0.08": {
+      "near_fn_s": 644.2399999999403,
+      "near_fp_s": 11643.799999999688,
+      "far_fn_s": 21482.93918750205,
+      "far_fp_s": 26045.55218750106
+    },
+    "0.16": {
+      "near_fn_s": 2288.1799999997106,
+      "near_fp_s": 18498.68,
+      "far_fn_s": 19838.99918750181,
+      "far_fp_s": 19190.672187500975
+    },
+    "0.32": {
+      "near_fn_s": 5867.459687500558,
+      "near_fp_s": 27049.57950000049,
+      "far_fn_s": 16259.719500000956,
+      "far_fp_s": 10639.772687500743
+    }
+  },
+  "partial_score_histograms": {
+    "true_fake": [
+      16749.620000000927,
+      1225.4799999998995,
+      791.6797499999442,
+      624.1799999999583,
+      524.6799999999863,
+      479.85974999999354,
+      448.45968749999645,
+      430.0399999999952,
+      427.97999999999354,
+      425.1999999999945,
+      432.1997499999941,
+      456.09999999999195,
+      483.9799999999903,
+      535.3997499999731,
+      608.1199999999408,
+      728.7195624999024,
+      918.458937499872,
+      1296.039312499755,
+      2304.157249999532,
+      78841.44837500031
+    ],
+    "true_real": [
+      45260.980000000156,
+      1993.4199374997468,
+      1226.1199374998096,
+      930.3599999998763,
+      767.2198124999077,
+      670.9798749999279,
+      617.3598749999471,
+      579.8199374999587,
+      553.3198749999699,
+      541.3197499999781,
+      547.219874999971,
+      559.1799374999724,
+      581.3196874999594,
+      630.3997499999406,
+      694.779999999918,
+      795.2996874998884,
+      972.9395624998529,
+      1299.4194999997533,
+      2130.7592499995917,
+      29478.03493750093
+    ],
+    "missed_fake": [
+      16749.620000000927,
+      1225.4799999998995,
+      791.6797499999442,
+      624.1799999999583,
+      524.6799999999863,
+      479.85974999999354,
+      448.45968749999645,
+      430.0399999999952,
+      427.97999999999354,
+      425.1999999999945,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "false_alarm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      547.2198749999717,
+      559.179937499973,
+      581.3196874999605,
+      630.399749999941,
+      694.7799999999187,
+      795.2996874998888,
+      972.9395624998533,
+      1299.4194999997542,
+      2130.7592499995926,
+      29478.034937500932
+    ]
+  },
+  "duration_groups": [
+    {
+      "bin": "≤0.16",
+      "n": 4429,
+      "miss": 80,
+      "fragment": 790,
+      "matched": 849,
+      "covered_fake_s": 503.80000000000786,
+      "fake_s": 561.540000000009
+    },
+    {
+      "bin": "0.16–0.32",
+      "n": 10679,
+      "miss": 38,
+      "fragment": 1581,
+      "matched": 2503,
+      "covered_fake_s": 2628.879687500031,
+      "fake_s": 2759.479375000076
+    },
+    {
+      "bin": "0.32–0.64",
+      "n": 36243,
+      "miss": 10,
+      "fragment": 6866,
+      "matched": 9304,
+      "covered_fake_s": 16612.01193750001,
+      "fake_s": 17694.471937500057
+    },
+    {
+      "bin": "0.64–1.28",
+      "n": 38554,
+      "miss": 17,
+      "fragment": 12143,
+      "matched": 12510,
+      "covered_fake_s": 30307.971750000735,
+      "fake_s": 35040.99150000087
+    },
+    {
+      "bin": "1.28–2.56",
+      "n": 18470,
+      "miss": 5,
+      "fragment": 8504,
+      "matched": 6455,
+      "covered_fake_s": 24031.765812499812,
+      "fake_s": 32116.745812499805
+    },
+    {
+      "bin": ">2.56",
+      "n": 5578,
+      "miss": 5,
+      "fragment": 3496,
+      "matched": 2005,
+      "covered_fake_s": 12520.19375000003,
+      "fake_s": 20558.573500000002
+    }
+  ],
+  "selected_examples": {
+    "fragmented": {
+      "uid": "dev01-elevenlab-partial-cf_3752_4943_000054_000006",
+      "scope": "partial",
+      "event_index": 3,
+      "start_s": 5.5600000000000005,
+      "end_s": 6.5600000000000005,
+      "duration_s": 1.0,
+      "duration_bin": "0.64–1.28",
+      "coverage": 0.17999999999999972,
+      "overlapping_predictions": 2,
+      "category": "fragmented",
+      "matched": 0,
+      "best_iou": 0.061855670103092855,
+      "start_error_s": 0.8799999999999999,
+      "end_error_s": 0.9399999999999995,
+      "fn_whole_s": 0.0,
+      "fn_edge_s": 0.0,
+      "fn_internal_s": 0.8200000000000003,
+      "mean_score": 0.18562645389992066
+    },
+    "merged_with_others": {
+      "uid": "dev01-elevenlab-partial-cf_1673_143397_000016_000003",
+      "scope": "partial",
+      "event_index": 5,
+      "start_s": 6.2,
+      "end_s": 6.86,
+      "duration_s": 0.6600000000000001,
+      "duration_bin": "0.64–1.28",
+      "coverage": 1.0,
+      "overlapping_predictions": 1,
+      "category": "merged_with_others",
+      "matched": 0,
+      "best_iou": 0.21428571428571433,
+      "start_error_s": -0.6200000000000001,
+      "end_error_s": 1.7999999999999998,
+      "fn_whole_s": 0.0,
+      "fn_edge_s": 0.0,
+      "fn_internal_s": 0.0,
+      "mean_score": 0.9999476582035793
+    },
+    "single_matched": {
+      "uid": "dev01-xttsv2-partial-cf_1462_170138_000008_000003",
+      "scope": "partial",
+      "event_index": 1,
+      "start_s": 3.7800000000000002,
+      "end_s": 4.46,
+      "duration_s": 0.6799999999999997,
+      "duration_bin": "0.64–1.28",
+      "coverage": 1.0,
+      "overlapping_predictions": 1,
+      "category": "single_matched",
+      "matched": 1,
+      "best_iou": 0.9189189189189189,
+      "start_error_s": -0.020000000000000018,
+      "end_error_s": 0.040000000000000036,
+      "fn_whole_s": 0.0,
+      "fn_edge_s": 0.0,
+      "fn_internal_s": 0.0,
+      "mean_score": 0.9998248578902502
+    },
+    "single_poor_overlap": {
+      "uid": "dev01-gptsovits-partial-cf_5895_34615_000013_000000",
+      "scope": "partial",
+      "event_index": 4,
+      "start_s": 6.92,
+      "end_s": 7.24,
+      "duration_s": 0.3200000000000003,
+      "duration_bin": "0.16–0.32",
+      "coverage": 1.0,
+      "overlapping_predictions": 1,
+      "category": "single_poor_overlap",
+      "matched": 0,
+      "best_iou": 0.2424242424242426,
+      "start_error_s": -0.8399999999999999,
+      "end_error_s": 0.16000000000000014,
+      "fn_whole_s": 0.0,
+      "fn_edge_s": 0.0,
+      "fn_internal_s": 0.0,
+      "mean_score": 0.9999972299890447
+    },
+    "complete_miss": {
+      "uid": "dev01-yourtts-partial-cf_3000_15664_000018_000002",
+      "scope": "partial",
+      "event_index": 1,
+      "start_s": 5.68,
+      "end_s": 5.84,
+      "duration_s": 0.16000000000000014,
+      "duration_bin": "≤0.16",
+      "coverage": 0.0,
+      "overlapping_predictions": 0,
+      "category": "complete_miss",
+      "matched": 0,
+      "best_iou": null,
+      "start_error_s": null,
+      "end_error_s": null,
+      "fn_whole_s": 0.16000000000000014,
+      "fn_edge_s": 0.0,
+      "fn_internal_s": 0.0,
+      "mean_score": 0.006235606430515309
+    }
+  },
+  "rule_stats": {
+    "original": {
+      "partial": {
+        "recordings": 32194,
+        "truth_events": 113953,
+        "pred_events": 254649,
+        "matched": 33626,
+        "tp_s": 86604.6229375003,
+        "fn_s": 22127.1791875025,
+        "fp_s": 37689.352187500765,
+        "changed_s": 0.0
+      },
+      "genuine": {
+        "recordings": 10573,
+        "truth_events": 0,
+        "pred_events": 24575,
+        "matched": 0,
+        "tp_s": 0.0,
+        "fn_s": 0.0,
+        "fp_s": 1223.6673124999436,
+        "changed_s": 0.0
+      },
+      "full_spoof": {
+        "recordings": 33461,
+        "truth_events": 33461,
+        "pred_events": 166700,
+        "matched": 13077,
+        "tp_s": 97067.13806249862,
+        "fn_s": 118979.51943749962,
+        "fp_s": 0.0,
+        "changed_s": 0.0
+      }
+    },
+    "merge_80ms": {
+      "partial": {
+        "recordings": 32194,
+        "truth_events": 113953,
+        "pred_events": 122396,
+        "matched": 26370,
+        "tp_s": 88861.2229375012,
+        "fn_s": 19870.579187500207,
+        "fp_s": 40287.95218750078,
+        "changed_s": 4855.1999999999525
+      },
+      "genuine": {
+        "recordings": 10573,
+        "truth_events": 0,
+        "pred_events": 20714,
+        "matched": 0,
+        "tp_s": 0.0,
+        "fn_s": 0.0,
+        "fp_s": 1376.3473124999316,
+        "changed_s": 152.68000000000097
+      },
+      "full_spoof": {
+        "recordings": 33461,
+        "truth_events": 33461,
+        "pred_events": 93258,
+        "matched": 14500,
+        "tp_s": 99850.75806249586,
+        "fn_s": 116195.89943750072,
+        "fp_s": 0.0,
+        "changed_s": 2783.619999999691
+      }
+    },
+    "merge_160ms": {
+      "partial": {
+        "recordings": 32194,
+        "truth_events": 113953,
+        "pred_events": 100261,
+        "matched": 23670,
+        "tp_s": 89986.34293750089,
+        "fn_s": 18745.45918750057,
+        "fp_s": 41925.21218750062,
+        "changed_s": 7617.580000000715
+      },
+      "genuine": {
+        "recordings": 10573,
+        "truth_events": 0,
+        "pred_events": 19607,
+        "matched": 0,
+        "tp_s": 0.0,
+        "fn_s": 0.0,
+        "fp_s": 1516.827312499917,
+        "changed_s": 293.1600000000006
+      },
+      "full_spoof": {
+        "recordings": 33461,
+        "truth_events": 33461,
+        "pred_events": 79601,
+        "matched": 14928,
+        "tp_s": 101544.77806249588,
+        "fn_s": 114501.87943749955,
+        "fp_s": 0.0,
+        "changed_s": 4477.640000000086
+      }
+    },
+    "merge_320ms": {
+      "partial": {
+        "recordings": 32194,
+        "truth_events": 113953,
+        "pred_events": 85461,
+        "matched": 21300,
+        "tp_s": 91354.54293750097,
+        "fn_s": 17377.25918750045,
+        "fp_s": 44123.012187500375,
+        "changed_s": 11183.580000001171
+      },
+      "genuine": {
+        "recordings": 10573,
+        "truth_events": 0,
+        "pred_events": 18617,
+        "matched": 0,
+        "tp_s": 0.0,
+        "fn_s": 0.0,
+        "fp_s": 1754.9273124999052,
+        "changed_s": 531.2600000000006
+      },
+      "full_spoof": {
+        "recordings": 33461,
+        "truth_events": 33461,
+        "pred_events": 70115,
+        "matched": 15406,
+        "tp_s": 103816.03806249629,
+        "fn_s": 112230.61943750034,
+        "fp_s": 0.0,
+        "changed_s": 6748.900000000605
+      }
+    },
+    "delete_80ms": {
+      "partial": {
+        "recordings": 32194,
+        "truth_events": 113953,
+        "pred_events": 106537,
+        "matched": 33441,
+        "tp_s": 83939.78575000026,
+        "fn_s": 24792.016375001538,
+        "fp_s": 34322.17700000115,
+        "changed_s": 6032.012375000268
+      },
+      "genuine": {
+        "recordings": 10573,
+        "truth_events": 0,
+        "pred_events": 1336,
+        "matched": 0,
+        "tp_s": 0.0,
+        "fn_s": 0.0,
+        "fp_s": 454.9594375000007,
+        "changed_s": 768.7078749999765
+      },
+      "full_spoof": {
+        "recordings": 33461,
+        "truth_events": 33461,
+        "pred_events": 51428,
+        "matched": 13077,
+        "tp_s": 92651.67981249925,
+        "fn_s": 123394.97768749963,
+        "fp_s": 0.0,
+        "changed_s": 4415.458249999655
+      }
+    },
+    "delete_160ms": {
+      "partial": {
+        "recordings": 32194,
+        "truth_events": 113953,
+        "pred_events": 79738,
+        "matched": 32950,
+        "tp_s": 82359.24668749988,
+        "fn_s": 26372.55543750086,
+        "fp_s": 32689.197250001136,
+        "changed_s": 9245.531187500663
+      },
+      "genuine": {
+        "recordings": 10573,
+        "truth_events": 0,
+        "pred_events": 629,
+        "matched": 0,
+        "tp_s": 0.0,
+        "fn_s": 0.0,
+        "fp_s": 372.01956250000023,
+        "changed_s": 851.6477499999696
+      },
+      "full_spoof": {
+        "recordings": 33461,
+        "truth_events": 33461,
+        "pred_events": 37286,
+        "matched": 13077,
+        "tp_s": 90953.33987499936,
+        "fn_s": 125093.31762499969,
+        "fp_s": 0.0,
+        "changed_s": 6113.798187500405
+      }
+    },
+    "merge160_delete80": {
+      "partial": {
+        "recordings": 32194,
+        "truth_events": 113953,
+        "pred_events": 68766,
+        "matched": 23613,
+        "tp_s": 89597.9541250007,
+        "fn_s": 19133.848000000562,
+        "fp_s": 41045.815312500425,
+        "changed_s": 8831.685687500778
+      },
+      "genuine": {
+        "recordings": 10573,
+        "truth_events": 0,
+        "pred_events": 2782,
+        "matched": 0,
+        "tp_s": 0.0,
+        "fn_s": 0.0,
+        "fp_s": 976.0773125000009,
+        "changed_s": 814.3899999999742
+      },
+      "full_spoof": {
+        "recordings": 33461,
+        "truth_events": 33461,
+        "pred_events": 37825,
+        "matched": 14928,
+        "tp_s": 100060.3596249998,
+        "fn_s": 115986.29787499868,
+        "fp_s": 0.0,
+        "changed_s": 5905.298437500119
+      }
+    }
+  },
+  "verified_confusion": [
+    [
+      9183591,
+      7055335
+    ],
+    [
+      1945652,
+      5749635
+    ]
+  ],
+  "elapsed_seconds": 241.1420488357544,
+  "protocol": {
+    "threshold": "fixed native argmax, class 0 spoof",
+    "matching": "max cardinality tIoU>=0.5, then max IoU",
+    "fn_components": "Disjoint: complete unseen event; prefix/suffix of touched event; internal holes between hits. Edge undercoverage can be long, not necessarily small boundary error.",
+    "fp_components": "Disjoint: prediction with no true overlap; prefix/suffix outside first/last true hit; real gaps between true hits.",
+    "topology": "Exclusive priority: complete miss; fragmentation (may also bridge); single prediction bridging multiple truths; single matched; single poor overlap.",
+    "collar": "Distance of cell center to nearest internal TRUE class transition; recording endpoints excluded. Sensitivity .02/.08/.16/.32 s.",
+    "rules": "Retrospective diagnostic probes, no tuning/selection claimed. Merge gaps <=80/160/320 ms; remove predictions <=80/160 ms; merge160 then delete80.",
+    "limitations": [
+      "Evaluation labels used for retrospective diagnosis, cannot count these recordings as untouched evidence for methods motivated by this report.",
+      "Original saved-label grids retained. PS 160ms and LPS 20ms not a controlled same-resolution comparison.",
+      "No waveform reinference, semantic contribution, or learned corrector effectiveness tested.",
+      "Error morphology does not identify causal artifacts or prove transfer to other datasets."
+    ]
+  }
+}

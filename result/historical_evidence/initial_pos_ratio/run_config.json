@@ -1,0 +1,30 @@
+{
+  "status": "complete",
+  "experiment": "exploratory train-POS-prior candidate expansion",
+  "recordings": 2484,
+  "split": "fixed10/dev",
+  "train_recordings": 2538,
+  "grid_seconds": 0.16,
+  "budgets_fraction_of_original_negative_seconds": [
+    0.01,
+    0.05,
+    0.1
+  ],
+  "ranking": "SAL logit[0]-logit[1] + frame-overlap-average log(POS likelihood ratio)",
+  "inference_inputs": "SAL logits; ASR text/time/confidence/POS; frozen train POS ratios",
+  "actual_training": false,
+  "train_pos_source": "D:\\SAL_精简实验\\result\\semantic_frequency_train_fixed10_20261111\\truth_regions\\pos_rankings.json",
+  "train_pos_sha256": "8375deaf84af4d561cf66c666458bafc59dcd51d878f48c532cb0fb392a7802d",
+  "transcripts_sha256": "5d7564ea237ee3394fe21ff6a5c5cb5d146df62e77f7be337448574931421fd3",
+  "prediction_run": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\Project\\SAL_experiments_20261105\\results\\sal_wavlm_dev_full",
+  "prediction_metadata_sha256": "48825726bf092261850e5ea3e7801efacef86eabb60f18b74a268656f74f546b",
+  "code_sha256": "98700cff1ce510ab786d29ccbbcf154edfe9cecafe581de5475e3e9ef8816cdf",
+  "limitations": [
+    "Development set was previously explored; not an untouched test.",
+    "POS likelihood ratio is a heuristic feature, not a calibrated fake probability.",
+    "Train POS counts use pure words and 10 ms truth; evaluation uses SAL native 160 ms truth.",
+    "Candidate coverage is not corrected detector accuracy or tIoU event recall.",
+    "Global offline duration budget; no deployment latency claim.",
+    "Zero-weight unknown/no-word regions retain acoustic fallback."
+  ]
+}

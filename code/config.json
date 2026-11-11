@@ -1,5 +1,147 @@
 {
   "data_root": "../data",
   "result_root": "../result",
-  "python_path": ".venv/Scripts/python.exe"
+  "python_path": ".venv/Scripts/python.exe",
+  "dataset": {
+    "profile": "reduced",
+    "seed": 20261111,
+    "fractions": {
+      "train_detector": 0.2,
+      "train_edit": 0.05,
+      "train_review": 0.05,
+      "dev": 0.1,
+      "eval": 0.05,
+      "lps": 0.05
+    }
+  },
+  "sal": {
+    "seed": 888,
+    "batch_size": 8,
+    "num_workers": 0,
+    "max_epochs": 60,
+    "min_epochs": 40,
+    "patience": 10,
+    "learning_rate": 1e-05,
+    "weight_decay": 0.0001,
+    "mixup_ratio": 0.2,
+    "device": "cuda",
+    "note": "SAL model/loss retained; local aligned_cross_recording_v1 fixes upstream self-mixing no-op. Batch8/workers0 for Windows. Fresh SAL head and general WavLM backbone; see README implementation note."
+  },
+  "cnn": {
+    "seed": 666,
+    "use_grid_search_best": false,
+    "training_data_profile": "reduced",
+    "evaluation_data_profile": "reduced",
+    "epochs": 30,
+    "batch_size": 8,
+    "crop_seconds": 4.0,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "patience": 5,
+    "num_workers": 0,
+    "cpu_threads": 4,
+    "device": "cuda",
+    "checkpoint": null,
+    "model": {
+      "sample_rate": 16000,
+      "hop_length": 320,
+      "n_fft": 512,
+      "win_length": 400,
+      "n_mels": 80,
+      "channels": [
+        16,
+        32,
+        64
+      ],
+      "hidden_size": 128,
+      "gru_layers": 2,
+      "dropout": 0.2
+    },
+    "grid_search": {
+      "learning_rates": [
+        0.001,
+        0.0003
+      ],
+      "dropouts": [
+        0.2,
+        0.4
+      ]
+    }
+  },
+  "semantic": {
+    "data_profile": "reduced",
+    "word_spoof_overlap": 0.5,
+    "minimum_word_confidence": 0.5,
+    "minimum_count": 20,
+    "smoothing_strength": 20.0,
+    "language": "en",
+    "type_priority": [
+      "negation",
+      "time",
+      "person",
+      "place",
+      "organization",
+      "quantity",
+      "other"
+    ],
+    "lexicons": {
+      "negation": [
+        "no",
+        "not",
+        "never",
+        "neither",
+        "nor",
+        "nobody",
+        "nothing",
+        "nowhere",
+        "without",
+        "cannot"
+      ],
+      "quantity": [
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+        "ten",
+        "eleven",
+        "twelve",
+        "hundred",
+        "thousand",
+        "million",
+        "billion",
+        "percent"
+      ],
+      "time": [
+        "today",
+        "tomorrow",
+        "yesterday",
+        "tonight",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "january",
+        "february",
+        "march",
+        "april",
+        "may",
+        "june",
+        "july",
+        "august",
+        "september",
+        "october",
+        "november",
+        "december"
+      ]
+    }
+  }
 }

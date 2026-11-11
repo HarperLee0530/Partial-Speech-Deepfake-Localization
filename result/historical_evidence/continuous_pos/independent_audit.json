@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "train_recordings": 2538,
+  "dev_recordings": 2484,
+  "configurations": 10,
+  "checks": [
+    "train-only grouped CV selection and split separation",
+    "positive acoustic slopes",
+    "model hash unchanged",
+    "independent score reconstruction from SAL logits and ASR word overlaps",
+    "all 9 candidate rankings and budgets reproduced",
+    "candidate interval integration and per-recording missed duration",
+    "fully missed event coverage"
+  ],
+  "metrics": {
+    "sal_original": {
+      "candidate_seconds": 4644.555312499875,
+      "covered_fake_seconds": 4600.07006249999,
+      "recovered_miss_seconds": 0.0,
+      "added_real_seconds": 0.0,
+      "added_seconds": 0.0
+    },
+    "raw_sal_1pct": {
+      "candidate_seconds": 4684.665312499882,
+      "covered_fake_seconds": 4617.954999999991,
+      "recovered_miss_seconds": 17.88493750000001,
+      "added_real_seconds": 22.225062500000014,
+      "added_seconds": 40.10999999999989
+    },
+    "acoustic_logistic_1pct": {
+      "candidate_seconds": 4684.665312499882,
+      "covered_fake_seconds": 4617.954999999991,
+      "recovered_miss_seconds": 17.88493750000001,
+      "added_real_seconds": 22.225062500000014,
+      "added_seconds": 40.10999999999989
+    },
+    "continuous_pos_1pct": {
+      "candidate_seconds": 4684.56956249988,
+      "covered_fake_seconds": 4617.859249999991,
+      "recovered_miss_seconds": 17.78918750000001,
+      "added_real_seconds": 22.225062500000014,
+      "added_seconds": 40.01424999999988
+    },
+    "raw_sal_5pct": {
+      "candidate_seconds": 4845.141999999893,
+      "covered_fake_seconds": 4642.219062499993,
+      "recovered_miss_seconds": 42.1489999999999,
+      "added_real_seconds": 158.43768749999825,
+      "added_seconds": 200.58668749999757
+    },
+    "acoustic_logistic_5pct": {
+      "candidate_seconds": 4845.141999999893,
+      "covered_fake_seconds": 4642.219062499993,
+      "recovered_miss_seconds": 42.1489999999999,
+      "added_real_seconds": 158.43768749999825,
+      "added_seconds": 200.58668749999757
+    },
+    "continuous_pos_5pct": {
+      "candidate_seconds": 4845.141999999898,
+      "covered_fake_seconds": 4642.059062499992,
+      "recovered_miss_seconds": 41.98899999999989,
+      "added_real_seconds": 158.59768749999824,
+      "added_seconds": 200.58668749999768
+    },
+    "raw_sal_10pct": {
+      "candidate_seconds": 5045.871562499912,
+      "covered_fake_seconds": 4649.299374999993,
+      "recovered_miss_seconds": 49.22931249999978,
+      "added_real_seconds": 352.08693750000134,
+      "added_seconds": 401.3162500000039
+    },
+    "acoustic_logistic_10pct": {
+      "candidate_seconds": 5045.871562499912,
+      "covered_fake_seconds": 4649.299374999993,
+      "recovered_miss_seconds": 49.22931249999978,
+      "added_real_seconds": 352.08693750000134,
+      "added_seconds": 401.3162500000039
+    },
+    "continuous_pos_10pct": {
+      "candidate_seconds": 5045.922062499912,
+      "covered_fake_seconds": 4649.299374999993,
+      "recovered_miss_seconds": 49.22931249999978,
+      "added_real_seconds": 352.13743750000117,
+      "added_seconds": 401.36675000000366
+    }
+  }
+}

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="537.84pt" height="260.64pt" viewBox="0 0 537.84 260.64" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-11T19:49:40.360038</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 260.64 
+L 537.84 260.64 
+L 537.84 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 12.6 146.52 
+L 58.68 146.52 
+Q 61.56 146.52 61.56 143.64 
+L 61.56 70.92 
+Q 61.56 68.04 58.68 68.04 
+L 12.6 68.04 
+Q 9.72 68.04 9.72 70.92 
+L 9.72 143.64 
+Q 9.72 146.52 12.6 146.52 
+z
+" clip-path="url(#p88e2019884)" style="fill: #eaf4f9; stroke: #5e9cc5; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 73.08 146.52 
+L 145.08 146.52 
+Q 147.96 146.52 147.96 143.64 
+L 147.96 70.92 
+Q 147.96 68.04 145.08 68.04 
+L 73.08 68.04 
+Q 70.2 68.04 70.2 70.92 
+L 70.2 143.64 
+Q 70.2 146.52 73.08 146.52 
+z
+" clip-path="url(#p88e2019884)" style="fill: #eaf4f9; stroke: #5e9cc5; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 159.48 146.52 
+L 249.48 146.52 
+Q 252.36 146.52 252.36 143.64 
+L 252.36 70.92 
+Q 252.36 68.04 249.48 68.04 
+L 159.48 68.04 
+Q 156.6 68.04 156.6 70.92 
+L 156.6 143.64 
+Q 156.6 146.52 159.48 146.52 
+z
+" clip-path="url(#p88e2019884)" style="fill: #eaf4f9; stroke: #5e9cc5; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 263.88 146.52 
+L 343.08 146.52 
+Q 345.96 146.52 345.96 143.64 
+L 345.96 70.92 
+Q 345.96 68.04 343.08 68.04 
+L 263.88 68.04 
+Q 261 68.04 261 70.92 
+L 261 143.64 
+Q 261 146.52 263.88 146.52 
+z
+" clip-path="url(#p88e2019884)" style="fill: #f1edf8; stroke: #5e9cc5; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 357.48 146.52 
+L 445.32 146.52 
+Q 448.2 146.52 448.2 143.64 
+L 448.2 70.92 
+Q 448.2 68.04 445.32 68.04 
+L 357.48 68.04 
+Q 354.6 68.04 354.6 70.92 
+L 354.6 143.64 
+Q 354.6 146.52 357.48 146.52 
+z
+" clip-path="url(#p88e2019884)" style="fill: #f1edf8; stroke: #5e9cc5; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 459.72 146.52 
+L 525.24 146.52 
+Q 528.12 146.52 528.12 143.64 
+L 528.12 70.92 
+Q 528.12 68.04 525.24 68.04 
+L 459.72 68.04 
+Q 456.84 68.04 456.84 70.92 
+L 456.84 143.64 
+Q 456.84 146.52 459.72 146.52 
+z
+" clip-path="url(#p88e2019884)" style="fill: #eaf4f9; stroke: #5e9cc5; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 62.559844 107.28 
+Q 65.878164 107.28 68.190253 107.28 
+" clip-path="url(#p88e2019884)" style="fill: none; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 64.990253 105.68 
+L 68.190253 107.28 
+L 64.990253 108.88 
+z
+" clip-path="url(#p88e2019884)" style="fill: #414653; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 148.959844 107.28 
+Q 152.278164 107.28 154.590253 107.28 
+" clip-path="url(#p88e2019884)" style="fill: none; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 151.390253 105.68 
+L 154.590253 107.28 
+L 151.390253 108.88 
+z
+" clip-path="url(#p88e2019884)" style="fill: #414653; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 253.359844 107.28 
+Q 256.678164 107.28 258.990253 107.28 
+" clip-path="url(#p88e2019884)" style="fill: none; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 255.790253 105.68 
+L 258.990253 107.28 
+L 255.790253 108.88 
+z
+" clip-path="url(#p88e2019884)" style="fill: #414653; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 346.959844 107.28 
+Q 350.278164 107.28 352.590253 107.28 
+" clip-path="url(#p88e2019884)" style="fill: none; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 349.390253 105.68 
+L 352.590253 107.28 
+L 349.390253 108.88 
+z
+" clip-path="url(#p88e2019884)" style="fill: #414653; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 449.199844 107.28 
+Q 452.518164 107.28 454.830253 107.28 
+" clip-path="url(#p88e2019884)" style="fill: none; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 451.630253 105.68 
+L 454.830253 107.28 
+L 451.630253 108.88 
+z
+" clip-path="url(#p88e2019884)" style="fill: #414653; stroke: #414653; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 183.96 56.52 
+L 424.44 56.52 
+Q 427.32 56.52 427.32 53.64 
+L 427.32 9 
+Q 427.32 6.12 424.44 6.12 
+L 183.96 6.12 
+Q 181.08 6.12 181.08 9 
+L 181.08 53.64 
+Q 181.08 56.52 183.96 56.52 
+z
+" clip-path="url(#p88e2019884)" style="fill: #f1edf8; stroke-dasharray: 3.145,1.36; stroke-dashoffset: 0; stroke: #8a74c4; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 303.48 57.519932 
+Q 303.48 62.101388 303.48 65.676614 
+" clip-path="url(#p88e2019884)" style="fill: none; stroke-dasharray: 3.33,1.44; stroke-dashoffset: 0; stroke: #8a74c4; stroke-width: 0.9; stroke-linecap: round"/>
+    <path d="M 305.08 62.476614 
+L 303.48 65.676614 
+L 301.88 62.476614 
+z
+" clip-path="url(#p88e2019884)" style="fill: #8a74c4; stroke-dasharray: 3.33,1.44; stroke-dashoffset: 0; stroke: #8a74c4; stroke-width: 0.9; stroke-linecap: round"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 78.84 231.48 
+L 459 231.48 
+Q 461.88 231.48 461.88 228.6 
+L 461.88 174.6 
+Q 461.88 171.72 459 171.72 
+L 78.84 171.72 
+Q 75.96 171.72 75.96 174.6 
+L 75.96 228.6 
+Q 75.96 231.48 78.84 231.48 
+z
+" clip-path="url(#p88e2019884)" style="fill: #ffffff; stroke-dasharray: 3.145,1.36; stroke-dashoffset: 0; stroke: #8a74c4; stroke-width: 0.85; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(23.417516 104.982975)">Frozen</text>
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(27.664219 113.252931)">SAL</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; text-anchor: middle; fill: #414653" x="109.08" y="86.918063" transform="rotate(-0 109.08 86.918063)">Saved inputs</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(87.797523 114.965072)">scores / mask</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(84.183273 123.237606)">optional cached</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(82.649563 131.510141)">acoustic features</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(176.87675 86.789938)">Shared acoustic</text>
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(178.851797 94.935741)">candidate pool</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(182.985828 114.945816)">retain / delete</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(185.827359 123.21835)">insert / split</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(182.171758 131.495328)">merge / adjust</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; text-anchor: middle; fill: #414653" x="303.48" y="86.918063" transform="rotate(-0 303.48 86.918063)">Edit-gain model</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(273.270523 114.950259)">small CNN + MLP</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(270.978289 123.222794)">structure + acoustics</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(273.202016 131.495328)">signed action gains</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(378.399 86.789938)">Conservative</text>
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(387.509969 94.788397)">decoder</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(386.007344 114.950259)">no-op = 0</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(366.519031 123.222794)">max 1 edit / recording</text>
+    <text style="font-size: 7.9px; font-family: 'Times New Roman'; fill: #414653" transform="translate(379.138047 131.510141)">conflict check</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(483.36775 104.982975)">Final</text>
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(477.220953 113.252931)">intervals</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 8.1px; font-family: 'Times New Roman'; text-anchor: middle; fill: #414653" x="304.2" y="24.930281" transform="rotate(-0 304.2 24.930281)">Optional linguistic increment — conditional / unvalidated</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 7.8px; font-family: 'Times New Roman'; text-anchor: middle; fill: #414653" x="304.2" y="41.531531" transform="rotate(-0 304.2 41.531531)">POS, NER, word boundaries + confidence</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 8.2px; font-family: 'Times New Roman'; text-anchor: start; fill: #414653" x="11.52" y="165.533875" transform="rotate(-0 11.52 165.533875)">Fixed acoustic candidates across ablations; language cannot directly label authenticity or replace acoustic ranking.</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Times New Roman'; text-anchor: middle; fill: #414653" x="268.92" y="190.668594" transform="rotate(-0 268.92 190.668594)">Future extension — unvalidated</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(182.13325 207.788537)">Changed-context reinspection + review-gain selector</text>
+    <text style="font-size: 8.2px; font-family: 'Times New Roman'; fill: #414653" transform="translate(166.227172 216.390594)">Enable only after demonstrating useful new acoustic evidence.</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8.1px; font-family: 'Times New Roman'; text-anchor: start; fill: #414653" x="11.52" y="251.058305" transform="rotate(-0 11.52 251.058305)">Proposed core: candidate edits + gain network + conservative decoder. No learned correction gain has yet been demonstrated.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p88e2019884">
+   <rect x="4.32" y="4.32" width="529.2" height="252"/>
+  </clipPath>
+ </defs>
+</svg>

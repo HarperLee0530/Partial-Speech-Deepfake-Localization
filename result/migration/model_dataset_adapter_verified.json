@@ -1,0 +1,75 @@
+{
+  "train_detector": {
+    "count": 5076,
+    "resolution": 0.16,
+    "first_uid": "CON_T_0000012",
+    "feature_shape": [
+      1,
+      160,
+      80
+    ]
+  },
+  "train_edit": {
+    "count": 1269,
+    "resolution": 0.16,
+    "first_uid": "CON_T_0000013",
+    "feature_shape": [
+      1,
+      136,
+      80
+    ]
+  },
+  "train_review": {
+    "count": 1269,
+    "resolution": 0.16,
+    "first_uid": "CON_T_0000031",
+    "feature_shape": [
+      1,
+      176,
+      80
+    ]
+  },
+  "dev": {
+    "count": 2484,
+    "resolution": 0.16,
+    "first_uid": "CON_D_0000003",
+    "feature_shape": [
+      1,
+      104,
+      80
+    ]
+  },
+  "eval": {
+    "count": 3562,
+    "resolution": 0.16,
+    "first_uid": "CON_E_0000028",
+    "feature_shape": [
+      1,
+      128,
+      80
+    ]
+  },
+  "lps": {
+    "count": 3800,
+    "resolution": 0.02,
+    "first_uid": "dev-clean_1272_128104_000006_000003",
+    "feature_shape": [
+      1,
+      59,
+      80
+    ]
+  },
+  "cnn_real_batch": {
+    "loss": 0.7059168219566345,
+    "batch_size": 2,
+    "updated_classifier": true
+  },
+  "sal_adapter": {
+    "train_detector_count": 5076,
+    "dev_count": 2484,
+    "train_rawboost": true,
+    "dev_rawboost": false,
+    "native_resolution": 0.16
+  },
+  "training_started": false
+}

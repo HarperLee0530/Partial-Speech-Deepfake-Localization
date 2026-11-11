@@ -221,8 +221,13 @@ __marimo__/
 
 # SAL course project resources
 # Keep datasets, downloaded models and experiment outputs local.
-/data/
-/result/
+/data/*
+!/data/README.md
+!/data/package_manifest.json
+/result/*
+!/result/README.md
+!/result/historical_evidence/
+!/result/migration/
 /visualization/outputs/
 
 # Large research assets should be downloaded separately, wherever they reside.
@@ -256,3 +261,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Small source-protocol archive is metadata, not audio.
+!/code/manifests/reduced/source_metadata/*.zip

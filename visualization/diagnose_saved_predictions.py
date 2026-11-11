@@ -1,4 +1,4 @@
-"""Read-only SAL diagnostics. Run this file to plot both completed SAL runs.
+"""Read-only SAL diagnostics. Default displays help; --latest plots current reduced runs.
 
 No inference, GPU use, threshold fitting, or changes to source experiment files.
 Requires numpy, scipy, matplotlib. Outputs PNG/PDF/SVG, CSV and provenance JSON.
@@ -28,7 +28,7 @@ from matplotlib.patches import Patch, Rectangle
 from matplotlib.colors import LinearSegmentedColormap
 from scipy.optimize import linear_sum_assignment
 
-from visualization_paths import CODE_ROOT as CODE, RESULT_ROOT, PROJECT_ROOT, OUTPUT_ROOT, project_path, output_path, source_run
+from visualization_paths import CODE_ROOT as CODE, RESULT_ROOT, PROJECT_ROOT, OUTPUT_ROOT, project_path, output_path, source_run, safe_relative_path, latest_reduced_runs
 
 COLORS = dict(light='#A7D7E8', cyan='#7EC1D9', blue='#5E9CC5',
               lavender='#B79FD9', purple='#8A74C4', navy='#5B6BA6',
@@ -121,6 +121,8 @@ def bootstrap_rates(record_counts, reps, seed=20261106):
     data = np.asarray(record_counts, dtype=float)
     rng = np.random.default_rng(seed)
     out = np.full((reps, len(BIN_LABELS), 3), np.nan)
+    if not len(data):
+        return out
     for i in range(reps):
         ids = rng.integers(0, len(data), size=len(data))
         total = data[ids].sum(axis=0)
@@ -329,7 +331,11 @@ def analyze(run, out, reps):
     out.mkdir()
     metrics = json.loads((run/'metrics.json').read_text(encoding='utf-8-sig'))
     dt = metrics['resolution_seconds']
-    title = 'PartialSpoof eval' if metrics['split']=='eval' else 'LlamaPartialSpoof crossfade'
+    name = 'PS eval' if metrics['split']=='eval' else 'LPS crossfade'
+    scope = metrics.get('data_profile', 'historical scope unspecified')
+    if metrics.get('smoke_test'):
+        scope += ' smoke'
+    title = f'{name} | {scope} | n={metrics["utterance_count"]:,} | {dt*1000:g} ms'
     db = sqlite3.connect((run/'predictions.sqlite').as_uri()+'?mode=ro', uri=True)
     db.execute('PRAGMA query_only=ON')
     confusion = np.zeros((2,2), dtype=np.int64)
@@ -438,7 +444,8 @@ def analyze(run, out, reps):
     write_csv(out/'scope_summary.csv',[dict(scope=k,**v) for k,v in scopes.items()])
     save_json(out/'selected_examples.json',dict(selection='Smallest 256 stable SHA256 hashes per category, then near-median severity, prefer distinct recordings',
               eligible_counts=examples.counts,examples=selected))
-    summary=dict(dataset=title,source_run=os.path.relpath(run, RESULT_ROOT),resolution_seconds=dt,scope=scopes,
+    summary=dict(dataset=title,source_run=safe_relative_path(run, RESULT_ROOT),resolution_seconds=dt,scope=scopes,
+        data_profile=metrics.get('data_profile', 'unspecified'), checkpoint_kind=metrics.get('checkpoint_kind', 'unspecified'),
         confusion_verified=confusion.tolist(),frames_verified=nframes,recordings_verified=len(record_rows),
         threshold='argmax on saved 2-class logits; class 0=spoof; ties choose spoof; equivalent spoof softmax >=0.5',
         matching='Maximum-cardinality one-to-one matching at tIoU >=0.5, then maximum summed tIoU',
@@ -513,10 +520,12 @@ def render_existing(output,reps):
 
 
 def write_readme(output):
+    def rate(numerator, denominator):
+        return f'{100*numerator/denominator:.2f}%' if denominator else 'n/a（分母为0）'
     lines=['SAL 图1与图2 诊断结果说明',
       '',
       '一、这次完成了什么',
-      '只读已有两次 SAL 实验的 predictions.sqlite，未重新运行模型，未调整阈值，未修改原始结果。',
+      '只读显式选择或当前缩减实验的 predictions.sqlite，未重新运行模型，未调整阈值，未修改原始结果。',
       '逐帧样本数、录音数和混淆矩阵与各自 metrics.json 完全一致。',
       '配色按用户提供的蓝紫参考图：真值青蓝，预测区间紫色，分数深蓝，文字灰色。',
       '图中使用英文以方便论文排版；本文档说明统计口径和中文解读。',
@@ -546,7 +555,7 @@ def write_readme(output):
       'b紫线：完全漏检率，即真实事件与所有预测区间均没有正时长重叠。',
       'b蓝线：没有获得一对一tIoU>=0.5匹配的事件比例，包含完全漏检。',
       'tIoU = 两区间交集时长 / 并集时长。匹配先最大化合格匹配数量，再最大化tIoU之和。',
-      '误差线是400次按录音重采样的95%区间；同源变体可能相关，因此不作为严格源独立显著性证明。',
+      '误差线是按录音重采样的95%区间；实际重复次数见summary.json。同源变体可能相关，不作为严格源独立显著性证明。',
       'c/d：只统计匹配成功的片段，分别显示起点/终点的提前、网格完全一致、延后比例。',
       '每列总和约100%（存在显示舍入），n为该组匹配事件数。深色表示该类偏差占比高。',
       'Exact on saved grid只表示与该分辨率标签一致，不等于精确到原始音频的真实编辑边界。',
@@ -562,16 +571,14 @@ def write_readme(output):
             groups=list(csv.DictReader(f))
         lines.extend(['',f'{s["dataset"]}：',f'全部评估录音 {s["recordings_verified"]:,} 条；保存网格 {s["resolution_seconds"]*1000:g} ms。',
           f'局部伪造录音 {v["recordings"]:,} 条，真实事件 {v["truth"]:,} 个，预测事件 {v["pred"]:,} 个。',
-          f'完全漏检 {v["miss"]:,}/{v["truth"]:,} = {100*v["miss"]/v["truth"]:.2f}%。',
-          f'tIoU>=0.5的一对一匹配召回 {v["matched"]:,}/{v["truth"]:,} = {100*v["matched"]/v["truth"]:.2f}%。',
-          f'碎片化真实事件 {v["fragment"]:,}/{v["truth"]:,} = {100*v["fragment"]/v["truth"]:.2f}%。',
-          f'合并多个真实事件的预测 {v["merge"]:,}/{v["pred"]:,} = {100*v["merge"]/v["pred"]:.2f}%。',
-          f'无重叠误报预测 {v["false_alarm"]:,}/{v["pred"]:,} = {100*v["false_alarm"]/v["pred"]:.2f}%。',
+          f'完全漏检 {v["miss"]:,}/{v["truth"]:,} = {rate(v["miss"],v["truth"])}。',
+          f'tIoU>=0.5的一对一匹配召回 {v["matched"]:,}/{v["truth"]:,} = {rate(v["matched"],v["truth"])}。',
+          f'碎片化真实事件 {v["fragment"]:,}/{v["truth"]:,} = {rate(v["fragment"],v["truth"])}。',
+          f'合并多个真实事件的预测 {v["merge"]:,}/{v["pred"]:,} = {rate(v["merge"],v["pred"])}。',
+          f'无重叠误报预测 {v["false_alarm"]:,}/{v["pred"]:,} = {rate(v["false_alarm"],v["pred"])}。',
           '各时长组完全漏检率：'+ '；'.join(f'{r["duration_bin"]} s：{100*float(r["complete_miss_rate"]):.2f}%（n={int(r["true_events"]):,}）' for r in groups if r['true_events']!='0')])
     lines.extend(['',
-      'PS：最短网格事件的完全漏检更明显，但不能据此证明是时长本身造成；需排查攻击类型等因素。',
-      'PS：匹配成功事件大多在网格上边界重合，不宜据当前结果宣称普遍边界偏移。',
-      'LPS：完全无覆盖的漏检少，但一对一匹配召回低、碎片化和误报较多，说明“碰到一点伪造区间”不等于定位成功。',
+      '错误是否主要来自漏检、边界偏差或碎片化，应依据上方当前数据统计判断，不沿用历史实验结论。',
       '因此，复检后覆盖率提高不能单独证明有效，也可能只是扩大了预测范围，必须同时看误报和匹配质量。',
       '',
       '六、限制与论文表述',
@@ -596,21 +603,32 @@ def write_readme(output):
       'summary.json / analysis_manifest.json：来源、口径、验证结果和配色。',
       '',
       '重新生成（自动创建新的时间戳输出文件夹）：',
-      '在项目根目录运行：python visualization/diagnose_saved_predictions.py',
+      '在项目根目录运行：python visualization/diagnose_saved_predictions.py --latest；历史结果须显式 --runs。',
       '',
       '只更新现有图的样式（读取已有诊断CSV）：',
-      f'python visualization/diagnose_saved_predictions.py --render-existing "{os.path.relpath(output, PROJECT_ROOT)}"',
+      f'python visualization/diagnose_saved_predictions.py --render-existing "{safe_relative_path(output, PROJECT_ROOT)}"',
       ''])
     (output/'阅读说明.txt').write_text('\n'.join(lines),encoding='utf-8-sig')
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--runs',nargs='+',type=Path,help='Completed SAL run directories; default: latest complete eval and lps')
+    parser.add_argument('--runs','--run',nargs='+',type=Path,help='Explicit completed PS/LPS runs; historical scopes are labeled')
+    parser.add_argument('--latest',action='store_true',help='Latest current reduced-trained eval and lps predictions only')
+    parser.add_argument('--check',action='store_true',help='Check diagnostic primitives without reading predictions or plotting')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--bootstrap',type=int,default=400)
     parser.add_argument('--render-existing',type=Path,help='Regenerate existing diagnostics using current plot style')
     args=parser.parse_args()
+    if not any((args.runs,args.latest,args.render_existing,args.check)):
+        parser.print_help()
+        return
+    if args.check:
+        check_primitives()
+        print('Diagnostic primitive checks passed; no model inference or plots started.')
+        return
+    if args.runs and args.latest:
+        parser.error('Choose --runs or --latest, not both')
     if args.bootstrap<100: parser.error('--bootstrap must be >=100')
     if args.render_existing:
         check_primitives()
@@ -619,16 +637,16 @@ def main():
         return
     runs=[project_path(p) for p in args.runs] if args.runs else None
     if not runs:
-        runs=[]
-        for split in ['eval','lps']:
-            eligible=[]
-            for path in RESULT_ROOT.glob('sal_wavlm_*'):
-                if path.is_dir() and (path/'metrics.json').exists() and (path/'status.json').exists():
-                    m=json.loads((path/'metrics.json').read_text(encoding='utf-8-sig'))
-                    status=json.loads((path/'status.json').read_text(encoding='utf-8-sig'))
-                    if m['split']==split and not m['smoke_test'] and status.get('status')=='complete':eligible.append(path)
-            if not eligible:raise RuntimeError(f'No complete SAL run for {split}')
-            runs.append(sorted(eligible)[-1])
+        runs=latest_reduced_runs()
+    seen=set()
+    for run in runs:
+        m=json.loads((run/'metrics.json').read_text(encoding='utf-8-sig'))
+        status=json.loads((run/'status.json').read_text(encoding='utf-8-sig'))
+        if m.get('split') not in ('eval','lps') or status.get('status')!='complete':
+            parser.error('--runs requires completed eval/lps predictions')
+        if m['split'] in seen:
+            parser.error('Supply at most one run for each split per output directory')
+        seen.add(m['split'])
     output=output_path(args.output) if args.output else OUTPUT_ROOT/f'sal_diagnostics_{datetime.now(ZoneInfo("Asia/Shanghai")):%Y%m%d_%H%M%S}'
     output.mkdir(parents=True,exist_ok=False)
     check_primitives()
@@ -638,8 +656,8 @@ def main():
         metrics=json.loads((run/'metrics.json').read_text(encoding='utf-8-sig'))
         summaries.append(analyze(run,output/('PS_eval' if metrics['split']=='eval' else 'LPS_crossfade'),args.bootstrap))
     save_json(output/'analysis_manifest.json',dict(created=datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(),
-        script=os.path.relpath(Path(__file__).resolve(),PROJECT_ROOT),script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        source_runs=[os.path.relpath(x,RESULT_ROOT) for x in runs],palette=COLORS,bootstrap_replicates=args.bootstrap,
+        script=safe_relative_path(Path(__file__).resolve(),PROJECT_ROOT),script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        source_runs=[safe_relative_path(x,RESULT_ROOT) for x in runs],palette=COLORS,bootstrap_replicates=args.bootstrap,
         source_files_modified=False,model_inference=False))
     write_readme(output)
     print('OUTPUT_DIRECTORY='+str(output),flush=True)

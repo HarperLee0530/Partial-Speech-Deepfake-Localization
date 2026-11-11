@@ -1,0 +1,82 @@
+{
+  "run": "cnn_bigru_train_20261109_203335_588602",
+  "model": "LogMel-CNN-BiGRU",
+  "protocol": "cnn_bigru_ps160_lps20_v1",
+  "started_local": "2026-11-09T20:33:35+08:00",
+  "training_dataset": "PartialSpoof train",
+  "validation_dataset": "PartialSpoof dev",
+  "smoke_test": false,
+  "config": {
+    "seed": 666,
+    "use_grid_search_best": true,
+    "training_data_profile": "full",
+    "evaluation_data_profile": "full",
+    "epochs": 30,
+    "batch_size": 8,
+    "crop_seconds": 4.0,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "patience": 5,
+    "num_workers": 0,
+    "cpu_threads": 4,
+    "device": "cuda",
+    "checkpoint": null,
+    "model": {
+      "sample_rate": 16000,
+      "hop_length": 320,
+      "n_fft": 512,
+      "win_length": 400,
+      "n_mels": 80,
+      "channels": [
+        16,
+        32,
+        64
+      ],
+      "hidden_size": 128,
+      "gru_layers": 2,
+      "dropout": 0.4
+    },
+    "hyperparameter_source": "cnn_grid_search_20261109_150021_228938.json",
+    "grid_hyperparameters_selected": true,
+    "grid_source_checkpoint": "../data/models/cnn_bigru_train_20261109_162901_728518_best.pt"
+  },
+  "weights_pretrained": false,
+  "status": "complete",
+  "updated_local": "2026-11-10T20:25:49+08:00",
+  "elapsed_wall_seconds": 85936.328,
+  "data_audit": {
+    "official_split_utterances": {
+      "train": 25380,
+      "dev": 24844
+    },
+    "official_count_source": "full_labels",
+    "active_data_profile": "full",
+    "active_split_utterances": {
+      "train": 25380,
+      "dev": 24844
+    },
+    "utterance_ids_disjoint": true,
+    "source_recording_overlap": "Not independently verified: source provenance map is not provided",
+    "split_policy": "Official PS splits unchanged; crop only after splitting"
+  },
+  "data_profile": "full",
+  "train_utterances": 25380,
+  "dev_utterances": 24844,
+  "train_manifest_sha256": "2905481a5864ede983afc117932f994b9f3e403cdeeaa4cd39f88562eba45692",
+  "dev_manifest_sha256": "b4eabeda976a28cff0a253f47adfd06184f3b05aca6536b25adbc5a3cca8f9fb",
+  "comparability": "Same official splits and metric protocol; training/pretraining conditions differ from public SAL checkpoint",
+  "phase": "validation",
+  "epoch": 12,
+  "batches_completed": 3173,
+  "batches_total": 3173,
+  "train_loss": 0.04246392574347297,
+  "validation_completed": 24844,
+  "validation_total": 24844,
+  "best_epoch": 7,
+  "best_dev_eer_percent": 3.8046960830688477,
+  "checkpoint": "../data/models/cnn_bigru_train_20261109_203335_588602_best.pt",
+  "epochs_completed": 12,
+  "checkpoint_sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+  "stop_reason": "early_stopping",
+  "finished_local": "2026-11-10T20:25:49+08:00"
+}

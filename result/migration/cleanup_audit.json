@@ -1,0 +1,61 @@
+{
+  "method": "Windows Recycle Bin; no permanent filesystem deletion",
+  "project_root": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\Project",
+  "project_allowed_directories": [
+    "_work",
+    "Final_Research_Plan_20261111",
+    "LPS_SAL_诊断_20261111",
+    "Progress_Report_Data_Protocol_Revision",
+    "Progress_Report_English",
+    "Progress_Report_With_Figures",
+    "SAL_experiments_20261105",
+    "Standalone_Figures"
+  ],
+  "project_allowed_files": [
+    "Final_Research_Plan_20261111_完整资料.zip",
+    "LPS_SAL_诊断_20261111_完整资料.zip",
+    "20__1_revised.zip",
+    "NNDL_Progress_Report_Fig3_Rebuilt.pdf",
+    "语义辅助复查与区间收益修正完整研究方案.docx",
+    "SAL_精简实验.code-workspace"
+  ],
+  "protected_project_files_sha256": {
+    "1.pdf": "f09a42eb6fb68ef44adf83d023914e8f637f2fe6846327a036c14adb9485d701",
+    "10.pdf": "1bb098f100996bf0a46e63b6332cbba8ef8a72120644bd7e3af9b23957dad46a",
+    "11.pdf": "8e30cf93f11ffd2b65fd708f2c3b680f230934d23ec04519c190e21b4829cf7f",
+    "2.pdf": "815a58c02fb2de56ba5743cda0ebcb6db105f68ead8185e36cd05c5c59b85927",
+    "3.pdf": "3097bd061ef5a87cff5670b3bb6cfc923687928e7c2b2d05b233342c8fd79e23",
+    "4.pdf": "ef44470c259d3df0348ad46413d18667fcc37db261cd2785115225e7046fb252",
+    "5.pdf": "351e173a371b96ff3457c266480efe1dd39238c9f8c611e14834ebaf3248d65f",
+    "6.pdf": "8bc188a96aa4ed29a07d83d7b91c9cf77e9344738f1654fdb962fc58d2a66f5a",
+    "7.pdf": "f9b625b80a83c531a8886dbea961d64e67fe9ceeb2e2f12d06dd50b68a555203",
+    "8.pdf": "afbe99b368f28f921dd81f98fb44e60b74b3be601f8ce90ce9bd66e377280614",
+    "9.pdf": "af860a6c41cd6b1bde46a2f2bea6c6f26b04f64b08299e0a0eb213f5d39169b2",
+    "Course Project.pdf": "069bc02a5b60d19147df376b6e7109f7355c83f7d9deec9a350af75eb1cdfc4a",
+    "HAD论文研读.docx": "b480c5ebe561b3920d546b091c31dc161864d23394596db2368f8b381f7a1ce9",
+    "HAD论文研读.pdf": "4871ecbaef6d7cf1fea832138732dea4ee995222827723c3056b8df2abac0d41",
+    "MIST论文研读.docx": "fbb256146319d29a50ede9f0029cfc1807e168ce2fb9cf9066bdb62276de874c",
+    "project_report思路.docx": "065db9d34a84e0e8a3ac32301f34052958a9eeb2faa39421cb652a52b33ed881",
+    "project初流程.docx": "4b6ff7829422db78ee47e2c996183ffa474f9c159ab720419d2347405db39f95",
+    "project要求.docx": "4e2244345bd53e0ef5d7fe646101a8b5689fee66780c1f8990b55672c5588964"
+  },
+  "protected_other_directories": [
+    "NNDL/Assignment",
+    "NNDL/课程资料 and all other non-Project paths"
+  ],
+  "explicit_old_dataset_targets": [
+    "D:\\SAL_精简实验\\data\\PartialSpoof",
+    "D:\\SAL_精简实验\\data\\LlamaPartialSpoof",
+    "D:\\SAL_精简实验\\data\\fixed10",
+    "D:\\SAL_精简实验\\data\\downloads",
+    "D:\\SAL_精简实验\\data\\fixed10.zip"
+  ],
+  "old_dataset_backup": "D:\\SAL_精简实验\\result\\migration_fixed10_backup_20261107\\initial_subset_before_label_dtype_fix",
+  "discarded_interrupted_checkpoint": "D:\\SAL_精简实验\\data\\models\\sal_length_ablation_20261111_173559_372042\\original\\interrupted.ckpt",
+  "note": "Source data removed only after new audio/label SHA256 and ZIP CRC checks. Emptying Windows Recycle Bin is a separate user action; no disk space release claimed.",
+  "status": "completed_to_recycle_bin",
+  "protected_project_files_verified": 18,
+  "post_cleanup_deep_audit_passed": true,
+  "post_cleanup_audio_count": 17460,
+  "assignment_directory_untouched": true
+}

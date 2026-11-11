@@ -1,0 +1,131 @@
+{
+  "status": "passed",
+  "output": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\小组项目交接说明.docx",
+  "sha256": "ddbc5e6415af8f28d777fa34f762f403acfaf500599f0a088917def124423d12",
+  "bytes": 805259,
+  "pages": 11,
+  "figures": 3,
+  "reviewed_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "canonical_render": "attempted; unavailable bundled LibreOffice on Windows",
+  "fallback": "separate Microsoft Word COM read-only instance to PDF; bundled Poppler150dpi to PNG; all pages visually reviewed",
+  "artifact_marker_runs": 1,
+  "content_checks": [
+    "17,460",
+    "3,527,619,522",
+    "aligned_cross_recording_v1",
+    "42.309",
+    "32.603",
+    "41.989",
+    "0.136%",
+    "84.319%",
+    "尚未实施",
+    "不是折外预测",
+    "不能宣称 EER 改善"
+  ],
+  "limitations": [
+    "No reduced detector training results claimed",
+    "Optional ASR/NER models not included",
+    "Document commands verified against repository CLI; no training launched"
+  ],
+  "final_status_added": "41 regression checks and real-data integration acceptance; no reduced-training results",
+  "deletion_claims_present": false,
+  "final_pngs": [
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-01.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-02.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-03.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-04.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-05.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-06.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-07.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-08.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-09.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-10.png",
+    "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\reduced_project_20261111\\handoff_work\\render\\page-11.png"
+  ],
+  "full_distribution_table": {
+    "page": 2,
+    "columns": [
+      "用途与保留比例",
+      "录音数",
+      "全真",
+      "局部伪造",
+      "全假",
+      "音频大小"
+    ],
+    "rows": [
+      [
+        "SAL训练 原train20%",
+        "5,076",
+        "512",
+        "4,339",
+        "225",
+        "555.1 MB"
+      ],
+      [
+        "编辑收益 原train5%",
+        "1,269",
+        "126",
+        "1,086",
+        "57",
+        "139.8 MB"
+      ],
+      [
+        "复查预留 原train5%",
+        "1,269",
+        "128",
+        "1,089",
+        "52",
+        "137.0 MB"
+      ],
+      [
+        "PS dev 原dev10%",
+        "2,484",
+        "255",
+        "2,112",
+        "117",
+        "277.2 MB"
+      ],
+      [
+        "PS eval 原eval5%",
+        "3,562",
+        "365",
+        "3,050",
+        "147",
+        "385.0 MB"
+      ],
+      [
+        "LPS 约5%",
+        "3,800",
+        "529",
+        "1,609",
+        "1,662",
+        "761.4 MB"
+      ],
+      [
+        "合计",
+        "17,460",
+        "1,915",
+        "13,285",
+        "2,260",
+        "约2.26 GB"
+      ]
+    ],
+    "row_and_column_totals_verified": true,
+    "audio_only_approx_gb": 2.26,
+    "archive_bytes": 3527619522,
+    "all_pages_rerendered_and_reviewed": true
+  },
+  "final_revision": "Included user-requested complete six-column reduced-data distribution table; all 11 pages rendered and visually reviewed; page references unchanged."
+}

@@ -1,0 +1,46 @@
+test_comparison_rejects_mismatched_manifest_and_incomplete_results (test_project.BaselineTests) ... ok
+test_frontend_length_and_silence (test_project.BaselineTests) ... ok
+test_intervals_boundaries_and_empty_prediction (test_project.BaselineTests) ... ok
+test_masked_loss_ignores_padding_and_gradients (test_project.BaselineTests) ... ok
+test_metrics_exactly_match_original_database_evaluator (test_project.BaselineTests) ... ok
+test_pooling_and_label_orientation (test_project.BaselineTests) ... ok
+test_train_epoch_updates_cnn_gru_and_head (test_project.BaselineTests) ... ok
+test_variable_lengths_do_not_change_valid_predictions (test_project.BaselineTests) ... ok
+test_frozen_validation_detects_label_and_audio_changes (test_project.ReducedDataContractTests) ... ok
+test_lps_inferred_source_variants_are_kept_together (test_project.ReducedDataContractTests) ... ok
+test_string_labels_preserve_authenticity (test_project.ReducedDataContractTests) ... ok
+test_train_alias_never_includes_gain_roles (test_project.ReducedDataContractTests) ... ok
+test_train_partitions_are_exact_disjoint_and_deterministic (test_project.ReducedDataContractTests) ... ok
+test_full_predictions_refused (test_project.ReducedSemanticTests) ... ok
+test_legacy_artifacts_and_checkpoint_mismatch_rejected (test_project.ReducedSemanticTests) ... ok
+test_manifest_mismatch_rejected_before_output (test_project.ReducedSemanticTests) ... ok
+test_only_train_edit_and_reduced_detector_can_fit (test_project.ReducedSemanticTests) ... ok
+test_partial_coverage_and_source_group_overlap_cannot_fit (test_project.ReducedSemanticTests) ... ok
+test_reduced_audio_manifest_does_not_need_full_roots (test_project.ReducedSemanticTests) ... ok
+test_reduced_fit_apply_and_label_free_whitelist (test_project.ReducedSemanticTests) ... ok
+test_configured_cpu_never_requires_cuda (test_project.SalDeviceAndMixingTests) ... ok
+test_cpu_inference_float32_without_gpu_calls (test_project.SalDeviceAndMixingTests) ... ok
+test_cpu_oom_is_not_retried_as_cuda_oom (test_project.SalDeviceAndMixingTests) ... ok
+test_cpu_prediction_export_counts_no_oom_fallback (test_project.SalDeviceAndMixingTests) ... ok
+test_csm_cross_recording_and_cut_alignment_all_ratios (test_project.SalDeviceAndMixingTests) ... ok
+test_csm_short_valid_lengths_and_singleton (test_project.SalDeviceAndMixingTests) ... ok
+test_cuda_oom_retries_on_cpu_and_restores_device (test_project.SalDeviceAndMixingTests) ... ok
+test_all_four_outcomes_and_denominators (test_project.SemanticsTest) ... ok
+test_backoff_and_missing_mask (test_project.SemanticsTest) ... ok
+test_boundary_partial_is_not_forced_into_clean_denominator (test_project.SemanticsTest) ... ok
+test_complete_miss_is_not_any_partial_miss (test_project.SemanticsTest) ... ok
+test_entity_type_precedes_numeric_surface (test_project.SemanticsTest) ... ok
+test_false_alarm_event_requires_no_true_overlap (test_project.SemanticsTest) ... ok
+test_invalid_word_intervals_rejected (test_project.SemanticsTest) ... ok
+test_last_grid_cell_clips_to_audio (test_project.SemanticsTest) ... ok
+test_low_confidence_and_no_word_coverage_are_visible (test_project.SemanticsTest) ... ok
+test_multi_tags_keep_one_primary_bucket (test_project.SemanticsTest) ... ok
+test_ner_char_alignment_with_stub (test_project.SemanticsTest) ... ok
+test_paths_do_not_depend_on_working_directory (test_project.SemanticsTest) ... ok
+test_ties_match_sal_argmax (test_project.SemanticsTest) ... ok
+test_unscored_audio_tail_is_not_assumed_real (test_project.SemanticsTest) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 4.482s
+
+OK

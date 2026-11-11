@@ -1,0 +1,300 @@
+{
+  "splits": {
+    "train": {
+      "recordings": 25380,
+      "scopes": {
+        "genuine": 2580,
+        "partial": 21677,
+        "fully_fake": 1123
+      },
+      "frames": {
+        "spoof": 303477,
+        "real": 254930
+      },
+      "spoof_frame_percent": 54.34691900352252,
+      "utterance_duration_quantiles": [
+        1.92,
+        3.2,
+        5.44,
+        9.120000000000001
+      ],
+      "recordings_longer_than_4s_percent": 26.627265563435778,
+      "spoof_event_duration_quantiles": [
+        0.16,
+        0.32,
+        1.76,
+        3.68
+      ],
+      "attack_codes": {
+        "CON": 22800,
+        "-": 2580
+      },
+      "speakers": 20,
+      "manifest_sha256": "2905481a5864ede983afc117932f994b9f3e403cdeeaa4cd39f88562eba45692",
+      "label_sha256": "685647460758d1d72e7cdecba7db5e79fabcb31e2f8f0e1ab091b4d58706491c",
+      "exact_audio_label_protocol_coverage": true
+    },
+    "dev": {
+      "recordings": 24844,
+      "scopes": {
+        "genuine": 2548,
+        "partial": 21126,
+        "fully_fake": 1170
+      },
+      "frames": {
+        "spoof": 301417,
+        "real": 258862
+      },
+      "spoof_frame_percent": 53.7976615222059,
+      "utterance_duration_quantiles": [
+        1.92,
+        3.36,
+        5.6000000000000005,
+        9.28
+      ],
+      "recordings_longer_than_4s_percent": 30.631138303010786,
+      "spoof_event_duration_quantiles": [
+        0.16,
+        0.32,
+        1.76,
+        3.84
+      ],
+      "attack_codes": {
+        "CON": 22296,
+        "-": 2548
+      },
+      "speakers": 20,
+      "manifest_sha256": "b4eabeda976a28cff0a253f47adfd06184f3b05aca6536b25adbc5a3cca8f9fb",
+      "label_sha256": "28fd0e07e8e1d12f489e48b04a1f2a0d807404e99b904edc14175f2ee19d586a",
+      "exact_audio_label_protocol_coverage": true
+    },
+    "eval": {
+      "recordings": 71237,
+      "scopes": {
+        "partial": 60988,
+        "genuine": 7355,
+        "fully_fake": 2894
+      },
+      "frames": {
+        "spoof": 774062,
+        "real": 784363
+      },
+      "spoof_frame_percent": 49.66950607183534,
+      "utterance_duration_quantiles": [
+        1.76,
+        3.04,
+        5.76,
+        9.44
+      ],
+      "recordings_longer_than_4s_percent": 27.48150539747603,
+      "spoof_event_duration_quantiles": [
+        0.16,
+        0.32,
+        1.6,
+        3.68
+      ],
+      "attack_codes": {
+        "CON": 63882,
+        "-": 7355
+      },
+      "speakers": 67,
+      "manifest_sha256": "6f905be5a085167c9753757f494fa8aaa596d7d35894475c605eeebd0c843eb2",
+      "label_sha256": "df406a5d8b78d6e5a953e1cfb2b7d365888ff92f74890f969703d456094e4fab",
+      "exact_audio_label_protocol_coverage": true
+    }
+  },
+  "overlaps": {
+    "train_dev": {
+      "uid_overlap": 0,
+      "speaker_overlap": 0
+    },
+    "train_eval": {
+      "uid_overlap": 0,
+      "speaker_overlap": 0
+    },
+    "dev_eval": {
+      "uid_overlap": 0,
+      "speaker_overlap": 0
+    }
+  },
+  "checkpoint": {
+    "epoch": 7,
+    "sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+    "matches_training_record": true,
+    "matches_best_history_metrics": true
+  },
+  "best_dev_metrics": {
+    "eer_percent": 3.8046960830688477,
+    "f1_bonafide_percent": 95.75120544433594,
+    "accuracy_percent": 96.10033416748047,
+    "eer_margin_threshold": -0.5522069931030273,
+    "f1_spoof_percent": 96.39645137295715,
+    "frame_count": 560279,
+    "confusion_true_rows_pred_columns_0_spoof_1_bonafide": [
+      [
+        292235,
+        9182
+      ],
+      [
+        12667,
+        246195
+      ]
+    ],
+    "f1_rule": "official F1Metric: binary-head argmax; positive class 1 = bonafide",
+    "eer_rule": "official EERMetric: sort logit_1 - logit_0 descending, nearest FPR/FNR crossing",
+    "single_class_eer_sentinel": false
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.24437057270220117,
+      "validation_loss": 0.1404856909002663,
+      "dev_eer_percent": 5.586612701416016
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.11230281600925139,
+      "validation_loss": 0.13682724349183245,
+      "dev_eer_percent": 4.9771575927734375
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.08878797211604812,
+      "validation_loss": 0.15242031614956797,
+      "dev_eer_percent": 5.693441390991211
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.07564946987950726,
+      "validation_loss": 0.11487480277868445,
+      "dev_eer_percent": 4.0999674797058105
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.06586720646396757,
+      "validation_loss": 0.10398410788526327,
+      "dev_eer_percent": 3.8289148807525635
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.05969656262539607,
+      "validation_loss": 0.11187280110626513,
+      "dev_eer_percent": 3.9768826961517334
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0551498748391535,
+      "validation_loss": 0.11006185958534674,
+      "dev_eer_percent": 3.8046960830688477
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.05005080427867693,
+      "validation_loss": 0.14176253327821275,
+      "dev_eer_percent": 4.644064426422119
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.04724578447101814,
+      "validation_loss": 0.12010086267339323,
+      "dev_eer_percent": 3.978541374206543
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.044740440607751626,
+      "validation_loss": 0.12209576293246178,
+      "dev_eer_percent": 3.837872266769409
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.04323938044921093,
+      "validation_loss": 0.1222657949056773,
+      "dev_eer_percent": 3.888300895690918
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.04246392574347297,
+      "validation_loss": 0.12063238921424227,
+      "dev_eer_percent": 3.919818639755249
+    }
+  ],
+  "limitations": [
+    "Full dev scores were not saved; no full dev re-inference in this audit.",
+    "CON is a concatenation protocol code, not a detailed synthesis attack identifier.",
+    "Source-utterance and waveform duplicate relationships are not established by disjoint output IDs."
+  ],
+  "cnn": {
+    "frames": 1558425,
+    "spoof_frames": 774062,
+    "real_frames": 784363,
+    "missed_spoof_frames": 238295,
+    "false_alarm_real_frames": 43891,
+    "miss_percent": 30.78500171820862,
+    "false_alarm_percent": 5.595750946946758,
+    "eer_numpy_percent": 19.490318623095426,
+    "recordings": 71237,
+    "all_saved_labels_match_official": true,
+    "manifest_sha256": "6f905be5a085167c9753757f494fa8aaa596d7d35894475c605eeebd0c843eb2",
+    "boundary": {
+      "spoof": 226677,
+      "real": 251850,
+      "miss": 39796,
+      "false_alarm": 25203
+    },
+    "interior": {
+      "spoof": 547385,
+      "real": 532513,
+      "miss": 198499,
+      "false_alarm": 18688
+    },
+    "saved_eer_percent": 19.490299224853516,
+    "via_validation_metric": {
+      "eer_percent": 19.490299224853516,
+      "f1_bonafide_percent": 83.99517059326172,
+      "accuracy_percent": 81.89286804199219,
+      "eer_margin_threshold": 2.9846043586730957,
+      "f1_spoof_percent": 79.15477351298644,
+      "frame_count": 1558425,
+      "confusion_true_rows_pred_columns_0_spoof_1_bonafide": [
+        [
+          535767,
+          238295
+        ],
+        [
+          43891,
+          740472
+        ]
+      ],
+      "f1_rule": "official F1Metric: binary-head argmax; positive class 1 = bonafide",
+      "eer_rule": "official EERMetric: sort logit_1 - logit_0 descending, nearest FPR/FNR crossing",
+      "single_class_eer_sentinel": false
+    }
+  },
+  "sal": {
+    "frames": 1558425,
+    "spoof_frames": 774062,
+    "real_frames": 784363,
+    "missed_spoof_frames": 31176,
+    "false_alarm_real_frames": 14979,
+    "miss_percent": 4.027584353708101,
+    "false_alarm_percent": 1.9097025229389963,
+    "eer_numpy_percent": 2.9979626103964723,
+    "recordings": 71237,
+    "all_saved_labels_match_official": true,
+    "manifest_sha256": "6f905be5a085167c9753757f494fa8aaa596d7d35894475c605eeebd0c843eb2",
+    "boundary": {
+      "spoof": 226677,
+      "real": 251850,
+      "miss": 7859,
+      "false_alarm": 9930
+    },
+    "interior": {
+      "spoof": 547385,
+      "real": 532513,
+      "miss": 23317,
+      "false_alarm": 5049
+    },
+    "saved_eer_percent": 2.997951030731201
+  },
+  "output": "../result/cnn_generalization_audit_20261110_234601"
+}

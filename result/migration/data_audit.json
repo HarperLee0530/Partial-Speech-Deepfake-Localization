@@ -1,0 +1,840 @@
+{
+  "mode": "read-only",
+  "root": "D:\\SAL_精简实验\\data",
+  "inventories": {
+    "PartialSpoof": {
+      "files_by_extension": {
+        ".json": 6,
+        ".txt": 28,
+        ".lst": 3,
+        ".wav": 121461,
+        ".npy": 21
+      },
+      "bytes_by_extension": {
+        ".json": 5320,
+        ".txt": 33640020,
+        ".lst": 1687999,
+        ".wav": 13400664484,
+        ".npy": 7124213309
+      },
+      "apparent_bytes": 20560211132,
+      "unique_inode_bytes_within_tree": 20560211132,
+      "wav_link_counts": {
+        "1": 109163,
+        "3": 11994,
+        "2": 304
+      },
+      "nonwav_examples": [
+        "database_dev.tar.gz.extracted.json",
+        "database_eval.tar.gz.extracted.json",
+        "database_protocols.tar.gz.extracted.json",
+        "database_segment_labels_v1.2.tar.gz.extracted.json",
+        "database_train.tar.gz.extracted.json",
+        "README_完整数据.txt",
+        "training_data_audit.json",
+        "database\\dev\\dev.lst",
+        "database\\eval\\eval.lst",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.dev.female.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.dev.female.trn.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.dev.gi.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.dev.male.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.dev.male.trn.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.eval.female.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.eval.female.trn.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.eval.gi.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.eval.male.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_protocols\\ASVspoof2019.LA.asv.eval.male.trn.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_scores\\ASVspoof2019.LA.asv.dev.gi.trl.scores.txt",
+        "database\\protocols\\ASVspoof2019_LA_asv_scores\\ASVspoof2019.LA.asv.eval.gi.trl.scores.txt",
+        "database\\protocols\\ASVspoof2019_LA_cm_protocols\\ASVspoof2019.LA.cm.dev.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_cm_protocols\\ASVspoof2019.LA.cm.eval.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_cm_protocols\\ASVspoof2019.LA.cm.train.trl.txt",
+        "database\\protocols\\ASVspoof2019_LA_cm_protocols\\ASVspoof2019.LA.cm.train.trn.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_protocols\\PartialSpoof.LA.asv.dev.female.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_protocols\\PartialSpoof.LA.asv.dev.gi.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_protocols\\PartialSpoof.LA.asv.dev.male.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_protocols\\PartialSpoof.LA.asv.eval.female.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_protocols\\PartialSpoof.LA.asv.eval.gi.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_protocols\\PartialSpoof.LA.asv.eval.male.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_scores\\PartialSpoof.LA.asv.dev.gi.trl.scores.txt",
+        "database\\protocols\\PartialSpoof_LA_asv_scores\\PartialSpoof.LA.asv.eval.gi.trl.scores.txt",
+        "database\\protocols\\PartialSpoof_LA_cm_protocols\\PartialSpoof.LA.cm.dev.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_cm_protocols\\PartialSpoof.LA.cm.eval.trl.txt",
+        "database\\protocols\\PartialSpoof_LA_cm_protocols\\PartialSpoof.LA.cm.train.trl.txt",
+        "database\\segment_labels\\dev_seglab_0.01.npy",
+        "database\\segment_labels\\dev_seglab_0.02.npy",
+        "database\\segment_labels\\dev_seglab_0.04.npy",
+        "database\\segment_labels\\dev_seglab_0.08.npy",
+        "database\\segment_labels\\dev_seglab_0.16.npy",
+        "database\\segment_labels\\dev_seglab_0.32.npy",
+        "database\\segment_labels\\dev_seglab_0.64.npy",
+        "database\\segment_labels\\eval_seglab_0.01.npy",
+        "database\\segment_labels\\eval_seglab_0.02.npy"
+      ],
+      "resolved": "D:\\SAL_精简实验\\data\\PartialSpoof"
+    },
+    "LlamaPartialSpoof": {
+      "files_by_extension": {
+        ".json": 1,
+        ".txt": 1,
+        ".wav": 76228,
+        ".npy": 1
+      },
+      "bytes_by_extension": {
+        ".json": 247,
+        ".txt": 310,
+        ".wav": 15342260940,
+        ".npy": 200069168
+      },
+      "apparent_bytes": 15542330665,
+      "unique_inode_bytes_within_tree": 15542330665,
+      "wav_link_counts": {
+        "1": 68605,
+        "3": 7623
+      },
+      "nonwav_examples": [
+        "R01TTS.0.a.tgz.extracted.json",
+        "README_完整数据.txt",
+        "segment_labels\\cf_seglab_0.02.npy"
+      ],
+      "resolved": "D:\\SAL_精简实验\\data\\LlamaPartialSpoof"
+    },
+    "fixed10": {
+      "files_by_extension": {
+        ".txt": 5,
+        ".wav": 19769,
+        ".npy": 4,
+        ".json": 4
+      },
+      "bytes_by_extension": {
+        ".txt": 541977,
+        ".wav": 2884753310,
+        ".npy": 44181242,
+        ".json": 686898
+      },
+      "apparent_bytes": 2930163427,
+      "unique_inode_bytes_within_tree": 2930163427,
+      "wav_link_counts": {
+        "3": 19617,
+        "2": 152
+      },
+      "nonwav_examples": [
+        "README.txt",
+        "LlamaPartialSpoof\\segment_labels\\cf_seglab_0.02.npy",
+        "manifests\\dev.json",
+        "manifests\\dev.txt",
+        "manifests\\eval.json",
+        "manifests\\eval.txt",
+        "manifests\\lps.json",
+        "manifests\\lps.txt",
+        "manifests\\train.json",
+        "manifests\\train.txt",
+        "PartialSpoof\\database\\segment_labels\\dev_seglab_0.16.npy",
+        "PartialSpoof\\database\\segment_labels\\eval_seglab_0.16.npy",
+        "PartialSpoof\\database\\segment_labels\\train_seglab_0.16.npy"
+      ],
+      "resolved": "D:\\SAL_精简实验\\data\\fixed10"
+    },
+    "downloads": {
+      "files_by_extension": {
+        ".txt": 1,
+        ".gz": 1,
+        ".json": 2
+      },
+      "bytes_by_extension": {
+        ".txt": 10525493,
+        ".gz": 2027101056,
+        ".json": 519
+      },
+      "apparent_bytes": 2037627068,
+      "unique_inode_bytes_within_tree": 2037627068,
+      "wav_link_counts": {},
+      "nonwav_examples": [
+        "LlamaPartialSpoof\\label_R01TTS.0.a.txt",
+        "PartialSpoof\\database_train.tar.gz",
+        "PartialSpoof\\database_train.tar.gz.verified.json",
+        "PartialSpoof\\database_train.tar.gz.chunks\\state.json"
+      ],
+      "resolved": "D:\\SAL_精简实验\\data\\downloads"
+    }
+  },
+  "datasets": {
+    "train": {
+      "count": 25380,
+      "label_file": "D:\\SAL_精简实验\\data\\PartialSpoof\\database\\segment_labels\\train_seglab_0.16.npy",
+      "label_sha256": "685647460758d1d72e7cdecba7db5e79fabcb31e2f8f0e1ab091b4d58706491c",
+      "protocol_count": 25380,
+      "label_protocol_ids_match": true,
+      "class_counts": {
+        "genuine": 2580,
+        "partial": 21677,
+        "fully_fake": 1123
+      },
+      "attack_counts": {
+        "-": 2580,
+        "CON": 22800
+      },
+      "speaker_counts": {
+        "LA_0089": 1304,
+        "LA_0088": 1235,
+        "LA_0090": 1247,
+        "LA_0084": 1241,
+        "LA_0086": 1259,
+        "LA_0091": 1258,
+        "LA_0085": 1242,
+        "LA_0096": 1303,
+        "LA_0083": 1299,
+        "LA_0092": 1302,
+        "LA_0087": 1247,
+        "LA_0098": 1258,
+        "LA_0094": 1300,
+        "LA_0097": 1225,
+        "LA_0080": 1261,
+        "LA_0093": 1282,
+        "LA_0095": 1305,
+        "LA_0079": 1249,
+        "LA_0081": 1258,
+        "LA_0082": 1305
+      },
+      "fake_ratio_bins": {
+        "0": 2580,
+        "<1": 13222,
+        "<=0.5": 7338,
+        "<=0.25": 1117,
+        "1": 1123
+      },
+      "label_grid_duration_bins": {
+        "<=4s": 15786,
+        "<=8s": 6269,
+        "<=2s": 2836,
+        ">8s": 489
+      },
+      "shortest_event_bins": {
+        "none": 2580,
+        ">2s": 1559,
+        "<=2s": 4473,
+        "<=0.5s": 4984,
+        "<=0.16s": 11784
+      },
+      "native_grid_seconds": 0.16,
+      "stored_label_dtype": "<U21"
+    },
+    "dev": {
+      "count": 24844,
+      "label_file": "D:\\SAL_精简实验\\data\\PartialSpoof\\database\\segment_labels\\dev_seglab_0.16.npy",
+      "label_sha256": "28fd0e07e8e1d12f489e48b04a1f2a0d807404e99b904edc14175f2ee19d586a",
+      "protocol_count": 24844,
+      "label_protocol_ids_match": true,
+      "class_counts": {
+        "genuine": 2548,
+        "partial": 21126,
+        "fully_fake": 1170
+      },
+      "attack_counts": {
+        "-": 2548,
+        "CON": 22296
+      },
+      "speaker_counts": {
+        "LA_0077": 2644,
+        "LA_0106": 126,
+        "LA_0099": 77,
+        "LA_0102": 126,
+        "LA_0069": 2639,
+        "LA_0103": 126,
+        "LA_0108": 126,
+        "LA_0078": 2643,
+        "LA_0074": 2628,
+        "LA_0104": 126,
+        "LA_0070": 1985,
+        "LA_0075": 2625,
+        "LA_0101": 77,
+        "LA_0107": 126,
+        "LA_0071": 1976,
+        "LA_0072": 2644,
+        "LA_0073": 2000,
+        "LA_0105": 77,
+        "LA_0076": 1996,
+        "LA_0100": 77
+      },
+      "fake_ratio_bins": {
+        "0": 2548,
+        "<=0.5": 7598,
+        "<1": 12592,
+        "<=0.25": 936,
+        "1": 1170
+      },
+      "label_grid_duration_bins": {
+        "<=4s": 14230,
+        "<=8s": 7054,
+        "<=2s": 3004,
+        ">8s": 556
+      },
+      "shortest_event_bins": {
+        "none": 2548,
+        "<=2s": 4112,
+        ">2s": 1316,
+        "<=0.5s": 4857,
+        "<=0.16s": 12011
+      },
+      "native_grid_seconds": 0.16,
+      "stored_label_dtype": "<U21"
+    },
+    "eval": {
+      "count": 71237,
+      "label_file": "D:\\SAL_精简实验\\data\\PartialSpoof\\database\\segment_labels\\eval_seglab_0.16.npy",
+      "label_sha256": "df406a5d8b78d6e5a953e1cfb2b7d365888ff92f74890f969703d456094e4fab",
+      "protocol_count": 71237,
+      "label_protocol_ids_match": true,
+      "class_counts": {
+        "partial": 60988,
+        "genuine": 7355,
+        "fully_fake": 2894
+      },
+      "attack_counts": {
+        "CON": 63882,
+        "-": 7355
+      },
+      "speaker_counts": {
+        "LA_0030": 922,
+        "LA_0016": 1805,
+        "LA_0028": 990,
+        "LA_0027": 1830,
+        "LA_0009": 1806,
+        "LA_0039": 1776,
+        "LA_0068": 95,
+        "LA_0065": 95,
+        "LA_0033": 1781,
+        "LA_0022": 1762,
+        "LA_0047": 1805,
+        "LA_0043": 1813,
+        "LA_0034": 1793,
+        "LA_0055": 113,
+        "LA_0017": 1804,
+        "LA_0059": 95,
+        "LA_0066": 113,
+        "LA_0036": 981,
+        "LA_0041": 1790,
+        "LA_0057": 95,
+        "LA_0051": 113,
+        "LA_0026": 1796,
+        "LA_0045": 1814,
+        "LA_0007": 1002,
+        "LA_0029": 1776,
+        "LA_0042": 1811,
+        "LA_0008": 1730,
+        "LA_0014": 1814,
+        "LA_0050": 113,
+        "LA_0035": 1818,
+        "LA_0003": 996,
+        "LA_0058": 113,
+        "LA_0020": 1793,
+        "LA_0012": 1832,
+        "LA_0024": 1818,
+        "LA_0018": 991,
+        "LA_0064": 95,
+        "LA_0056": 95,
+        "LA_0053": 113,
+        "LA_0037": 1796,
+        "LA_0032": 983,
+        "LA_0061": 113,
+        "LA_0054": 95,
+        "LA_0019": 1773,
+        "LA_0048": 998,
+        "LA_0015": 1007,
+        "LA_0010": 1817,
+        "LA_0021": 1003,
+        "LA_0052": 95,
+        "LA_0060": 113,
+        "LA_0025": 978,
+        "LA_0023": 993,
+        "LA_0005": 1017,
+        "LA_0011": 980,
+        "LA_0004": 1803,
+        "LA_0006": 1793,
+        "LA_0031": 1784,
+        "LA_0040": 959,
+        "LA_0044": 970,
+        "LA_0063": 113,
+        "LA_0049": 95,
+        "LA_0002": 983,
+        "LA_0013": 987,
+        "LA_0046": 1001,
+        "LA_0067": 113,
+        "LA_0001": 1001,
+        "LA_0038": 977
+      },
+      "fake_ratio_bins": {
+        "<=0.25": 5802,
+        "<=0.5": 23140,
+        "0": 7355,
+        "<1": 32046,
+        "1": 2894
+      },
+      "label_grid_duration_bins": {
+        "<=2s": 10643,
+        "<=4s": 41017,
+        "<=8s": 17869,
+        ">8s": 1708
+      },
+      "shortest_event_bins": {
+        "<=0.16s": 42353,
+        "none": 7355,
+        "<=2s": 8842,
+        "<=0.5s": 9291,
+        ">2s": 3396
+      },
+      "native_grid_seconds": 0.16,
+      "stored_label_dtype": "<U21"
+    },
+    "lps": {
+      "count": 76228,
+      "label_file": "D:\\SAL_精简实验\\data\\LlamaPartialSpoof\\segment_labels\\cf_seglab_0.02.npy",
+      "native_grid_seconds": 0.02,
+      "class_counts": {
+        "genuine": 10573,
+        "fully_fake": 33461,
+        "partial": 32194
+      },
+      "filename_prefix_counts": {
+        "dev-clean": 5736,
+        "test-clean": 4837,
+        "dev01-cosyvoice-full": 5576,
+        "dev01-elevenlab-full": 5577,
+        "dev01-gptsovits-full": 5577,
+        "dev01-ljjets-full": 5577,
+        "dev01-xttsv2-full": 5577,
+        "dev01-yourtts-full": 5577,
+        "dev01-cosyvoice-partial-cf": 5262,
+        "dev01-elevenlab-partial-cf": 5387,
+        "dev01-gptsovits-partial-cf": 5387,
+        "dev01-ljjets-partial-cf": 5387,
+        "dev01-xttsv2-partial-cf": 5384,
+        "dev01-yourtts-partial-cf": 5387
+      },
+      "source_group_candidate": "last four numeric filename components; candidate LibriSpeech/derived clip relation, documentation still required",
+      "candidate_source_groups": 10573,
+      "group_size_counts": {
+        "13": 5260,
+        "12": 125,
+        "1": 4996,
+        "7": 190,
+        "11": 2
+      },
+      "unparsed_ids": [],
+      "group_examples": [
+        {
+          "key": "1462_170145_000020_000002",
+          "ids": [
+            "dev-clean_1462_170145_000020_000002",
+            "dev01-cosyvoice-full_1462_170145_000020_000002",
+            "dev01-elevenlab-full_1462_170145_000020_000002",
+            "dev01-gptsovits-full_1462_170145_000020_000002",
+            "dev01-ljjets-full_1462_170145_000020_000002",
+            "dev01-xttsv2-full_1462_170145_000020_000002",
+            "dev01-yourtts-full_1462_170145_000020_000002",
+            "dev01-cosyvoice-partial-cf_1462_170145_000020_000002",
+            "dev01-elevenlab-partial-cf_1462_170145_000020_000002",
+            "dev01-gptsovits-partial-cf_1462_170145_000020_000002",
+            "dev01-ljjets-partial-cf_1462_170145_000020_000002",
+            "dev01-xttsv2-partial-cf_1462_170145_000020_000002",
+            "dev01-yourtts-partial-cf_1462_170145_000020_000002"
+          ]
+        },
+        {
+          "key": "6313_66129_000092_000001",
+          "ids": [
+            "dev-clean_6313_66129_000092_000001",
+            "dev01-cosyvoice-full_6313_66129_000092_000001",
+            "dev01-elevenlab-full_6313_66129_000092_000001",
+            "dev01-gptsovits-full_6313_66129_000092_000001",
+            "dev01-ljjets-full_6313_66129_000092_000001",
+            "dev01-xttsv2-full_6313_66129_000092_000001",
+            "dev01-yourtts-full_6313_66129_000092_000001",
+            "dev01-cosyvoice-partial-cf_6313_66129_000092_000001",
+            "dev01-elevenlab-partial-cf_6313_66129_000092_000001",
+            "dev01-gptsovits-partial-cf_6313_66129_000092_000001",
+            "dev01-ljjets-partial-cf_6313_66129_000092_000001",
+            "dev01-xttsv2-partial-cf_6313_66129_000092_000001",
+            "dev01-yourtts-partial-cf_6313_66129_000092_000001"
+          ]
+        },
+        {
+          "key": "1988_24833_000025_000000",
+          "ids": [
+            "dev-clean_1988_24833_000025_000000",
+            "dev01-cosyvoice-full_1988_24833_000025_000000",
+            "dev01-elevenlab-full_1988_24833_000025_000000",
+            "dev01-gptsovits-full_1988_24833_000025_000000",
+            "dev01-ljjets-full_1988_24833_000025_000000",
+            "dev01-xttsv2-full_1988_24833_000025_000000",
+            "dev01-yourtts-full_1988_24833_000025_000000",
+            "dev01-cosyvoice-partial-cf_1988_24833_000025_000000",
+            "dev01-elevenlab-partial-cf_1988_24833_000025_000000",
+            "dev01-gptsovits-partial-cf_1988_24833_000025_000000",
+            "dev01-ljjets-partial-cf_1988_24833_000025_000000",
+            "dev01-xttsv2-partial-cf_1988_24833_000025_000000",
+            "dev01-yourtts-partial-cf_1988_24833_000025_000000"
+          ]
+        },
+        {
+          "key": "6345_93306_000056_000002",
+          "ids": [
+            "dev-clean_6345_93306_000056_000002",
+            "dev01-cosyvoice-full_6345_93306_000056_000002",
+            "dev01-elevenlab-full_6345_93306_000056_000002",
+            "dev01-gptsovits-full_6345_93306_000056_000002",
+            "dev01-ljjets-full_6345_93306_000056_000002",
+            "dev01-xttsv2-full_6345_93306_000056_000002",
+            "dev01-yourtts-full_6345_93306_000056_000002",
+            "dev01-cosyvoice-partial-cf_6345_93306_000056_000002",
+            "dev01-elevenlab-partial-cf_6345_93306_000056_000002",
+            "dev01-gptsovits-partial-cf_6345_93306_000056_000002",
+            "dev01-ljjets-partial-cf_6345_93306_000056_000002",
+            "dev01-xttsv2-partial-cf_6345_93306_000056_000002",
+            "dev01-yourtts-partial-cf_6345_93306_000056_000002"
+          ]
+        },
+        {
+          "key": "2277_149896_000003_000001",
+          "ids": [
+            "dev-clean_2277_149896_000003_000001",
+            "dev01-cosyvoice-full_2277_149896_000003_000001",
+            "dev01-elevenlab-full_2277_149896_000003_000001",
+            "dev01-gptsovits-full_2277_149896_000003_000001",
+            "dev01-ljjets-full_2277_149896_000003_000001",
+            "dev01-xttsv2-full_2277_149896_000003_000001",
+            "dev01-yourtts-full_2277_149896_000003_000001",
+            "dev01-cosyvoice-partial-cf_2277_149896_000003_000001",
+            "dev01-elevenlab-partial-cf_2277_149896_000003_000001",
+            "dev01-gptsovits-partial-cf_2277_149896_000003_000001",
+            "dev01-ljjets-partial-cf_2277_149896_000003_000001",
+            "dev01-xttsv2-partial-cf_2277_149896_000003_000001",
+            "dev01-yourtts-partial-cf_2277_149896_000003_000001"
+          ]
+        },
+        {
+          "key": "1462_170138_000003_000005",
+          "ids": [
+            "dev-clean_1462_170138_000003_000005",
+            "dev01-cosyvoice-full_1462_170138_000003_000005",
+            "dev01-elevenlab-full_1462_170138_000003_000005",
+            "dev01-gptsovits-full_1462_170138_000003_000005",
+            "dev01-ljjets-full_1462_170138_000003_000005",
+            "dev01-xttsv2-full_1462_170138_000003_000005",
+            "dev01-yourtts-full_1462_170138_000003_000005",
+            "dev01-cosyvoice-partial-cf_1462_170138_000003_000005",
+            "dev01-elevenlab-partial-cf_1462_170138_000003_000005",
+            "dev01-gptsovits-partial-cf_1462_170138_000003_000005",
+            "dev01-ljjets-partial-cf_1462_170138_000003_000005",
+            "dev01-xttsv2-partial-cf_1462_170138_000003_000005",
+            "dev01-yourtts-partial-cf_1462_170138_000003_000005"
+          ]
+        },
+        {
+          "key": "6241_61943_000003_000000",
+          "ids": [
+            "dev-clean_6241_61943_000003_000000",
+            "dev01-cosyvoice-full_6241_61943_000003_000000",
+            "dev01-elevenlab-full_6241_61943_000003_000000",
+            "dev01-gptsovits-full_6241_61943_000003_000000",
+            "dev01-ljjets-full_6241_61943_000003_000000",
+            "dev01-xttsv2-full_6241_61943_000003_000000",
+            "dev01-yourtts-full_6241_61943_000003_000000",
+            "dev01-cosyvoice-partial-cf_6241_61943_000003_000000",
+            "dev01-elevenlab-partial-cf_6241_61943_000003_000000",
+            "dev01-gptsovits-partial-cf_6241_61943_000003_000000",
+            "dev01-ljjets-partial-cf_6241_61943_000003_000000",
+            "dev01-xttsv2-partial-cf_6241_61943_000003_000000",
+            "dev01-yourtts-partial-cf_6241_61943_000003_000000"
+          ]
+        },
+        {
+          "key": "1272_141231_000034_000002",
+          "ids": [
+            "dev-clean_1272_141231_000034_000002",
+            "dev01-cosyvoice-full_1272_141231_000034_000002",
+            "dev01-elevenlab-full_1272_141231_000034_000002",
+            "dev01-gptsovits-full_1272_141231_000034_000002",
+            "dev01-ljjets-full_1272_141231_000034_000002",
+            "dev01-xttsv2-full_1272_141231_000034_000002",
+            "dev01-yourtts-full_1272_141231_000034_000002",
+            "dev01-cosyvoice-partial-cf_1272_141231_000034_000002",
+            "dev01-elevenlab-partial-cf_1272_141231_000034_000002",
+            "dev01-gptsovits-partial-cf_1272_141231_000034_000002",
+            "dev01-ljjets-partial-cf_1272_141231_000034_000002",
+            "dev01-xttsv2-partial-cf_1272_141231_000034_000002",
+            "dev01-yourtts-partial-cf_1272_141231_000034_000002"
+          ]
+        }
+      ],
+      "conservative_parent_source_group": "first three of final four numeric fields: speaker_chapter_original_utterance; fourth field appears to be derived clip index. Filename-inferred, not independently verified provenance.",
+      "conservative_parent_groups": 5047,
+      "parent_group_size_summary": {
+        "min": 1,
+        "max": 221,
+        "histogram": {
+          "52": 123,
+          "39": 248,
+          "26": 495,
+          "13": 1245,
+          "130": 9,
+          "12": 48,
+          "78": 38,
+          "105": 3,
+          "72": 9,
+          "91": 13,
+          "104": 10,
+          "7": 95,
+          "65": 58,
+          "143": 3,
+          "33": 33,
+          "123": 1,
+          "59": 11,
+          "20": 31,
+          "66": 12,
+          "38": 14,
+          "67": 1,
+          "98": 3,
+          "117": 11,
+          "40": 11,
+          "25": 20,
+          "128": 1,
+          "221": 1,
+          "1": 1353,
+          "92": 3,
+          "14": 26,
+          "53": 7,
+          "54": 1,
+          "124": 2,
+          "64": 10,
+          "111": 1,
+          "131": 2,
+          "46": 12,
+          "79": 2,
+          "34": 4,
+          "181": 1,
+          "145": 1,
+          "90": 5,
+          "89": 1,
+          "27": 16,
+          "8": 23,
+          "51": 4,
+          "47": 1,
+          "102": 1,
+          "118": 3,
+          "50": 2,
+          "144": 1,
+          "163": 1,
+          "37": 4,
+          "21": 3,
+          "169": 1,
+          "85": 3,
+          "195": 1,
+          "60": 1,
+          "103": 1,
+          "137": 1,
+          "77": 1,
+          "99": 1,
+          "45": 1,
+          "15": 2,
+          "24": 1,
+          "5": 72,
+          "2": 479,
+          "6": 40,
+          "16": 1,
+          "10": 8,
+          "4": 118,
+          "3": 260,
+          "11": 5,
+          "9": 13
+        }
+      },
+      "parent_group_example": {
+        "key": "1462_170145_000020",
+        "ids": [
+          "dev-clean_1462_170145_000020_000002",
+          "dev-clean_1462_170145_000020_000000",
+          "dev-clean_1462_170145_000020_000001",
+          "dev-clean_1462_170145_000020_000003",
+          "dev01-cosyvoice-full_1462_170145_000020_000002",
+          "dev01-cosyvoice-full_1462_170145_000020_000000",
+          "dev01-cosyvoice-full_1462_170145_000020_000001",
+          "dev01-cosyvoice-full_1462_170145_000020_000003",
+          "dev01-elevenlab-full_1462_170145_000020_000002",
+          "dev01-elevenlab-full_1462_170145_000020_000000",
+          "dev01-elevenlab-full_1462_170145_000020_000001",
+          "dev01-elevenlab-full_1462_170145_000020_000003",
+          "dev01-gptsovits-full_1462_170145_000020_000002",
+          "dev01-gptsovits-full_1462_170145_000020_000000",
+          "dev01-gptsovits-full_1462_170145_000020_000001",
+          "dev01-gptsovits-full_1462_170145_000020_000003",
+          "dev01-ljjets-full_1462_170145_000020_000002",
+          "dev01-ljjets-full_1462_170145_000020_000000",
+          "dev01-ljjets-full_1462_170145_000020_000001",
+          "dev01-ljjets-full_1462_170145_000020_000003",
+          "dev01-xttsv2-full_1462_170145_000020_000002",
+          "dev01-xttsv2-full_1462_170145_000020_000000",
+          "dev01-xttsv2-full_1462_170145_000020_000001",
+          "dev01-xttsv2-full_1462_170145_000020_000003",
+          "dev01-yourtts-full_1462_170145_000020_000002",
+          "dev01-yourtts-full_1462_170145_000020_000000",
+          "dev01-yourtts-full_1462_170145_000020_000001",
+          "dev01-yourtts-full_1462_170145_000020_000003",
+          "dev01-cosyvoice-partial-cf_1462_170145_000020_000000",
+          "dev01-cosyvoice-partial-cf_1462_170145_000020_000001"
+        ]
+      }
+    }
+  },
+  "ps_speaker_overlap": {
+    "train_dev": [],
+    "train_eval": [],
+    "dev_eval": []
+  },
+  "requested_targets": {
+    "detector_train": 5076,
+    "edit_gain_train": 1269,
+    "review_gain_train": 1269,
+    "dev": 2484,
+    "eval": 3562,
+    "lps": 3811
+  },
+  "path_safety": {
+    "source_data_root": "D:/SAL_精简实验/data",
+    "source_root_is_directory": true,
+    "legacy_alias": "D:/Partial-Speech-Deepfake-Localization/data",
+    "legacy_alias_type": "junction to D:/SAL_精简实验/data",
+    "active_training_at_initial_audit": {
+      "pids": [
+        16880,
+        2236
+      ],
+      "entry": "sal/length_ablation.py --mode train --arm both"
+    },
+    "deletion_performed_by_audit_agent": false
+  },
+  "hardlinks": {
+    "fixed10_audio_share_full_originals": true,
+    "third_copy_example": "D:/SAL_精简实验/result/migration_fixed10_backup_20261107/initial_subset_before_label_dtype_fix",
+    "note": "Keeping this result backup retains old fixed10 audio content even if full/fixed10 directory names are removed; do not delete entire result directory."
+  },
+  "metadata_limits": {
+    "ps_label_dtype": "Full originals Unicode <U21; cast to integer before comparison. Reduced labels int8 preserve all values.",
+    "ps_source_map": "No original-recording/derived-variant relation map found. Official protocol supplies speaker ID and CON/- coarse attack only.",
+    "lps_source_map": "Filename-inferred parent key: first 3 of final 4 numeric fields. No independently verified construction provenance."
+  },
+  "reduced_result": {
+    "train_detector": {
+      "count": 5076,
+      "official_count": 25380,
+      "actual_fraction": 0.2,
+      "manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+      "audio_bytes": 555084230
+    },
+    "train_edit": {
+      "count": 1269,
+      "official_count": 25380,
+      "actual_fraction": 0.05,
+      "manifest_sha256": "1cb0808d3af0547b949a9ca977b0696d5cdc0792a2e7d8922af6f46394af1621",
+      "audio_bytes": 139825788
+    },
+    "train_review": {
+      "count": 1269,
+      "official_count": 25380,
+      "actual_fraction": 0.05,
+      "manifest_sha256": "c9b3ffa8538f5c1bd5b575374f03a559f522f1fab967958480a00bd78998b241",
+      "audio_bytes": 137045928
+    },
+    "dev": {
+      "count": 2484,
+      "official_count": 24844,
+      "actual_fraction": 0.09998389953308646,
+      "manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+      "audio_bytes": 277175868
+    },
+    "eval": {
+      "count": 3562,
+      "official_count": 71237,
+      "actual_fraction": 0.05000210564734618,
+      "manifest_sha256": "203792d5718e75e54614ad005386a3037cd9ddb83dd6dc7a93266dfc9c4252b1",
+      "audio_bytes": 384971456
+    },
+    "lps": {
+      "count": 3800,
+      "official_count": 76228,
+      "actual_fraction": 0.049850448654037885,
+      "manifest_sha256": "7e4ff246af20815b7cd65ec0c0821cc1ba3b2a8de984df3261f50925222d3f21",
+      "audio_bytes": 761385870
+    }
+  },
+  "deletion_plan_after_root_acceptance": {
+    "must_first": "Wait for/explicitly stop active old training; verify new reduced labels/audio hashes and package recovery; change all code imports/profiles before cleanup.",
+    "candidate_paths": [
+      "D:/SAL_精简实验/data/PartialSpoof",
+      "D:/SAL_精简实验/data/LlamaPartialSpoof",
+      "D:/SAL_精简实验/data/fixed10",
+      "D:/SAL_精简实验/data/fixed10.zip",
+      "D:/SAL_精简实验/data/downloads/PartialSpoof/database_train.tar.gz"
+    ],
+    "must_preserve": [
+      "D:/SAL_精简实验/data/reduced",
+      "D:/SAL_精简实验/data/models",
+      "D:/SAL_精简实验/data/semantic",
+      "D:/SAL_精简实验/result"
+    ],
+    "result_audio_backup": "Only the specifically identified migration audio backup may be considered separately; no automatic permission to remove model/result artifacts."
+  },
+  "source_metadata_archive": "C:/Users/35432/Desktop/学习打卡/NNDL/tmp/reduced_repo_20261111/code/manifests/reduced/source_metadata/original_protocols_and_lps_labels.zip",
+  "old_fixed10_zip_bytes": 2267692862,
+  "authorized_cleanup_scope_latest": "User later clarified: clean only this-task obsolete artifacts under Project. Do not delete D: original data. Earlier candidate list is technical inventory only, not authorization.",
+  "reduced_distribution_max_abs_percentage_points": {
+    "dev": {
+      "kind": 0.0105,
+      "attack": 0.0097,
+      "speaker": 1.0726,
+      "fake_ratio": 0.0401,
+      "shortest_fake": 0.1975,
+      "duration": 0.9118
+    },
+    "eval": {
+      "kind": 0.0776,
+      "attack": 0.0776,
+      "speaker": 0.0939,
+      "fake_ratio": 0.3827,
+      "shortest_fake": 0.3161,
+      "duration": 0.7565
+    },
+    "lps": {
+      "kind": 0.1591,
+      "attack": 0.0542,
+      "speaker": 6.0985,
+      "fake_ratio": 0.8701,
+      "shortest_fake": 1.0792,
+      "duration": 1.0623
+    },
+    "train_detector": {
+      "kind": 0.0788,
+      "attack": 0.0788,
+      "speaker": 0.0827,
+      "fake_ratio": 0.1261,
+      "shortest_fake": 0.1615,
+      "duration": 0.2522
+    },
+    "train_edit": {
+      "kind": 0.2364,
+      "attack": 0.2364,
+      "speaker": 0.2167,
+      "fake_ratio": 0.4649,
+      "shortest_fake": 0.4689,
+      "duration": 0.7053
+    },
+    "train_review": {
+      "kind": 0.4058,
+      "attack": 0.0788,
+      "speaker": 0.398,
+      "fake_ratio": 0.7801,
+      "shortest_fake": 0.5477,
+      "duration": 1.1781
+    }
+  }
+}
