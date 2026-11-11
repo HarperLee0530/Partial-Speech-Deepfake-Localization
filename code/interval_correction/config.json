@@ -1,0 +1,19 @@
+{
+  "main_threshold": 0.5,
+  "low_threshold": 0.3,
+  "valley_threshold": 0.2,
+  "merge_gap": 0.2,
+  "boundary_radius": 0.32,
+  "minimum_duration": 0.02,
+  "delete_confidence": 0.6,
+  "isolation_gap": 0.4,
+  "merge_support": 0.35,
+  "insert_support": 0.4,
+  "minimum_gain": 0.01,
+  "tiou": 0.5,
+  "short_duration": 0.32,
+  "risk_miss": 1.0,
+  "risk_fp": 1.0,
+  "risk_fp_seconds": 0.1,
+  "risk_localization": 1.0
+}

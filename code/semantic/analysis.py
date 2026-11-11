@@ -203,6 +203,8 @@ def masks(truth, predicted):
 
 
 def align(words, logits, labels, seconds, dt, config):
+    # Public callers may bypass annotate(); reject invalid spans before division.
+    validate_record(dict(uid='alignment', words=words))
     if not np.isfinite(seconds) or seconds <= 0 or not np.isfinite(dt) or dt <= 0:
         raise ValueError('Invalid audio duration or evaluation grid')
     logits = np.asarray(logits)
@@ -732,3 +734,4 @@ def main(argv=None):
 
 if __name__=='__main__':
     main()
+
