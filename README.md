@@ -1,6 +1,16 @@
 # Partial-Speech-Deepfake-Localization
 Semantic-assisted reinspection and gain-based interval correction for partial speech deepfake localization.
 
+## Optional interval-correction experiments (A/B/C/D)
+
+The new frozen-SAL single-round correction implementation is documented in
+[the experiment handoff](docs/INTERVAL_CORRECTION_HANDOFF.md) and
+[the repository/semantic audit](docs/REPOSITORY_AUDIT_INTERVAL_CORRECTION.md).
+It supports nested 2k/5k/20k training manifests and independent validation.
+Its synthetic smoke tests are not real-data results. This optional protocol does
+not implement the future reinspection stage described below. Existing commands
+and experiment behavior remain available.
+
 ## SAL 精简实验：组员使用指南
 
 本项目用于课程实验：评估 SAL、训练 CNN–BiGRU 新基线，并探索语义信息对伪造语音检测的辅助作用。**仅 CNN 网格搜索使用固定分层 10% train/dev；正式 CNN、语义和后续收益网络使用完整 train；完整 dev 选模，完整测试集最终评价。** 不保留随机 10% 搜索模式，不按 SAL 错误挑选测试样本。
@@ -392,3 +402,4 @@ GitHub 共享代码、配置和固定清单；音频、权重、预测数据库�
 功能测试使用小规模或合成输入，不替代真实模型训练，也不代表 ASR/NER 在真实数据上的准确性已经验证。
 
 上游 SAL 的原始文档和许可见 [vendor/SAL/README.md](code/vendor/SAL/README.md) 与 [LICENSE](code/vendor/SAL/LICENSE)。当前整理不生成提交 ZIP；最终提交包另行制作。
+
