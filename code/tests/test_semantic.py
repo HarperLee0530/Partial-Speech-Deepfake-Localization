@@ -20,6 +20,29 @@ from semantic.analysis import analyze, freeze, features
 
 
 class SemanticsTest(unittest.TestCase):
+    def test_profile_mismatch_fails_before_creating_outputs(self):
+        from semantic.analysis import make_manifest
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_json(root/'metrics.json', dict(split='train', data_profile='fixed10'))
+            output = root/'should_not_exist.jsonl'
+            with self.assertRaisesRegex(ValueError, 'Expected full'):
+                make_manifest(root, output, 0, expected_profile='full')
+            self.assertFalse(output.exists())
+            with self.assertRaisesRegex(ValueError, 'Expected full'):
+                analyze(root, root/'absent.jsonl', root/'report', settings())
+            self.assertFalse((root/'report').exists())
+
+    def test_explicit_subset_cli_override(self):
+        from semantic import analysis
+        from unittest.mock import patch
+        with patch.object(analysis, 'make_manifest', return_value={}) as make:
+            analysis.main(['manifest', '--run', 'unused', '--output', 'unused.jsonl', '--data-profile', 'fixed10'])
+            self.assertEqual(make.call_args.args[-1], 'fixed10')
+        with patch.object(analysis, 'analyze', return_value={}) as analyze_mock:
+            analysis.main(['analyze', '--run', 'unused', '--transcripts', 'unused.jsonl', '--data-profile', 'fixed10'])
+            self.assertEqual(analyze_mock.call_args.args[-1]['data_profile'], 'fixed10')
+
     def setUp(self):
         self.config = settings()
 

@@ -2,6 +2,17 @@
 
 一、当前实现对应研究方案的哪一步
 
+【当前正式数据协议】
+config.json的data_profile=full；manifest/analyze核对预测档位，不静默使用fixed10。
+正式语义准备以完整官方train为来源，完整dev用于修正阶段验证，完整eval/lps用于最终评价。
+只有CNN网格搜索使用固定分层10% train/dev；正式CNN使用完整train/dev。
+组员仅用精简数据调试时，在manifest/analyze命令末尾加 --data-profile fixed10。
+完整训练集预测入口：sal/full_data.py --mode predict --split train --checkpoint public。
+将输出RESULT_FILE同名目录作为manifest的--run；省略--limit生成完整音频清单。
+完整train缓存和统计覆盖所有官方训练录音；freeze默认完整train模式，features --split train扣除自身/已知同源组贡献。
+收益训练以合法训练候选为单位，允许预算抽样；候选生成与收益网络尚未实现。
+完整步骤、数据量和隔离限制以项目根README.md为准。
+
 【组员精简数据】组员只需data/fixed10、对应fixed10预测目录（predictions.sqlite、metrics.json、status.json）及ASR/NER资源。
 manifest根据metrics.json中的data_profile定位精简或完整音频。下文历史full结果示例仅供拥有完整数据的负责人使用；
 组员应把--run替换为check列出的fixed10预测目录。完整数据不必传给组员。
@@ -10,7 +21,7 @@ manifest根据metrics.json中的data_profile定位精简或完整音频。下文
 
 音频 → 本地 ASR 词级时间戳 → 词汇规则 / NER / 词性标注
      → 与已保存的 SAL 预测及真实标签对齐 → 词表、类型表、区间分布表
-     → 仅在独立修正训练部分拟合并冻结统计 → 新录音查询统计特征与可用性标记。
+     → 在完整训练集拟合并冻结统计 → 训练录音扣除自身贡献；新录音查询冻结统计。
 
 这是首阶段语义路线，不是完整论文系统。复查收益网络、修改收益网络、实际声学复检
 尚未在本模块实现。词频、错误率都不是实际复查收益；本模块不修改 SAL 分数或预测。
@@ -114,23 +125,24 @@ analyzed_uids.json：实际纳入录音，用于后续检查统计与特征输�
 正式显著性检验应按录音重采样；当前 Wilson 区间没有处理同录音词语相关性。
 本次没有生成语义图或虚构真实分布；有真实转录结果后再用 visualization 中的绘图流程。
 
-七、后续冻结训练统计和导出特征
-freeze 拒绝 dev/eval/LPS 的诊断表。它要求 run 的 split=train，且提供真实训练划分清单：
-{"uid":"某录音","source_group":"源录音组","role":"correction_train"}
-role 取 base_train/correction_train/recheck_train/dev/test。清单必须含实际 base_train，
-统计中的所有 uid 都属于 correction_train，同源组不能跨划分。
-注意：清单必须反映真实的基础模型训练过程；程序无法从权重推断是否见过录音。
-当前公开预训练 SAL 的训练暴露情况、以及原 CNN 全训练集训练方式都需要单独审计，
-不能给已有测试诊断改个文件名就称为无泄漏的训练统计。
+七、完整训练统计和特征导出
+freeze默认要求full/train的全部官方录音ID，预测和转录完整覆盖（无词录音也保留空记录）。
+不拆分base_train/correction_train/recheck_train；全部官方train参与各后续阶段。
 
-  .venv/Scripts/python.exe semantic/analysis.py freeze --report ../result/修正训练语义统计 --partition-manifest ../data/semantic/partitions.jsonl --output ../data/semantic/frozen_statistics.json
-  .venv/Scripts/python.exe semantic/analysis.py features --transcripts ../data/semantic/新录音标注.jsonl --frozen ../data/semantic/frozen_statistics.json --output ../result/新录音语义特征.jsonl
+  .venv/Scripts/python.exe semantic/analysis.py freeze --report ../result/semantic_train_full --output ../data/semantic/frozen_statistics.json
+  .venv/Scripts/python.exe semantic/analysis.py features --split train --transcripts ../data/semantic/train_full_annotated.jsonl --frozen ../data/semantic/frozen_statistics.json --output ../result/train_semantic_features.jsonl
 
-词和类型估计以总体平均平滑；每个条件比例按其各自分母检查最小样本量。
-查询回退：可靠的词统计 → 可靠的主类型统计 → acoustic_fallback，输出 prior_available 标记。
-缺失统计的 0 是占位值，不代表真实错误率为 0；下游必须读取可用性标记。
-features 不打开预测标签，且拒绝与拟合录音 UID 重复；只输出允许的词与统计特征。
-这些特征未来接入复查收益网络。不能直接把统计先验乘到 SAL 伪造分数上。
+有可靠源组映射时freeze加 --source-groups ../data/semantic/train_source_groups.jsonl。
+每行：{"uid":"录音ID","source_group":"源组ID","split":"train"}，覆盖全部train。
+训练特征扣除本组所有词对总体/词/类型统计的贡献，再计算平滑比例；默认只扣除本录音。
+full_train_priors.py实现以上逻辑，无需重复训练CNN。
+验证/测试features使用 --split dev/eval/lps，查询完整训练冻结统计；不拟合其标签。
+无源组映射时不声称排除了所有同源关联。训练内基础模型错误偏乐观的问题仍需dev检验。
+
+查询回退：可靠的词统计 → 可靠的主类型统计 → acoustic_fallback；必须读取prior_available。
+0占位不代表错误率为0。逐词诊断表含真值，不直接送网络；features只输出白名单字段。
+legacy --partition-manifest仅兼容旧协议，本次流程不用。
+修改收益和复查收益网络尚未实现，具体数据契约和后续顺序见根README第6节。
 
 八、检查
   .venv/Scripts/python.exe tests/test_semantic.py

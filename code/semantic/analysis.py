@@ -10,7 +10,7 @@ import sys
 CODE_ROOT = Path(__file__).resolve().parents[1]
 if str(CODE_ROOT) not in sys.path:
     sys.path.insert(0, str(CODE_ROOT))
-from project_config import RESULT_ROOT, DATA_ROOT
+from project_config import RESULT_ROOT, DATA_ROOT, artifact_relative
 
 
 def path(value):
@@ -19,8 +19,7 @@ def path(value):
 
 
 def relative(value):
-    import os
-    return Path(os.path.relpath(value, CODE_ROOT)).as_posix()
+    return artifact_relative(value, CODE_ROOT, DATA_ROOT, RESULT_ROOT)
 
 
 def read_json(value):
@@ -64,6 +63,9 @@ def database(run):
 
 def settings(value=None):
     config = read_json(path(value) if value else Path(__file__).with_name('config.json'))
+    config.setdefault('data_profile', 'full')
+    if config['data_profile'] not in ('full', 'fixed10'):
+        raise ValueError('data_profile must be full or fixed10')
     if not 0 < config['word_spoof_overlap'] <= 1:
         raise ValueError('word_spoof_overlap must be in (0, 1]')
     if not 0 <= config['minimum_word_confidence'] <= 1:
@@ -485,12 +487,19 @@ def check():
                 next_step='Supply word-timestamp transcripts, or install optional ASR and a local model. No downloads are started.')
 
 
-def make_manifest(run, output, limit):
-    metrics = read_json(run/'metrics.json')
-    split = metrics['split']
+def prediction_profile(metrics, expected=None):
     profile = metrics.get('data_profile', 'full')
     if profile not in ('full', 'fixed10'):
         raise ValueError('Unknown prediction data_profile: '+str(profile))
+    if expected is not None and profile != expected:
+        raise ValueError(f'Expected {expected} predictions, got {profile}; use --data-profile fixed10 explicitly for subset development')
+    return profile
+
+
+def make_manifest(run, output, limit, expected_profile=None):
+    metrics = read_json(run/'metrics.json')
+    split = metrics['split']
+    profile = prediction_profile(metrics, expected_profile)
     base = DATA_ROOT/'fixed10' if profile == 'fixed10' else DATA_ROOT
     audio_root = base/'LlamaPartialSpoof' if split=='lps' else base/'PartialSpoof'/'database'/split
     db = database(run)
@@ -513,7 +522,8 @@ def make_manifest(run, output, limit):
     with output.open('x',encoding='utf-8') as f:
         for uid,seconds in records:
             f.write(json.dumps(dict(uid=uid,audio=relative(audio[uid]),seconds=seconds),ensure_ascii=False)+'\n')
-    return dict(recordings=len(records),audio_manifest=relative(output),sampling='first saved ordinal; feasibility only if limited')
+    return dict(recordings=len(records),audio_manifest=relative(output),data_profile=profile,
+                split=split,sampling='first saved ordinal; feasibility only if limited')
 
 
 WORD_FIELDS = ['uid','scope','language','word_index','text','normalized','primary_type','types','pos',
@@ -527,13 +537,17 @@ def analyze(run, transcripts, output, config):
     import csv
     import numpy as np
     metrics = read_json(run/'metrics.json')
+    profile = prediction_profile(metrics, config.get('data_profile'))
     dt = float(metrics['resolution_seconds'])
     if (run/'status.json').exists() and read_json(run/'status.json').get('status') != 'complete':
         raise ValueError('Use a completed prediction run')
     output.mkdir(parents=True,exist_ok=False)
     started = time.perf_counter()
     metadata = dict(status='running',purpose='retrospective_diagnostics',prior_eligible=False,
-                    source_run=relative(run),split=metrics['split'],resolution_seconds=dt,
+                    source_run=relative(run),split=metrics['split'],data_profile=profile,resolution_seconds=dt,
+                    detector_training_profile=metrics.get('training_data_profile'),
+                    detector_checkpoint_sha256=metrics.get('checkpoint_sha256'),
+                    prediction_role=metrics.get('prediction_role', 'see source run provenance'),
                     transcripts=relative(transcripts),transcripts_sha256=digest(transcripts),config=config,
                     method='0=spoof; saved-logit argmax (ties=spoof); word overlap threshold; no resampling',
                     rate_population='fully scored, confidence accepted, ground-truth-pure words only',
@@ -602,7 +616,12 @@ def analyze(run, transcripts, output, config):
     return dict(output=relative(output),**{key:metadata[key] for key in ('analyzed_recordings','missing_transcript_recordings','word_counts')})
 
 
-def freeze(report, partition_manifest, output):
+def freeze(report, partition_manifest, output, source_groups=None):
+    if partition_manifest is None:
+        from semantic.full_train_priors import freeze_full
+        return freeze_full(report, output, source_groups)
+    if source_groups is not None:
+        raise ValueError('Use source groups for full-train mode OR a legacy partition manifest, not both')
     """Require an explicit source-group partition; refuse eval/dev/LPS-derived priors."""
     import csv
     meta = read_json(report/'summary.json')
@@ -640,8 +659,11 @@ def freeze(report, partition_manifest, output):
     return dict(frozen_statistics=relative(output),training_recordings=len(ids))
 
 
-def features(transcripts, frozen, output):
+def features(transcripts, frozen, output, split='inference'):
     artifact = read_json(frozen)
+    if artifact.get('schema_version') == 2:
+        from semantic.full_train_priors import export_features
+        return export_features(transcripts, frozen, output, split)
     if artifact.get('source_split')!='correction_train':
         raise ValueError('Expected frozen correction-training statistics')
     training_ids = set(artifact['source_uids'])
@@ -668,20 +690,28 @@ def main(argv=None):
     subs = parser.add_subparsers(dest='command')
     subs.add_parser('check')
     p = subs.add_parser('manifest'); p.add_argument('--run',required=True); p.add_argument('--output',required=True); p.add_argument('--limit',type=int,default=0)
+    p.add_argument('--data-profile',choices=('full','fixed10'),help='Default from config: full; fixed10 is development/diagnostics')
     p = subs.add_parser('transcribe'); p.add_argument('--manifest',required=True); p.add_argument('--output',required=True); p.add_argument('--asr-model',required=True); p.add_argument('--device',choices=['cpu','cuda'],default='cpu'); p.add_argument('--limit',type=int,default=0)
     p = subs.add_parser('annotate'); p.add_argument('--transcripts',required=True); p.add_argument('--output',required=True); p.add_argument('--ner-model')
     p = subs.add_parser('analyze'); p.add_argument('--run',required=True); p.add_argument('--transcripts',required=True); p.add_argument('--output')
-    p = subs.add_parser('freeze'); p.add_argument('--report',required=True); p.add_argument('--partition-manifest',required=True); p.add_argument('--output',required=True)
+    p.add_argument('--data-profile',choices=('full','fixed10'),help='Default from config: full; must match saved predictions')
+    p = subs.add_parser('freeze'); p.add_argument('--report',required=True); p.add_argument('--partition-manifest',help='Optional legacy disjoint-partition protocol'); p.add_argument('--output',required=True)
+    p.add_argument('--source-groups',help='Optional full-train uid/source_group JSONL; otherwise exclude each recording itself')
     p = subs.add_parser('features'); p.add_argument('--transcripts',required=True); p.add_argument('--frozen',required=True); p.add_argument('--output',required=True)
+    p.add_argument('--split',choices=('train','dev','eval','lps','inference'),default='inference')
     args = parser.parse_args(argv)
     config = settings(args.config)
+    if getattr(args, 'data_profile', None):
+        config['data_profile'] = args.data_profile
     if getattr(args,'limit',0)<0:
         parser.error('--limit must be nonnegative')
     command = args.command or 'check'
     if command=='check':
         result = check()
+        result['default_data_profile'] = config['data_profile']
+        result['gain_network_implemented'] = False
     elif command=='manifest':
-        result = make_manifest(path(args.run),path(args.output),args.limit)
+        result = make_manifest(path(args.run),path(args.output),args.limit,config['data_profile'])
     elif command in ('transcribe','annotate'):
         path(args.output).parent.mkdir(parents=True,exist_ok=True)
         if command=='transcribe':
@@ -693,9 +723,10 @@ def main(argv=None):
         destination = path(args.output) if args.output else RESULT_ROOT/('semantic_diagnostics_'+datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
         result = analyze(path(args.run),path(args.transcripts),destination,config)
     elif command=='freeze':
-        result = freeze(path(args.report),path(args.partition_manifest),path(args.output))
+        result = freeze(path(args.report),path(args.partition_manifest) if args.partition_manifest else None,
+                        path(args.output),path(args.source_groups) if args.source_groups else None)
     else:
-        result = features(path(args.transcripts),path(args.frozen),path(args.output))
+        result = features(path(args.transcripts),path(args.frozen),path(args.output),args.split)
     print(json.dumps(result,ensure_ascii=False,indent=2))
 
 

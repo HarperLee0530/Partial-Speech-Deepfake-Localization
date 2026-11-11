@@ -18,14 +18,14 @@ from cnn import baseline as p
 
 
 def candidate_configs(base, search):
-    if base['training_data_profile'] != 'fixed10':
-        raise ValueError('This course-project grid is restricted to fixed10 training/validation')
     configs = []
     for lr, dropout in itertools.product(search['learning_rates'], search['dropouts']):
         c = copy.deepcopy(base)
         c.update(learning_rate=float(lr), checkpoint=None, use_grid_search_best=False,
-                 hyperparameter_source='current grid trial')
+                 training_data_profile='fixed10', hyperparameter_source='current grid trial')
         c.pop('grid_selected_checkpoint', None)
+        c.pop('grid_source_checkpoint', None)
+        c.pop('grid_hyperparameters_selected', None)
         c['model']['dropout'] = float(dropout)
         if not 0 <= c['model']['dropout'] < 1:
             raise ValueError('Dropout must be in [0, 1)')
@@ -42,12 +42,16 @@ def select_winner(trials):
 
 
 def search_grid(base, configs):
+    if not configs or any(c['training_data_profile'] != 'fixed10' for c in configs):
+        raise ValueError('Grid trials must use the fixed10 train/dev manifests')
+    from tools.data_tools import audit_search
+    audit_search()
     p.require_device_idle(base['device'])
     p.RESULT_ROOT.mkdir(parents=True, exist_ok=True)
     stamp = p.datetime.now(p.ZoneInfo('Asia/Shanghai')).strftime('%Y%m%d_%H%M%S_%f')
     path = p.RESULT_ROOT/f'cnn_grid_search_{stamp}.json'
     state = dict(status='running', started_local=p.now(), base_config=base,
-                 base_signature=p.configuration_signature(base, exclude_search=True),
+                 base_signature=p.grid_signature(base),
                  selection_metric='fixed10 PS dev EER; lower is better; ties prefer earlier grid entry',
                  test_data_used=False, trials=[])
 
@@ -95,7 +99,9 @@ def main(argv=None):
     configs = candidate_configs(base, search)
     if args.mode == 'plan':
         print(json.dumps(dict(mode='plan', trials=len(configs), learning_rates=search['learning_rates'],
-                             dropouts=search['dropouts'], training_profile=base['training_data_profile']), indent=2))
+                             dropouts=search['dropouts'], training_profile='fixed10',
+                             validation_profile='fixed10', formal_training_profile=base['training_data_profile'],
+                             formal_validation_profile=base['training_data_profile'], test_data_used=False), indent=2))
         return 0
     search_grid(base, configs)
     return 0

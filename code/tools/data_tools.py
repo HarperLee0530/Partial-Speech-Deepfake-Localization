@@ -181,8 +181,8 @@ def build(split):
     return manifest
 
 
-def prepare():
-    manifests = [build(split) for split in ('train', 'dev', 'eval', 'lps')]
+def prepare(splits=('train', 'dev')):
+    manifests = [build(split) for split in splits]
     for i, left in enumerate(manifests[:3]):
         for right in manifests[i+1:3]:
             assert not set(left['utterance_ids']) & set(right['utterance_ids'])
@@ -191,10 +191,11 @@ def prepare():
             '精简数据：data/fixed10；种子 20261107，按录音固定抽样，每轮不重新抽。',
             'train=训练；dev=验证/早停/调参；eval=PS 测试；lps=LPS 外部测试。',
             '测试子集只能作测试对照，不能据其指标选择模型或阈值。',
-            '完整数据保留用于最终评估。10% 按录音条数取最近整数，不是按帧数/磁盘字节。',
+            '10% train/dev仅用于网格搜索；正式CNN及语义/收益阶段使用完整train，完整dev选模。',
+            '10% 按录音条数取最近整数，不是按帧数/磁盘字节。',
             'fixed10 音频为 NTFS 硬链接，不重复占用音频空间。两处共享文件内容，禁止原地改写音频。',
             '因此本操作减少训练/评估处理量，不释放完整原始数据所占磁盘空间。',
-            '尚无源录音衍生关系映射，不声称已验证 source-disjoint；三阶段下游训练仍须另外划分。', '']
+            '后续阶段共用完整train；训练语义特征扣除自身/已知同源组贡献，不声称检测预测为out-of-fold。', '']
     for m in manifests:
         rows.append(f"{m['split']}: {m['count']} / {m['official_count']} ({100*m['actual_fraction']:.4f}%)")
     (DATA_ROOT/'数据集说明_完整与固定10%.txt').write_text('\n'.join(rows)+'\n', encoding='utf-8-sig')
@@ -202,8 +203,53 @@ def prepare():
     import shutil
     target = CODE_ROOT/'manifests/fixed10'
     target.mkdir(parents=True, exist_ok=True)
-    for file in (SUBSET_ROOT/'manifests').glob('*'):
-        shutil.copy2(file, target/file.name)
+    for split in splits:
+        for suffix in ('.json', '.txt'):
+            file = SUBSET_ROOT/'manifests'/(split+suffix)
+            destination = target/file.name
+            if destination.exists() and destination.read_bytes() != file.read_bytes():
+                raise ValueError('Refusing to overwrite the shared frozen manifest: '+str(destination))
+            if not destination.exists():
+                shutil.copy2(file, destination)
+
+
+def audit_search(verbose=True):
+    """Read-only check of the frozen search manifests; no audio/GPU/output writes."""
+    summary, selected = {}, {}
+    for split in ('train', 'dev'):
+        manifest = read_manifest(split)
+        reference = json.loads((CODE_ROOT/'manifests/fixed10'/f'{split}.json').read_text(encoding='utf-8'))
+        if manifest != reference or manifest['seed'] != SEED or manifest.get('requested_fraction') != FRACTION:
+            raise ValueError('Search subset differs from the fixed shared protocol: '+split)
+        counts = manifest['strata_counts']
+        target = math.floor(manifest['official_count']*FRACTION+.5)
+        if (len(manifest['utterance_ids']) != target or manifest['count'] != target
+                or sum(c['selected'] for c in counts.values()) != target
+                or sum(c['full'] for c in counts.values()) != manifest['official_count']
+                or any(abs(c['selected']-FRACTION*c['full']) >= 1+1e-8 for c in counts.values())):
+            raise ValueError('Invalid proportional allocation: '+split)
+        selected[split] = set(manifest['utterance_ids'])
+        summary[split] = {key: manifest[key] for key in ('count', 'official_count', 'seed', 'manifest_sha256', 'strata')}
+        original = DATA_ROOT/'PartialSpoof/database'
+        label_file = original/f'segment_labels/{split}_seglab_0.16.npy'
+        protocol_file = original/f'protocols/PartialSpoof_LA_cm_protocols/PartialSpoof.LA.cm.{split}.trl.txt'
+        summary[split]['verified_against_full_labels'] = False
+        if label_file.exists() and protocol_file.exists():
+            if hashlib.sha256(label_file.read_bytes()).hexdigest() != manifest['source_labels_sha256']:
+                raise ValueError('Official labels changed since subset freezing: '+split)
+            labels = np.load(label_file, allow_pickle=True).item()
+            protocol = {parts[1]: parts[-2] for line in protocol_file.read_text().splitlines() if (parts := line.split())}
+            groups = strata_for(labels, protocol)
+            recomputed, allocation = choose(groups, split)
+            expected_counts = {key: dict(full=len(ids), selected=allocation[key]) for key, ids in groups.items()}
+            if recomputed != manifest['utterance_ids'] or expected_counts != counts:
+                raise ValueError('Existing subset is not the fixed proportional stratified sample: '+split)
+            summary[split]['verified_against_full_labels'] = True
+    if selected['train'] & selected['dev']:
+        raise ValueError('Train/dev subset ID overlap')
+    if verbose:
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+    return summary
 
 
 def audit_fixed10():
@@ -266,7 +312,7 @@ def audit_fixed10():
         verification.append(dict(split=split, file=filename, verification=verified))
         summary.extend([f"{split}: {result['utterance_count']} 条；EER={result['eer_percent']:.6f}%；F1={result['f1_bonafide_percent']:.6f}%",
                         '记录：'+filename, ''])
-    summary.extend(['CNN-BiGRU 默认 train/dev/eval/LPS 均为对应 fixed10 子集。',
+    summary.extend(['CNN-BiGRU 网格搜索使用 fixed10 train/dev，正式训练与评价使用完整数据。',
                     '旧完整数据训练权重不会自动作为 fixed10 权重使用。',
                     'CNN-BiGRU 的实际训练和测试状态请查看对应时间戳结果。'])
     (RESULT_ROOT/'SAL_fixed10_结果说明.txt').write_text('\n'.join(summary)+'\n', encoding='utf-8-sig')
@@ -311,9 +357,9 @@ def audit_full():
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--action', choices=('prepare', 'audit', 'audit-full'), default='audit')
+    parser.add_argument('--action', choices=('prepare', 'audit', 'audit-full', 'audit-search'), default='audit-search')
     args = parser.parse_args(argv)
-    return {'prepare': prepare, 'audit': audit_fixed10, 'audit-full': audit_full}[args.action]()
+    return {'prepare': prepare, 'audit': audit_fixed10, 'audit-full': audit_full, 'audit-search': audit_search}[args.action]()
 
 
 if __name__ == '__main__':

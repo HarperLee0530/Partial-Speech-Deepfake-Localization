@@ -1,11 +1,16 @@
 项目代码说明（最终模块布局，2026-11-07）
 
 【组员精简数据适配】
+当前正式协议：只有CNN网格搜索使用固定分层fixed10 train/dev；正式CNN训练、验证和评估默认full。
+冻结SAL、语义和候选准备以完整train为来源；完整dev用于修正选模，完整eval/lps最终评价。
+候选生成、收益网络训练尚未实现。语义统计允许完整train拟合；训练特征扣除自身/已知同源组贡献。
+本次不修改正在运行搜索的训练配置、固定清单和搜索范围，也不启动额外GPU任务。
+只有精简数据时运行CNN网格搜索；正式CNN训练/验证与全量语义需要完整数据。
 组员只需领取整个data/fixed10（约2.73 GiB），无需完整音频或完整数据解压标记。
 CNN不需要SAL权重；Setup.cmd仅检查环境。领取数据后运行：
 tools/check_environment.py --task cnn --data-profile fixed10。
 SAL公开模型评估可用--task sal检查所需权重；重训SAL只需预训练WavLM骨干。
-semantic/analysis.py manifest按预测metrics中的data_profile选择fixed10或full音频。
+semantic/analysis.py manifest/analyze默认要求full预测；组员加 --data-profile fixed10。
 sal/full_data.py继续使用完整数据，由负责人运行，未改成精简数据。
 数据通过组内网盘或移动硬盘传递，GitHub尚未提供实际音频下载链接。
 data_tools.py原有audit/prepare仍是完整来源审计/抽样工具，组员不用运行。
@@ -28,7 +33,8 @@ pipeline.py：两个入口共用的官方 SAL 训练与推理评估实现，不�
 config.json：两种数据档位共用的 SAL 训练参数。
 __init__.py：Python 包标记。
 
-SAL 两个入口支持 --mode check/train/validate/test/all。
+SAL 两个入口支持 --mode check/train/predict/validate/test/all。
+predict：冻结权重导出train/dev/eval/lps预测，不训练；正式流程用full_data.py --mode predict --split train --checkpoint public。
 train：调用原作者 SALTrainer、模型、损失和数据增强，在对应 PS train 上训练、PS dev 上选模。
 all：训练完成后，用本次最佳验证权重测试 --split 指定的测试集，默认 PS eval。
 validate/test 必须明确 --checkpoint public、latest 或自定义权重路径：
@@ -45,14 +51,15 @@ SAL 训练用预训练 WavLM 骨干和新初始化的 SAL 检测头，不加载�
 baseline.py：一个完整文件，按“网络与特征→数据与batch→训练和评估”排列。
   网络：16 kHz音频→80维Log-Mel→CNN→双向GRU→逐帧伪造logit。
   原生步长20ms；PS按8帧平均得到160ms输出，LPS保留20ms。
-  默认 --mode train，从头训练；dev/ps/lps 分别评估验证集、PS、LPS。
-  --mode full：训练→PS→LPS→成绩对照，full指完整流程，默认数据仍是固定10%。
+  默认 --mode check，仅检查；--mode train 使用完整train从头训练；dev/ps/lps 分别评估验证集、PS、LPS。
+  --mode full：完整train训练/完整dev验证→完整PS→完整LPS→成绩对照；full指完整流程。
   --mode check：检查配置；prepare：准备PS训练资源；predict：预测代码顶部AUDIO_FILE。
   最佳权重按dev EER选择；区间阈值也只用dev选择，不在测试集调参。
 grid_search.py：读取网格范围，依次训练各组，记录每组验证指标并选出最优参数。
   默认 --mode plan 只显示搜索方案；--mode search 才启动正式网格搜索。
   不绑定旧实验、不自动运行测试集、不使用测试成绩选择参数。
-config.json：CNN默认参数；training_data_profile/evaluation_data_profile默认为fixed10。
+config.json：CNN默认参数；training_data_profile=full，evaluation_data_profile=full。
+  测试档位不影响训练内部的dev验证，也不影响网格最优参数的训练配置签名。
 grid_config.json：学习率、dropout候选值；当前2×2共4组。
 __init__.py：Python包标记。
 
@@ -122,7 +129,7 @@ references：资源平台原始元数据，方便追溯。
 train 2538条；dev 2484条；PS eval 7124条；LPS 7623条。
 完整音频保留。精简音频是NTFS硬链接，不重复占用音频空间，不可原地改写。
 保留官方train/dev/eval划分；源录音衍生关系未独立核验。
-后续修正器/选择器的阶段训练数据还需单独划分，不能声称已经完成三阶段隔离。
+后续修正器/选择器都用完整train；完整dev选模。基础预测为训练内预测，不声称三阶段隔离。
 主表F1正类为真实帧（bonafide），与SAL官方实现保持一致。
 
 九、常用命令（code目录下PowerShell）
@@ -146,3 +153,8 @@ train 2538条；dev 2484条；PS eval 7124条；LPS 7623条。
 
 旧代码、旧说明和迁移记录备份在 ../result/code_cleanup_backup_20261107；不是运行入口。
 已停止的旧训练和搜索没有重启，未上传GitHub，未生成提交ZIP。
+
+当前顺序：固定分层10%网格搜索 -> 完整train训练CNN并冻结 -> 完整train语义与修改收益网络并冻结 -> 完整train复查收益网络 -> 完整dev定设置 -> 完整测试。
+cnn/baseline.py --mode train-predict：冻结正式CNN导出完整训练集预测，不启动训练。
+semantic/full_train_priors.py：完整train统计、扣除本录音/同源组贡献的训练特征；无GPU训练。
+tools/data_tools.py --action audit-search：只读复核固定train/dev清单，存在完整标签时重新计算分层名单并比较。

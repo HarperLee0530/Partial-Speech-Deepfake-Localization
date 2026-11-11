@@ -50,7 +50,7 @@ if not args.environment_only and args.data_profile == 'full':
 if not args.environment_only and args.data_profile == 'fixed10':
     try:
         from tools.data_tools import validate_fixed10
-        for split in ('train', 'dev', 'eval', 'lps'):
+        for split in (('train', 'dev') if args.task == 'cnn' else ('train', 'dev', 'eval', 'lps')):
             manifest = validate_fixed10(split)
             print(f'FIXED10 {split}: {manifest["count"]} recordings; audio/labels/manifest matched')
     except Exception as exc:

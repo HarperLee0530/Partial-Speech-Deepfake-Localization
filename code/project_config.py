@@ -17,6 +17,19 @@ DATA_ROOT = configured_folder('data_root')
 RESULT_ROOT = configured_folder('result_root')
 LOG_ROOT = RESULT_ROOT/'logs'
 
+
+def artifact_relative(path, code_root=CODE_ROOT, data_root=DATA_ROOT, result_root=RESULT_ROOT):
+    """Serialize logical ../data and ../result paths even when they are junctions."""
+    import os
+    value = Path(path).resolve()
+    for root, setting in ((data_root, 'data_root'), (result_root, 'result_root')):
+        try:
+            suffix = value.relative_to(Path(root).resolve())
+        except ValueError:
+            continue
+        return (Path(CONFIG[setting])/suffix).as_posix()
+    return Path(os.path.relpath(value, code_root)).as_posix()
+
 def portable_checkpoint_path():
     # Save a relocatable path in new experiment metadata as well.
     return (Path(CONFIG['data_root'])/'models/SAL_WavLM.ckpt').as_posix()

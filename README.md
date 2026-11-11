@@ -3,11 +3,28 @@ Semantic-assisted reinspection and gain-based interval correction for partial sp
 
 ## SAL 精简实验：组员使用指南
 
-本项目用于课程实验：评估 SAL、训练 CNN–BiGRU 新基线，并探索语义信息对伪造语音检测的辅助作用。日常对照实验统一使用 **固定 10% 数据集**，保留完整数据的 SAL 入口和完整测试集评估方式。
+本项目用于课程实验：评估 SAL、训练 CNN–BiGRU 新基线，并探索语义信息对伪造语音检测的辅助作用。**仅 CNN 网格搜索使用固定分层 10% train/dev；正式 CNN、语义和后续收益网络使用完整 train；完整 dev 选模，完整测试集最终评价。** 不保留随机 10% 搜索模式，不按 SAL 错误挑选测试样本。
+
+### 当前正式实验的数据模式
+
+| 阶段 | 数据与配置 | 当前实现状态 |
+| --- | --- | --- |
+| CNN 网格搜索 | 搜索器锁定 `fixed10` train/dev，种子 20261107，最大余数法按比例分层 | 已实现；每组复用同一名单 |
+| CNN 正式训练 | `cnn/config.json` 的 `training_data_profile=full`；完整 train 训练、完整 dev 早停 | 已实现；仅继承网格学习率/dropout，从头初始化权重 |
+| CNN 冻结后预测与最终测试 | `--mode train-predict` 导出完整训练集预测；`ps/lps` 使用完整测试集 | 已实现；不会自动使用 10% 网格权重冒充正式权重 |
+| 冻结 SAL 预测 | `sal/full_data.py --mode predict --checkpoint public --split train`；验证使用完整 dev，测试使用完整 eval/lps | 已实现预测导出；不会重新训练 SAL |
+| 语义分析 | `semantic/config.json` 的 `data_profile=full`，要求输入预测与档位一致 | 已实现转写、标注、统计和特征导出 |
+| 候选生成、收益网络训练 | 来源是完整官方 train；可限制候选数量，不限定为原 fixed10 录音 | **开发约定，候选生成器和收益网络尚未实现** |
+| 修正阶段选模与预算选择 | 完整 dev；不得将其用于收益标签训练或先验拟合 | 待修正网络实现 |
+| 最终方法对照 | 相同完整 PS eval、LPS；记录各阶段训练量和计算预算 | 现有 SAL/CNN 评估可运行；完整修正系统待实现 |
+
+固定顺序：10% 搜参数 → 完整 train 训练 CNN 并冻结 → 完整 train 建立语义统计、训练修改收益网络并冻结 → 完整 train 生成复查收益标签、训练复查收益网络 → 完整 dev 确定最终设置 → 完整 eval/LPS 评价。后两个网络尚未实现，本次落实已有模块的数据协议和特征接口，不创建虚假的训练入口。
+
+各阶段可共用完整官方 train，不强制拆成三个互斥子集。训练语义特征扣除自身录音/已知同源组的贡献；dev/test 查询完整训练统计。该计数扣除不使基础模型预测变成 out-of-fold，也不消除修改器训练内收益偏乐观的问题；必须用完整 dev 检验泛化，论文如实描述。代码更新未启动训练、未改动已有权重或结果。
 
 ## 组员先看：获取精简数据并运行
 
-组员只使用固定 10% 数据开发、训练和测试；完整数据实验由项目负责人在其电脑执行。**`sal/full_data.py` 仍使用完整数据，不会自动退回精简数据。**
+组员只领取固定 10% 数据时，可以运行 CNN 网格搜索、代码调试和小规模诊断；正式 CNN 重训、全量语义和最终实验需完整数据。**`sal/full_data.py` 始终使用完整数据。** 不会自动把正式训练退回精简数据。
 
 GitHub 提供代码和抽样 ID，不包含实际音频。由项目负责人通过组内网盘或移动硬盘提供下面的文件夹；目前尚未配置共享下载链接。不需要为此生成最终提交 ZIP。
 
@@ -44,10 +61,10 @@ Partial-Speech-Deepfake-Localization/
 ```powershell
 .\Setup.cmd
 .\.venv\Scripts\python.exe -B tools/check_environment.py --task cnn --data-profile fixed10
-.\.venv\Scripts\python.exe -B cnn/baseline.py --mode check
-.\.venv\Scripts\python.exe -B cnn/baseline.py --mode train
-.\.venv\Scripts\python.exe -B cnn/baseline.py --mode ps
-.\.venv\Scripts\python.exe -B cnn/baseline.py --mode lps
+.\.venv\Scripts\python.exe -B tools/data_tools.py --action audit-search
+.\.venv\Scripts\python.exe -B cnn/grid_search.py --mode plan
+# 准备好后才执行下一行，启动固定分层10%的搜索
+.\.venv\Scripts\python.exe -B cnn/grid_search.py --mode search
 ```
 
 Setup 仅检查安装环境；后续命令核验精简音频、标签和仓库清单，不要求完整数据、原始压缩包或解压标记。默认训练设备是 NVIDIA CUDA；无可用 GPU 时可在对应模型配置中选择 `cpu`，运行会更慢。不要复制他人的 `.venv`。
@@ -134,12 +151,12 @@ SAL_精简实验/
 
 ## 2. 数据与实验口径
 
-固定抽样种子为 `20261107`。从官方划分中各自固定抽取约 10%，后续每次实验使用同一清单，训练时仅打乱顺序，**不会每轮重新随机抽 10%**。
+固定抽样种子为 `20261107`。在官方 train/dev 内分别按攻击类型（可用时）、全真/全假/局部伪造、伪造帧占比、最短伪造事件时长分层；各层按比例分配名额，最大余数法补齐总数，再按固定哈希顺序选取录音。时长层为无伪造、≤0.5s、0.5–2s、>2s。**固定的是录音名单，训练时只打乱顺序，不重新抽样。** 小层名额可能为零，不为强行覆盖小层而改变抽样比例。网格只用 train/dev；历史 eval/LPS 子集保留作旧结果复核。
 
 | 划分 | 完整录音数 | 固定 10% 录音数 | 用途 |
 | --- | ---: | ---: | --- |
-| PS train | 25,380 | 2,538 | 训练 |
-| PS dev | 24,844 | 2,484 | 验证、选模、调参 |
+| PS train | 25,380 | 2,538 | 10% 搜索训练；正式训练全部 25,380 |
+| PS dev | 24,844 | 2,484 | 10% 搜索验证；正式选模全部 24,844 |
 | PS eval | 71,237 | 7,124 | PS 测试 |
 | LPS | 76,228 | 7,623 | 跨数据集测试 |
 
@@ -147,7 +164,7 @@ SAL_精简实验/
 - `code/manifests/fixed10/` 是可共享的 ID 清单，**清单本身不含音频**。运行时还需要 `data/fixed10/` 内的音频、标签和清单。
 - 本机精简音频通过 NTFS 硬链接建立。不要原地改写音频，否则会同时影响对应完整数据；换电脑后需要重新准备本地数据。
 - SAL 和 CNN 对照须使用相同划分、相同录音清单与指标定义。当前主表 F1 的正类为真实帧（bonafide）；PS 评价步长为 160 ms，LPS 为 20 ms。
-- 精简训练完成后，可以在完整 **测试集** 上评估泛化表现；训练集、验证集上的分数应分别报告，不能混成一个测试成绩。
+- 正式全量训练和验证选模完成后，在完整 **测试集** 上评估泛化表现；训练集、验证集上的分数应分别报告，不能混成一个测试成绩。
 
 ## 3. 新电脑准备
 
@@ -186,7 +203,7 @@ cd code
 .\.venv\Scripts\python.exe -B sal/fixed10.py --mode test --checkpoint public --split eval
 .\.venv\Scripts\python.exe -B sal/fixed10.py --mode test --checkpoint public --split lps
 
-# 在固定 10% train/dev 上重新训练、选模，然后测试
+# 可选的额外重训实验，不属于当前冻结 SAL 主方案
 .\.venv\Scripts\python.exe -B sal/fixed10.py --mode train
 .\.venv\Scripts\python.exe -B sal/fixed10.py --mode validate --checkpoint latest
 .\.venv\Scripts\python.exe -B sal/fixed10.py --mode test --checkpoint latest --split eval
@@ -194,6 +211,19 @@ cd code
 ```
 
 将入口换成 `sal/full_data.py` 即使用完整数据。`public` 表示公开 SAL 权重，`latest` 表示相同训练数据档位最近一次已完成训练的最佳权重；没有对应训练时不会回退到公开权重。也可传入具体权重路径。
+
+正式流程在当前 GPU 搜索及已排队任务结束后执行；不要和它们并行抢占 GPU：
+
+```powershell
+# 冻结公开 SAL，在完整训练集导出逐帧预测，供后续合法训练分区使用
+.\.venv\Scripts\python.exe -B sal/full_data.py --mode predict --checkpoint public --split train
+# 完整验证及最终测试；均不重新训练 SAL
+.\.venv\Scripts\python.exe -B sal/full_data.py --mode validate --checkpoint public
+.\.venv\Scripts\python.exe -B sal/full_data.py --mode test --checkpoint public --split eval
+.\.venv\Scripts\python.exe -B sal/full_data.py --mode test --checkpoint public --split lps
+```
+
+`predict` 使用推理模式、关闭训练增强并保存预测数据库；train 上的指标属于训练来源诊断，不是独立测试成绩。把命令输出的 `RESULT_FILE` 对应同名目录传给语义模块。不得把 eval/lps 预测改名为 train。
 
 若要用精简训练的 SAL 权重评估完整测试集，应在 `full_data.py` 中显式传入该精简训练权重路径，不能用 `latest` 代替，因为后者会寻找完整数据训练的权重。
 
@@ -208,14 +238,20 @@ cd code
 
 # 自动采用有效的网格最优参数，从头训练
 .\.venv\Scripts\python.exe -B cnn/baseline.py --mode train
+# 冻结正式模型，在完整 train 上导出供语义分析使用的预测（不训练）
+.\.venv\Scripts\python.exe -B cnn/baseline.py --mode train-predict
+# 下游方案与完整 dev 设置确定后，才运行最终测试
 .\.venv\Scripts\python.exe -B cnn/baseline.py --mode ps
 .\.venv\Scripts\python.exe -B cnn/baseline.py --mode lps
 
-# 用精简训练的模型评估完整 PS 测试集
+# 默认测试档位已经是 full，也可显式指定
 .\.venv\Scripts\python.exe -B cnn/baseline.py --mode ps --evaluation-data-profile full
+.\.venv\Scripts\python.exe -B cnn/baseline.py --mode lps --evaluation-data-profile full
 ```
 
 搜索全部成功后发布 `result/cnn_grid_best.json`。默认 `use_grid_search_best=true`，基线会读取并校验最优参数、数据清单和权重。有有效结果就采用最优学习率/dropout；没有搜索结果则使用配置默认值；结果与当前配置不兼容时报错。训练命令会重新从头训练，不会自动续训。
+
+正式流程必须先完成一次完整 train 重训；`--mode ps/lps` 只寻找配置与数据档位匹配的正式模型，不能自动拿网格权重代替。`--mode dev` 默认完整 dev。搜索器内部锁定 fixed10 train/dev；正式训练内部验证跟随 `training_data_profile=full`，不受评估档位参数改变影响。直接运行 baseline.py 默认 check，不启动训练。
 
 `baseline.py --mode full` 表示“训练→PS 测试→LPS 测试→成绩对照”的完整流程，**不表示使用完整数据集**。
 
@@ -223,7 +259,7 @@ cd code
 
 ```text
 完整录音 → ASR 词级时间戳 → 规则/NER 标注 → 对齐检测预测和真实标签
-         → 错误统计 → 合法训练划分上冻结统计 → 新录音的词级统计特征
+         → 错误统计 → 完整训练集冻结统计、训练特征扣除自身贡献 → 新录音的词级统计特征
 ```
 
 这里的“完整录音”指每条音频不按真假标签裁剪，不要求一次处理完整数据集。可以先用 32 条录音验证流程；这 32 条按预测保存顺序选取，不能据此推断全库分布。
@@ -245,7 +281,7 @@ py -3.10 -m venv semantic/.venv
 - 一个已完成的预测目录，包含 `predictions.sqlite`、`metrics.json`，并保留对应 `status.json`。只有汇总分数 JSON 不够。
 - 对应录音音频。`check` 会列出本机已有预测目录；GitHub 克隆不包含这些实验结果。
 
-`manifest` 根据预测目录中 `metrics.json` 的 `data_profile` 定位音频：`fixed10` 使用精简目录，`full` 使用完整目录；旧结果缺少字段时按完整数据处理。组员须领取对应 fixed10 预测结果，不要改字段把全量结果冒充为精简结果。也可手动准备音频清单 JSONL，每行格式如下，并把 audio 换成实际存在、相对于 code 的路径：
+`manifest/analyze` 默认要求 `semantic/config.json` 中的 `data_profile=full`。组员处理精简预测时显式加 `--data-profile fixed10`；档位不匹配会报错。`manifest` 根据预测目录中 `metrics.json` 的 `data_profile` 定位音频：`fixed10` 使用精简目录，`full` 使用完整目录；旧结果缺少字段时按完整数据处理。不要改字段把全量结果冒充为精简结果。也可手动准备音频清单 JSONL，每行格式如下，并把 audio 换成实际存在、相对于 code 的路径：
 
 ```json
 {"uid":"实际录音ID","audio":"../data/fixed10/实际子目录/实际录音ID.flac","seconds":3.2}
@@ -262,14 +298,14 @@ $run = '../result/替换为实际预测目录'
 $semPython = '.\semantic\.venv\Scripts\python.exe'
 
 # 按预测的数据档位自动查找音频；组员选择 fixed10 预测目录
-& $semPython semantic/analysis.py manifest --run $run --output ../data/semantic/smoke_audio.jsonl --limit 32
+& $semPython semantic/analysis.py manifest --run $run --data-profile fixed10 --output ../data/semantic/smoke_audio.jsonl --limit 32
 
 # 默认 CPU int8；使用 GPU 需另加 --device cuda，并具备相应运行环境
 & $semPython semantic/analysis.py transcribe --manifest ../data/semantic/smoke_audio.jsonl --asr-model ../data/models/whisper --output ../data/semantic/smoke_words.jsonl
 
 & $semPython semantic/analysis.py annotate --transcripts ../data/semantic/smoke_words.jsonl --ner-model ../data/models/ner_en --output ../data/semantic/smoke_annotated.jsonl
 
-& $semPython semantic/analysis.py analyze --run $run --transcripts ../data/semantic/smoke_annotated.jsonl
+& $semPython semantic/analysis.py analyze --run $run --data-profile fixed10 --transcripts ../data/semantic/smoke_annotated.jsonl
 ```
 
 如已有人工审核的词级转录，可以跳过 ASR。转录每行一段录音，词时间是相对于原始音频的秒数，UID 必须和预测数据库一致：
@@ -304,44 +340,48 @@ $semPython = '.\semantic\.venv\Scripts\python.exe'
 
 当前 `analysis.py` 支持 `check / manifest / transcribe / annotate / analyze / freeze / features`，**没有神经网络训练子命令**。其中 `freeze` 拟合并保存统计先验，`features` 查询这些先验，不代表已经训练完成复查收益网络或区间修改网络。
 
-### 冻结训练统计前的条件
+### 完整训练集的语义统计与特征
 
-需要按真实源录音组划分并记录 `base_train`、`correction_train`、`recheck_train`、`dev`、`test`，同源组不能跨角色；当前固定 10% 清单只保留官方划分，尚未完成这项阶段划分和源录音关联审计。
+先完成一次正式 CNN 训练并冻结，运行 `cnn/baseline.py --mode train-predict`。其 `RESULT_FILE` 对应目录作为语义输入；若分析冻结 SAL，则用 `sal/full_data.py --mode predict --split train --checkpoint public`。这些预测是训练内预测，不称为独立测试或 out-of-fold 预测。
 
-先用真实 `base_train` 训练基础检测器，再为 `correction_train` 导出预测、对齐转录并统计。当前入口没有一键完成这些阶段的数据划分和训练预测导出，组员需补齐相关数据加载/预测接口；不要把现成 eval 结果改成 `train` 就用于冻结。
-
-`freeze` 要求报告来源的 `split=train`，全部统计 UID 属于 `correction_train`，分组清单必须包含实际 `base_train`。程序无法仅从权重判断模型是否见过这些录音，因此清单必须反映真实训练过程。
-
-分组清单每行格式为：
-
-```json
-{"uid":"实际录音ID","source_group":"真实源录音组ID","role":"correction_train"}
-```
-
-满足上述条件后，以下命令才可使用；其中名称是占位符，需要替换：
+下面从 code 目录运行，`$trainRun` 替换为实际完成的 full/train 预测目录：
 
 ```powershell
-& $semPython semantic/analysis.py freeze --report ../result/实际修正训练统计目录 --partition-manifest ../data/semantic/partitions.jsonl --output ../data/semantic/frozen_statistics.json
-& $semPython semantic/analysis.py features --transcripts ../data/semantic/新录音标注.jsonl --frozen ../data/semantic/frozen_statistics.json --output ../result/新录音语义特征.jsonl
+$trainRun = '../result/实际完整训练集预测目录'
+& $semPython semantic/analysis.py manifest --run $trainRun --output ../data/semantic/train_full_audio.jsonl
+& $semPython semantic/analysis.py transcribe --manifest ../data/semantic/train_full_audio.jsonl --asr-model ../data/models/whisper --output ../data/semantic/train_full_words.jsonl
+& $semPython semantic/analysis.py annotate --transcripts ../data/semantic/train_full_words.jsonl --ner-model ../data/models/ner_en --output ../data/semantic/train_full_annotated.jsonl
+& $semPython semantic/analysis.py analyze --run $trainRun --transcripts ../data/semantic/train_full_annotated.jsonl --output ../result/semantic_train_full
+& $semPython semantic/analysis.py freeze --report ../result/semantic_train_full --output ../data/semantic/frozen_statistics.json
+& $semPython semantic/analysis.py features --split train --transcripts ../data/semantic/train_full_annotated.jsonl --frozen ../data/semantic/frozen_statistics.json --output ../result/train_semantic_features.jsonl
 ```
 
-特征查询会拒绝与拟合统计重复的 UID；下游必须读取 `prior_available` 等可用性信息。小样本或不可用时会回退，缺失统计的零占位值不能当成真实错误率。
+正式 freeze 默认要求完整 train 的全部官方 UID、完整预测和转录覆盖。ASR 无词录音保留空 words；缺失转录不等于无词。不会把 dev/eval/LPS 诊断表用于拟合，也不要求另拆 correction_train/recheck_train。旧 `--partition-manifest` 仅保留为兼容入口，当前流程不使用。
 
-### 后续开发建议顺序
+有可靠同源录音映射时，freeze 加 `--source-groups ../data/semantic/train_source_groups.jsonl`，每行如下，必须覆盖完整 train：
 
-1. 明确训练目标：复查哪些区间、如何定义修改收益，以及对应训练标签，先写清楚再实现网络。
-2. 完成源录音分组和阶段数据划分，补齐训练分区预测导出；确保统计和后续模型的训练来源可追溯。
-3. 跑通语义统计冻结与新录音特征导出，保存特征定义、模型版本和清单哈希。
-4. 在 `code/semantic/` 实现下游训练入口。建议将一个模型的数据读取、网络、训练、验证与测试集中到一个完整文件；该文件目前尚未创建。
-5. 只在训练部分拟合、dev 上选模型和阈值，方案确定后在固定测试集评估。对照纯声学基线与加入语义后的结果，图表统一导出至 visualization。
+```json
+{"uid":"实际录音ID","source_group":"实际源录音组ID","split":"train"}
+```
 
-测试集词汇统计只用于事后分析，不能用于学习先验或调参。公开 SAL 权重的训练暴露也需核查，不能直接视为满足阶段隔离要求的基础检测器。不要直接把词汇错误率乘到 SAL 分数上并当成已验证的方法。
+训练特征从总计数中扣除本组，再重算总体、词和类型的平滑统计；无同源映射则仅扣除本录音，并记录此限制。整个过程不重新训练检测器。完整 dev/eval/LPS 的 features 分别用 `--split dev/eval/lps`，查询全部训练统计；不读取这些录音的真值标签来生成特征，禁止拟合录音冒充 dev/test。未知同源关系无法自动推断。
+
+下游必须读取 prior_available 和支持数，小样本时回退纯声学；0 占位不代表真实错误率为零。逐词诊断表含真值，不能直接作为网络输入；features 只输出白名单字段。
+
+### 后续收益网络的数据约定（网络尚未实现）
+
+1. 修改收益网络：完整 train 候选与训练标签，完整 dev 早停；选定后冻结修改器。包含正收益、零收益、负收益和正确保留样本。
+2. 复查收益标签：在完整 train 上，用冻结基础模型与冻结修改器比较“复查前”和“实际复查并修改后”的错误代价；不使用真值挑选的 oracle 最佳操作作为部署收益。
+3. 复查收益网络：完整 train 的候选特征和收益标签训练，完整 dev 选择模型、阈值及计算预算；真实收益仅作监督目标，不能作为候选输入。
+4. 所有设计固定后，在完整 PS eval 与 LPS 评价；对照纯声学选择、相同候选池/预算的语义选择及简单替代方法。
+
+共用 train 不等于测试泄漏，但训练内错误和收益可能偏乐观。上述扣除仅避免自标签进入统计特征，不等价于检测器/修改器的交叉拟合；用完整 dev 检验收益，不将训练效果当泛化结论。测试语义统计只作事后诊断，既有已探索测试集也应如实披露。
 
 ## 7. 组内交接与检查
 
 GitHub 共享代码、配置和固定清单；音频、权重、预测数据库以及大规模转录结果另行共享。交接时记录所用数据档位、ID 清单、模型来源、权重、参数和输出目录，避免同名结果被误用。
 
-负责语义的组员交回：转录及标注 JSONL、统计目录、所用模型与配置说明；开展训练后还应交回真实阶段划分清单、冻结统计、训练配置、权重和独立测试成绩。模型放 `data/models/`，运行记录放 `result/`，图表及绘图代码放 `visualization/`。
+负责语义的组员交回：转录及标注 JSONL、统计目录、所用模型与配置说明；开展训练后还应交回各阶段完整训练清单和可用的同源映射、冻结统计、训练配置、权重和独立测试成绩。模型放 `data/models/`，运行记录放 `result/`，图表及绘图代码放 `visualization/`。
 
 从 `code` 目录运行功能检查：
 

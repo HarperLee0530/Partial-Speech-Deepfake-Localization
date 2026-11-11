@@ -1,4 +1,5 @@
 {
+  "data_profile": "full",
   "word_spoof_overlap": 0.5,
   "minimum_word_confidence": 0.5,
   "minimum_count": 20,

@@ -201,7 +201,7 @@ def parse_arguments(argv=None):
     if not argv:
         argv = ['--split', 'dev', '--limit', '32']
     parser = argparse.ArgumentParser()
-    parser.add_argument('--split', choices=['dev', 'eval', 'lps'], required=True)
+    parser.add_argument('--split', choices=['train', 'dev', 'eval', 'lps'], required=True)
     parser.add_argument('--limit', type=int, default=0)
     parser.add_argument('--data-profile', choices=['fixed10', 'full'], default='fixed10')
     parser.add_argument('--checkpoint', help='Optional trained checkpoint, relative to code; default is released SAL')
@@ -362,7 +362,7 @@ def require_no_other_sal_process():
     if isinstance(processes, dict):
         processes = [processes]
     own = {os.getpid(), os.getppid()}
-    names = ('sal/pipeline.py', 'sal/full_data.py', 'sal/fixed10.py', 'cnn/baseline.py', 'cnn/grid_search.py')
+    names = ('sal/pipeline.py', 'sal/full_data.py', 'sal/fixed10.py', 'cnn/baseline.py', 'cnn/grid_search.py', 'cnn/evaluate_tests.py')
     for process in processes:
         if process['ProcessId'] not in own and any(name in (process.get('CommandLine') or '').replace('\\', '/') for name in names):
             raise RuntimeError('Another SAL evaluation is running; wait until it finishes before starting a new one.')
@@ -503,10 +503,12 @@ def train_sal(profile, settings=None):
 def experiment_main(profile, argv=None):
     """Profile-specific entry used by full_data.py and fixed10.py."""
     parser = argparse.ArgumentParser(description=f'SAL {profile}: train / validate / test. No training on import.')
-    parser.add_argument('--mode', choices=('check','train','validate','test','all'), default='check')
-    parser.add_argument('--split', choices=('eval','lps'), default='eval', help='Test set; training is always PS')
+    parser.add_argument('--mode', choices=('check','train','predict','validate','test','all'), default='check')
+    parser.add_argument('--split', choices=('train','dev','eval','lps'), default='eval', help='predict exports frozen-model scores; test/all accept eval/lps only')
     parser.add_argument('--checkpoint', help='public, latest, or path relative to code; required for validate/test')
     args = parser.parse_args(argv)
+    if args.mode in ('test', 'all') and args.split not in ('eval', 'lps'):
+        parser.error('test/all require --split eval or lps; use predict for train/dev scores')
     if args.mode == 'check':
         settings, model, data = training_config(profile)
         print(json.dumps(dict(profile=profile, data_root=str(data.root), settings=settings,

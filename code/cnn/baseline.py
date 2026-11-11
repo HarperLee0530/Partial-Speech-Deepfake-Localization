@@ -190,26 +190,26 @@ from project_config import DATA_ROOT
 def check_training_files(data_profile='full'):
     if data_profile == 'fixed10':
         from tools.data_tools import validate_fixed10
-        for split in ('train', 'dev', 'eval'):
+        for split in ('train', 'dev'):
             validate_fixed10(split)
         return
     base = DATA_ROOT / 'PartialSpoof'
     required = [base/'database/train', base/'database/dev',
                 base/'database_train.tar.gz.extracted.json',
                 base/'database_dev.tar.gz.extracted.json']
-    required += [base/'database/segment_labels'/f'{s}_seglab_0.16.npy' for s in ('train', 'dev', 'eval')]
+    required += [base/'database/segment_labels'/f'{s}_seglab_0.16.npy' for s in ('train', 'dev')]
     missing = [str(p) for p in required if not p.exists()]
     if missing:
         raise FileNotFoundError('Missing official PS training resources; never substitute dev/eval for train:\n' + '\n'.join(missing))
 
 
-def audit_splits(data_profile='full'):
+def audit_splits(data_profile='full', splits=('train', 'dev')):
     root = DATA_ROOT/('fixed10/PartialSpoof/database/segment_labels' if data_profile == 'fixed10'
                      else 'PartialSpoof/database/segment_labels')
     ids = {split: set(np.load(root/f'{split}_seglab_0.16.npy', allow_pickle=True).item())
-           for split in ('train', 'dev', 'eval')}
+           for split in splits}
     for a, b in (('train', 'dev'), ('train', 'eval'), ('dev', 'eval')):
-        if ids[a] & ids[b]:
+        if a in ids and b in ids and ids[a] & ids[b]:
             raise ValueError(f'Utterance ID leakage between {a} and {b}')
     from tools.data_tools import read_manifest, validate_fixed10
     if data_profile == 'fixed10':
@@ -232,7 +232,7 @@ def manifest_hash(utterance_ids):
 
 
 class BaselineDataset(Dataset):
-    def __init__(self, split, model_config, crop_seconds=None, data_profile='fixed10'):
+    def __init__(self, split, model_config, crop_seconds=None, data_profile='full'):
         # Importing the evaluator does not load SAL weights or launch evaluation.
         from sal.pipeline import get_dataset
         self.official, self.resolution = get_dataset(split, data_profile)
@@ -290,9 +290,9 @@ def collate(batch):
 
 
 # 3. Training, validation and evaluation
-"""直接点击本文件运行 CNN-BiGRU。默认仅训练；RUN_MODE=full 时训练→PS→LPS→汇总。
+"""直接点击本文件检查 CNN-BiGRU。显式 train 才训练；full 为训练→PS→LPS→汇总。
 
-默认使用固定 10% 训练/验证/测试数据。导入模块不启动实验。
+正式训练/验证/测试默认完整数据；只有网格搜索锁定分层 10%。导入模块不启动实验。
 只执行某一步时修改下方 RUN_MODE；不需要额外的 run 包装文件。
 """
 import gc
@@ -322,11 +322,11 @@ _CODE_ROOT = Path(__file__).resolve().parents[1]
 if str(_CODE_ROOT) not in sys.path:
     sys.path.insert(0, str(_CODE_ROOT))
 
-from project_config import CODE_ROOT, DATA_ROOT, RESULT_ROOT
+from project_config import CODE_ROOT, DATA_ROOT, RESULT_ROOT, artifact_relative
 from tools.data_tools import profile_info, PROFILES
 
 PROTOCOL = 'cnn_bigru_ps160_lps20_v1'
-RUN_MODE = 'train'  # train / full / ps / lps / check / prepare / predict
+RUN_MODE = 'check'  # train / train-predict / full / ps / lps / check / prepare / predict
 AUDIO_FILE = ''  # predict 模式：相对路径以 code 为基准，例如 ../data/example.wav
 MODULE_ROOT = Path(__file__).resolve().parent
 
@@ -366,6 +366,13 @@ def configuration_signature(config, exclude_search=False):
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
 
+def grid_signature(config):
+    """Hyperparameter transfer permits fixed10 -> full, never weight transfer."""
+    fixed = copy.deepcopy(config)
+    fixed['training_data_profile'] = 'fixed10'
+    return configuration_signature(fixed, exclude_search=True)
+
+
 def read_grid_selection(config):
     """Only a completed, dev-selected search on the current fixed manifests is eligible."""
     pointer = RESULT_ROOT/'cnn_grid_best.json'
@@ -378,9 +385,12 @@ def read_grid_selection(config):
     winner = min(search['trials'], key=lambda t: (t['dev_eer_percent'], t['index']))
     if selected['winner'] != winner:
         raise ValueError('Grid selection differs from the validation-set winner')
-    if search['base_signature'] != configuration_signature(config, exclude_search=True):
+    if winner['config'].get('training_data_profile') != 'fixed10' or search.get('test_data_used', False):
+        raise ValueError('Expected train/dev-only fixed10 hyperparameter search')
+    if search['base_signature'] != grid_signature(config):
         raise ValueError('Grid search was run with different fixed settings. Rerun search or disable use_grid_search_best.')
-    from tools.data_tools import read_manifest
+    from tools.data_tools import read_manifest, audit_search
+    audit_search(verbose=False)
     for split in ('train', 'dev'):
         if winner[split+'_manifest_sha256'] != read_manifest(split)['manifest_sha256']:
             raise ValueError('Grid search used a different fixed subset')
@@ -399,7 +409,9 @@ def load_config(use_grid=True):
         config['learning_rate'] = winner['config']['learning_rate']
         config['model']['dropout'] = winner['config']['model']['dropout']
         config['hyperparameter_source'] = selected['search_file']
-        config['grid_selected_checkpoint'] = winner['checkpoint']
+        config['grid_hyperparameters_selected'] = True
+        # Provenance only. Formal training initializes a fresh CNN on the full train split.
+        config['grid_source_checkpoint'] = artifact_relative(CODE_ROOT/winner['checkpoint'], CODE_ROOT, DATA_ROOT, RESULT_ROOT)
     else:
         config['hyperparameter_source'] = 'cnn/config.json'
     return config
@@ -446,7 +458,7 @@ def other_experiment_processes():
         processes = json.loads(output.decode('utf-8', errors='replace') or '[]')
         if isinstance(processes, dict):
             processes = [processes]
-        names = ('sal/pipeline.py', 'sal/full_data.py', 'sal/fixed10.py', 'cnn/baseline.py', 'cnn/grid_search.py')
+        names = ('sal/pipeline.py', 'sal/full_data.py', 'sal/fixed10.py', 'cnn/baseline.py', 'cnn/grid_search.py', 'cnn/evaluate_tests.py')
         return [p for p in processes if p['ProcessId'] not in (os.getpid(), os.getppid())
                 and any(name in (p.get('CommandLine') or '').replace('\\', '/') for name in names)]
     return []
@@ -663,7 +675,7 @@ def train(config=None, progress=None):
                 torch.save(checkpoint, temporary)
                 temporary.replace(weights)
                 record.update('running', best_epoch=epoch, best_dev_eer_percent=eer,
-                              checkpoint=os.path.relpath(weights, CODE_ROOT).replace('\\', '/'))
+                              checkpoint=artifact_relative(weights, CODE_ROOT, DATA_ROOT, RESULT_ROOT))
             else:
                 stale += 1
             print(json.dumps(entry, ensure_ascii=False), flush=True)
@@ -687,8 +699,9 @@ def load_trained_model(config):
         for result in RESULT_ROOT.glob('cnn_bigru_train_*.json'):
             data = json.loads(result.read_text(encoding='utf-8'))
             if (data.get('status') == 'complete' and data.get('smoke_test') is False
+                    and isinstance(data.get('config'), dict)
                     and data.get('config', {}).get('training_data_profile', 'full') == config['training_data_profile']
-                    and (not config.get('grid_selected_checkpoint') or
+                    and (not config.get('grid_hyperparameters_selected') or
                          configuration_signature(validate_config(data['config'])) == configuration_signature(config))):
                 complete.append((result.name, data))
         if not complete:
@@ -699,7 +712,7 @@ def load_trained_model(config):
             raise ValueError('Training checkpoint checksum differs from completed run record')
     checkpoint = torch.load(path, map_location='cpu')
     if checkpoint.get('config', {}).get('training_data_profile', 'full') != config['training_data_profile']:
-        raise ValueError('Checkpoint training-data profile differs from configured profile; old full-data weights cannot stand in for fixed10 training')
+        raise ValueError('Checkpoint training-data profile differs from configured profile; fixed10 grid weights cannot stand in for full training')
     if checkpoint.get('protocol') != PROTOCOL or checkpoint.get('trained') is not True:
         raise ValueError('Expected a trained CNN-BiGRU checkpoint using this evaluation protocol')
     model_config = ModelConfig(**checkpoint['model_config'])
@@ -709,8 +722,8 @@ def load_trained_model(config):
 
 
 def evaluate(split, checkpoint_path=None, config=None, progress=None):
-    if split not in ('dev', 'eval', 'lps'):
-        raise ValueError('Choose dev, eval or lps')
+    if split not in ('train', 'dev', 'eval', 'lps'):
+        raise ValueError('Choose train (frozen prediction export), dev, eval or lps')
     config = validate_config(load_config() if config is None else config)
     if checkpoint_path is not None:
         # Full pipeline pins both tests to this training run, not a later run.
@@ -720,11 +733,14 @@ def evaluate(split, checkpoint_path=None, config=None, progress=None):
     require_device_idle(config['device'])
     configure_runtime(config)
     profile = config['evaluation_data_profile']
-    record = RunRecord(f'{split}_{profile}', split=split, smoke_test=False, completed=0,
+    if split == 'train' and (profile != 'full' or config['training_data_profile'] != 'full'):
+        raise ValueError('Formal training-prediction export requires a full-train model and full train data')
+    purpose = f'predict_train_{profile}' if split == 'train' else f'{split}_{profile}'
+    record = RunRecord(purpose, split=split, smoke_test=False, completed=0,
                        **profile_info(split, profile), training_data_profile=config['training_data_profile'],
                        dataset='LlamaPartialSpoof crossfade' if split == 'lps' else f'PartialSpoof {split}',
                        metric_unit='percent', precision='float32', batch_size=1, full_utterance=True,
-                       checkpoint=os.path.relpath(weights, CODE_ROOT).replace('\\', '/'), checkpoint_sha256=sha256(weights),
+                       checkpoint=artifact_relative(weights, CODE_ROOT, DATA_ROOT, RESULT_ROOT), checkpoint_sha256=sha256(weights),
                        train_run=checkpoint['train_run'], interval_threshold=checkpoint['interval_threshold'],
                        threshold_source=checkpoint['threshold_source'], progress=progress)
     connection = None
@@ -782,6 +798,9 @@ def evaluate(split, checkpoint_path=None, config=None, progress=None):
         if metrics['utterance_count'] != len(dataset):
             raise RuntimeError('Incomplete predictions')
         metrics.update(**profile_info(split, profile), manifest_sha256=dataset.manifest_sha256,
+                       training_data_profile=config['training_data_profile'],
+                       checkpoint_sha256=sha256(weights),
+                       prediction_role='in_sample_training_features' if split == 'train' else 'validation' if split == 'dev' else 'test',
                        audio_seconds=audio_seconds, inference_seconds=inference_seconds,
                        real_time_factor=inference_seconds/audio_seconds, cpu_fallback_utterances=fallbacks,
                        planned_utterances=len(dataset), resolution_seconds=dataset.resolution,
@@ -939,6 +958,10 @@ def main(mode=None, evaluation_data_profile=None):
         return full_pipeline(evaluation_data_profile=evaluation_data_profile)
     if mode == 'train':
         return train()
+    if mode == 'train-predict':
+        config = load_config()
+        config['evaluation_data_profile'] = 'full'
+        return evaluate('train', config=config)
     if mode in ('dev', 'ps', 'lps'):
         config = load_config()
         if evaluation_data_profile is not None:
@@ -950,8 +973,8 @@ def main(mode=None, evaluation_data_profile=None):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--mode', choices=('train', 'full', 'ps', 'lps', 'dev', 'check', 'prepare', 'predict'), default=RUN_MODE)
+    parser.add_argument('--mode', choices=('train', 'train-predict', 'full', 'ps', 'lps', 'dev', 'check', 'prepare', 'predict'), default=RUN_MODE)
     parser.add_argument('--evaluation-data-profile', choices=('fixed10', 'full'), default=None,
-                        help='Override evaluation data only; training remains configured fixed10')
+                        help='Override evaluation data only; formal training defaults to full train/dev')
     arguments = parser.parse_args()
     raise SystemExit(entrypoint(main, arguments.mode, arguments.evaluation_data_profile))
