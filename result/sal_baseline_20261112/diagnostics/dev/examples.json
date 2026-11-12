@@ -1,0 +1,50 @@
+[
+  {
+    "category": "all_fake_miss",
+    "uid": "CON_D_0018707",
+    "eligible_recordings": 5,
+    "selection": "minimum SHA256(role|category|uid)"
+  },
+  {
+    "category": "all_real_false_alarm",
+    "uid": "LA_D_4701213",
+    "eligible_recordings": 8,
+    "selection": "minimum SHA256(role|category|uid)"
+  },
+  {
+    "category": "boundary_offset",
+    "uid": "CON_D_0010678",
+    "eligible_recordings": 502,
+    "selection": "minimum SHA256(role|category|uid)"
+  },
+  {
+    "category": "complete_miss",
+    "uid": "CON_D_0015637",
+    "eligible_recordings": 70,
+    "selection": "minimum SHA256(role|category|uid)"
+  },
+  {
+    "category": "correct_control",
+    "uid": "LA_D_4367665",
+    "eligible_recordings": 1810,
+    "selection": "minimum SHA256(role|category|uid)"
+  },
+  {
+    "category": "fragmentation",
+    "uid": "CON_D_0002413",
+    "eligible_recordings": 102,
+    "selection": "minimum SHA256(role|category|uid)"
+  },
+  {
+    "category": "merge",
+    "uid": "CON_D_0012816",
+    "eligible_recordings": 110,
+    "selection": "minimum SHA256(role|category|uid)"
+  },
+  {
+    "category": "spurious_false_alarm",
+    "uid": "CON_D_0000238",
+    "eligible_recordings": 56,
+    "selection": "minimum SHA256(role|category|uid)"
+  }
+]

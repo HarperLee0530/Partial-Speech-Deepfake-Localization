@@ -1,0 +1,46 @@
+{
+  "run": "sal_train_reduced_20261112_122313_966079",
+  "status": "complete",
+  "data_profile": "reduced",
+  "config": {
+    "seed": 888,
+    "batch_size": 8,
+    "num_workers": 0,
+    "max_epochs": 60,
+    "min_epochs": 40,
+    "patience": 10,
+    "learning_rate": 1e-05,
+    "weight_decay": 0.0001,
+    "mixup_ratio": 0.2,
+    "device": "cuda",
+    "note": "SAL model/loss retained; local aligned_cross_recording_v1 fixes upstream self-mixing no-op. Batch8/workers0 for Windows. Fresh SAL head and general WavLM backbone; see README implementation note."
+  },
+  "manifests": {
+    "train_detector": {
+      "count": 5076,
+      "sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce"
+    },
+    "dev": {
+      "count": 2484,
+      "sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1"
+    }
+  },
+  "started_local": "2026-11-12T12:23:13.967078+08:00",
+  "weights_pretrained": "WavLM backbone only; fresh SAL head",
+  "public_sal_checkpoint_used_for_training": false,
+  "test_used_for_selection": false,
+  "protocol": "sal_reduced_v1",
+  "training_data_profile": "reduced",
+  "training_split": "train_detector",
+  "training_manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+  "training_dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+  "csm_implementation": "aligned_cross_recording_v1",
+  "validation_eer_implementation": "official_formula_cpu_v1",
+  "updated_local": "2026-11-12T17:30:07.754535+08:00",
+  "phase": "validation",
+  "epoch": 40,
+  "checkpoint": "../data/models/sal_train_reduced_20261112_122313_966079/best-epoch=024.ckpt",
+  "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+  "best_dev_eer_percent": 1.8525282144546509,
+  "finished_local": "2026-11-12T17:30:07.754535+08:00"
+}

@@ -1,0 +1,93 @@
+diff --git a/README.md b/README.md
+index a3bae56..c14103f 100644
+--- a/README.md
++++ b/README.md
+@@ -61,6 +61,8 @@
+ 
+ **实现修正记录**：原 vendor 的 CSM `_mixup_batch` 将同一录音拼接回自身，复核时输入与标签完全不变。本版本保留 vendor 原件，在 `sal.py` 训练实例上覆盖该方法，以不同录音为来源并对齐音频/标签切点；训练和预测元数据记录 `csm_implementation=aligned_cross_recording_v1`。模型结构和损失不变，但这是明确的实现修正，不能声称与未修复上游代码逐字节等价，也没有据此取得新的性能结论。CPU/GPU 推理和跨盘路径也已统一处理。
+ 
++接手机器的首次 GPU 运行发现：锁定的 PyTorch 2.2.1 在严格确定性模式下不支持 EER 使用的 CUDA 浮点 `cumsum`。入口现通过 TorchMetrics 的 `compute_on_cpu` 将验证 EER 的列表状态移至 CPU，与预测缓存的 EER 计算设备一致；vendor 公式、模型、损失和训练配置均不变，严格确定性保持开启。元数据记录 `validation_eer_implementation=official_formula_cpu_v1`，并新增 CUDA 输入回归测试。该修复不构成性能改进结论。
++
+ ## CNN 和语义
+ 
+ ```powershell
+diff --git a/code/sal.py b/code/sal.py
+index 20a3bf9..29f2c0d 100644
+--- a/code/sal.py
++++ b/code/sal.py
+@@ -125,7 +125,8 @@ def training_identity():
+     return dict(training_data_profile='reduced', training_split='train_detector',
+         training_manifest_sha256=read_manifest('train_detector')['manifest_sha256'],
+         training_dev_manifest_sha256=read_manifest('dev')['manifest_sha256'],
+-        csm_implementation='aligned_cross_recording_v1')
++        csm_implementation='aligned_cross_recording_v1',
++        validation_eer_implementation='official_formula_cpu_v1')
+ 
+ 
+ def validate_training_metadata(metadata):
+@@ -487,6 +488,16 @@ def cross_recording_mixup(self, batch):
+     return utt_ids, mixed_inputs, mixed_labels, mixed_lengths
+ 
+ 
++def enable_cpu_validation_eer(model):
++    """Keep the official EER formula under strict deterministic CUDA training.
++
++    Torch 2.2.1 rejects CUDA float cumsum in deterministic mode. TorchMetrics
++    supports CPU list states; prediction export already computes EER on CPU.
++    No model/loss, threshold rule, or deterministic setting is changed.
++    """
++    model.val_eer.compute_on_cpu = True
++
++
+ def train_sal(profile, settings=None):
+     """Train the official SAL model on PS train; PS dev alone selects the checkpoint."""
+     import hydra
+@@ -542,6 +553,7 @@ def train_sal(profile, settings=None):
+         torch.backends.cuda.matmul.allow_tf32 = False
+         torch.backends.cudnn.allow_tf32 = False
+         model = hydra.utils.instantiate(model_config)
++        enable_cpu_validation_eer(model)
+         # Keep vendor sources intact; explicitly version this implementation repair.
+         model._mixup_batch = MethodType(cross_recording_mixup, model)
+         data = make_data_module(data_config)
+@@ -555,6 +567,7 @@ def train_sal(profile, settings=None):
+         write_json(out/'resolved_config.json', dict(settings=settings, model=OmegaConf.to_container(model_config, resolve=True),
+                                                   data=OmegaConf.to_container(data_config, resolve=True),
+                                                   csm_implementation=identity['csm_implementation'],
++                                                  validation_eer_implementation=identity['validation_eer_implementation'],
+                                                   csm_patch='sal.cross_recording_mixup overrides vendor self-pairing; aligned cuts; two vendor mixup2 rounds'))
+         trainer.fit(model, datamodule=data)
+         if trainer.interrupted:
+diff --git a/code/test_project.py b/code/test_project.py
+index 01e488a..ed19c09 100644
+--- a/code/test_project.py
++++ b/code/test_project.py
+@@ -426,6 +426,28 @@ class ReducedDataContractTests(unittest.TestCase):
+                     data.validate_reduced('train')
+ 
+ class SalDeviceAndMixingTests(unittest.TestCase):
++    @unittest.skipUnless(torch.cuda.is_available(), 'CUDA required for deterministic EER regression')
++    def test_validation_eer_with_cuda_inputs_and_strict_determinism(self):
++        from src.evaluator.evaluator import EERMetric
++        enabled = torch.are_deterministic_algorithms_enabled()
++        warn_only = torch.is_deterministic_algorithms_warn_only_enabled()
++        try:
++            torch.use_deterministic_algorithms(True)
++            scores = torch.tensor([.9, .8, .7, .6, .4, .3, .2, .1])
++            labels = torch.tensor([1., 0., 1., 0., 0., 1., 0., 1.])
++            reference = EERMetric()
++            reference.update(scores, labels)
++            model = types.SimpleNamespace(val_eer=EERMetric().cuda())
++            sal.enable_cpu_validation_eer(model)
++            model.val_eer.update(scores[:4].cuda(), labels[:4].cuda())
++            model.val_eer.update(scores[4:].cuda(), labels[4:].cuda())
++            self.assertTrue(all(x.device.type == 'cpu' for x in model.val_eer.y_pred))
++            self.assertEqual(model.val_eer.compute(), reference.compute())
++            self.assertTrue(torch.are_deterministic_algorithms_enabled())
++            self.assertFalse(torch.is_deterministic_algorithms_warn_only_enabled())
++        finally:
++            torch.use_deterministic_algorithms(enabled, warn_only=warn_only)
++
+     def test_configured_cpu_never_requires_cuda(self):
+         with patch.dict(sal.CONFIG,{'sal':{'device':'cpu'}}),patch.object(torch.cuda,'is_available',side_effect=AssertionError('CUDA queried')):
+             self.assertEqual(sal.configured_device(),'cpu')

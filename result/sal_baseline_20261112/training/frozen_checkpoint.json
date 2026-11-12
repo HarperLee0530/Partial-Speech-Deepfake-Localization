@@ -1,0 +1,11 @@
+{
+  "checkpoint": "C:\\Users\\ROG\\OneDrive\\\u6587\u6863\\ChatGPT\\NNDLproject\\partial_speech_project\\data\\models\\sal_train_reduced_20261112_122313_966079\\best-epoch=024.ckpt",
+  "checkpoint_argument": "../data/models/sal_train_reduced_20261112_122313_966079/best-epoch=024.ckpt",
+  "sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+  "training_record": "C:\\Users\\ROG\\OneDrive\\\u6587\u6863\\ChatGPT\\NNDLproject\\partial_speech_project\\result\\sal_train_reduced_20261112_122313_966079.json",
+  "selection": "minimum dev val/eer",
+  "best_dev_eer_percent": 1.8525282144546509,
+  "csm_implementation": "aligned_cross_recording_v1",
+  "training_manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+  "dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1"
+}
