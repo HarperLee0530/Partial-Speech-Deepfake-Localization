@@ -28,7 +28,12 @@ def artifact_relative(path, code_root=CODE_ROOT, data_root=DATA_ROOT, result_roo
         except ValueError:
             continue
         return (Path(CONFIG[setting])/suffix).as_posix()
-    return Path(os.path.relpath(value, code_root)).as_posix()
+    try:
+        return Path(os.path.relpath(value, code_root)).as_posix()
+    except ValueError:
+        # Windows cannot express a relative path across drives. External files
+        # keep their absolute path; project data/results remain relocatable above.
+        return value.as_posix()
 
 def portable_checkpoint_path():
     # Save a relocatable path in new experiment metadata as well.

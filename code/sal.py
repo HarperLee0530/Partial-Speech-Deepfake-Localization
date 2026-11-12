@@ -487,6 +487,17 @@ def cross_recording_mixup(self, batch):
     return utt_ids, mixed_inputs, mixed_labels, mixed_lengths
 
 
+def configure_runtime_model(model):
+    """Apply local CSM repair and deterministic CPU metric accumulation."""
+    model._mixup_batch = MethodType(cross_recording_mixup, model)
+    # TorchMetrics moves these list states to CPU after each update, even when
+    # Lightning puts the model on CUDA. Keep vendor EER rules unchanged while
+    # avoiding CUDA float cumsum, unavailable under deterministic algorithms.
+    model.val_eer.compute_on_cpu = True
+    model.test_eer.compute_on_cpu = True
+    return model
+
+
 def train_sal(profile, settings=None):
     """Train the official SAL model on PS train; PS dev alone selects the checkpoint."""
     import hydra
@@ -541,9 +552,7 @@ def train_sal(profile, settings=None):
         torch.set_num_threads(4)
         torch.backends.cuda.matmul.allow_tf32 = False
         torch.backends.cudnn.allow_tf32 = False
-        model = hydra.utils.instantiate(model_config)
-        # Keep vendor sources intact; explicitly version this implementation repair.
-        model._mixup_batch = MethodType(cross_recording_mixup, model)
+        model = configure_runtime_model(hydra.utils.instantiate(model_config))
         data = make_data_module(data_config)
         checkpoint = ModelCheckpoint(dirpath=str(checkpoint_dir), filename='best-{epoch:03d}',
                                      monitor='val/eer', mode='min', save_top_k=1, save_last=True)
@@ -555,6 +564,7 @@ def train_sal(profile, settings=None):
         write_json(out/'resolved_config.json', dict(settings=settings, model=OmegaConf.to_container(model_config, resolve=True),
                                                   data=OmegaConf.to_container(data_config, resolve=True),
                                                   csm_implementation=identity['csm_implementation'],
+                                                  eer_accumulation_device='cpu',
                                                   csm_patch='sal.cross_recording_mixup overrides vendor self-pairing; aligned cuts; two vendor mixup2 rounds'))
         trainer.fit(model, datamodule=data)
         if trainer.interrupted:

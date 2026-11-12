@@ -426,6 +426,33 @@ class ReducedDataContractTests(unittest.TestCase):
                     data.validate_reduced('train')
 
 class SalDeviceAndMixingTests(unittest.TestCase):
+    @unittest.skipUnless(torch.cuda.is_available(), 'CUDA regression requires GPU')
+    def test_deterministic_cuda_validation_keeps_eer_states_on_cpu(self):
+        from src.evaluator.evaluator import EERMetric
+        model = torch.nn.Module()
+        model.val_eer, model.test_eer = EERMetric(), EERMetric()
+        sal.configure_runtime_model(model)
+        model.cuda()
+        scores = torch.tensor([.8, .6, .4, .2, -.1, -.3])
+        labels = torch.tensor([1., 0., 1., 0., 1., 0.])
+        reference = EERMetric()
+        reference.update(scores, labels)
+        expected = reference.compute()
+        enabled = torch.are_deterministic_algorithms_enabled()
+        warn_only = torch.is_deterministic_algorithms_warn_only_enabled()
+        try:
+            torch.use_deterministic_algorithms(True)
+            for metric in (model.val_eer, model.test_eer):
+                for _ in range(2):  # reset must preserve the CPU accumulation policy
+                    metric.update(scores[:3].cuda(), labels[:3].cuda())
+                    metric.update(scores[3:].cuda(), labels[3:].cuda())
+                    self.assertTrue(all(x.device.type == 'cpu' for x in metric.y_pred + metric.y_true))
+                    self.assertEqual(metric.compute(), expected)
+                    metric.reset()
+            self.assertTrue(torch.are_deterministic_algorithms_enabled())
+        finally:
+            torch.use_deterministic_algorithms(enabled, warn_only=warn_only)
+
     def test_configured_cpu_never_requires_cuda(self):
         with patch.dict(sal.CONFIG,{'sal':{'device':'cpu'}}),patch.object(torch.cuda,'is_available',side_effect=AssertionError('CUDA queried')):
             self.assertEqual(sal.configured_device(),'cpu')
