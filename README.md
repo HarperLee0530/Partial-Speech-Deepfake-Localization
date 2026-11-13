@@ -1,6 +1,6 @@
 # Partial Speech Deepfake Localization 课程项目
 
-本版本固定使用缩减数据，完成 SAL、CNN、语义分析入口与数据协议迁移。**尚未完成缩减版 SAL 的正式训练，也未证明后续方法改善 LPS 泛化。** 历史成绩只用于研究诊断。
+本版本固定使用缩减数据，完成 SAL、CNN、语义分析入口与数据协议迁移。[缩减 SAL 冻结基线](result/sal_baseline_20261112)已完成训练；[同一模型的 PS eval 与 LPS 测试](result/sal_frozen_test_20261113)已完成，EER 分别为 4.503134% 与 37.909355%。**尚未证明后续方法改善 LPS 泛化。** 历史成绩只用于研究诊断。
 
 ## 目录
 
@@ -8,6 +8,7 @@
 - `data/`：配套 ZIP 的说明和校验索引。实际音频与模型不提交 Git。
 - `result/historical_evidence/`：近期实验的必要统计与独立复核；不是新缩减实验成绩。
 - `result/migration/`：数据与代码验收记录。未来运行自动在 `result/` 创建新的 run。
+- `result/sal_baseline_20261112/`、`result/sal_frozen_test_20261113/`：缩减 SAL 冻结训练基线及其 PS eval/LPS 测试结果、预测缓存和核验材料。
 - `visualization/`：保留的诊断图和可视化工具。旧图均有历史数据范围，不能当成缩减后重跑结果。
 
 ## 数据交接

@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "read_only_cache_verification": true,
+  "percentage_point_tolerance": 0.0001,
+  "checkpoint_identity_check": "recorded SHA256 in config and metrics; weights not rehashed",
+  "results": {
+    "eval": {
+      "passed": true,
+      "run_directory": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\publish_sal_tests_20261113\\result\\sal_frozen_test_20261113\\predictions\\sal_reduced_eval_20261113",
+      "database_integrity": "ok",
+      "recordings": 3562,
+      "frames": 76925,
+      "uid_set_and_order_match": true,
+      "manifest_sha256": "203792d5718e75e54614ad005386a3037cd9ddb83dd6dc7a93266dfc9c4252b1",
+      "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+      "device_recording_counts": {
+        "cuda": 3562
+      },
+      "confusion_matrix_true_rows_pred_columns_0_fake_1_real": [
+        [
+          35663,
+          2466
+        ],
+        [
+          986,
+          37810
+        ]
+      ],
+      "independent_metrics": {
+        "accuracy_percent": 95.51251218719533,
+        "f1_spoof_percent": 95.38366899355425,
+        "f1_bonafide_percent": 95.63435855928773
+      },
+      "absolute_difference_percentage_points": {
+        "accuracy_percent": 1.9835923126265698e-08,
+        "f1_spoof_percent": 0.0,
+        "f1_bonafide_percent": 2.70780211053534e-06
+      },
+      "reported_eer_percent_not_independently_recomputed": 4.503134250640869,
+      "audio_seconds": 12025.460249999995
+    },
+    "lps": {
+      "passed": true,
+      "run_directory": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\publish_sal_tests_20261113\\result\\sal_frozen_test_20261113\\predictions\\sal_reduced_lps_20261113",
+      "database_integrity": "ok",
+      "recordings": 3800,
+      "frames": 1187777,
+      "uid_set_and_order_match": true,
+      "manifest_sha256": "7e4ff246af20815b7cd65ec0c0821cc1ba3b2a8de984df3261f50925222d3f21",
+      "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+      "device_recording_counts": {
+        "cuda": 3800
+      },
+      "confusion_matrix_true_rows_pred_columns_0_fake_1_real": [
+        [
+          392957,
+          404883
+        ],
+        [
+          67843,
+          322094
+        ]
+      ],
+      "independent_metrics": {
+        "accuracy_percent": 60.20077842894752,
+        "f1_spoof_percent": 62.44152418483442,
+        "f1_bonafide_percent": 57.67570287416936
+      },
+      "absolute_difference_percentage_points": {
+        "accuracy_percent": 5.322341181113188e-07,
+        "f1_spoof_percent": 0.0,
+        "f1_bonafide_percent": 1.7328119383819285e-06
+      },
+      "reported_eer_percent_not_independently_recomputed": 37.90935516357422,
+      "audio_seconds": 23788.083437500056
+    }
+  }
+}
