@@ -1,117 +1,100 @@
-# PS 部分伪造语音定位：CNN-BiGRU＋信道增强直接微调
+# PS 部分伪造语音定位：四组从随机初始化训练
 
-**唯一主方案：从最初原 CNN-BiGRU 权重开始，在增强音频上直接微调原网络全部参数，输出20 ms真假分数与伪造区间。** 原CNN保留为训练起点和对照。主分支仅维护这条训练、推理和评估流程。
+**本轮四组模型从同一个随机初始化的 CNN-BiGRU 开始训练。正式结果尚未产生，当前没有发布成品权重。** 前两组是控制组，最后两组是候选方法，不加载旧 CNN、B1 或双分辨率权重。
 
-## 方法
+| 组名 | 输入与结构 | 作用 |
+|---|---|---|
+| `cnn_clean` | CNN-BiGRU，只用原声 | 结构基线控制 |
+| `cnn_aug` | 相同CNN，原声／20dB白噪声／轻微EQ轮换 | 信道增强控制 |
+| `dual` | 增强＋20/160ms两分支＋局部交叉注意力＋分歧门控＋粗辅助监督 | 候选方法一 |
+| `boundary` | 在`dual`上加入可学习降采样、边界BCE、同真值片段内部一致性 | 候选方法二 |
 
-```text
-训练音频 → 原声 / 20 dB白噪声 / 轻微EQ（逐轮轮换）
-         → Log-Mel80（20 ms）→ CNN（16/32/64）→ 两层BiGRU
-         → 原线性分类层 → 每20 ms的伪造分数
-```
+`dual`同时加入结构与粗辅助监督；`boundary`是三项改动的组合，首轮不能分别归因于其中一项。当前四组不使用位置偏置或可靠性门控扩展。
 
-- 直接更新原模型全部 **911,521** 个参数，包括CNN、BiGRU和原分类层。
-- 增强发生在输入波形：噪声按整段RMS缩放至20 dB；EQ为 `x[n]+0.15*(x[n]-x[n-1])`，首个previous取首采样。时长和真假标签保持一致。
-- 每条录音每轮出现一次，三种信道固定分配并逐轮轮换；开发集和测试集使用原声。
-- 损失为 **真实20 ms时长加权BCE＋160 ms时长加权BCE**，系数各为1。160 ms分数是8个原生logit的均值；主要定位输出保留20 ms。
-- 已完成设置：seed666，8轮，整段音频，batch8，AdamW学习率0.0001、weight decay0.0001，梯度裁剪5。
-- 为复现已发布权重，当前训练仍按开发集 `J=0.5×时长F1+0.5×事件F1` 选模，epoch0可选，平局取更早轮。本次保留的权重选中第8轮。后续改为纯事件F1选模的方案见评价规范，尚未作为本次成绩的训练规则。
+## 共同条件与评价
 
-## 已完成的同口径结果
+- 固定PS **train6345 / dev2484 / eval3562**，seed666，20个训练epoch，batch8；epoch0只验证，也可被选中。
+- 结构：Log-Mel80 → CNN(16/32/64) → 两层双向GRU(hidden128) → 逐帧分类；dropout0.4，CNN共911,521参数。四组初始CNN张量完全相同，全部参数从头更新。
+- CNN和新增模块统一AdamW lr=`1e-3`、weight decay=`1e-4`、梯度裁剪5，训练数据顺序相同。`cnn_clean`始终取原声，其他组按相同UID分配与epoch轮换信道。
+- 新增模块使用**可训练LayerNorm256**，不读取旧CNN特征mean/std或旧normalization文件；标准化后截断至[-5,5]。
+- 共同损失为实际时长加权20ms BCE＋最终160ms BCE；两个候选方法另加0.5倍粗辅助BCE；`boundary`再加0.1倍边界BCE＋0.05倍片段内一致性。
+- 每轮仅在干净**dev**上按真实时长FPR≤5%确定阈值，再按该阈值下的dev**事件F1@IoU0.5最大**选择权重，平局取更早epoch。测试集绝不用于校准或选模。
+- 统一原生20ms评价，辅报≤320ms短事件召回、真实时长误报率、全真录音误报率和Frame F1/EER。5%只约束dev，不保证eval也≤5%。
 
-固定 **PS dev2484 / eval3562**。使用真实20 ms标签，假类为正；每个模型分别在同一dev按真实时长FPR≤5%确定阈值，冻结后评估eval。事件IoU≥0.5，一对一匹配；短事件≤320 ms；不增加平滑、补空隙或短事件删除。
+这是新的统一结构实验，不是旧成品复评。旧成绩不放入当前结果表。当前eval子集此前已使用过，不能称为新盲测；单seed不足以证明稳定增益。详见[本轮规范](docs/dual_resolution_experiment.txt)与[评价定义](docs/evaluation_protocol_v2.txt)。
 
-| 指标 | 最初原CNN | 保留方案：信道增强直接微调 |
-|---|---:|---:|
-| **事件F1 ↑（主指标）** | 31.7508% | **50.2401%** |
-| 事件Precision ↑ | 25.5042% | 42.5432% |
-| 事件Recall ↑ | 42.0495% | 61.3372% |
-| ≤320 ms事件召回 ↑ | 44.5932% | **62.9841%** |
-| 真实时长误报率 ↓ | **4.5105%** | 6.0467% |
-| 全真录音误报率 ↓ | 37.8082% | **18.9041%** |
-| 20 ms Frame F1 ↑（补充） | 61.1897% | 74.9082% |
-| 20 ms EER ↓（补充） | 26.5678% | 21.1291% |
+## 环境和独立输入
 
-事件F1提高 **18.4894个百分点**，短事件召回提高 **18.3910个百分点**，同时真实时长误报率增加1.5361个百分点。365条全真录音的报警数量由138降至69；全真报警条数与真实时长误报率是不同指标。开发集5%预算不保证测试集也低于5%。
+Python3.10，依赖见`code/requirements.txt`。进入`code/`后可用`Setup.cmd`建立环境；GPU运行需匹配的PyTorch/CUDA。
 
-这是一个适配seed的结果，且原CNN只使用160 ms监督，微调额外使用真实20 ms监督，因此不能把全部提升归因于信道增强。评估为已使用过的3562条子集，并非完整71237条PS测试集或新的盲测集。
+- 永久输入：`D:\SAL_精简实验\data\cnn_ps_inputs_v2\manifests\{train,dev,eval}.json`及`labels20\{train,dev,eval}.npz`。
+- 新LogMel缓存：`D:\SAL_精简实验\data\cnn_ps_features_v2\{train,dev}`，train三信道、dev仅原声，当前机器已生成。
+- 本轮结果：`D:\SAL_精简实验\result\ps_four_eventf1_20261115_run1`。
 
-[完整重评结果与计数](docs/results_native20_fixed_reevaluation.json) · [独立复算](docs/verification_native20_fixed_reevaluation.json) · [原微调训练记录](docs/results_cnn_finetune_seed666.json) · [统一评价规范](docs/evaluation_protocol_v2.txt)
+清单不依赖旧result缓存，音频与官方160ms标签仍在原数据目录。输入16kHz单声道；实际20ms NPZ为**1=假**，官方160ms NPY为1=真，由读取器转换。不能重复粗标签伪造细标签。
 
-## 两个权重分别怎么用
+## Windows运行顺序
 
-| 文件 | 用途 | 本次20 ms开发集阈值 |
-|---|---|---:|
-| [original_cnn.pt](weights/original_cnn.pt) | 原基线；重新微调的起点 | 4.5316390991210946 |
-| [cnn_finetuned_seed666.pt](weights/cnn_finetuned_seed666.pt) | 当前选定的成品模型 | 0.2922912240028382 |
-
-权重随仓库提供，SHA256见 [manifest](weights/manifest.json)，加载说明见 [weights/README.md](weights/README.md)。阈值是分数阈值，不是概率；不能混用两个模型或两种时间尺度的阈值。重新训练后应使用新模型自己的开发集阈值。
-
-## 环境与数据
-
-Python3.10，依赖为PyTorch、torchaudio、NumPy、SoundFile、SciPy、scikit-learn。进入仓库后：
+同一PowerShell窗口内依次执行。组员修改本机路径，复现时另选新的`$run`，不要覆盖当前结果。
 
 ```powershell
-cd code
-.\Setup.cmd
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+$repo = 'D:\Partial-Speech-DualResolution-experiment'
+$inputs = 'D:\SAL_精简实验\data\cnn_ps_inputs_v2'
+$features = 'D:\SAL_精简实验\data\cnn_ps_features_v2'
+$run = 'D:\SAL_精简实验\result\ps_four_eventf1_20261115_run1'
+Set-Location -LiteralPath (Join-Path $repo 'code')
+$python = Join-Path $repo 'code\.venv\Scripts\python.exe'
+# 本机也可使用已有环境：D:\SAL_精简实验\code\.venv\Scripts\python.exe
+$config = Join-Path $repo 'code\configs\cnn_ps_structure.json'
+$trainCache = Join-Path $features 'train'
+$devCache = Join-Path $features 'dev'
+$evalCache = Join-Path $features 'eval'
+& $python -B -m unittest discover -s tests -v
+if ($LASTEXITCODE -ne 0) { throw '测试未通过' }
 ```
 
-下文从 `code/` 执行。`python` 表示已激活的Python环境；未激活时用 `.\.venv\Scripts\python.exe`。Setup仅安装依赖，不下载数据或启动训练。GPU需要匹配的CUDA版本；可显式选择CPU。
-
-数据不随Git提交，官方来源见 [PS资源清单](code/manifests/ps_sources.json)。组内布局：`data/reduced/<role>/audio/<uid>.wav`，各role的 `segment_labels/` 内保存官方160 ms标签。准备固定PS清单和实际细标签：
+先生成train三信道和dev单原声LogMel。**当前机器这两个新缓存已完成，可跳过生成；生成器拒绝覆盖非空目录。** 这里只读[纯结构配置](code/configs/cnn_ps_structure.json)，不读checkpoint、不运行CNN。此时不要生成eval缓存。
 
 ```powershell
-python -m cnn_ps.manifests reduced --reduced-root ../data/reduced --output ../data/manifests_ps
-python -m cnn_ps.manifests labels20 --archive ../data/database_segment_labels_v1.2.tar.gz --output ../data/labels20
+& $python -B -m cnn_ps.dual_features --model-config $config --manifest (Join-Path $inputs 'manifests\train.json') --labels20 (Join-Path $inputs 'labels20\train.npz') --output $trainCache --split train --channels 3 --cpu-threads 1 --seed 666
+if ($LASTEXITCODE -ne 0) { throw 'train缓存未完成' }
+& $python -B -m cnn_ps.dual_features --model-config $config --manifest (Join-Path $inputs 'manifests\dev.json') --labels20 (Join-Path $inputs 'labels20\dev.npz') --output $devCache --split dev --channels 1 --cpu-threads 1 --seed 666
+if ($LASTEXITCODE -ne 0) { throw 'dev缓存未完成' }
 ```
 
-细标签工具校验官方归档SHA256，输出NPZ为 **1=假、0=真**；官方原始粗标签为1=真。不得将160 ms标签重复8遍代替真实20 ms标签。音频要求16kHz单声道。
-
-原CNN在完整PS train25380/dev24844上训练选模；微调使用固定train6345（train_detector5076＋train_edit1269）、dev2484、eval3562，`train_review`不参与。这里的角色名只用于寻找组内文件。不能将重新在6345条上训练的CNN视为同一个历史基线。
-
-## 使用成品模型
+四组独立启动、共享相同训练参数；以下按顺序运行，也可单独选择尚未启动的一组。训练不接收eval缓存、旧权重或归一化文件。
 
 ```powershell
-python -m cnn_ps.predict --audio ../data/example.wav --checkpoint ../weights/cnn_finetuned_seed666.pt --resolution 0.02 --threshold 0.2922912240028382 --output ../result/example.json
+$trainArgs = @('-B', '-m', 'cnn_ps.train_four', '--train-cache', $trainCache, '--dev-cache', $devCache, '--output', $run, '--epochs', '20', '--batch-size', '8', '--seed', '666', '--device', 'cuda', '--threads', '4')
+& $python @trainArgs --arm cnn_clean
+if ($LASTEXITCODE -ne 0) { throw 'cnn_clean未完成' }
+& $python @trainArgs --arm cnn_aug
+if ($LASTEXITCODE -ne 0) { throw 'cnn_aug未完成' }
+& $python @trainArgs --arm dual
+if ($LASTEXITCODE -ne 0) { throw 'dual未完成' }
+& $python @trainArgs --arm boundary
+if ($LASTEXITCODE -ne 0) { throw 'boundary未完成' }
 ```
 
-输出包含原生分数、预测区间及实际时长裁剪。为保留旧调用兼容性，`predict`默认仍为160 ms和未校准阈值0；**当前方案请按上例显式传20 ms及开发集阈值**。
-
-## 从原CNN直接微调
+**四组全部完成后先冻结，再生成eval缓存，最后统一测试。** 冻结检查还核对四组初始化、训练预算、数据和源码一致。
 
 ```powershell
-python -m cnn_ps.finetune --checkpoint ../weights/original_cnn.pt --expected-sha256 36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428 --train-manifest ../data/manifests_ps/train.json --dev-manifest ../data/manifests_ps/dev.json --train-labels20 ../data/labels20/train.npz --dev-labels20 ../data/labels20/dev.npz --output ../result/cnn_finetune1 --device cuda
+& $python -B -m cnn_ps.train_four --freeze-only --output $run --device cpu
+if ($LASTEXITCODE -ne 0) { throw '冻结未通过，停止读取eval' }
+& $python -B -m cnn_ps.dual_features --model-config $config --manifest (Join-Path $inputs 'manifests\eval.json') --labels20 (Join-Path $inputs 'labels20\eval.npz') --output $evalCache --split eval --channels 1 --cpu-threads 1 --seed 666
+if ($LASTEXITCODE -ne 0) { throw 'eval缓存未完成' }
+& $python -B -m cnn_ps.train_four --evaluate --eval-cache $evalCache --output $run --device cuda --threads 4
+if ($LASTEXITCODE -ne 0) { throw '统一评估未完成' }
 ```
 
-直接读取波形，不需要小修正头或其特征缓存。训练只访问train/dev；输出保存权重、逐轮开发集记录、开发集分数和阈值，拒绝覆盖非空目录。此命令保留已完成实验的训练与旧J选模行为。
+`--evaluate`只使用冻结dev阈值，不搜索测试工作点；拒绝替换不同的冻结计划或覆盖已完成测试报告。
 
-## 统一评估成品与原基线
+## 每轮存档与权重状态
 
-只有下载的权重也可以评估。以下入口先重新推理原声dev、按5%真实时长预算校准并保存阈值，然后才读取eval。主报告为 `metrics20.json`，160 ms辅助报告另按dev Frame F1校准阈值；不重选checkpoint。
+每组`$run/<arm>/epochs/`保存`epoch_00`至`epoch_20`的完整CNN/新增模块权重、dev阈值、指标和原始分数。`best.pt`、`dev_metrics.json`、`dev_scores20.npz`对应dev选中轮，`complete.json`记录哈希；统一测试后才生成`comparison.json`及各组`eval_metrics.json`。
 
-```powershell
-python -m cnn_ps.evaluate_cnn --checkpoint ../weights/cnn_finetuned_seed666.pt --dev-manifest ../data/manifests_ps/dev.json --dev-labels20 ../data/labels20/dev.npz --eval-manifest ../data/manifests_ps/eval.json --eval-labels20 ../data/labels20/eval.npz --output ../result/main_eval1 --device cuda
-python -m cnn_ps.evaluate_cnn --checkpoint ../weights/original_cnn.pt --dev-manifest ../data/manifests_ps/dev.json --dev-labels20 ../data/labels20/dev.npz --eval-manifest ../data/manifests_ps/eval.json --eval-labels20 ../data/labels20/eval.npz --output ../result/baseline_eval1 --device cuda
-```
+逐轮保存用于检查学习过程，或在另行明确的**dev-only**协议下重选。不能看eval后挑更好的epoch并称为原协议结果。
 
-对于本机新完成的微调目录，也可把 `--checkpoint ...` 替换为 `--run ../result/cnn_finetune1`，核验并沿用该run保存的开发集分数与阈值；两选项互斥。跨设备、库版本的重推理可能有微小浮点差异；已发表的固定权重重评数值使用相应存档分数，可按文档中的哈希复核。
+旧CNN/B1/dual权重已移出当前交付，旧结果按本轮清理要求移入回收站；原PS数据及SAL、语义、HAD、prosody材料保留。[权重清单](weights/manifest.json)当前`weights=[]`。正式训练、冻结和评估完成前不填写新成绩，不沿用旧成绩或旧阈值。
 
-## 代码位置
-
-| 文件（`code/cnn_ps/`） | 职责 |
-|---|---|
-| `backbone.py`、`baseline.py` | 原CNN-BiGRU、Log-Mel、原基线从头训练与collate |
-| `augmentation.py`、`finetune.py` | 波形信道增强、全部CNN参数直接微调 |
-| `predict.py`、`evaluate_cnn.py` | 单音频推理、原CNN/成品模型统一评估 |
-| `metrics20.py`、`report_native20.py` | 20 ms阈值、事件/时长/录音误报及补充指标 |
-| `metrics160.py` | 秒单位事件匹配与160 ms历史辅助指标 |
-| `manifests.py`、`io.py` | 固定PS划分、细标签提取、路径与文件校验 |
-
-## 历史对照
-
-小修正头、缓存训练及三方案回放专用代码和六个头权重已移出当前主树。其完整代码、权重可在[清理前提交](https://github.com/HarperLee0530/Partial-Speech-Deepfake-Localization/tree/51b20490d8b795fad13d83375ade72b25042b764)回查。
-
-已验证的对照数字和审计记录保留在 `docs/`，仅供报告引用：[历史记录说明](docs/history_index.txt)。SAL只作为[历史参考结果](docs/native20_sal_reference.txt)保留；它在EER和全真录音误报方面有优势，不应将当前CNN选择描述为所有指标全面超过SAL。
-
-本次整理的[验证记录](docs/verification_direct_finetune_cleanup.json)：19项测试通过；两个权重SHA不变；原CNN/成品的真实录音推理与清理前一致，直接checkpoint评估的开发集校准、阈值冻结顺序和分数复算通过。未重新训练模型。
+当前入口：[train_four.py](code/cnn_ps/train_four.py)、[dual_resolution.py](code/cnn_ps/dual_resolution.py)、[dual_features.py](code/cnn_ps/dual_features.py)。部分旧入口暂留用于共享函数与回溯，本轮只使用上述四组流程。

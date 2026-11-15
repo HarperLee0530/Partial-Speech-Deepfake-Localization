@@ -45,7 +45,7 @@ class DualResolutionAdapter(nn.Module):
 
     def __init__(self, mean, std, variant="fusion", hidden=32, heads=4, radius=2,
                  learned_pool=False, boundary_head=False, relative_position=False,
-                 reliability_gate=False):
+                 reliability_gate=False, normalize_mode="fixed"):
         super().__init__()
         if variant not in ("residual", "dual", "fusion"):
             raise ValueError("variant must be residual, dual or fusion")
@@ -58,6 +58,8 @@ class DualResolutionAdapter(nn.Module):
             raise ValueError("learned_pool requires a coarse branch")
         if variant != "fusion" and (relative_position or reliability_gate):
             raise ValueError("relative_position and reliability_gate require fusion")
+        if normalize_mode not in ("fixed", "layernorm"):
+            raise ValueError("normalize_mode must be fixed or layernorm")
         mean = torch.as_tensor(mean, dtype=torch.float32).detach().clone()
         std = torch.as_tensor(std, dtype=torch.float32).detach().clone()
         if mean.shape != (self.feature_dim,) or std.shape != mean.shape:
@@ -71,6 +73,11 @@ class DualResolutionAdapter(nn.Module):
         self.boundary_head = bool(boundary_head)
         self.relative_position = bool(relative_position)
         self.reliability_gate = bool(reliability_gate)
+        self.normalize_mode = normalize_mode
+        # Fresh-from-random training must not reuse statistics extracted by an
+        # old trained CNN. Per-frame LayerNorm uses no development/test data.
+        if normalize_mode == "layernorm":
+            self.feature_norm = nn.LayerNorm(self.feature_dim)
 
         # Keep this order common to all variants for paired initialization.
         self.fine_projection = nn.Linear(self.feature_dim, hidden)
@@ -142,7 +149,8 @@ class DualResolutionAdapter(nn.Module):
         h = torch.where(valid[:, None], h, self.feature_mean[None, :])
         if not torch.isfinite(h).all() or not torch.isfinite(z).all():
             raise ValueError("Valid features and all storage-grid logits must be finite")
-        normalized = ((h - self.feature_mean) / self.feature_std).clamp(-5., 5.)
+        normalized = (self.feature_norm(h) if self.normalize_mode == "layernorm"
+                      else (h - self.feature_mean) / self.feature_std).clamp(-5., 5.)
         return normalized, z, weights, valid
 
     def _local_attention(self, fine_features, coarse_features, valid, coarse_valid):

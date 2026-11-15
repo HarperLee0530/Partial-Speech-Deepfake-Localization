@@ -35,9 +35,11 @@ def frontend_config(config):
 
 @torch.inference_mode()
 def build_feature_cache(checkpoint, manifest, labels20, output, split,
-                        channels=3, cpu_threads=1, seed=666):
+                        channels=3, cpu_threads=1, seed=666, model_config=None):
     """Create immutable full-recording LogMel arrays without model inference."""
-    checkpoint, manifest, labels20, output = map(Path, (checkpoint, manifest, labels20, output))
+    manifest, labels20, output = map(Path, (manifest, labels20, output))
+    if (checkpoint is None) == (model_config is None):
+        raise ValueError('Supply exactly one source: checkpoint or pure model_config JSON')
     if split not in ("train", "dev", "eval"):
         raise ValueError("split must be train, dev or eval")
     if channels not in (1, 3) or (split != "train" and channels != 1):
@@ -46,9 +48,14 @@ def build_feature_cache(checkpoint, manifest, labels20, output, split,
         raise ValueError("cpu_threads must be positive")
     if output.exists() and (not output.is_dir() or any(output.iterdir())):
         raise FileExistsError("Output must be empty; no implicit cache resume or overwrite")
-    source_sha = sha256(checkpoint)
-    payload = torch.load(str(checkpoint), map_location="cpu", weights_only=False)
-    config = ModelConfig(**payload["model_config"])
+    source = Path(model_config if model_config is not None else checkpoint)
+    source_sha = sha256(source)
+    if model_config is not None:
+        payload = read_json(source)
+        config = ModelConfig(**payload.get('model_config', payload))
+    else:
+        payload = torch.load(str(source), map_location="cpu", weights_only=False)
+        config = ModelConfig(**payload["model_config"])
     del payload
     if config.n_mels != 80:
         raise ValueError("The matched CNN experiment requires 80-bin LogMel features")
@@ -59,8 +66,11 @@ def build_feature_cache(checkpoint, manifest, labels20, output, split,
     start = time.monotonic()
     protocol = dict(schema=SCHEMA, split=split, recordings=len(dataset), channels=channels,
                     channel_names=list(CHANNELS[:channels]), frontend_config=frontend_config(config),
-                    frontend_source_checkpoint=str(checkpoint.resolve()), frontend_source_checkpoint_sha256=source_sha,
-                    checkpoint_usage="Read model_config only; no CNN instantiated or evaluated",
+                    frontend_source_checkpoint=None if model_config is not None else str(source.resolve()),
+                    frontend_source_checkpoint_sha256=None if model_config is not None else source_sha,
+                    frontend_source_config=str(source.resolve()) if model_config is not None else None,
+                    frontend_source_config_sha256=source_sha if model_config is not None else None,
+                    checkpoint_usage="No trained checkpoint read; pure configuration JSON" if model_config is not None else "Read model_config only; no CNN instantiated or evaluated",
                     records=dataset.records, manifest=str(manifest.resolve()),
                     manifest_sha256=sha256(manifest), uid_order_sha256=manifest_hash(dataset.uids),
                     labels20_file=str(labels20.resolve()), labels20_sha256=sha256(labels20),
@@ -115,12 +125,14 @@ def build_feature_cache(checkpoint, manifest, labels20, output, split,
                     print(progress, flush=True)
                     last_progress = time.monotonic()
             arrays["features"].flush()
-        if sha256(checkpoint) != source_sha:
+        if sha256(source) != source_sha:
             raise RuntimeError("Frontend source checkpoint changed during extraction")
         if sha256(manifest) != protocol["manifest_sha256"] or sha256(labels20) != protocol["labels20_sha256"]:
             raise RuntimeError("Manifest or actual20 labels changed during extraction")
         complete = dict(protocol, **metadata, status="complete", completed_recording_views=completed,
-                        source_checkpoint_unchanged=True, elapsed_seconds=time.monotonic()-start,
+                        source_checkpoint_unchanged=(model_config is None),
+                        source_configuration_unchanged=(model_config is not None),
+                        elapsed_seconds=time.monotonic()-start,
                         arrays={name: dict(file=f"{name}.npy", shape=list(a.shape), dtype=str(a.dtype),
                                            sha256=sha256(output/f"{name}.npy")) for name, a in arrays.items()})
         save_json(output/"complete.json", complete)
@@ -219,7 +231,9 @@ class FeatureData(Dataset):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkpoint", type=Path, required=True, help="Read frontend model_config only")
+    sources = parser.add_mutually_exclusive_group(required=True)
+    sources.add_argument("--checkpoint", type=Path, help="Read frontend model_config only")
+    sources.add_argument("--model-config", type=Path, help="Pure configuration JSON; no trained checkpoint required")
     parser.add_argument("--manifest", "--train-manifest", dest="manifest", type=Path, required=True)
     parser.add_argument("--labels20", type=Path, required=True, help="UID-keyed actual20 NPZ, 1=fake")
     parser.add_argument("--output", type=Path, required=True)
