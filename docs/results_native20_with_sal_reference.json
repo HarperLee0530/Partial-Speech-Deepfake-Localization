@@ -1,0 +1,834 @@
+{
+  "status": "complete",
+  "protocol_version": "ps_native20_event_v2_fixed_checkpoint_reevaluation",
+  "dataset": "PS",
+  "dev_recordings": 2484,
+  "eval_recordings": 3562,
+  "prediction_grid_seconds": 0.02,
+  "truth_grid_seconds": 0.02,
+  "event_iou_threshold": 0.5,
+  "short_truth_max_seconds": 0.32,
+  "dev_real_duration_fpr_limit": 0.05,
+  "primary_metric": "event_f1_iou05_percent",
+  "same_eval_uids_labels_and_durations": true,
+  "models": {
+    "original_cnn": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 4.531639099121095,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 61.09312959791755,
+      "duration_precision_percent": 86.8013088525663,
+      "duration_recall_percent": 47.1334791421794,
+      "duration_accuracy_percent": 76.8114878388959,
+      "real_fpr_percent": 4.510544335603174,
+      "spoof_fnr_percent": 52.86652085782062,
+      "confusion_seconds_tp_fp_fn_tn": [
+        2189.3271874999814,
+        332.9011250000017,
+        2455.6241874999796,
+        7047.607749999991
+      ],
+      "fake_seconds": 4644.9513749999605,
+      "real_seconds": 7380.508874999992,
+      "fp_seconds": 332.9011250000017,
+      "fn_seconds": 2455.6241874999796,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 31.750751643704366,
+      "event_precision_percent": 25.50424628450106,
+      "event_recall_percent": 42.04953181062396,
+      "event_counts": {
+        "matched": 4805,
+        "predicted": 18840,
+        "truth": 11427,
+        "unmatched_predictions": 14035,
+        "missed_truth": 6622
+      },
+      "short_event_recall_le320ms_percent": 44.59318949831037,
+      "short_event_counts": {
+        "matched": 3431,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 4201.585548461649,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 138,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 8.020874999999998,
+        "predicted_events": 230,
+        "false_alarm_recording_rate_percent": 37.80821917808219,
+        "duration_fpr_percent": 0.6473407045720505,
+        "unmatched_fp_events_per_hour": 668.2539042007984
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 2976,
+          "recall_percent": 48.61156484808886
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 137,
+          "recall_percent": 22.34910277324633
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 318,
+          "recall_percent": 33.15954118873827
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 546,
+          "recall_percent": 40.594795539033456
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 828,
+          "recall_percent": 34.67336683417086
+        }
+      },
+      "event_recall_le80ms_percent": 48.61156484808886,
+      "event_recall_le160ms_percent": 46.221232368225685,
+      "event_recall_le320ms_percent": 44.59318949831037,
+      "event_recall_le640ms_percent": 43.99822989268724,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 4.510544335603174,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        110367,
+        16655,
+        123348,
+        352680
+      ],
+      "frame_f1_percent": 61.18973102287816,
+      "eer_percent": 26.56778924173239,
+      "supplementary_native20": {
+        "duration_f1_percent": 61.09312959791755,
+        "frame_confusion_tp_fp_fn_tn": [
+          110367,
+          16655,
+          123348,
+          352680
+        ],
+        "frame_f1_percent": 61.18973102287816,
+        "eer_percent": 26.56778924173239,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {},
+      "protocol_version": "ps_native20_event_v2_fixed_checkpoint_reevaluation",
+      "model_id": "original_cnn",
+      "split": "eval",
+      "checkpoint": {
+        "file": "original_cnn.pt",
+        "checkpoint_sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+        "seed": 666,
+        "selected_epoch": 7,
+        "checkpoint_reselected": false,
+        "historical_selection": "fixed_historical_baseline; original dev EER",
+        "new_v2_checkpoint_selection": false
+      },
+      "threshold_source": "dev real-duration FPR cap5%",
+      "checkpoint_reselection": false,
+      "eval_previously_inspected": true,
+      "per_recording_file": "original_cnn_per_recording.json",
+      "eval_predictions_sha256": "758d07b954e528d50405b86b64e849bb4befa0bfda08ff4929713547f64b9027"
+    },
+    "channel_head_seed666": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 0.848010540008545,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 70.3339601982066,
+      "duration_precision_percent": 88.32453358034583,
+      "duration_recall_percent": 58.43209311313849,
+      "duration_accuracy_percent": 80.96050575278407,
+      "real_fpr_percent": 4.861151935136755,
+      "spoof_fnr_percent": 41.56790688686151,
+      "confusion_seconds_tp_fp_fn_tn": [
+        2714.1423124999887,
+        358.7777500000021,
+        1930.8090624999802,
+        7021.731124999989
+      ],
+      "fake_seconds": 4644.951374999969,
+      "real_seconds": 7380.508874999991,
+      "fp_seconds": 358.7777500000021,
+      "fn_seconds": 1930.8090624999802,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 43.59789872422542,
+      "event_precision_percent": 36.844648465813,
+      "event_recall_percent": 53.38234007175987,
+      "event_counts": {
+        "matched": 6100,
+        "predicted": 16556,
+        "truth": 11427,
+        "unmatched_predictions": 10456,
+        "missed_truth": 5327
+      },
+      "short_event_recall_le320ms_percent": 54.432024954510005,
+      "short_event_counts": {
+        "matched": 4188,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 3130.158781240826,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 92,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 11.568124999999995,
+        "predicted_events": 158,
+        "false_alarm_recording_rate_percent": 25.205479452054796,
+        "duration_fpr_percent": 0.9336285864170119,
+        "unmatched_fp_events_per_hour": 459.0613776683746
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 3466,
+          "recall_percent": 56.615485135576606
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 251,
+          "recall_percent": 40.94616639477977
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 471,
+          "recall_percent": 49.113660062565174
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 750,
+          "recall_percent": 55.762081784386616
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 1162,
+          "recall_percent": 48.65996649916248
+        }
+      },
+      "event_recall_le80ms_percent": 56.615485135576606,
+      "event_recall_le160ms_percent": 55.18930957683742,
+      "event_recall_le320ms_percent": 54.432024954510005,
+      "event_recall_le640ms_percent": 54.629936939926985,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 4.861151935136755,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        136945,
+        17960,
+        96770,
+        351375
+      ],
+      "frame_f1_percent": 70.47758736040348,
+      "eer_percent": 21.67979976510311,
+      "supplementary_native20": {
+        "duration_f1_percent": 70.3339601982066,
+        "frame_confusion_tp_fp_fn_tn": [
+          136945,
+          17960,
+          96770,
+          351375
+        ],
+        "frame_f1_percent": 70.47758736040348,
+        "eer_percent": 21.67979976510311,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {},
+      "protocol_version": "ps_native20_event_v2_fixed_checkpoint_reevaluation",
+      "model_id": "channel_head_seed666",
+      "split": "eval",
+      "checkpoint": {
+        "file": "head_aug_erm_seed666.pt",
+        "checkpoint_sha256": "ac137c3092964ddd9fb9733e675a28d3de7267f545294ec533a653a9255c4f18",
+        "seed": 666,
+        "selected_epoch": 8,
+        "checkpoint_reselected": false,
+        "historical_selection": "dev J=0.5 durationF1+0.5 eventF1",
+        "new_v2_checkpoint_selection": false
+      },
+      "threshold_source": "dev real-duration FPR cap5%",
+      "checkpoint_reselection": false,
+      "eval_previously_inspected": true,
+      "per_recording_file": "channel_head_seed666_per_recording.json",
+      "eval_predictions_sha256": "848daf3e712b76e5913d27dab3f2c8c1bc3401bd326c7e1b5d607ca4d1737f4e"
+    },
+    "channel_finetuned_seed666": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 0.2922912240028382,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 74.78402911935018,
+      "duration_precision_percent": 87.20160396121442,
+      "duration_recall_percent": 65.4621667056742,
+      "duration_accuracy_percent": 82.94833975273428,
+      "real_fpr_percent": 6.046670630146781,
+      "spoof_fnr_percent": 34.53783329432578,
+      "confusion_seconds_tp_fp_fn_tn": [
+        3040.6858124999844,
+        446.27506250000124,
+        1604.2655624999813,
+        6934.233812499993
+      ],
+      "fake_seconds": 4644.951374999966,
+      "real_seconds": 7380.508874999994,
+      "fp_seconds": 446.27506250000124,
+      "fn_seconds": 1604.2655624999813,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 50.24012615583112,
+      "event_precision_percent": 42.54324734446131,
+      "event_recall_percent": 61.33718386278113,
+      "event_counts": {
+        "matched": 7009,
+        "predicted": 16475,
+        "truth": 11427,
+        "unmatched_predictions": 9466,
+        "missed_truth": 4418
+      },
+      "short_event_recall_le320ms_percent": 62.984143488432544,
+      "short_event_counts": {
+        "matched": 4846,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 2833.7875882962567,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 69,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 12.84,
+        "predicted_events": 158,
+        "false_alarm_recording_rate_percent": 18.904109589041095,
+        "duration_fpr_percent": 1.0362777934708034,
+        "unmatched_fp_events_per_hour": 459.0613776683746
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 3939,
+          "recall_percent": 64.34171839268213
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 331,
+          "recall_percent": 53.99673735725938
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 576,
+          "recall_percent": 60.06256517205422
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 805,
+          "recall_percent": 59.85130111524163
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 1358,
+          "recall_percent": 56.867671691792296
+        }
+      },
+      "event_recall_le80ms_percent": 64.34171839268213,
+      "event_recall_le160ms_percent": 63.40014847809948,
+      "event_recall_le320ms_percent": 62.984143488432544,
+      "event_recall_le640ms_percent": 62.517977652395174,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.046670630146781,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        153331,
+        22338,
+        80384,
+        346997
+      ],
+      "frame_f1_percent": 74.90815469095031,
+      "eer_percent": 21.129104652541393,
+      "supplementary_native20": {
+        "duration_f1_percent": 74.78402911935018,
+        "frame_confusion_tp_fp_fn_tn": [
+          153331,
+          22338,
+          80384,
+          346997
+        ],
+        "frame_f1_percent": 74.90815469095031,
+        "eer_percent": 21.129104652541393,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {},
+      "protocol_version": "ps_native20_event_v2_fixed_checkpoint_reevaluation",
+      "model_id": "channel_finetuned_seed666",
+      "split": "eval",
+      "checkpoint": {
+        "file": "cnn_finetuned_seed666.pt",
+        "checkpoint_sha256": "ed3bf849955ae0d00f4d2ca7c92f7d9eb719b0d07dd5fb866dfa4b547eab9157",
+        "seed": 666,
+        "selected_epoch": 8,
+        "checkpoint_reselected": false,
+        "historical_selection": "dev J=0.5 durationF1+0.5 eventF1",
+        "new_v2_checkpoint_selection": false
+      },
+      "threshold_source": "dev real-duration FPR cap5%",
+      "checkpoint_reselection": false,
+      "eval_previously_inspected": true,
+      "per_recording_file": "channel_finetuned_seed666_per_recording.json",
+      "eval_predictions_sha256": "92649836ba133856547d573c14ffa0e2c9709448d2593c1223649165f097a836"
+    },
+    "sal_160trained_20inference": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 6.256688117980958,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 74.42774177058519,
+      "duration_precision_percent": 89.33500309556295,
+      "duration_recall_percent": 63.784133800539486,
+      "duration_accuracy_percent": 83.07002324505628,
+      "real_fpr_percent": 4.79232876743884,
+      "spoof_fnr_percent": 36.21586619946051,
+      "confusion_seconds_tp_fp_fn_tn": [
+        2962.7419999999756,
+        353.6982500000017,
+        1682.209374999988,
+        7026.810624999997
+      ],
+      "fake_seconds": 4644.951374999964,
+      "real_seconds": 7380.508874999999,
+      "fp_seconds": 353.6982500000017,
+      "fn_seconds": 1682.209374999988,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 21.62206942258305,
+      "event_precision_percent": 15.79520697167756,
+      "event_recall_percent": 34.26096088212129,
+      "event_counts": {
+        "matched": 3915,
+        "predicted": 24786,
+        "truth": 11427,
+        "unmatched_predictions": 20871,
+        "missed_truth": 7512
+      },
+      "short_event_recall_le320ms_percent": 34.62438263582012,
+      "short_event_counts": {
+        "matched": 2664,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 6248.043603985968,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 19,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 0.6400000000000005,
+        "predicted_events": 24,
+        "false_alarm_recording_rate_percent": 5.205479452054795,
+        "duration_fpr_percent": 0.05165247568701827,
+        "unmatched_fp_events_per_hour": 69.73084217747461
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 2269,
+          "recall_percent": 37.063051290427964
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 227,
+          "recall_percent": 37.03099510603589
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 168,
+          "recall_percent": 17.51824817518248
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 312,
+          "recall_percent": 23.197026022304833
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 939,
+          "recall_percent": 39.321608040201006
+        }
+      },
+      "event_recall_le80ms_percent": 37.063051290427964,
+      "event_recall_le160ms_percent": 37.060133630289535,
+      "event_recall_le320ms_percent": 34.62438263582012,
+      "event_recall_le640ms_percent": 32.923996017258546,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 4.79232876743884,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        148976,
+        17687,
+        84739,
+        351648
+      ],
+      "frame_f1_percent": 74.41767529684448,
+      "eer_percent": 9.378012358958621,
+      "supplementary_native20": {
+        "duration_f1_percent": 74.42774177058519,
+        "frame_confusion_tp_fp_fn_tn": [
+          148976,
+          17687,
+          84739,
+          351648
+        ],
+        "frame_f1_percent": 74.41767529684448,
+        "eer_percent": 9.378012358958621,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {},
+      "model_id": "sal_reduced_native20",
+      "split": "eval",
+      "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+      "historical_selection": "Reduced PS dev EER; epoch24; trained at160ms, evaluated at20ms",
+      "threshold_source": "same2484PSdev; max_real_duration_fpr=.05",
+      "checkpoint_reselection": false,
+      "trained_resolution_seconds": 0.16,
+      "prediction_grid_seconds": 0.02,
+      "eval_previously_inspected": true,
+      "eval_predictions_sha256": "e82b22d9fca9bd81460073f29b8bfe440888bc36f13168db4441e05d65f8420e",
+      "per_recording_file": "per_recording.json"
+    }
+  },
+  "cnn_adaptation_seed": 666,
+  "sal_training_seed": 888,
+  "sal_inference_seed": 666,
+  "sal_description": "Local SAL checkpoint trained at160ms and selected by dev EER; same weights directly infer at20ms via original pooling scale1. Not a newly trained20ms SAL model or a published-paper benchmark.",
+  "sal_model_parameters_total": 339161827,
+  "sal_original_training_records": 5076,
+  "sal_dev_calibration": {
+    "protocol_version": "ps_native20_event_v2_fixed_checkpoint_reevaluation",
+    "model_id": "sal_reduced_native20",
+    "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+    "selected_epoch": 24,
+    "historical_checkpoint_selection": "Reduced PS dev EER; native160ms training",
+    "checkpoint_reselection": false,
+    "eval_read": false,
+    "threshold": 6.256688117980958,
+    "threshold_selection": {
+      "threshold": 6.256688117980958,
+      "max_real_fpr": 0.05,
+      "nominal_max_real_fpr_percent": 5.0,
+      "real_fpr_percent": 4.999817940783746,
+      "fp_seconds": 243.0439374999995,
+      "real_seconds": 4861.055749999992,
+      "budget_seconds": 243.05278749999962,
+      "included_real_score_groups": 12150,
+      "total_real_score_groups": 240122,
+      "excluded_boundary_score": 6.256688117980957,
+      "excluded_boundary_tie_seconds": 0.027874999999999858,
+      "selection_source": "Genuine-labelled durations in supplied development recordings only; includes genuine regions of partial fakes.",
+      "tie_rule": "Exclude the entire first score-tie group that would exceed the budget; score>=float64 threshold.",
+      "score_comparison_dtype": "float64"
+    },
+    "dev_event_counts": {
+      "matched": 4380,
+      "predicted": 16085,
+      "truth": 8274,
+      "unmatched_predictions": 11705,
+      "missed_truth": 3894
+    },
+    "dev_event_f1_percent": 35.962067408350094,
+    "dev_predictions_sha256": "fbb3e925d7a883bf36f9d258b0c2716c0447fb27c0fab72a9ac3a06857ff8cdc",
+    "dev_manifest_sha256": "9d4f4f0e6fb88ac6957db2f30d64739e9a535789672c26658877a95ca8702860",
+    "dev_labels20_sha256": "e497f2933f2fb4d96acdae494b4baeb871ed7cc2981e22a995acc4e9c0c6cb04"
+  },
+  "sal_completion": {
+    "status": "complete",
+    "model_id": "sal_reduced_native20",
+    "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+    "checkpoint_unchanged": true,
+    "checkpoint_reselected": false,
+    "training_performed": false,
+    "dev_recordings": 2484,
+    "eval_recordings": 3562,
+    "elapsed_seconds": 286.60899999999674,
+    "dev_predictions_sha256": "fbb3e925d7a883bf36f9d258b0c2716c0447fb27c0fab72a9ac3a06857ff8cdc",
+    "eval_predictions_sha256": "e82b22d9fca9bd81460073f29b8bfe440888bc36f13168db4441e05d65f8420e",
+    "threshold": 6.256688117980958,
+    "threshold_frozen_before_eval": true,
+    "calibration_sha256": "3012ffbbc8191ab765a6bc373f65e0ca653de023d67ed7a8d8f8ed99b1e5703d",
+    "metrics_sha256": "2c3ec5bca8e7329405d2aeb80b669151b82707d7b98d1bf5c93f861eb5a83538",
+    "eval_labels20_sha256": "50336c15b13dec536473f04b9d6a90b18a0c8410e06b79bce99c366a73bc2581",
+    "smoke_audit_sha256": "96db65899cd9ec469b189bf81e76c5291572f22843c14b40e2a1fcfb322c5240"
+  },
+  "sal_native20_mechanism": {
+    "status": "passed",
+    "device": "cuda",
+    "dtype": "float32",
+    "tf32": false,
+    "trained_resolution_seconds": 0.16,
+    "inference_resolution_seconds": 0.02,
+    "training_pool_scale": 8,
+    "evaluation_pool_scale": 1,
+    "explanation": "Same native20 WavLM/Conformer stream and binary-head weights; eval pooling size changed8 to1. No repetition/interpolation.",
+    "samples": [
+      {
+        "uid": "CON_D_0000003",
+        "duration": 1.94425,
+        "actual_length20": 98,
+        "storage_length20": 104,
+        "length160": 13,
+        "prepool_shape": [
+          1,
+          104,
+          1024
+        ],
+        "native_output_shape": [
+          1,
+          104,
+          2
+        ],
+        "coarse_output_shape": [
+          1,
+          13,
+          2
+        ],
+        "prepool_features_unchanged": true,
+        "native20_equals_same_binary_head_on_unpooled_features_exact": true,
+        "coarse160_equals_same_head_on_mean8_features_exact": true,
+        "max_within160_block_score_difference": 20.157411575317383,
+        "not_repeated160_scores": true,
+        "elapsed_seconds": 0.8589999999967404
+      },
+      {
+        "uid": "CON_D_0000004",
+        "duration": 1.980125,
+        "actual_length20": 100,
+        "storage_length20": 104,
+        "length160": 13,
+        "prepool_shape": [
+          1,
+          104,
+          1024
+        ],
+        "native_output_shape": [
+          1,
+          104,
+          2
+        ],
+        "coarse_output_shape": [
+          1,
+          13,
+          2
+        ],
+        "prepool_features_unchanged": true,
+        "native20_equals_same_binary_head_on_unpooled_features_exact": true,
+        "coarse160_equals_same_head_on_mean8_features_exact": true,
+        "max_within160_block_score_difference": 19.51030921936035,
+        "not_repeated160_scores": true,
+        "elapsed_seconds": 0.0470000000204891
+      },
+      {
+        "uid": "CON_D_0000134",
+        "duration": 1.867875,
+        "actual_length20": 94,
+        "storage_length20": 96,
+        "length160": 12,
+        "prepool_shape": [
+          1,
+          96,
+          1024
+        ],
+        "native_output_shape": [
+          1,
+          96,
+          2
+        ],
+        "coarse_output_shape": [
+          1,
+          12,
+          2
+        ],
+        "prepool_features_unchanged": true,
+        "native20_equals_same_binary_head_on_unpooled_features_exact": true,
+        "coarse160_equals_same_head_on_mean8_features_exact": true,
+        "max_within160_block_score_difference": 14.81502914428711,
+        "not_repeated160_scores": true,
+        "elapsed_seconds": 0.1559999999590218
+      }
+    ]
+  },
+  "sal_legacy160_input_and_output_parity": {
+    "status": "passed",
+    "purpose": "Exclude waveform/padding/checkpoint/inference implementation differences before interpreting SAL20 diagnostics",
+    "selected_sql_rows": "First3 ORDER BY ordinal; no sample selection by result",
+    "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+    "legacy_sql_sha256": "a40d13a2f2069d39b91a8ae176858267b69d6554593032da38fa7f0d6b4ff6ad",
+    "source_script_sha256": "749fad70da1b3064fea77814e8d0a7cdb9565c59cea3446b4646b74f29c3b174",
+    "native20_inference_script_sha256": "364a4bdbda0aa170d4fa49fd667323d5619ab84dcaece59e03e0b6bb3a4edc5a",
+    "legacy_dataset_source_sha256": "785c03549f5947465aca17cc92844e3e9254a475c35f0b30f4197d88a3bf4c6a",
+    "legacy_base_dataset_source_sha256": "6856e97f96de9a20f6a28335d81619578cf939a1bb8ca016fa74b6ebeadd4494",
+    "checkpoint_metadata": {
+      "epoch": 24,
+      "global_step": 15875,
+      "strict_load": "<All keys matched successfully>",
+      "state_dict_keys": 571,
+      "project_training": {
+        "profile": "reduced",
+        "manifests": {
+          "train_detector": {
+            "count": 5076,
+            "sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce"
+          },
+          "dev": {
+            "count": 2484,
+            "sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1"
+          }
+        },
+        "run": "sal_train_reduced_20261112_122313_966079",
+        "config": {
+          "seed": 888,
+          "batch_size": 8,
+          "num_workers": 0,
+          "max_epochs": 60,
+          "min_epochs": 40,
+          "patience": 10,
+          "learning_rate": 1e-05,
+          "weight_decay": 0.0001,
+          "mixup_ratio": 0.2,
+          "device": "cuda",
+          "note": "SAL model/loss retained; local aligned_cross_recording_v1 fixes upstream self-mixing no-op. Batch8/workers0 for Windows. Fresh SAL head and general WavLM backbone; see README implementation note."
+        },
+        "protocol": "sal_reduced_v1",
+        "training_data_profile": "reduced",
+        "training_split": "train_detector",
+        "training_manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+        "training_dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+        "csm_implementation": "aligned_cross_recording_v1",
+        "validation_eer_implementation": "official_formula_cpu_v1"
+      },
+      "model_class": "SSLSeq8Bin",
+      "parameters": 339161827,
+      "pooling_type": "avg",
+      "train_pool_scale": 8
+    },
+    "eval_pool_scale": 8,
+    "precision": "float32",
+    "tf32": false,
+    "comparison_tolerance": {
+      "rtol": 0.0001,
+      "atol": 0.0001
+    },
+    "samples": [
+      {
+        "uid": "CON_E_0000028",
+        "ordinal": 0,
+        "native160_cells": 16,
+        "raw_audio_samples": 40784,
+        "padded_samples": 40960,
+        "padding_samples": 176,
+        "raw_float64_to_float32_equals_direct_float32": true,
+        "legacy_dataset_input_equals_current_input_exact": true,
+        "labels160_equal_sql": true,
+        "duration_equal_sql": true,
+        "legacy_device": "cuda",
+        "new_device": "cuda",
+        "logits_shape": [
+          16,
+          2
+        ],
+        "logits_max_abs_difference": 2.86102294921875e-06,
+        "logits_mean_abs_difference": 1.0579824447631836e-06,
+        "logits_allclose": true,
+        "argmax_all_equal": true,
+        "elapsed_seconds": 0.75
+      },
+      {
+        "uid": "CON_E_0000035",
+        "ordinal": 1,
+        "native160_cells": 19,
+        "raw_audio_samples": 46954,
+        "padded_samples": 48640,
+        "padding_samples": 1686,
+        "raw_float64_to_float32_equals_direct_float32": true,
+        "legacy_dataset_input_equals_current_input_exact": true,
+        "labels160_equal_sql": true,
+        "duration_equal_sql": true,
+        "legacy_device": "cuda",
+        "new_device": "cuda",
+        "logits_shape": [
+          19,
+          2
+        ],
+        "logits_max_abs_difference": 2.1457672119140625e-06,
+        "logits_mean_abs_difference": 9.223034567185096e-07,
+        "logits_allclose": true,
+        "argmax_all_equal": true,
+        "elapsed_seconds": 0.061999999976251274
+      },
+      {
+        "uid": "CON_E_0000047",
+        "ordinal": 2,
+        "native160_cells": 23,
+        "raw_audio_samples": 58128,
+        "padded_samples": 58880,
+        "padding_samples": 752,
+        "raw_float64_to_float32_equals_direct_float32": true,
+        "legacy_dataset_input_equals_current_input_exact": true,
+        "labels160_equal_sql": true,
+        "duration_equal_sql": true,
+        "legacy_device": "cuda",
+        "new_device": "cuda",
+        "logits_shape": [
+          23,
+          2
+        ],
+        "logits_max_abs_difference": 3.814697265625e-06,
+        "logits_mean_abs_difference": 8.51309835070424e-07,
+        "logits_allclose": true,
+        "argmax_all_equal": true,
+        "elapsed_seconds": 0.10899999999674037
+      }
+    ],
+    "waveform_semantics": "Both use raw16k mono without external amplitude normalization; legacy sf.read float64 then FloatTensor is exact to direct float32 read on these recordings; both right-pad zeros to N160*2560 samples; model-internal padding and SSL preprocessing unchanged.",
+    "native20_run_untouched": true,
+    "native20_complete_sha256": "b77e4abf6e4277e5c18445566ac00e772bf7d3a8071426b30e9d09ec019eceae",
+    "training_performed": false,
+    "threshold_changed": false,
+    "checkpoint_reselected": false,
+    "conclusion": "The first3 archived SAL160 outputs reproduce within tolerance with identical input tensors and argmax. This excludes the tested input-pipeline mismatch; it does not by itself identify the separate causal contributions of pooling-resolution change, threshold recalibration, and event-metric sensitivity."
+  },
+  "cnn_replay_report": "results_native20_fixed_reevaluation.json",
+  "cnn_audit_report": "verification_native20_fixed_reevaluation.json",
+  "sal_audit_report": "verification_sal_native20_fixed_reevaluation.json",
+  "source_sha256": {
+    "cnn_comparison": "82dafa8ac69e452e07ba936639df50b128781a728f7ddbcd4d22832878b756a9",
+    "sal_metrics": "2c3ec5bca8e7329405d2aeb80b669151b82707d7b98d1bf5c93f861eb5a83538",
+    "sal_independent_audit": "6e2016a43d3b182e0812056750482aef5c85658efc7bc4f7d476db87290166df",
+    "sal_legacy160_parity": "9e87a8cf02fbf369d2e05b683d988539969a3118ed597a3e33e2234c0e798c5b"
+  },
+  "limits": [
+    "Fixed historical checkpoints; no retraining or checkpoint reselection.",
+    "SAL and CNN use different architectures, pretraining, training set sizes and selection histories; this is an operating-protocol comparison, not a controlled architecture ablation.",
+    "SAL trained160ms then inferred20ms; changing pooling granularity may affect performance. Resolution and threshold-policy effects have not been causally separated.",
+    "PS eval3562 was previously inspected. This is not a fresh blind test or the full71237-record evaluation.",
+    "No test threshold adjustment, smoothing, gap filling or short-event deletion.",
+    "SAL has lower native20 EER and fewer fully-genuine recording alarms; CNN adaptation has higher event F1 in this specific setup. Neither dominates every metric."
+  ]
+}

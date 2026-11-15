@@ -28,6 +28,8 @@
 
 [完整结果、开发集阈值与计数](docs/results_native20_fixed_reevaluation.json)；[重评步骤及来源](docs/native20_fixed_reevaluation.txt)；[独立逐分数复算](docs/verification_native20_fixed_reevaluation.json)。19项回归/边界测试通过，独立核对三个模型的开发集阈值及全部逐录音计数一致。旧160 ms结果在下文单独保留。
 
+**补充SAL参考**：已对本地固定SAL权重补跑同一dev/eval的原生20 ms推理并使用相同5%开发集预算。该权重原先以160 ms训练，这次将原有无参数平均池化从8帧改为1帧；没有重复160 ms分数，也没有重新训练。它的20 ms事件F1为21.6221%、短事件召回34.6244%、真实时长FPR4.7923%、全真录音误报率5.2055%、EER9.3780%。CNN微调在本设置下事件匹配较好，SAL的EER和全真录音误报更好，不能写成CNN全面超过SAL。[四模型对照说明](docs/native20_sal_reference.txt)，[完整指标和条件记录](docs/results_native20_with_sal_reference.json)，[SAL独立复算](docs/verification_sal_native20_fixed_reevaluation.json)。SAL仅作为结果参考，仓库训练代码仍维护CNN路线。
+
 ## 模型与训练
 
 ```text

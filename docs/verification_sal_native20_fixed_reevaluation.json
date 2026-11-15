@@ -1,0 +1,324 @@
+{
+  "status": "pass",
+  "scope": "Independent SAL saved-score/provenance audit; no inference or training",
+  "evaluation_directory_name": "sal_native20_fixed_reeval_20261115_run2",
+  "checks": 284627,
+  "maximum_floating_difference": 2.842170943040401e-14,
+  "checkpoint_sha256": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+  "selected_epoch": 24,
+  "checkpoint_unchanged": true,
+  "historical_training_seed": 888,
+  "inference_seed": 666,
+  "historical_training_recordings": 5076,
+  "trained_resolution_seconds": 0.16,
+  "inference_resolution_seconds": 0.02,
+  "training_pool_scale": 8,
+  "evaluation_pool_scale": 1,
+  "parameter_count": 339161827,
+  "score_definition": "class0 fake minus class1 real",
+  "raw_binary_margin_exact_cells": {
+    "dev": 434150,
+    "eval": 603050
+  },
+  "score_class_semantics_evidence": "Official PS labels0=fake,1=real are loaded without inversion and passed to criterion2; binary logits are out_layer2 outputs in that class order. Source hashes retained.",
+  "same_cnn_fixed_uids_labels_durations": true,
+  "actual_native20_not_repeated": true,
+  "smoke_checks": [
+    {
+      "uid": "CON_D_0000003",
+      "stored20_cells": 104,
+      "maximum_within160_score_difference": 20.157411575317383
+    },
+    {
+      "uid": "CON_D_0000004",
+      "stored20_cells": 104,
+      "maximum_within160_score_difference": 19.51030921936035
+    },
+    {
+      "uid": "CON_D_0000134",
+      "stored20_cells": 96,
+      "maximum_within160_score_difference": 14.81502914428711
+    }
+  ],
+  "dev_threshold": {
+    "threshold": 6.256688117980958,
+    "real_fpr_percent": 4.999817940783745,
+    "fp_seconds": 243.04393749999946,
+    "real_seconds": 4861.055749999992,
+    "budget_seconds": 243.05278749999962,
+    "included_real_score_groups": 12150,
+    "total_real_score_groups": 240122,
+    "excluded_boundary_score": 6.256688117980957,
+    "excluded_boundary_tie_seconds": 0.027874999999999858
+  },
+  "dev_metrics": {
+    "recordings": 2484,
+    "frames": 434150,
+    "active_20ms_frames": 434150,
+    "threshold": 6.256688117980958,
+    "resolution_seconds": 0.02,
+    "positive_label": "fake",
+    "duration_f1_percent": 87.57178125336311,
+    "duration_precision_percent": 92.83077353288887,
+    "duration_recall_percent": 82.87670101026738,
+    "duration_accuracy_percent": 89.68320003612709,
+    "real_fpr_percent": 4.999817940783767,
+    "real_duration_fpr_percent": 4.999817940783767,
+    "spoof_fnr_percent": 17.123298989732614,
+    "confusion_seconds_tp_fp_fn_tn": [
+      3147.0559374999925,
+      243.0439375000008,
+      650.2186874999959,
+      4618.011812499998
+    ],
+    "fake_seconds": 3797.274624999988,
+    "real_seconds": 4861.055749999999,
+    "fp_seconds": 243.0439375000008,
+    "fn_seconds": 650.2186874999959,
+    "audio_seconds": 8658.330375,
+    "event_f1_iou05_percent": 35.962067408350094,
+    "event_precision_percent": 27.230338824992227,
+    "event_recall_percent": 52.93691080493111,
+    "event_counts": {
+      "matched": 4380,
+      "predicted": 16085,
+      "truth": 8274,
+      "unmatched_predictions": 11705,
+      "missed_truth": 3894
+    },
+    "short_event_recall_le320ms_percent": 46.26300851466414,
+    "short_event_counts": {
+      "matched": 2445,
+      "truth": 5285
+    },
+    "unmatched_fp_events_per_hour": 4866.758159479448,
+    "fully_genuine": {
+      "recordings": 255,
+      "false_alarm_recordings": 14,
+      "audio_seconds": 866.4188125000007,
+      "fp_seconds": 0.41999999999999993,
+      "predicted_events": 17,
+      "false_alarm_recording_rate_percent": 5.490196078431373,
+      "duration_fpr_percent": 0.04847540172726796,
+      "unmatched_fp_events_per_hour": 70.63558537401904
+    },
+    "frame_confusion_tp_fp_fn_tn": [
+      158133,
+      12153,
+      32758,
+      231106
+    ],
+    "frame_f1_percent": 87.5653765328357,
+    "eer_percent": 6.489473488561648,
+    "event_duration_bins": {
+      "le80ms": {
+        "truth": 3689,
+        "matched": 1549,
+        "recall_percent": 41.98969910544863
+      },
+      "gt80_le160ms": {
+        "truth": 501,
+        "matched": 285,
+        "recall_percent": 56.88622754491018
+      },
+      "gt160_le320ms": {
+        "truth": 1095,
+        "matched": 611,
+        "recall_percent": 55.79908675799087
+      },
+      "gt320_le640ms": {
+        "truth": 1172,
+        "matched": 776,
+        "recall_percent": 66.21160409556315
+      },
+      "gt640ms": {
+        "truth": 1817,
+        "matched": 1159,
+        "recall_percent": 63.78646119977986
+      }
+    },
+    "event_recall_le80ms_percent": 41.98969910544863,
+    "event_recall_le160ms_percent": 43.7708830548926,
+    "event_recall_le320ms_percent": 46.26300851466414,
+    "event_recall_le640ms_percent": 49.88384698776522
+  },
+  "eval_metrics": {
+    "recordings": 3562,
+    "frames": 603050,
+    "active_20ms_frames": 603050,
+    "threshold": 6.256688117980958,
+    "resolution_seconds": 0.02,
+    "positive_label": "fake",
+    "duration_f1_percent": 74.42774177058519,
+    "duration_precision_percent": 89.33500309556295,
+    "duration_recall_percent": 63.784133800539486,
+    "duration_accuracy_percent": 83.07002324505628,
+    "real_fpr_percent": 4.79232876743884,
+    "real_duration_fpr_percent": 4.79232876743884,
+    "spoof_fnr_percent": 36.21586619946051,
+    "confusion_seconds_tp_fp_fn_tn": [
+      2962.7419999999756,
+      353.6982500000017,
+      1682.209374999988,
+      7026.810624999997
+    ],
+    "fake_seconds": 4644.951374999964,
+    "real_seconds": 7380.508874999999,
+    "fp_seconds": 353.6982500000017,
+    "fn_seconds": 1682.209374999988,
+    "audio_seconds": 12025.46025,
+    "event_f1_iou05_percent": 21.62206942258305,
+    "event_precision_percent": 15.79520697167756,
+    "event_recall_percent": 34.26096088212129,
+    "event_counts": {
+      "matched": 3915,
+      "predicted": 24786,
+      "truth": 11427,
+      "unmatched_predictions": 20871,
+      "missed_truth": 7512
+    },
+    "short_event_recall_le320ms_percent": 34.62438263582012,
+    "short_event_counts": {
+      "matched": 2664,
+      "truth": 7694
+    },
+    "unmatched_fp_events_per_hour": 6248.043603985968,
+    "fully_genuine": {
+      "recordings": 365,
+      "false_alarm_recordings": 19,
+      "audio_seconds": 1239.050000000001,
+      "fp_seconds": 0.6400000000000005,
+      "predicted_events": 24,
+      "false_alarm_recording_rate_percent": 5.205479452054795,
+      "duration_fpr_percent": 0.05165247568701827,
+      "unmatched_fp_events_per_hour": 69.73084217747461
+    },
+    "frame_confusion_tp_fp_fn_tn": [
+      148976,
+      17687,
+      84739,
+      351648
+    ],
+    "frame_f1_percent": 74.41767529684448,
+    "eer_percent": 9.378012358958618,
+    "event_duration_bins": {
+      "le80ms": {
+        "truth": 6122,
+        "matched": 2269,
+        "recall_percent": 37.063051290427964
+      },
+      "gt80_le160ms": {
+        "truth": 613,
+        "matched": 227,
+        "recall_percent": 37.03099510603589
+      },
+      "gt160_le320ms": {
+        "truth": 959,
+        "matched": 168,
+        "recall_percent": 17.51824817518248
+      },
+      "gt320_le640ms": {
+        "truth": 1345,
+        "matched": 312,
+        "recall_percent": 23.197026022304833
+      },
+      "gt640ms": {
+        "truth": 2388,
+        "matched": 939,
+        "recall_percent": 39.321608040201006
+      }
+    },
+    "event_recall_le80ms_percent": 37.063051290427964,
+    "event_recall_le160ms_percent": 37.060133630289535,
+    "event_recall_le320ms_percent": 34.62438263582012,
+    "event_recall_le640ms_percent": 32.923996017258546
+  },
+  "comparison_four_models": {
+    "original_cnn": {
+      "event_precision_percent": 25.50424628450106,
+      "event_recall_percent": 42.04953181062396,
+      "event_f1_iou05_percent": 31.750751643704366,
+      "short_event_recall_le320ms_percent": 44.59318949831037,
+      "real_duration_fpr_percent": 4.510544335603174,
+      "frame_f1_percent": 61.18973102287816,
+      "eer_percent": 26.56778924173239
+    },
+    "channel_head_seed666": {
+      "event_precision_percent": 36.844648465813,
+      "event_recall_percent": 53.38234007175987,
+      "event_f1_iou05_percent": 43.59789872422542,
+      "short_event_recall_le320ms_percent": 54.432024954510005,
+      "real_duration_fpr_percent": 4.861151935136755,
+      "frame_f1_percent": 70.47758736040348,
+      "eer_percent": 21.67979976510311
+    },
+    "channel_finetuned_seed666": {
+      "event_precision_percent": 42.54324734446131,
+      "event_recall_percent": 61.33718386278113,
+      "event_f1_iou05_percent": 50.24012615583112,
+      "short_event_recall_le320ms_percent": 62.984143488432544,
+      "real_duration_fpr_percent": 6.046670630146781,
+      "frame_f1_percent": 74.90815469095031,
+      "eer_percent": 21.129104652541393
+    },
+    "sal_reduced_native20": {
+      "event_precision_percent": 15.79520697167756,
+      "event_recall_percent": 34.26096088212129,
+      "event_f1_iou05_percent": 21.62206942258305,
+      "short_event_recall_le320ms_percent": 34.62438263582012,
+      "real_duration_fpr_percent": 4.79232876743884,
+      "frame_f1_percent": 74.41767529684448,
+      "eer_percent": 9.378012358958618
+    }
+  },
+  "prediction_hashes": {
+    "dev": "fbb3e925d7a883bf36f9d258b0c2716c0447fb27c0fab72a9ac3a06857ff8cdc",
+    "eval": "e82b22d9fca9bd81460073f29b8bfe440888bc36f13168db4441e05d65f8420e"
+  },
+  "source_hashes": {
+    "<validation_root>\\native20_reeval_audit\\audit_native20.py": "bbde676f13b57182e42109d6489dde7189dc79c6233a2959f74c826328ea8257",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\checkpoint_metadata.json": "a1e191b6fa2416031de9546c076e57418d49adf800dc4ec5552cdbae40b3aefd",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\complete.json": "b77e4abf6e4277e5c18445566ac00e772bf7d3a8071426b30e9d09ec019eceae",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\CON_D_0000003_smoke.npz": "7f92e0c038614aae9e3738519f00281cf980870fa5cafa5061d35a59381b172e",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\CON_D_0000004_smoke.npz": "c6712dfb238fd105a00ab4b87b035d13228f7f7c7a88226d63d2f538a7d0f7a1",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\CON_D_0000134_smoke.npz": "7f057ba8ccec84276e32492c1bd1544e18c692ed591e4f24cfc406d05021a3f6",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\dev_inference.json": "c3322ae24b812adcdfd54f331eacbe033840688c081e773af6061e3928d4fdc0",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\dev_metrics.json": "6e70da84f1ceec5708e207b6a131f7c04198246c49c0e37f111885b951e76b70",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\dev_scores20.npz": "fbb3e925d7a883bf36f9d258b0c2716c0447fb27c0fab72a9ac3a06857ff8cdc",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\environment.json": "275ee8fc4dc5e509fba7a28b1693e498018a16591def37e7e8c09cd0448630b3",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\eval_inference.json": "9e9f57d25b165069778e95b2cdab7ef82836fc89ce8638ab71af8dfd1be33dd1",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\eval_scores20.npz": "e82b22d9fca9bd81460073f29b8bfe440888bc36f13168db4441e05d65f8420e",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\frozen_dev_calibration.json": "3012ffbbc8191ab765a6bc373f65e0ca653de023d67ed7a8d8f8ed99b1e5703d",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\metrics.json": "2c3ec5bca8e7329405d2aeb80b669151b82707d7b98d1bf5c93f861eb5a83538",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\per_recording.json": "99923047b3c05516d1dabf5b708f679113ddbd68ade5c255a49f4e433c60f25b",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\progress.json": "a8f8785779df0a90127669df90e5370f6f67d21ed36af13fb824ed81ee601d26",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\protocol.json": "c49fce8319a842442f38ceb9a91e6b64092dbd0f95c74c4117fb4a9b71385370",
+    "<experiment_root>\\result\\sal_native20_fixed_reeval_20261115_run2\\smoke_audit.json": "96db65899cd9ec469b189bf81e76c5291572f22843c14b40e2a1fcfb322c5240",
+    "<experiment_root>\\data\\models\\sal_train_reduced_20261112_122313_966079\\best-epoch=024.ckpt": "6b05b7406e20b719c7a55ea40c90905fda7f9d4f01ea7d3d50604d7c40c7d4ff",
+    "<validation_root>\\sal_native20\\infer_sal20.py": "364a4bdbda0aa170d4fa49fd667323d5619ab84dcaece59e03e0b6bb3a4edc5a",
+    "<experiment_root>\\code\\vendor\\SAL\\src\\models\\net\\model.py": "5698e52a8dfa7ab6b02a612d3b3c58ad9f9141c3d3813d33fe7405197d8f5aa4",
+    "<experiment_root>\\code\\vendor\\SAL\\src\\models\\net\\ssl_encoder.py": "e2323ab6179bbc0bb3bbb14c472abd46bdff8701fe41946a538d32198ee59859",
+    "<experiment_root>\\code\\vendor\\SAL\\src\\data\\partialspoof.py": "785c03549f5947465aca17cc92844e3e9254a475c35f0b30f4197d88a3bf4c6a",
+    "<experiment_root>\\code\\vendor\\SAL\\src\\trainers\\sal_trainer.py": "fbeb3075571eb24fea7b828228096abfd46ca2d2d4e1c582e5d2ffa0ce0d9959",
+    "<experiment_root>\\code\\vendor\\SAL\\src\\models\\criterion\\basic_loss.py": "2b3f579c7e291a5028bd95350fc914f61fbece9fbe14d551605f954407b720b4",
+    "<repository>\\code\\manifests\\ps_fixed_ids.json": "fd133d1251411ae1c9591655e4f73ee8e0d2c7e567f2fd2c6eeea4aa2de8f021",
+    "<experiment_root>\\result\\cnn_native20_fixed_reeval_20261115_run1\\original_cnn_dev_scores.npz": "44debb3e800e7283ee920c1897b8c54e32f7a5a786016be29360cc5ddfabdad9",
+    "<experiment_root>\\result\\cnn_native20_fixed_reeval_20261115_run1\\channel_head_seed666_dev_scores.npz": "4caf55f285b2bcc45b6315d18a344fae306faf0f260af6baa26db28bdfc0fdb8",
+    "<experiment_root>\\result\\cnn_native20_fixed_reeval_20261115_run1\\channel_finetuned_seed666_dev_scores.npz": "af7ef1887057dc1d713ff02bd8e71ecc745e78ea39fdc80c7eac2fa337683577",
+    "<experiment_root>\\result\\abc_20261113_run1\\labels20\\dev.npz": "e497f2933f2fb4d96acdae494b4baeb871ed7cc2981e22a995acc4e9c0c6cb04",
+    "<experiment_root>\\result\\cnn_native20_fixed_reeval_20261115_run1\\original_cnn_eval_scores.npz": "758d07b954e528d50405b86b64e849bb4befa0bfda08ff4929713547f64b9027",
+    "<experiment_root>\\result\\cnn_native20_fixed_reeval_20261115_run1\\channel_head_seed666_eval_scores.npz": "848daf3e712b76e5913d27dab3f2c8c1bc3401bd326c7e1b5d607ca4d1737f4e",
+    "<experiment_root>\\result\\cnn_native20_fixed_reeval_20261115_run1\\channel_finetuned_seed666_eval_scores.npz": "92649836ba133856547d573c14ffa0e2c9709448d2593c1223649165f097a836",
+    "<experiment_root>\\result\\abc_20261113_run1\\labels20\\eval.npz": "50336c15b13dec536473f04b9d6a90b18a0c8410e06b79bce99c366a73bc2581"
+  },
+  "independent_helper_sha256": "bbde676f13b57182e42109d6489dde7189dc79c6233a2959f74c826328ea8257",
+  "auditor_sha256": "205022a552fa605f6660dede2f8866cddcd70dc03a276424c2f4f220658a8507",
+  "limitations": [
+    "SAL weights were trained/selected historically at160ms; evaluation changes parameter-free pool size8 to1.",
+    "SAL uses pretrained WavLM and train5076; CNN baseline was trained from scratch on full PS train25380, with adapters train6345.",
+    "Same fixed previously inspected3562 PS eval; not a new blind test.",
+    "Saved-logit and arithmetic audit, not an independent second SAL inference run."
+  ],
+  "source_local_audit_sha256": "6e2016a43d3b182e0812056750482aef5c85658efc7bc4f7d476db87290166df",
+  "publication_note": "Absolute local roots replaced with placeholders; numerical audit content unchanged."
+}
