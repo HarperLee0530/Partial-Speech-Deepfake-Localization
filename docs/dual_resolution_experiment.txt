@@ -1,0 +1,102 @@
+PS 四组随机初始化重训规范（2026-11-15，seed666）
+
+当前状态
+正式结果尚未产生，weights/manifest.json中weights=[]。
+本轮建立新的统一结构对照，不是旧CNN成品复评，也不从旧CNN/B1/双分辨率权重继续训练。
+旧六组方案已取消；当前只有四组，前两组是控制，最后两组是候选方法。旧成绩不进入本轮结果表。
+组员原实现与成品未取得，因此按文字方案重建，不能称为对既有成绩的精确复现。
+
+四组
+cnn_clean：新随机CNN-BiGRU，只使用原声，作为结构基线。
+cnn_aug：相同随机CNN，增加原声/20dB白噪声/轻微EQ轮换，作为增强控制。
+dual：cnn_aug＋20/160ms两分支＋局部四头交叉注意力＋分歧门控＋粗分支辅助BCE。
+boundary：dual＋可学习降采样＋边界BCE＋同真值片段内部相邻概率一致性。
+不加入位置偏置、可靠性门控扩展。dual同时改结构与粗监督；boundary是三项组合，不能归因单项。
+
+共同条件
+固定PS train6345/dev2484/eval3562，使用组内固定UID清单；train_review不参与。
+四组以seed666初始化相同CNN参数，全部从头训练，不读取旧模型文件。
+结构为80维LogMel、CNN通道16/32/64、两层双向GRU(hidden128)、逐帧线性分类，dropout=.4。
+CNN参数911521；骨干和新增模块全部端到端更新。
+20个训练epoch，batch8，所有参数AdamW lr1e-3、weight_decay1e-4、联合clip_norm5。
+epoch0只验证，不更新参数，但可被选为best。
+每组使用相同独立DataLoader shuffle generator；新增层在CPU-only fork_rng中初始化，
+不推进或重置骨干CUDA dropout随机状态；初始化CNN张量SHA写入协议和完成记录。
+cnn_clean始终取channel0，其他三组按相同UID分配与epoch轮换三信道，每录音每轮出现一次。
+无裁剪、跨录音拼接或短事件额外加权；dev/eval均只用原声。
+
+输入与前端
+永久输入：D:\SAL_精简实验\data\cnn_ps_inputs_v2
+  manifests/train.json、dev.json、eval.json
+  labels20/train.npz、dev.npz、eval.npz
+新缓存：D:\SAL_精简实验\data\cnn_ps_features_v2
+新结果：D:\SAL_精简实验\result\ps_four_eventf1_20261115_run1
+清单不引用旧result缓存；原音频和官方160ms标签保持在原数据目录。
+真实20ms NPZ采用1=假，官方160ms NPY为1=真，由读取器转换；不能重复粗标签生成细标签。
+音频16kHz单声道，先做完整波形信道变换，再按160ms标签网格补零、计算float32 LogMel。
+缓存只计算前端，不运行CNN，不加载checkpoint：
+  python -m cnn_ps.dual_features --model-config configs/cnn_ps_structure.json ...
+train缓存三信道，dev/eval缓存单原声。训练中的CNN继续更新，不是冻结上下文特征训练。
+纯配置SHA256：707381b135e3319f8bb7e78830e4db0f3cb5d03fa006d291fda9af5b0cc0a280。
+
+归一化与新增结构
+normalize_mode='layernorm'：对每帧256维BiGRU上下文做可训练LayerNorm，再clamp[-5,5]。
+不读取旧CNN训练特征mean/std；构造所需零mean/单位std缓冲不参与此模式归一化。
+细分支Linear256→32/GELU/Linear32→1得到细残差。
+粗分支每8帧按有效时长聚合，Linear256→32/GELU/Conv1d32→32(k3)/GELU/Linear32→1得到粗残差。
+粗分支logit为有效时长加权的原logit均值加粗残差；无效尾帧不进入粗特征、粗基分数和注意力。
+细32维作为query，粗特征作为key/value，4头、每头8维，只gather当前粗块±2；粗卷积额外扩一块。
+没有T×C整段注意力矩阵，但原BiGRU仍看整句，整体不是流式模型。
+注意力上下文经Linear32→1产生残差。门输入为细概率、粗加注意力概率、绝对差，
+MLP3→16→1/GELU/sigmoid输出g，融合为：
+  final_logit = original_logit + (1-g)*fine_residual + g*(coarse_residual_up + attention_residual)
+概率只作为门输入，最终仍是logit，损失使用BCEWithLogits。
+残差输出层零初始化，所以初始完整存储logits与同一随机CNN完全相同。
+无效存储尾帧保留原CNN logit、残差为0，保持最终160ms普通mean8计算。
+boundary可学习降采样为256组depthwise Conv1d(k8,stride8)，kernel初始1/8；
+输入按实际时长归一化，初始等价有效时长均值，之后学习8个帧位置的不同权重。
+边界头从细32维特征预测转折logit；推理时不访问真值边界或真实事件长度。
+
+损失
+所有组：实际20ms时长加权BCE＋最终160ms时长加权BCE，系数各1。
+最终160ms为8个存储20ms logits的普通均值；不足20ms的末格按真实时长计细BCE。
+无效细尾帧不进入细BCE，但仍参与上述历史160ms均值；这一约定四组相同。
+dual/boundary加0.5×独立粗BCE；boundary再加0.1×边界BCE＋0.05×片段内一致性。
+边界真值为相邻有效20ms真假标签是否变化，转折归后一帧；首帧和无效邻接不监督。
+一致性为相邻预测概率差平方，仅在两帧有效且真值相同时生效，不跨真假边界平滑。
+相邻权重取两帧真实时长较小者；各项按全batch相关时长归一化，而非每录音等权平均。
+
+选模与测试隔离
+每轮在dev真实音频时长上选择满足FPR≤5%的最宽松分数边界，同分组不拆开。
+再比较该阈值下的dev事件F1@IoU0.5，取最大者；差异≤1e-10个百分点取更早epoch。
+不使用旧J复合选模，不看测试挑epoch，不在测试重新校准阈值。
+四组全部complete后执行train_four --freeze-only，校验已选模型及dev产物哈希，
+核对四组初始CNN、数据、训练预算和源码一致，保存frozen_eval_plan.json。
+冻结后才生成eval单原声缓存，最后train_four --evaluate使用冻结权重与阈值。
+评估入口在构造eval数据前再次校验冻结计划，拒绝替换不同内容。
+
+评价
+主指标为原生20ms事件F1：连续假帧合并事件；IoU≥0.5一对一最大匹配，
+先最大化匹配数、再最大化IoU总和；不平滑、不补空隙、不删短事件。
+辅报事件P/R、≤320ms真值短事件按匹配个数召回、真实时长误报率、全真录音报警率。
+补充Frame F1、时长F1、EER；零分母按规范输出null，不能写成满分。
+时长指标按最后有效格的真实不足20ms宽度计；Frame指标对每个有效格计一次。
+5%只约束dev，不保证eval误报率≤5%；5%、320ms、IoU0.5是本研究设置，不是统一领域标准。
+事件F1减轻长事件按时长占优，但未完美消除长短偏置，因此保留短事件和误报辅助指标。
+当前eval曾被分析，不能称新盲测；仅seed666，不能据此证明多seed稳定增益。
+
+逐轮存档
+每组epochs/epoch_00.pt至epoch_20.pt保存完整新CNN、可选新增层、配置、dev阈值与指标；
+对应epoch_XX_metrics.json、epoch_XX_scores20.npz保留当轮开发集结果。
+best.pt/dev_metrics.json/dev_scores20.npz与complete.json共同确定当前选中轮。
+存档不含优化器续训状态。后续可另行声明dev-only协议重选，但不能看eval后挑模型。
+统一测试后才生成eval_metrics.json、eval_per_recording.json、eval_scores20.npz和comparison.json。
+分数NPZ每UID存8*lengths个分数，另记lengths20/duration；复算时逐录音截到真实细标签，
+不能把存储补零格当真实标签，不能混用不同模型的旧阈值。
+
+运行与清理
+完整PowerShell命令见根README：train3/dev1缓存 → 四条独立--arm训练 → --freeze-only → eval1缓存 → --evaluate。
+当前训练入口train_four.py不接受旧checkpoint或normalization；旧入口暂留用于共享函数和回溯。
+不要改运行中的源码，也不要覆盖非空结果目录。
+旧CNN/B1/dual权重移出当前交付，旧结果按用户要求移到回收站；原PS音频标签及SAL、语义、HAD、prosody材料保留。
+当前没有正式成绩或新发布权重，不沿用旧F1和旧阈值。

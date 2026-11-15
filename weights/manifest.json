@@ -1,50 +1,39 @@
 {
-  "format_version": 1,
-  "source": "Archived completed local PS experiments, unchanged checkpoint files",
-  "note": "Two standalone CNN checkpoints: original training starting point and selected channel-augmented directly fine-tuned model. No audio, large caches, or optimizer resume state. Original metadata may retain historical experiment paths; use README paths, not those archived paths. Historical checkpoint selection has not been changed by the unified 20ms evaluation.",
-  "primary_evaluation": {
-    "resolution_seconds": 0.02,
-    "calibration_split": "PS dev fixed subset",
-    "calibration_recordings": 2484,
-    "threshold_rule": "Per-model threshold frozen on dev only; genuine-duration false-positive-rate cap 5%",
-    "score": "fake-positive CNN logit",
-    "decision": "score >= dev_threshold20; compare in float64 to preserve tie-boundary thresholds",
-    "historical_160ms_thresholds": "Supplementary historical results only; do not mix with 20ms scores or thresholds"
+  "format_version": 2,
+  "experiment": "ps_four_random_cnn_v1",
+  "status": "no_published_weights_new_training_pending",
+  "note": "Old CNN/B1/dual weights removed. Four current arms share a random CNN initialization; no pretrained checkpoint or old normalization statistics. No new final result or checkpoint is declared here.",
+  "arms": ["cnn_clean", "cnn_aug", "dual", "boundary"],
+  "controls": ["cnn_clean", "cnn_aug"],
+  "candidate_methods": ["dual", "boundary"],
+  "initialization": {
+    "kind": "random",
+    "same_backbone_initialization_across_arms": true,
+    "seed": 666,
+    "model_config_file": "code/configs/cnn_ps_structure.json",
+    "model_config_sha256": "707381b135e3319f8bb7e78830e4db0f3cb5d03fa006d291fda9af5b0cc0a280",
+    "backbone_parameters": 911521,
+    "adapter_normalization": "trainable LayerNorm256; no external mean/std file"
   },
-  "weights": [
-    {
-      "file": "original_cnn.pt",
-      "kind": "original_cnn_baseline",
-      "role": "Training starting point and original CNN baseline control",
-      "bytes": 3656136,
-      "sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
-      "seed": 666,
-      "selected_epoch": 7,
-      "tensor_count": 26,
-      "state_elements": 911521,
-      "byte_identical_to_archived_checkpoint": true,
-      "dev_threshold20": 4.5316390991210946,
-      "threshold20_source": "PS dev 2484 recordings; genuine-duration FPR cap 5%; unified native 20ms evaluation",
-      "historical_threshold160": 0.0,
-      "threshold160_source": "original fixed logit zero"
-    },
-    {
-      "file": "cnn_finetuned_seed666.pt",
-      "kind": "full_cnn_finetuned",
-      "role": "Selected completed CNN-BiGRU with channel augmentation and direct full-parameter fine-tuning",
-      "bytes": 4190984,
-      "sha256": "ed3bf849955ae0d00f4d2ca7c92f7d9eb719b0d07dd5fb866dfa4b547eab9157",
-      "seed": 666,
-      "selected_epoch": 8,
-      "tensor_count": 26,
-      "state_elements": 911521,
-      "byte_identical_to_archived_checkpoint": true,
-      "dev_threshold20": 0.2922912240028382,
-      "threshold20_source": "PS dev 2484 recordings; genuine-duration FPR cap 5%; unified native 20ms evaluation",
-      "historical_dev_threshold20": 0.2922912240028382,
-      "historical_threshold160": -0.8814183473587036,
-      "threshold160_source": "dev frame F1 calibration",
-      "historical_checkpoint_selection": "J = 0.5 * duration F1 + 0.5 * event F1 on dev; epoch 8 selected before unified re-evaluation"
-    }
-  ]
+  "training": {
+    "train_recordings": 6345,
+    "dev_recordings": 2484,
+    "eval_recordings": 3562,
+    "epochs": 20,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "gradient_clip": 5,
+    "epoch_zero_eligible": true,
+    "checkpoint_selection": "Dev-only genuine-duration FPR cap5%, then maximize dev event F1@IoU0.5; earliest ties",
+    "per_epoch_weights_metrics_and_scores_saved": true
+  },
+  "evaluation": {
+    "resolution_seconds": 0.02,
+    "freeze_all_arms_before_eval_cache": true,
+    "test_threshold_selection": false,
+    "formal_results_available": false
+  },
+  "weights": []
 }

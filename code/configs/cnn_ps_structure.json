@@ -1,0 +1,14 @@
+{
+  "model_config": {
+    "sample_rate": 16000,
+    "hop_length": 320,
+    "n_fft": 512,
+    "win_length": 400,
+    "n_mels": 80,
+    "channels": [16, 32, 64],
+    "hidden_size": 128,
+    "gru_layers": 2,
+    "dropout": 0.4
+  },
+  "initialization": "random; no old checkpoint or feature statistics"
+}
