@@ -1,0 +1,76 @@
+PS 双分辨率端到端对照实验（2026-11-15，seed666）
+
+研究问题
+在已有 CNN-BiGRU＋信道增强直接微调的基础上，双分辨率及其升级设计能否提高事件定位？
+这份代码按组员的文字方案重建，未取得组员原代码、成品权重或原始预测，因此不是对其 46.46% 的精确复现。
+当前主方案位于原工作树，本实验在 experiment/dual-native20-20261115 独立分支中进行。
+
+六组实验
+baseline：原 CNN-BiGRU，全部参数直接微调。
+dual_fusion：再增加 20/160 ms 两分支、局部四头交叉注意力、分歧门控及粗分支辅助监督。
+boundary_dual：在 dual_fusion 上用可学习降采样替代均值，增加边界辅助监督、真值片段内部一致性。
+boundary_position：在 boundary_dual 上只增加注意力相对位置偏置。
+boundary_reliability：在 boundary_dual 上只扩充门控的可靠性输入。
+boundary_both：在 boundary_dual 上同时增加位置偏置和可靠性输入。
+
+共同条件
+同一原 CNN checkpoint：SHA256 36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428。
+所有组从此原 CNN 起点端到端训练；不是拿已微调模型额外训练一阶段再与旧成绩比较。
+原 CNN 先前在完整 PS train/dev 训练选模。此轮所有组使用相同固定 train6345/dev2484。
+所有组使用原声、20 dB 白噪声、轻微 EQ 三视图，按相同 UID 分配和 epoch 确定性轮换。
+音频先变换再补齐标签网格；缓存的是 float32 LogMel，不是冻结 CNN 的上下文特征。
+三视图缓存与原 FineData 实际计算逐位核验，因此缓存只用于省去重复解码和前端计算。
+同为 seed666，8 轮，batch8；相同独立 shuffle generator；无裁剪、跨录音拼接或困难事件加权。
+AdamW：CNN lr=1e-4，新增模块 lr=1e-3，weight_decay=1e-4，全部参数联合 clip_norm=5。
+新增模块在独立 CPU 随机状态中初始化，不改变骨干 dropout 的随机状态。
+开发/测试只有原声；训练不接收测试文件路径。
+
+损失
+所有组：实际20ms时长加权 BCE + 最终160ms时长加权 BCE，系数各1。
+最终160ms分数仍为每8个存储20ms logits的普通均值，完全沿用现有CNN训练口径。
+无效20ms尾部不计入细损失，但仍保留原CNN logit参与上述历史160ms均值。
+全部新增双分辨率组：另加0.5 × 独立粗分支BCE。
+边界设计组：另加0.1 × 边界BCE + 0.05 × 同真值片段内部相邻概率平方差。
+边界真值为相邻有效20ms标签是否变化；第一帧、无效尾帧没有边界监督。
+一致性只作用于标签相同且都有效的相邻帧，权重为相邻实际时长的较小值；不跨真值边界平滑。
+边界与一致性系数在本轮训练前固定，未根据测试调整。
+注意：新增粗辅助监督属于双分辨率方案的一部分，baseline→dual_fusion不能单独归因于分辨率。
+boundary_dual是三项改动的组合，首轮不能分别归因于降采样、边界监督、一致性。
+
+新增结构
+20ms细分支：原BiGRU的256维上下文特征，按原CNN训练集原声有效帧实际时长估计固定mean/std，
+标准化并截断至[-5,5]，Linear256→32 + GELU + Linear32→1得到残差。
+160ms粗分支：每8细帧按实际时长聚合，无效尾帧屏蔽；Linear256→32，GELU，Conv1d32→32/k3，GELU，Linear32→1。
+粗分支自身logit为原20ms分数的有效时长加权均值加粗残差，用于粗辅助监督和门控。
+交叉注意力：细32维特征作为query，粗特征作为key/value，4头，每头8维，只gather当前粗块±2块。
+粗卷积又扩展一块输入范围。没有整段T×C注意力矩阵，但原BiGRU本身仍看整句，整体是离线模型。
+注意力输出另经Linear32→1得到注意力残差。
+门控基础输入：fine概率、coarse+attention概率、绝对差。MLP3→16→1/GELU/sigmoid得到g。
+最终logit = 原logit + (1-g)×细残差 + g×(重复到20ms的粗残差+注意力残差)。
+所有残差输出层零初始化，因此新增模型初始完整20ms存储分数与原CNN逐位相同。
+可学习降采样：256组depthwise Conv1d/k8/stride8，再接原独立投影；kernel初始化1/8。
+输入用实际时长归一化，初始等价有效时长均值，以后各特征维可学习8个帧位置的不同权重。
+位置偏置：每头对[-2,-1,0,1,2]粗块偏移学习一个bias，共20个参数，初始0。
+可靠性门控：输入变为10维，在基础3维上加入两支entropy、两支confidence、
+前/后相邻标准化特征的RMS变化、边界预测概率。是否可信由训练学习，不预设能正确识别噪声。
+
+评价和选模
+所有新组均使用 ps_native20_event_v2：原生20ms分数、官方真实20ms标签；只在dev校准真实时长FPR≤5%的阈值。
+每轮只用dev事件F1选择checkpoint；epoch0可选，差异≤1e-10个百分点时保留更早轮次。
+先冻结所有checkpoint及阈值，再评估相同PS eval3562条。
+连续假帧合并事件；不平滑、不补空隙、不滤除短事件；IoU≥0.5一对一匹配，微平均计数。
+主指标事件F1；同时报告事件P/R、≤320ms短事件召回、真实时长FPR、全真录音误报率。
+FrameF1、时长F1、EER为补充。5%是dev校准约束，不保证测试FPR也≤5%。
+只有seed666，这一轮不能证明多种子稳定增益。当前测试子集此前已分析，不能称为新盲测。
+旧主线50.24%单列历史参考；新的严格对照以这次重跑baseline为准。
+
+入口
+code/cnn_ps/dual_features.py：三信道LogMel缓存和训练数据加载。
+code/cnn_ps/dual_resolution.py：双分辨率和各升级开关。
+code/cnn_ps/train_dual.py：六组训练、dev选模、冻结后评估。
+code/cnn_ps/diagnose_events.py：开发集未匹配预测的几何诊断，不把所有未匹配预测都叫正常语音误报。
+code/tests/test_dual_resolution.py、test_dual_training.py：结构、尾帧、梯度、监督权重、事件诊断检查。
+
+结果目录
+D:\SAL_精简实验\result\dual_e2e_20261115_run1
+每组独立保存 protocol/history/best.pt/dev_scores20/complete，完成统一评估后才生成eval_scores20和eval_metrics。
