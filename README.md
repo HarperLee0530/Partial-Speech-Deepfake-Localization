@@ -1,6 +1,13 @@
 # PS 部分伪造语音定位：边界辅助双分辨率 CNN-BiGRU
 
-本实验分支新增[主方案＋5维能量对照](docs/energy5_experiment.txt)：只在20ms细分支投影前增加160个参数，正式两组结果待完成后报告。当前已发布主方案及下方四组历史结果保持原定义。
+本实验分支已完成[主方案＋5维能量对照](docs/results_energy5_20261115.txt)，**本轮不支持加入能量分支，原`boundary`主方案继续保留**。同预算、同初始化的两组各20轮，事件F1由55.65%降到54.10%，≤320ms召回由65.30%降到63.26%，真实时长FPR由4.02%升到5.20%；Frame F1虽从71.14%升到72.63%，事件定位与误报指标没有受益。完整独立审计通过；只有seed666且eval此前已分析，作为负收益消融归档。[全精度结果与4项bootstrap](docs/results_energy5_20261115.json) · [实验方法与运行步骤](docs/energy5_experiment.txt) · [新增两组权重清单](weights/energy5_manifest.json)。下方四组历史表及原权重保持原样。
+
+本轮实验单音频入口为[`predict_energy`](code/cnn_ps/predict_energy.py)。在`code/`运行以下命令；默认加载能量负收益消融，控制组显式指定checkpoint。两个权重均包含完整CNN、adapter、训练归一化统计和冻结的开发集阈值，不需要缓存或标签；原`predict_main`仍对应现有主方案。
+
+```powershell
+python -m cnn_ps.predict_energy --audio example.wav --output prediction_energy.json --device cpu
+python -m cnn_ps.predict_energy --audio example.wav --output prediction_control.json --checkpoint ../weights/boundary_control_energytrial_seed666.pt --device cpu
+```
 
 **当前主方案为 `boundary`：CNN-BiGRU＋信道增强＋双分辨率、局部交叉注意力、分歧门控＋边界辅助组合。** CNN与新增模块全部端到端训练，输出原生20ms伪造区间。
 

@@ -1,6 +1,8 @@
 PS 主方案能量5维对照（seed666，2026-11-15）
 
-状态：实现和64项测试已通过；正式两组结果待训练、冻结及评估后填写。
+状态：两组20轮、固定阈值测试和完整独立审计均已完成；69项测试通过。
+结果：事件F1 55.6473%→54.0989%，短召回65.2976%→63.2571%，真实时长FPR 4.0169%→5.2038%。
+本轮不支持加入现有主方案；energy5作为负收益消融保留。完整结果见docs/results_energy5_20261115.txt/.json。
 当前已发布主方案仍是boundary。本轮单独检验能量输入，不把旧冻结CNN韵律消融的收益直接叠加到它上面。
 
 两组
@@ -46,3 +48,8 @@ python -m cnn_ps.train_energy --evaluate --output D:\SAL_精简实验\result\ps_
 control的非零残差前向、损失、全部梯度和一次AdamW更新与原boundary相同；候选零初始化输出也相同。
 测试覆盖共同CPU/CUDA RNG、有效全0能量、尾部mask、开发集选模、冻结和测试不校准。
 旧韵律消融使用8轮冻结CNN和旧J选模，其能量事件F1增益约0.22点且区间跨0，仅用于提出本轮假设。
+
+独立音频推理（在code目录，使用新的输出文件）
+python -m cnn_ps.predict_energy --audio example.wav --output prediction_energy.json --device cpu
+python -m cnn_ps.predict_energy --audio example.wav --output prediction_control.json --checkpoint ../weights/boundary_control_energytrial_seed666.pt --device cpu
+默认checkpoint是本轮energy5负收益消融；并不替换原predict_main的主方案。权重包含全部CNN/adapter、train clean归一化与dev阈值。

@@ -1,0 +1,467 @@
+{
+  "schema": "ps_boundary_energy5_published_results_v1",
+  "experiment": "ps_boundary_energy5_20261115_run1",
+  "status": "complete_independent_audit_passed",
+  "conclusion_zh": "本轮不支持将5维能量加入现有主方案。保留原boundary主方案；energy5作为负收益消融存档。",
+  "metric_protocol": "ps_native20_event_v2",
+  "checkpoint_schema": "ps_boundary_energy5_v1",
+  "paired_conditions": {
+    "seed": 666,
+    "epochs": 20,
+    "batch_size": 8,
+    "model_config": {
+      "sample_rate": 16000,
+      "hop_length": 320,
+      "n_fft": 512,
+      "win_length": 400,
+      "n_mels": 80,
+      "channels": [
+        16,
+        32,
+        64
+      ],
+      "hidden_size": 128,
+      "gru_layers": 2,
+      "dropout": 0.4
+    },
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "gradient_clip": 5.0,
+    "losses": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "train_uids_sha256": "3b02c95393d0de6c632e7313312f53650879c369efe1923baf78566772b186f7",
+    "dev_uids_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+    "train_recordings": 6345,
+    "dev_recordings": 2484,
+    "train_cache_metadata_sha256": "e82d9fc9b2326c49222785f60ddb7aa564c6236d48c63823154c17480ac6170b",
+    "dev_cache_metadata_sha256": "31257179886083d2505e8ab6ecaa44b27370858e77681faf7b874519ea82c432",
+    "train_energy_metadata_sha256": "1d9db146c011e66ef0ca7b22975b1aac627c71e6029149dc49d9be059b817cab",
+    "dev_energy_metadata_sha256": "764139effdce0bd6193a347b6dd13eb99c41fcb2687f04a646ae5f33c37eda99",
+    "energy_normalization": {
+      "schema": "cnn_energy5_train_clean_normalization_v1",
+      "mean": [
+        -0.26264509669629477,
+        -0.0049428299183058,
+        -0.007933266629715786,
+        -0.07599386043890898,
+        0.9297363336781762
+      ],
+      "std": [
+        2.3806546785023235,
+        0.78312990607804,
+        0.9981665610333129,
+        1.6769730648093204,
+        0.6508921169661772
+      ],
+      "valid_train_frames": 1088513,
+      "feature_names": [
+        "log_rms_recording_centered",
+        "log_rms_delta",
+        "log_rms_minus_neighbours_220ms",
+        "log_rms_minus_neighbours_1020ms",
+        "log_rms_neighbour_std_220ms"
+      ],
+      "source": "train clean actual frames; equal frame weight; includes valid zero feature vectors",
+      "frontend_complete_sha256": "e82d9fc9b2326c49222785f60ddb7aa564c6236d48c63823154c17480ac6170b",
+      "energy_sha256": "e2f355fc8725376249ee35c4c31b1700d73ba02d3950cfe3e704b00c4f03d249",
+      "fit_split": "train",
+      "fit_channel": 0,
+      "std_floor": 0.0001,
+      "clip": [
+        -10.0,
+        10.0
+      ],
+      "padded_frames_in_statistics": false,
+      "normalization_applied_to_cache": false
+    },
+    "normalization_sha256": "a7b42ef9f48d66b87e4fd368346c9085ab0442203e49ddf4a5673ec5edeece8f",
+    "source_sha256": {
+      "train_energy.py": "23d66163ae5bab74305de8561b1be46bcfb48f06c208d425906de4a868e7f12c",
+      "energy_adapter.py": "535261271c8ef061df4078531e6f1e8f1dfbde6969143441feeebd89717fcf01",
+      "energy_cache.py": "40a970d2e45a093282f85ba81218022af1e84b75b324dbd16224b530e8781ac3",
+      "energy_features.py": "071ce5f4f0b504494cd0a5058a61ffa7f34d7fede2465611522292ac5ae6c424",
+      "train_four.py": "63aea5eb8a1ac8ced11df3920378c72e4bf16f5d5870cd469c60526ffcc22246",
+      "train_dual.py": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f",
+      "dual_resolution.py": "436b790170ffbd48caf69286969d996e693dc02feadb3a7833974d84c84361b9",
+      "backbone.py": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+      "finetune.py": "ef03f3224dab65713f6ca23000029b9381cd2105afa052cf2bca2208ef75a18e",
+      "dual_features.py": "7a755887889605e336c2aca94a7df4590383cb361bec89ef246abde31d22e53f",
+      "augmentation.py": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0",
+      "metrics20.py": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+      "report_native20.py": "40e4375ae49f1302b4bd35b4eb1c53683eea73eae17daa1f1cf3d8ea55a1e985"
+    },
+    "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+    "initial_adapter_sha256": "191e3d0728ff5a561474b49a9362bf6b88aeeb46892ca70ff289e9bc0af449c6",
+    "initial_common_adapter_sha256": "2ed04519cfed6e940c21b6022a1cab8d34cf87ed73f1d04bc0c8b4ea087af6f7"
+  },
+  "evaluation_recordings": 3562,
+  "selection": "For each epoch calibrate on dev genuine-duration FPR <= 5%, then maximize dev event F1; epoch0 eligible, earliest tie. Freeze both arms before test, no test calibration.",
+  "selected": {
+    "boundary_control": {
+      "epoch": 19,
+      "threshold": 0.42304700613021856,
+      "dev_event_f1_iou05_percent": 78.99109437570976,
+      "dev_real_duration_fpr_percent": 4.999637938733813,
+      "checkpoint_sha256": "713ad95193e88b221363d8bc0c4498924706f676a94e5b331397337913cf3741"
+    },
+    "boundary_energy5": {
+      "epoch": 19,
+      "threshold": -0.0468684434890747,
+      "dev_event_f1_iou05_percent": 78.21782178217822,
+      "dev_real_duration_fpr_percent": 4.999757511524136,
+      "checkpoint_sha256": "82102a7c684f9c38a3e00daae915001e90fdc41faf64312ecefb35fb4a3c8a64"
+    }
+  },
+  "models": {
+    "boundary_control": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 0.42304700613021856,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 70.97391547862433,
+      "duration_precision_percent": 90.16555735737651,
+      "duration_recall_percent": 58.51834805267492,
+      "duration_accuracy_percent": 81.51194566544771,
+      "real_fpr_percent": 4.016946087609746,
+      "spoof_fnr_percent": 41.48165194732508,
+      "confusion_seconds_tp_fp_fn_tn": [
+        2718.1488124999914,
+        296.47106250000235,
+        1926.8025624999782,
+        7084.037812499992
+      ],
+      "fake_seconds": 4644.95137499997,
+      "real_seconds": 7380.508874999994,
+      "fp_seconds": 296.47106250000235,
+      "fn_seconds": 1926.8025624999782,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 55.647273593142316,
+      "event_precision_percent": 50.91133541500254,
+      "event_recall_percent": 61.354686269362034,
+      "event_counts": {
+        "matched": 7011,
+        "predicted": 13771,
+        "truth": 11427,
+        "unmatched_predictions": 6760,
+        "missed_truth": 4416
+      },
+      "short_event_recall_le320ms_percent": 65.29763452040551,
+      "short_event_counts": {
+        "matched": 5024,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 2023.7063275811004,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 37,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 13.497000000000009,
+        "predicted_events": 89,
+        "false_alarm_recording_rate_percent": 10.136986301369863,
+        "duration_fpr_percent": 1.0893022880432588,
+        "unmatched_fp_events_per_hour": 258.58520640813504
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4126,
+          "recall_percent": 67.39627572688664
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 339,
+          "recall_percent": 55.30179445350734
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 559,
+          "recall_percent": 58.28988529718457
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 759,
+          "recall_percent": 56.43122676579926
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 1228,
+          "recall_percent": 51.42378559463987
+        }
+      },
+      "event_recall_le80ms_percent": 67.39627572688664,
+      "event_recall_le160ms_percent": 66.29547141796586,
+      "event_recall_le320ms_percent": 65.29763452040551,
+      "event_recall_le640ms_percent": 63.97831618541874,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 4.016946087609746,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        137227,
+        14846,
+        96488,
+        354489
+      ],
+      "frame_f1_percent": 71.14114487749748,
+      "eer_percent": 24.71303526505297,
+      "supplementary_native20": {
+        "duration_f1_percent": 70.97391547862433,
+        "frame_confusion_tp_fp_fn_tn": [
+          137227,
+          14846,
+          96488,
+          354489
+        ],
+        "frame_f1_percent": 71.14114487749748,
+        "eer_percent": 24.71303526505297,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "boundary_energy5": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": -0.0468684434890747,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 72.48914971321422,
+      "duration_precision_percent": 88.15720484665364,
+      "duration_recall_percent": 61.54996213496446,
+      "duration_accuracy_percent": 81.9545274784806,
+      "real_fpr_percent": 5.203781595615279,
+      "spoof_fnr_percent": 38.45003786503555,
+      "confusion_seconds_tp_fp_fn_tn": [
+        2858.9658124999924,
+        384.065562500001,
+        1785.9855624999775,
+        6996.443312499975
+      ],
+      "fake_seconds": 4644.95137499997,
+      "real_seconds": 7380.508874999976,
+      "fp_seconds": 384.065562500001,
+      "fn_seconds": 1785.9855624999775,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 54.09887115609187,
+      "event_precision_percent": 48.720465540208934,
+      "event_recall_percent": 60.81211166535399,
+      "event_counts": {
+        "matched": 6949,
+        "predicted": 14263,
+        "truth": 11427,
+        "unmatched_predictions": 7314,
+        "missed_truth": 4478
+      },
+      "short_event_recall_le320ms_percent": 63.25708344164284,
+      "short_event_counts": {
+        "matched": 4867,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 2189.554449693516,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 60,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 14.045437499999974,
+        "predicted_events": 120,
+        "false_alarm_recording_rate_percent": 16.438356164383563,
+        "duration_fpr_percent": 1.1335650296598168,
+        "unmatched_fp_events_per_hour": 348.6542108873731
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 3910,
+          "recall_percent": 63.86801698791245
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 357,
+          "recall_percent": 58.23817292006525
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 600,
+          "recall_percent": 62.56517205422315
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 800,
+          "recall_percent": 59.479553903345725
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 1282,
+          "recall_percent": 53.685092127303186
+        }
+      },
+      "event_recall_le80ms_percent": 63.86801698791245,
+      "event_recall_le160ms_percent": 63.355605048255384,
+      "event_recall_le320ms_percent": 63.25708344164284,
+      "event_recall_le640ms_percent": 62.69498838367076,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 5.203781595615279,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        144231,
+        19221,
+        89484,
+        350114
+      ],
+      "frame_f1_percent": 72.62990127578576,
+      "eer_percent": 25.10239103340865,
+      "supplementary_native20": {
+        "duration_f1_percent": 72.48914971321422,
+        "frame_confusion_tp_fp_fn_tn": [
+          144231,
+          19221,
+          89484,
+          350114
+        ],
+        "frame_f1_percent": 72.62990127578576,
+        "eer_percent": 25.10239103340865,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    }
+  },
+  "delta_energy_minus_control_percentage_points": {
+    "event_precision_percent": -2.1908698747936057,
+    "event_recall_percent": -0.5425746040080455,
+    "event_f1_iou05_percent": -1.5484024370504486,
+    "short_event_recall_le320ms_percent": -2.040551078762668,
+    "real_duration_fpr_percent": 1.186835508005533,
+    "fully_genuine_false_alarm_recording_rate_percent": 6.301369863013701,
+    "frame_f1_percent": 1.4887563982882739,
+    "duration_f1_percent": 1.515234234589883,
+    "eer_percent": 0.3893557683556814
+  },
+  "matched_event_delta_by_duration_bin": {
+    "le80ms": -216,
+    "gt80_le160ms": 18,
+    "gt160_le320ms": 41,
+    "gt320_le640ms": 41,
+    "gt640ms": 54
+  },
+  "paired_bootstrap": {
+    "treatment": "boundary_energy5",
+    "reference": "boundary_control",
+    "metrics": {
+      "event_f1_iou05_percent": {
+        "observed_delta_percentage_points": -1.5484024370504486,
+        "percentile_95_ci_percentage_points": [
+          -2.398943919213594,
+          -0.7400140672512049
+        ],
+        "bootstrap_fraction_delta_positive": 0.0005,
+        "valid_replicates": 2000,
+        "undefined_replicates": 0,
+        "favorable_direction": "positive"
+      },
+      "short_event_recall_le320ms_percent": {
+        "observed_delta_percentage_points": -2.040551078762668,
+        "percentile_95_ci_percentage_points": [
+          -3.2213581136864904,
+          -0.8754156506373669
+        ],
+        "bootstrap_fraction_delta_positive": 0.0,
+        "valid_replicates": 2000,
+        "undefined_replicates": 0,
+        "favorable_direction": "positive"
+      },
+      "real_duration_fpr_percent": {
+        "observed_delta_percentage_points": 1.1868355080055197,
+        "percentile_95_ci_percentage_points": [
+          0.8672299067067794,
+          1.5040293523561168
+        ],
+        "bootstrap_fraction_delta_positive": 1.0,
+        "valid_replicates": 2000,
+        "undefined_replicates": 0,
+        "favorable_direction": "negative"
+      },
+      "fully_genuine_false_alarm_recording_rate_percent": {
+        "observed_delta_percentage_points": 6.301369863013701,
+        "percentile_95_ci_percentage_points": [
+          2.652169957237741,
+          10.165283476314805
+        ],
+        "bootstrap_fraction_delta_positive": 1.0,
+        "valid_replicates": 2000,
+        "undefined_replicates": 0,
+        "favorable_direction": "negative"
+      }
+    },
+    "repetitions": 2000,
+    "seed": 666,
+    "recordings": 3562,
+    "resampling_unit": "recording",
+    "paired": true,
+    "interval": "Unadjusted percentile 95%; exploratory multiple comparisons",
+    "limitation": "One trained seed; intervals condition on these fixed models and do not cover training-seed variability, speaker/source clustering or prior inspection of this test subset. Positive fraction is not a formal p value."
+  },
+  "training_audit": {
+    "status": "passed",
+    "all_forty_two_archives_audited": true,
+    "initial_CNN_and_adapter_tensors_equal": true,
+    "epoch_zero_dev_scores_bitwise_equal": true,
+    "all_dev_metrics_and_thresholds_independently_recomputed": true,
+    "energy_cache_hashes_and_masks_verified": true,
+    "energy_normalization_independently_recomputed": true,
+    "experiment_plan_sha256": "c01bfdfc0ed153b09e1a3c1a1ce125312bada7c6f3b483367f3d3fe70b26a274",
+    "limitation": "Audits saved scores and checkpoint contents; no new model/audio forward pass.",
+    "historical_control_replay": {
+      "descriptive_only": true,
+      "epochs_compared": 21,
+      "all_dev_logits_bitwise_equal": true
+    }
+  },
+  "evaluation_audit": {
+    "status": "passed",
+    "recordings": 3562,
+    "reference_label_sha256": "c2c4304e728aebd5f6336e37f400b450c13c27fd1760777dbb7f1106c073284b",
+    "uid_order_sha256": "203792d5718e75e54614ad005386a3037cd9ddb83dd6dc7a93266dfc9c4252b1",
+    "frozen_thresholds_preserved": true,
+    "all_per_recording_counts_recomputed": true
+  },
+  "verification": {
+    "unittest_passed": 69,
+    "unittest_seconds": 8.877,
+    "final_cpu_cli": "One clean dev recording, both arms: CLI exit0; thresholds, frame decisions and event intervals matched archived GPU results. Floating point logits are not claimed bitwise equal across devices.",
+    "final_cpu_vs_archived_gpu_max_absolute_logit_error": {
+      "boundary_control": 2.288818359375e-05,
+      "boundary_energy5": 3.0517578125e-05
+    },
+    "final_cpu_cli_validation_sha256": "16d2914c713b100027b418eef684079c8edf403ae11653d64459d3706284a8a3"
+  },
+  "provenance_sha256": {
+    "comparison": "0e4fefdd696bc78aef37c1eb7214ba93d25eba34740eb20d1c81121872981d9a",
+    "frozen_eval_plan": "a305bf886fa30ed016f6fc021df6808afabd810ec0034cff3cc3706842fb089f",
+    "experiment_plan": "c01bfdfc0ed153b09e1a3c1a1ce125312bada7c6f3b483367f3d3fe70b26a274",
+    "independent_audit": "56ebc293dc1f462082e0655adebafc30b5caf0428fbeeac70bab81d2f30b57d4",
+    "independent_audit_source": "e837611867a54edaf61322f4a2f0cb60b74525f3c20135a2f9d478f3ad12835a",
+    "eval_cache_metadata": "d3692a8de70ef2782f9b297c1d075cb86885ec2f29f227efd2881e0391840bdd",
+    "eval_energy_cache_metadata": "1ee9c504cb71f48eab3cc6723c35c8b2004114456f1bffc0a2eea344f18313d9"
+  },
+  "limitations_zh": [
+    "只有seed666，PS eval3562此前已经分析；这是探索性同条件对照，不是新盲测。",
+    "2000次录音配对bootstrap为未作多重比较校正的95%百分位区间；不覆盖训练seed方差或说话人/来源聚类。",
+    "开发集FPR约束不保证测试集也<=5%；不得用测试标签重新调阈值。",
+    "分桶和未匹配数量描述现象，不能据此断言某种声学机制、边界偏移或碎裂是原因。",
+    "旧冻结CNN+小修正头的韵律消融与本轮全参数boundary训练条件不同，不能把历史帧F1收益直接外推。"
+  ]
+}

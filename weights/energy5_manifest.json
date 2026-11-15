@@ -1,0 +1,242 @@
+{
+  "schema": "ps_boundary_energy5_weights_v1",
+  "status": "independently_audited",
+  "experiment": "ps_boundary_energy5_20261115_run1",
+  "primary_method_unchanged": "boundary",
+  "note": "These are paired experimental checkpoints. Energy5 is retained as a negative ablation; it does not replace the existing primary method or weights/manifest.json.",
+  "checkpoint_contents": [
+    "complete CNN state",
+    "complete adapter state",
+    "train-clean energy normalization",
+    "dev-selected logit threshold",
+    "training protocol",
+    "selected dev metrics"
+  ],
+  "frozen_eval_plan_sha256": "a305bf886fa30ed016f6fc021df6808afabd810ec0034cff3cc3706842fb089f",
+  "comparison_sha256": "0e4fefdd696bc78aef37c1eb7214ba93d25eba34740eb20d1c81121872981d9a",
+  "independent_audit_sha256": "56ebc293dc1f462082e0655adebafc30b5caf0428fbeeac70bab81d2f30b57d4",
+  "models": {
+    "boundary_control": {
+      "file": "boundary_control_energytrial_seed666.pt",
+      "sha256": "713ad95193e88b221363d8bc0c4498924706f676a94e5b331397337913cf3741",
+      "bytes": 4323624,
+      "role": "paired_control",
+      "checkpoint_schema": "ps_boundary_energy5_v1",
+      "seed": 666,
+      "selected_epoch": 19,
+      "threshold_logit": 0.42304700613021856,
+      "threshold_comparison": "score.astype(float64) >= threshold_logit",
+      "energy_enabled": false,
+      "model_config": {
+        "sample_rate": 16000,
+        "hop_length": 320,
+        "n_fft": 512,
+        "win_length": 400,
+        "n_mels": 80,
+        "channels": [
+          16,
+          32,
+          64
+        ],
+        "hidden_size": 128,
+        "gru_layers": 2,
+        "dropout": 0.4
+      },
+      "adapter_options": {
+        "variant": "fusion",
+        "normalize_mode": "layernorm",
+        "learned_pool": true,
+        "boundary_head": true,
+        "relative_position": false,
+        "reliability_gate": false
+      },
+      "nominal_parameters": 937174,
+      "trainable_parameters": 937014,
+      "energy_normalization": {
+        "schema": "cnn_energy5_train_clean_normalization_v1",
+        "mean": [
+          -0.26264509669629477,
+          -0.0049428299183058,
+          -0.007933266629715786,
+          -0.07599386043890898,
+          0.9297363336781762
+        ],
+        "std": [
+          2.3806546785023235,
+          0.78312990607804,
+          0.9981665610333129,
+          1.6769730648093204,
+          0.6508921169661772
+        ],
+        "valid_train_frames": 1088513,
+        "feature_names": [
+          "log_rms_recording_centered",
+          "log_rms_delta",
+          "log_rms_minus_neighbours_220ms",
+          "log_rms_minus_neighbours_1020ms",
+          "log_rms_neighbour_std_220ms"
+        ],
+        "source": "train clean actual frames; equal frame weight; includes valid zero feature vectors",
+        "frontend_complete_sha256": "e82d9fc9b2326c49222785f60ddb7aa564c6236d48c63823154c17480ac6170b",
+        "energy_sha256": "e2f355fc8725376249ee35c4c31b1700d73ba02d3950cfe3e704b00c4f03d249",
+        "fit_split": "train",
+        "fit_channel": 0,
+        "std_floor": 0.0001,
+        "clip": [
+          -10.0,
+          10.0
+        ],
+        "padded_frames_in_statistics": false,
+        "normalization_applied_to_cache": false
+      },
+      "normalization_sha256": "a7b42ef9f48d66b87e4fd368346c9085ab0442203e49ddf4a5673ec5edeece8f",
+      "source_sha256": {
+        "train_energy.py": "23d66163ae5bab74305de8561b1be46bcfb48f06c208d425906de4a868e7f12c",
+        "energy_adapter.py": "535261271c8ef061df4078531e6f1e8f1dfbde6969143441feeebd89717fcf01",
+        "energy_cache.py": "40a970d2e45a093282f85ba81218022af1e84b75b324dbd16224b530e8781ac3",
+        "energy_features.py": "071ce5f4f0b504494cd0a5058a61ffa7f34d7fede2465611522292ac5ae6c424",
+        "train_four.py": "63aea5eb8a1ac8ced11df3920378c72e4bf16f5d5870cd469c60526ffcc22246",
+        "train_dual.py": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f",
+        "dual_resolution.py": "436b790170ffbd48caf69286969d996e693dc02feadb3a7833974d84c84361b9",
+        "backbone.py": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+        "finetune.py": "ef03f3224dab65713f6ca23000029b9381cd2105afa052cf2bca2208ef75a18e",
+        "dual_features.py": "7a755887889605e336c2aca94a7df4590383cb361bec89ef246abde31d22e53f",
+        "augmentation.py": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0",
+        "metrics20.py": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+        "report_native20.py": "40e4375ae49f1302b4bd35b4eb1c53683eea73eae17daa1f1cf3d8ea55a1e985"
+      },
+      "complete_sha256": "878f23446dd3e0f9ea6f71377b94103f4d401d71ab9ed5686a2b5e947c0fa82f",
+      "protocol_sha256": "9dc344f8bc4c038a4f9c5b9a00988256059f5fea834ae70b0bca68601775f6d6",
+      "dev_scores20_sha256": "de9c4331fb600ef560b366af90b6f9aef421542bcd252be587ec03a85683f5b3",
+      "dev_metrics_sha256": "9659a62bb4a0beb6db9ec92fd4c2ba61ba44672b18322e9de88500e7ae6de1c5",
+      "eval_scores20_sha256": "832e122351f6f137b79d59af9b8a408a67db3b4fa24a8fe73ec755cbc314cd42",
+      "eval_metrics_sha256": "b6641dc1e5a0ec04697968654306211c5f63afa51f45cf1f817ef06530508470",
+      "selected_dev_metrics": {
+        "dev_event_f1_iou05_percent": 78.99109437570976,
+        "dev_real_duration_fpr_percent": 4.999637938733813
+      },
+      "test_metrics_percent": {
+        "event_precision_percent": 50.91133541500254,
+        "event_recall_percent": 61.354686269362034,
+        "event_f1_iou05_percent": 55.647273593142316,
+        "short_event_recall_le320ms_percent": 65.29763452040551,
+        "real_duration_fpr_percent": 4.016946087609746,
+        "fully_genuine_false_alarm_recording_rate_percent": 10.136986301369863,
+        "frame_f1_percent": 71.14114487749748,
+        "duration_f1_percent": 70.97391547862433,
+        "eer_percent": 24.71303526505297
+      }
+    },
+    "boundary_energy5": {
+      "file": "boundary_energy5_seed666.pt",
+      "sha256": "82102a7c684f9c38a3e00daae915001e90fdc41faf64312ecefb35fb4a3c8a64",
+      "bytes": 4323624,
+      "role": "negative_ablation_not_primary",
+      "checkpoint_schema": "ps_boundary_energy5_v1",
+      "seed": 666,
+      "selected_epoch": 19,
+      "threshold_logit": -0.0468684434890747,
+      "threshold_comparison": "score.astype(float64) >= threshold_logit",
+      "energy_enabled": true,
+      "model_config": {
+        "sample_rate": 16000,
+        "hop_length": 320,
+        "n_fft": 512,
+        "win_length": 400,
+        "n_mels": 80,
+        "channels": [
+          16,
+          32,
+          64
+        ],
+        "hidden_size": 128,
+        "gru_layers": 2,
+        "dropout": 0.4
+      },
+      "adapter_options": {
+        "variant": "fusion",
+        "normalize_mode": "layernorm",
+        "learned_pool": true,
+        "boundary_head": true,
+        "relative_position": false,
+        "reliability_gate": false
+      },
+      "nominal_parameters": 937174,
+      "trainable_parameters": 937174,
+      "energy_normalization": {
+        "schema": "cnn_energy5_train_clean_normalization_v1",
+        "mean": [
+          -0.26264509669629477,
+          -0.0049428299183058,
+          -0.007933266629715786,
+          -0.07599386043890898,
+          0.9297363336781762
+        ],
+        "std": [
+          2.3806546785023235,
+          0.78312990607804,
+          0.9981665610333129,
+          1.6769730648093204,
+          0.6508921169661772
+        ],
+        "valid_train_frames": 1088513,
+        "feature_names": [
+          "log_rms_recording_centered",
+          "log_rms_delta",
+          "log_rms_minus_neighbours_220ms",
+          "log_rms_minus_neighbours_1020ms",
+          "log_rms_neighbour_std_220ms"
+        ],
+        "source": "train clean actual frames; equal frame weight; includes valid zero feature vectors",
+        "frontend_complete_sha256": "e82d9fc9b2326c49222785f60ddb7aa564c6236d48c63823154c17480ac6170b",
+        "energy_sha256": "e2f355fc8725376249ee35c4c31b1700d73ba02d3950cfe3e704b00c4f03d249",
+        "fit_split": "train",
+        "fit_channel": 0,
+        "std_floor": 0.0001,
+        "clip": [
+          -10.0,
+          10.0
+        ],
+        "padded_frames_in_statistics": false,
+        "normalization_applied_to_cache": false
+      },
+      "normalization_sha256": "a7b42ef9f48d66b87e4fd368346c9085ab0442203e49ddf4a5673ec5edeece8f",
+      "source_sha256": {
+        "train_energy.py": "23d66163ae5bab74305de8561b1be46bcfb48f06c208d425906de4a868e7f12c",
+        "energy_adapter.py": "535261271c8ef061df4078531e6f1e8f1dfbde6969143441feeebd89717fcf01",
+        "energy_cache.py": "40a970d2e45a093282f85ba81218022af1e84b75b324dbd16224b530e8781ac3",
+        "energy_features.py": "071ce5f4f0b504494cd0a5058a61ffa7f34d7fede2465611522292ac5ae6c424",
+        "train_four.py": "63aea5eb8a1ac8ced11df3920378c72e4bf16f5d5870cd469c60526ffcc22246",
+        "train_dual.py": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f",
+        "dual_resolution.py": "436b790170ffbd48caf69286969d996e693dc02feadb3a7833974d84c84361b9",
+        "backbone.py": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+        "finetune.py": "ef03f3224dab65713f6ca23000029b9381cd2105afa052cf2bca2208ef75a18e",
+        "dual_features.py": "7a755887889605e336c2aca94a7df4590383cb361bec89ef246abde31d22e53f",
+        "augmentation.py": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0",
+        "metrics20.py": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+        "report_native20.py": "40e4375ae49f1302b4bd35b4eb1c53683eea73eae17daa1f1cf3d8ea55a1e985"
+      },
+      "complete_sha256": "db9ff50967cba2a207eb1739deb9a69e9d11bd938ba67d2fe5d71adeafa5be89",
+      "protocol_sha256": "d1970fdf6a4b1288ebc9aa16c7c398c12e53f044070cb1c4fabf21d5dbc7eeb9",
+      "dev_scores20_sha256": "83c387d7397edf2d56824a633f9aa250f17facdac56915f643e7ca9bf5745311",
+      "dev_metrics_sha256": "ecf5aff9f5785de3096555eccfe5974363605f1e1db9fea209dafac979944d20",
+      "eval_scores20_sha256": "313d8486cd3a2b6e194569779a72c40b8895cafca6d8e23502a06268464fcbd9",
+      "eval_metrics_sha256": "bd0966d6de254bae8126e16b1c558274c579c1f70044f718f9e25266d1d8b165",
+      "selected_dev_metrics": {
+        "dev_event_f1_iou05_percent": 78.21782178217822,
+        "dev_real_duration_fpr_percent": 4.999757511524136
+      },
+      "test_metrics_percent": {
+        "event_precision_percent": 48.720465540208934,
+        "event_recall_percent": 60.81211166535399,
+        "event_f1_iou05_percent": 54.09887115609187,
+        "short_event_recall_le320ms_percent": 63.25708344164284,
+        "real_duration_fpr_percent": 5.203781595615279,
+        "fully_genuine_false_alarm_recording_rate_percent": 16.438356164383563,
+        "frame_f1_percent": 72.62990127578576,
+        "duration_f1_percent": 72.48914971321422,
+        "eer_percent": 25.10239103340865
+      }
+    }
+  }
+}

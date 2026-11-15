@@ -27,3 +27,7 @@ desktop.ini
 !/weights/cnn_aug_ps_eventf1_seed666.pt
 !/weights/cnn_dual_ps_eventf1_seed666.pt
 !/weights/cnn_boundary_ps_eventf1_seed666.pt
+
+# Paired energy5 experiment; these do not replace the primary checkpoint.
+!/weights/boundary_control_energytrial_seed666.pt
+!/weights/boundary_energy5_seed666.pt
