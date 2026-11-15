@@ -21,3 +21,13 @@ __pycache__/
 *.tar.gz
 Thumbs.db
 desktop.ini
+
+# Explicitly published CNN checkpoints; other model artifacts remain ignored.
+!/weights/original_cnn.pt
+!/weights/cnn_finetuned_seed666.pt
+!/weights/head_clean_erm_seed666.pt
+!/weights/head_clean_erm_seed667.pt
+!/weights/head_clean_erm_seed668.pt
+!/weights/head_aug_erm_seed666.pt
+!/weights/head_aug_erm_seed667.pt
+!/weights/head_aug_erm_seed668.pt

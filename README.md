@@ -55,6 +55,8 @@ h → 按 train 统计量归一化并截断 → Linear(256,32) → Tanh → Line
 
 [完整新结果及逐轮dev记录](docs/results_cnn_finetune_seed666.json)、[训练前固定的对比协议](docs/protocol_cnn_finetune_seed666.json)、[独立逐帧分数复算](docs/verification_finetune_result.json)。原结构911,521参数不变，无新增头；26个参数张量均有更新。所有模型测试UID完全一致，模型与阈值未根据eval调整。
 
+权重获取和模型用途见 [weights/README.md](weights/README.md)；所有文件SHA256见 [weights/manifest.json](weights/manifest.json)。
+
 ## 代码与环境
 
 | 文件（位于 `code/cnn_ps/`） | 职责 |
@@ -79,7 +81,7 @@ Setup不下载数据或开始训练。GPU需要匹配的PyTorch/torchaudio CUDA�
 
 ## 数据与原权重
 
-音频、标签、权重和大缓存不提交Git。使用组内已有文件，或按[PS公开资源清单](code/manifests/ps_sources.json)获取官方数据。不需要WavLM/SAL权重。
+**CNN权重现在随仓库提供，位于 [weights/](weights/README.md)**：原CNN、直接微调CNN、三种子增强头和原声头对照。组员训练新方案应从 `weights/original_cnn.pt` 开始。音频、标签和大缓存仍不提交Git，可使用组内已有文件，或按[PS公开资源清单](code/manifests/ps_sources.json)获取官方数据。无需WavLM/SAL权重，也无需寻找旧 `result/` 目录。
 
 历史原权重 `cnn_bigru_train_20261109_203335_588602_best.pt` 的 SHA256 为：
 `36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428`。
@@ -97,15 +99,15 @@ python -m cnn_ps.manifests labels20 --archive ../data/database_segment_labels_v1
 
 ## 主方案复现
 
-将上述原权重放到 `../data/models/original_cnn.pt` 并核对哈希；路径可替换。
+原权重已包含在 `../weights/original_cnn.pt`，核对哈希即可使用。下列命令从 `code/` 目录运行。
 
 ```powershell
-python -m cnn_ps.prepare --manifest ../data/manifests_ps/train.json --labels20 ../data/labels20/train.npz --labels20-encoding fake --checkpoint ../data/models/original_cnn.pt --output ../cache/train --channels --device cuda
-python -m cnn_ps.prepare --manifest ../data/manifests_ps/dev.json --labels20 ../data/labels20/dev.npz --labels20-encoding fake --checkpoint ../data/models/original_cnn.pt --output ../cache/dev --device cuda
+python -m cnn_ps.prepare --manifest ../data/manifests_ps/train.json --labels20 ../data/labels20/train.npz --labels20-encoding fake --checkpoint ../weights/original_cnn.pt --output ../cache/train --channels --device cuda
+python -m cnn_ps.prepare --manifest ../data/manifests_ps/dev.json --labels20 ../data/labels20/dev.npz --labels20-encoding fake --checkpoint ../weights/original_cnn.pt --output ../cache/dev --device cuda
 python -m cnn_ps.train_head --train-cache ../cache/train --dev-cache ../cache/dev --channel-cache ../cache/train --output ../result/head_run1 --arms aug_erm clean_erm --seeds 666 667 668
 
 # 冻结训练结果后再准备并评估eval。
-python -m cnn_ps.prepare --manifest ../data/manifests_ps/eval.json --labels20 ../data/labels20/eval.npz --labels20-encoding fake --checkpoint ../data/models/original_cnn.pt --output ../cache/eval --device cuda
+python -m cnn_ps.prepare --manifest ../data/manifests_ps/eval.json --labels20 ../data/labels20/eval.npz --labels20-encoding fake --checkpoint ../weights/original_cnn.pt --output ../cache/eval --device cuda
 python -m cnn_ps.evaluate --dev-cache ../cache/dev --eval-cache ../cache/eval --heads ../result/head_run1/aug_erm_seed666/b_model.pt ../result/head_run1/aug_erm_seed667/b_model.pt ../result/head_run1/aug_erm_seed668/b_model.pt --output ../result/head_eval1 --native20
 ```
 
@@ -114,7 +116,7 @@ python -m cnn_ps.evaluate --dev-cache ../cache/dev --eval-cache ../cache/eval --
 统一160 ms主表EER为sklearn ROC最近交点处平均FPR/FNR。事件IoU≥0.5，先最大化一对一匹配数再最大化IoU；160 ms预测区间对真实20 ms事件，短事件≤320 ms。20 ms时长指标和160 ms帧计数指标不能混用。原CNN从头训练沿用历史genuine-positive EER选模，与主表EER分开记录。
 
 ```powershell
-python -m cnn_ps.predict --audio ../data/example.wav --checkpoint ../data/models/original_cnn.pt --output ../result/example_original.json
+python -m cnn_ps.predict --audio ../data/example.wav --checkpoint ../weights/original_cnn.pt --output ../result/example_original.json
 python -m cnn_ps.predict --help
 ```
 
@@ -125,7 +127,7 @@ python -m cnn_ps.predict --help
 加载同一原CNN并开放全部参数，不加新头。整段训练，不裁剪；同样三种信道及20/160 ms双尺度损失。默认seed666、8轮、batch8条录音、AdamW学习率0.0001，按上述20 ms dev规则选模，epoch0可选。
 
 ```powershell
-python -m cnn_ps.finetune --checkpoint ../data/models/original_cnn.pt --expected-sha256 36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428 --train-manifest ../data/manifests_ps/train.json --dev-manifest ../data/manifests_ps/dev.json --train-labels20 ../data/labels20/train.npz --dev-labels20 ../data/labels20/dev.npz --output ../result/cnn_finetune1 --device cuda
+python -m cnn_ps.finetune --checkpoint ../weights/original_cnn.pt --expected-sha256 36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428 --train-manifest ../data/manifests_ps/train.json --dev-manifest ../data/manifests_ps/dev.json --train-labels20 ../data/labels20/train.npz --dev-labels20 ../data/labels20/dev.npz --output ../result/cnn_finetune1 --device cuda
 python -m cnn_ps.evaluate_cnn --run ../result/cnn_finetune1 --dev-manifest ../data/manifests_ps/dev.json --dev-labels20 ../data/labels20/dev.npz --eval-manifest ../data/manifests_ps/eval.json --eval-labels20 ../data/labels20/eval.npz --output ../result/cnn_finetune_eval1 --device cuda
 ```
 
