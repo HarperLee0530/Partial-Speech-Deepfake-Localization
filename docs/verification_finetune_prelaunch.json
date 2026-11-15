@@ -1,0 +1,53 @@
+{
+  "recordings": 2,
+  "trainable_parameters": 911521,
+  "label_duration_alignment": {
+    "labels": true,
+    "weights": true,
+    "fine_labels": true,
+    "fine_weights": true
+  },
+  "channel_schedule": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      0
+    ]
+  ],
+  "all_three_channels_per_record": true,
+  "loss_absolute_error": 0.0,
+  "gradient_parameter_count": 26,
+  "all_gradients_finite": true,
+  "gradient_norms": {
+    "input_norm.weight": 1.8790159225463867,
+    "blocks.0.0.weight": 1.5656455755233765,
+    "gru.weight_ih_l0": 0.3882680833339691,
+    "classifier.weight": 0.8062983155250549
+  },
+  "eval_dropout_disabled": true,
+  "status": "passed",
+  "scope": "Prelaunch code review and one CPU backward pass on two PS recordings; not a completed training experiment",
+  "source_sha256": "e76dc75519e8e8c4769a084c75b8c8f509e2761c25bc0e6a3a8f15fb89dd8321",
+  "static_review": {
+    "full_original_cnn_trainable": true,
+    "residual_head_absent": true,
+    "whole_waveform_transform_before_padding": true,
+    "actual_fine_labels_used": true,
+    "padding_has_zero_loss_weight": true,
+    "dev_unaugmented": true,
+    "eval_split_not_read": true,
+    "epoch_zero_eligible": true,
+    "checkpoint_selected_on_dev_only": true
+  },
+  "limitations": [
+    "One pilot seed does not establish repeatability.",
+    "A comparison to the untouched CNN changes both supervision and channel exposure. A clean full-CNN fine-tuning control is required to isolate augmentation effects."
+  ]
+}

@@ -1,6 +1,0 @@
-{
-  "repository": "https://github.com/SentryMao/SAL",
-  "commit": "b4e80d1d2fd98f3d8b9a85a47837ab3a73e12485",
-  "official_source_modified": false,
-  "wrapper_scope": "path configuration, orchestration, saving predictions, original metrics"
-}

@@ -1,0 +1,57 @@
+{
+  "status": "pass",
+  "scope": "Read-only historical checkpoint inference and synthetic regression; not an eight-epoch retraining claim",
+  "original_backbone_checkpoint_sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+  "train_records": 6345,
+  "dev_records": 2484,
+  "trainable_head_parameters": 8257,
+  "comparisons": {
+    "historical_seed_initialization_exact": [
+      666,
+      667,
+      668
+    ],
+    "original_train_context_statistics_exact": true,
+    "historical_head_native_coarse_uniform_weights_exact": true,
+    "augmented_batch_objective_exact": true,
+    "one_adamw_update_after_gradient_clipping_exact": true
+  },
+  "historical_dev_replays": [
+    {
+      "seed": 666,
+      "checkpoint_sha256": "ac137c3092964ddd9fb9733e675a28d3de7267f545294ec533a653a9255c4f18",
+      "dev_prediction_cells": 442776,
+      "stored_prediction_sha256": "2e491045ce410907edcd2023fa4d13cea35fc98a8a714cffb9bd4903855d2fcd",
+      "new_prediction_matches_stored_array_exactly": true,
+      "maximum_absolute_difference": 0.0
+    },
+    {
+      "seed": 667,
+      "checkpoint_sha256": "0a3de4ef428c89fed818b293b7234cf21fb05f59afce8f60736a8f63d45518ae",
+      "dev_prediction_cells": 442776,
+      "stored_prediction_sha256": "1de8be1072450796a7165b11fed6cf7dc99af0b6e3bdba17448e23db93ed4ce8",
+      "new_prediction_matches_stored_array_exactly": true,
+      "maximum_absolute_difference": 0.0
+    },
+    {
+      "seed": 668,
+      "checkpoint_sha256": "c85fb4f773093021280d44c0e33b59e07b62627e8c0889eeece48316091b9060",
+      "dev_prediction_cells": 442776,
+      "stored_prediction_sha256": "5718af0d1ed8bfaa3982662953e9e11168b70fbb1dbf4a0de6c92fc00d5379c6",
+      "new_prediction_matches_stored_array_exactly": true,
+      "maximum_absolute_difference": 0.0
+    }
+  ],
+  "synthetic_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "count": 10,
+    "status": "pass",
+    "includes": "Both arms complete eight tiny synthetic epochs, save/reload checkpoints, and reject output overwrite"
+  },
+  "source_sha256": {
+    "code/cnn_ps/head.py": "a9d7379b93d45224a7a607160e00ab38c5176226d05f74a3aaa1cd6ff23f998e",
+    "code/cnn_ps/cached_data.py": "bfe5327ddaa9b4f1775e5b04aa0618acef33bdba192afa24de69f7506046eddc",
+    "code/cnn_ps/train_head.py": "d1b5cb4461e5a7fcde19280ea424abb039a5e2defc26a05f202eea9e3d49d086",
+    "code/tests/test_cnn_ps.py": "461b8c44cc5462fb4572f0696d475dc109992fec81ec95d880ab3bd1b65d92a6"
+  }
+}

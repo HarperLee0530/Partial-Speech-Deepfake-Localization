@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "scope": "Standalone PS waveform augmentation and frozen cache preparation; not new research scores",
+  "checkpoint_sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+  "source_sha256": {
+    "prepare.py": "433e056dfc69ad1c0c2acd4fe524d5ae182354bc2abe084d1a5acddf9ccf0738",
+    "augmentation.py": "916e78b88fcd3aced88f48813627bf2fe746b10f2b44c25446cf4cda78d4da76"
+  },
+  "smoke": {
+    "recordings": 2,
+    "uids": [
+      "CON_T_0000012",
+      "CON_T_0000013"
+    ],
+    "views": 3,
+    "device": "cpu",
+    "batch_size": 2,
+    "threads": 2,
+    "waveform_old_new_exact": {
+      "0": true,
+      "1": true,
+      "2": true
+    },
+    "cache": {
+      "native": {
+        "exact": false,
+        "max_abs": 2.86102294921875e-05
+      },
+      "context": {
+        "exact": false,
+        "max_abs": 0.00048828125
+      },
+      "labels": {
+        "exact": true,
+        "max_abs": 0.0
+      },
+      "weights": {
+        "exact": true,
+        "max_abs": 0.0
+      },
+      "fine_labels": {
+        "exact": true,
+        "max_abs": 0.0
+      },
+      "fine_weights": {
+        "exact": true,
+        "max_abs": 0.0
+      },
+      "native_channels": {
+        "exact": false,
+        "max_abs": 2.86102294921875e-05
+      },
+      "context_channels": {
+        "exact": false,
+        "max_abs": 0.00048828125
+      }
+    },
+    "metadata_equal": {
+      "uids": true,
+      "lengths": true,
+      "lengths20": true,
+      "durations": true
+    },
+    "cached_data_load": 37
+  },
+  "full_manifest_metadata_validation": {
+    "train": {
+      "recordings": 6345,
+      "coarse_blocks": 138796
+    },
+    "dev": {
+      "recordings": 2484,
+      "coarse_blocks": 55347
+    },
+    "eval": {
+      "recordings": 3562,
+      "coarse_blocks": 76925
+    }
+  },
+  "noise_test": {
+    "measured_snr_db": 19.999999992822993,
+    "repeat_exact": true,
+    "silence_finite": true
+  },
+  "official_real_positive_npy_and_exported_fake_positive_npz_labels_identical": true,
+  "existing_output_cache_not_overwritten": true,
+  "limitations": [
+    "CPU regeneration differs slightly from historical caches: maximum 2.8611e-5 logit and 4.8829e-4 float16 context error on these two recordings.",
+    "Waveform transformations match the old implementation exactly; historical saved caches remain necessary for bitwise replay of published scores.",
+    "Full manifest validation reads all PS audio headers and both label grids; full CNN feature extraction was tested on two recordings only."
+  ]
+}

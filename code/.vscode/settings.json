@@ -1,7 +1,0 @@
-{
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
-  "python.analysis.extraPaths": [
-    "./vendor/SAL"
-  ],
-  "python.terminal.activateEnvironment": false
-}

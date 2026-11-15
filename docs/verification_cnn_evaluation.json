@@ -1,0 +1,14 @@
+{
+  "epoch0_cli_smoke_completed": true,
+  "eval_recordings": 2,
+  "overwrite_rejected": true,
+  "calibration_written_before_eval_file_read": true,
+  "checkpoint_hash_mismatch_rejected": true,
+  "saved_dev_uid_order_mismatch_rejected": true,
+  "checkpoint_unchanged": true,
+  "both_metric_grids_saved": true,
+  "native20_threshold_frozen": true,
+  "score_archive_matches_storage_grid": true,
+  "source_sha256": "55bd5402c77e00d033d047990cb62e3df7ca7497fe305431b1e5cfab7f67dd19",
+  "scope": "2-dev / 2-eval smoke using artificial completed epoch0 fixture; no formal training or research result"
+}

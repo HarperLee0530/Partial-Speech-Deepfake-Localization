@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "PS-only code cleanup before direct CNN fine-tuning",
+  "unit_tests_passed": 10,
+  "cli_help_exit_codes": {
+    "baseline": 0,
+    "manifests": 0,
+    "prepare": 0,
+    "train_head": 0,
+    "evaluate": 0,
+    "predict": 0,
+    "finetune": 0,
+    "evaluate_cnn": 0
+  },
+  "portable_manifest_counts": {
+    "train": 6345,
+    "dev": 2484,
+    "eval": 3562
+  },
+  "independent_historical_replay_models": 8,
+  "historical_eval_recordings": 3562,
+  "historical_metrics_exact": true,
+  "formal_finetune_optimizer_updates_before_publication": 0
+}

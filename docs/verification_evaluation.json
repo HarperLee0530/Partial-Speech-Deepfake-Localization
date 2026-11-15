@@ -1,0 +1,119 @@
+{
+  "status": "pass",
+  "scope": "Historical checkpoint replay on the fixed PS eval subset; no model training or test threshold fitting",
+  "eval_recordings": 3562,
+  "eval_frames160": 76925,
+  "head_seeds": [
+    666,
+    667,
+    668
+  ],
+  "compared_models": [
+    "cnn_original_threshold0",
+    "cnn_dev_f1_calibrated",
+    "aug_erm_666",
+    "aug_erm_667",
+    "aug_erm_668",
+    "clean_erm_666",
+    "clean_erm_667",
+    "clean_erm_668"
+  ],
+  "all_160ms_summary_fields_exact": true,
+  "summary_fields_checked": 160,
+  "all_dev_thresholds_exact": true,
+  "arm_mean_and_sample_sd_exact": true,
+  "native20_historical_comparisons": {
+    "aug_erm_666": {
+      "common_metric_fields_checked": 34,
+      "exact": true
+    },
+    "aug_erm_667": {
+      "common_metric_fields_checked": 34,
+      "exact": true
+    },
+    "aug_erm_668": {
+      "common_metric_fields_checked": 34,
+      "exact": true
+    },
+    "clean_erm_666": {
+      "common_metric_fields_checked": 34,
+      "exact": true
+    },
+    "clean_erm_667": {
+      "common_metric_fields_checked": 34,
+      "exact": true
+    },
+    "clean_erm_668": {
+      "common_metric_fields_checked": 34,
+      "exact": true
+    }
+  },
+  "original_baseline": {
+    "frame_f1_percent": 78.8701923076923,
+    "eer_percent": 19.78290488604582
+  },
+  "arm_mean_sd": {
+    "aug_erm": {
+      "spoof_f1_percent": {
+        "mean": 81.10628180144933,
+        "sd": 0.2762201144362539
+      },
+      "eer_percent": {
+        "mean": 16.30332661272359,
+        "sd": 0.12737574318678996
+      },
+      "event_f1_iou05_percent": {
+        "mean": 29.96951023758812,
+        "sd": 0.1532411778172843
+      },
+      "short_event_recall_le320ms_percent": {
+        "mean": 14.357508014903388,
+        "sd": 0.10095468501629867
+      },
+      "real_fpr_percent": {
+        "mean": 5.9507853043269066,
+        "sd": 0.21630738056610138
+      }
+    },
+    "clean_erm": {
+      "spoof_f1_percent": {
+        "mean": 79.23533978438996,
+        "sd": 0.4257586082000709
+      },
+      "eer_percent": {
+        "mean": 19.434080348551635,
+        "sd": 0.13612469349722525
+      },
+      "event_f1_iou05_percent": {
+        "mean": 29.441694009424015,
+        "sd": 0.21434431851053298
+      },
+      "short_event_recall_le320ms_percent": {
+        "mean": 14.457152759726194,
+        "sd": 0.2101092739447559
+      },
+      "real_fpr_percent": {
+        "mean": 5.300374609066227,
+        "sd": 0.6424050754483822
+      }
+    }
+  },
+  "raw_predict_smoke": {
+    "status": "pass",
+    "waveform_seconds": 0.205,
+    "frames20": 11,
+    "frames160": 2,
+    "interval_end_clipped_to_duration": true,
+    "missing_head_threshold_rejected": true
+  },
+  "source_sha256": {
+    "code/cnn_ps/evaluate.py": "047be4ce176a0dbc2c93503727dab07f769416de9a5137af5d06e8fbaa84319a",
+    "code/cnn_ps/predict.py": "f5227f35a1cf838ec57b94eabdaf6e8379a4ea92e2870ff5d76feadd7f586c08"
+  },
+  "reference_summary_sha256": "de49ee537db3e365ddab4dd9a9b17eeb259e1adde4fd9aa3d259870f4182988d",
+  "reproduced_summary_sha256": "e344488aad4c5046cfb016871b1347eb2b69b50331104dee8a69e580faf07a9b",
+  "synthetic_evaluator_checks": {
+    "eval_cache_branch": "pass",
+    "calibration_saved_before_first_eval_read": "pass"
+  }
+}

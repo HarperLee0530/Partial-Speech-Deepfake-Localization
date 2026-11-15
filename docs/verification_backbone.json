@@ -1,0 +1,115 @@
+{
+  "status": "passed",
+  "scope": "Original CNN-BiGRU extraction and PS-only baseline port; smoke checks are not research performance measurements",
+  "original_checkpoint_sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+  "parameters": 911521,
+  "model_config": {
+    "sample_rate": 16000,
+    "hop_length": 320,
+    "n_fft": 512,
+    "win_length": 400,
+    "n_mels": 80,
+    "channels": [
+      16,
+      32,
+      64
+    ],
+    "hidden_size": 128,
+    "gru_layers": 2,
+    "dropout": 0.4
+  },
+  "runtime": {
+    "device": "cpu",
+    "threads": 4,
+    "comparison_tolerance": {
+      "rtol": 0,
+      "atol": 0
+    }
+  },
+  "real_audio_checks": [
+    {
+      "uid": "CON_D_0000003",
+      "stored_frames20": 104,
+      "logmel_features_exact": true,
+      "coarse_fake_positive_labels_exact": true,
+      "native_logits_exact": true,
+      "bigru_context_exact": true
+    },
+    {
+      "uid": "CON_D_0000004",
+      "stored_frames20": 104,
+      "logmel_features_exact": true,
+      "coarse_fake_positive_labels_exact": true,
+      "native_logits_exact": true,
+      "bigru_context_exact": true
+    },
+    {
+      "uid": "CON_D_0000134",
+      "stored_frames20": 96,
+      "logmel_features_exact": true,
+      "coarse_fake_positive_labels_exact": true,
+      "native_logits_exact": true,
+      "bigru_context_exact": true
+    }
+  ],
+  "reference": "Original baseline model and frontend plus original PS reader instantiated directly on the same official subset audio/labels",
+  "legacy_eer_check": {
+    "passed": true,
+    "included_repeated_scores_and_zero_ties": true,
+    "eer_and_margin_threshold_exact": true,
+    "note": "Training EER uses float32 genuine-positive cumulative counts and nearest-crossing FPR; final comparison uses a separate ROC protocol"
+  },
+  "training_path_smoke": {
+    "finite_loss": true,
+    "loss": 0.006092220079153776,
+    "scope": "One baseline optimizer step on two real dev recordings solely for code validation; discarded model, no saved trained checkpoint"
+  },
+  "finetune_gpu_smoke": {
+    "trainable_parameters": 911521,
+    "all_parameter_gradients_finite": true,
+    "loss": 1.3238468170166016,
+    "channels": [
+      2,
+      1,
+      2
+    ],
+    "batch_shape": [
+      3,
+      1,
+      160,
+      80
+    ],
+    "optimizer_updates": 0,
+    "scope": "Three real train recordings; backward only; no saved trained checkpoint"
+  },
+  "formal_finetune_launch": {
+    "status": "stopped_during_epoch_zero_validation_to_publish_code_first",
+    "completed_training_epochs": 0,
+    "optimizer_updates": 0,
+    "trained_checkpoint_saved": false
+  },
+  "source_sha256": {
+    "code/cnn_ps/backbone.py": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+    "code/cnn_ps/baseline.py": "32df2d55c583e24884a0fcbe1acea2cfe05db2a69e249813726a6b2a1eef6575",
+    "code/cnn_ps/io.py": "76d743f62f883f3b8707d857e735c0712dea8258ccb84d26bc0b204bcaebec0c",
+    "code/cnn_ps/finetune.py": "afec21c9dd4b0d2cfaf2dbadcf441655d5fe3ae999bdd1155907306d0f66c75c"
+  },
+  "limitations": [
+    "This verifies port arithmetic on three recordings, not a full training reproduction.",
+    "The historical model was trained on full PS train/dev; downstream main-method evaluation uses the fixed 3562-record PS eval subset."
+  ],
+  "inference_only_timing_sample": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "records": 96,
+    "selection": "Evenly spaced indices across fixed dev manifest",
+    "mean_audio_seconds": 3.5022141927083332,
+    "cpu_audio_and_feature_seconds": 0.22065199998905882,
+    "gpu_batch1_seconds": 1.9481673000263982,
+    "gpu_batch8_seconds": 0.5337923000333831,
+    "cache_reference_read_seconds": 0.10141220001969486,
+    "projected_epoch0_seconds": 58.742240063409554,
+    "projected_later_dev_forward_seconds": 50.40882888818305,
+    "formal_training_steps": 0,
+    "note": "Warmup excluded; inference-only sample, not a completed epoch. Runtime projections exclude event metric computation and hardware contention."
+  }
+}

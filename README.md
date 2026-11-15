@@ -1,88 +1,125 @@
-# Partial Speech Deepfake Localization 课程项目
+# PS 语音真假帧检测：CNN-BiGRU
 
-本版本固定使用缩减数据，完成 SAL、CNN、语义分析入口与数据协议迁移。[缩减 SAL 冻结基线](result/sal_baseline_20261112)已完成训练；[同一模型的 PS eval 与 LPS 测试](result/sal_frozen_test_20261113)已完成，EER 分别为 4.503134% 与 37.909355%。**尚未证明后续方法改善 LPS 泛化。** 历史成绩只用于研究诊断。
+当前主方案：**保留已训练的 CNN-BiGRU，用信道增强训练一个小型残差式逐帧判别头，提高 PS 上的真假帧识别表现。**
 
-## 目录
+仓库只维护 CNN 路线：原 CNN 从头训练、残差头主方案、直接微调对照、推理和统一评估。旧 SAL、WavLM、语义、候选收益网络、生成器分组、事件长度权重和 LPS 入口已移出当前版本；历史提交仍可查阅。本地数据和历史实验不属于代码清理范围。
 
-- `code/`：`sal.py`、`cnn.py`、`semantic.py`、`data.py`、`evaluate.py`；共享 `project_config.py`、一份 `config.json` 和一份 `test_project.py`。`vendor/SAL` 保留上游实现及许可证。
-- `data/`：配套 ZIP 的说明和校验索引。实际音频与模型不提交 Git。
-- `result/historical_evidence/`：近期实验的必要统计与独立复核；不是新缩减实验成绩。
-- `result/migration/`：数据与代码验收记录。未来运行自动在 `result/` 创建新的 run。
-- `result/sal_baseline_20261112/`、`result/sal_frozen_test_20261113/`：缩减 SAL 冻结训练基线及其 PS eval/LPS 测试结果、预测缓存和核验材料。
-- `visualization/`：保留的诊断图和可视化工具。旧图均有历史数据范围，不能当成缩减后重跑结果。
+## 模型与训练
 
-## 数据交接
+```text
+16 kHz 单声道 → Log-Mel80（20 ms）→ CNN（16/32/64）→ 两层 BiGRU → 上下文 h（256维）
+h → 原线性判别层 → 原分数 z
+h → 按 train 统计量归一化并截断 → Linear(256,32) → Tanh → Linear(32,1) → 修正量 Δ
+最终逐帧分数 = z + Δ → 8 个 logit 均值 → 160 ms 分数
+```
 
-从组员取得 `reduced_data_and_wavlm.zip`，**解压到项目根目录**，得到 `data/reduced/` 和 `data/models/wavlm_large.pt`，不要解压成 `data/data/`。包约 3.53 GB，包含 17,460 条音频和通用 WavLM 权重。校验值见 `data/package_manifest.json`。
+- 原 CNN-BiGRU 共 **911,521** 个参数，主方案中全部冻结，包括原判别层；新增头 **8,257** 个参数，最后一层零初始化，初始输出与原 CNN 相同。8 帧始终均匀平均，不学习池化权重。
+- 头的上下文输入按原始 train 缓存的均值/标准差归一化，再截断至 `[-10,10]`。保留历史初始化随机数顺序，兼容已保存实验。
+- 信道增强发生在**音频输入端**：原声、20 dB 白噪声、轻微 EQ。噪声按整段 RMS 缩放；EQ 为 `x[n] + 0.15*(x[n]-x[n-1])`，首个 previous 等于首采样。不裁剪幅度，不改时长和真假标签。
+- 每条训练录音每轮出现一次，三种信道固定分配并逐轮轮换；dev/eval 只用原声。
+- 损失：**160 ms 时长加权 BCE + 真实 20 ms 时长加权 BCE**，系数各为 1。20 ms 标签来自官方细粒度标注，不能用重复的粗标签代替。没有分组、类平衡或短事件权重。
+- 头默认 CPU、8 轮、batch 2,048 个粗帧块、AdamW 学习率 0.001。原声 dev 选模：真实时长 FPR≤5%，`J=0.5×时长F1+0.5×事件F1`；epoch0 可选，平局取更早轮。随后仅用 dev 选择 160 ms 帧 F1 阈值，不重选 checkpoint。
 
-| 角色 | 原划分比例 | 条数 | 用途 |
-|---|---:|---:|---|
-| train_detector | train 20% | 5,076 | SAL 与 CNN 检测器训练 |
-| train_edit | train 5% | 1,269 | 冻结 SAL 后生成编辑收益样本 |
-| train_review | train 5% | 1,269 | 预留给后续复查选择器 |
-| dev | dev 10% | 2,484 | 选 checkpoint、阈值及预算 |
-| eval | eval 5% | 3,562 | PS 最终评价 |
-| lps | crossfade 范围 4.985% | 3,800 | 跨数据集评价 |
+## 已完成结果与限制
 
-三训练角色录音 ID 互斥，各自保留全部 20 位训练说话人。官方 train/dev/eval 边界不变。PS 无可靠原音频衍生映射，因此不宣称来源完全独立；LPS 以文件名推断的来源组整组抽样，不能保证每位说话人严格同比例。dev 沿用已使用的固定清单；LPS 之前已被分析，不应称为全新未观察测试集。原生标签仍是 PS 160 ms、LPS 20 ms，1=真、0=假。
+以下为**固定 3,562 条 PS eval 子集**、160 ms、假帧为正类；不是 71,237 条完整测试集成绩。新增头报告 seed666/667/668 的均值±样本标准差。
 
-## 首次运行
+| 方法 | Frame F1 ↑ | EER ↓ | 真实帧误报率 ↓ |
+|---|---:|---:|---:|
+| 最初原 CNN，原阈值0 | 78.8702% | 19.7829% | 5.6269% |
+| 冻结 CNN+头，原声训练 `clean_erm` | 79.2353±0.4258% | 19.4341±0.1361% | 5.3004% |
+| **冻结 CNN+头+信道增强 `aug_erm`** | **81.1063±0.2762%** | **16.3033±0.1274%** | **5.9508%** |
 
-建议 Windows、Python 3.10、NVIDIA CUDA 环境。在 PowerShell 中进入 `code`：
+主方案较原 CNN 的帧 F1 提高 **2.2361 个百分点**、EER 降低 **3.4796 个百分点**，同时真实帧误报率增加约0.324个百分点。没有证据支持“实现短事件保护”：≤320 ms事件召回14.3575%，原声头对照14.4572%；20 ms事件指标也未全面改善。残差连接和信道增强本身是已有方法，不能单独宣称为新算法。
+
+[结果明细](docs/results_ps160.json)保存各seed、阈值、checkpoint哈希。[独立回放验证](docs/verification_evaluation.json)已用清理后代码重算全部3562条录音，8个模型/阈值组合的160 ms结果与原报告完全一致。
+
+**直接微调对照尚待正式运行**：不加新头，增强音频后更新全部 CNN 参数。先跑seed666，与已有同seed结果配对；未完成时不列入结果表。学习率、batch和可训练参数范围不同，这是两种训练方案的比较。若要把增益单独归因于增强，还需要“原声直接微调”对照。
+
+## 代码与环境
+
+| 文件（位于 `code/cnn_ps/`） | 职责 |
+|---|---|
+| `backbone.py`、`baseline.py` | 原 CNN-BiGRU、特征、原基线从头训练 |
+| `io.py`、`manifests.py` | 可迁移路径、固定PS清单、官方细粒度标签提取 |
+| `augmentation.py`、`prepare.py` | 波形增强、冻结CNN缓存 |
+| `head.py`、`cached_data.py`、`train_head.py` | 残差头、主方案及原声头对照 |
+| `evaluate.py`、`predict.py` | 基线/头统一评估、单音频推理 |
+| `finetune.py`、`evaluate_cnn.py` | 全CNN直接微调及固定阈值评估 |
+| `metrics160.py`、`metrics20.py` | 帧、时长、区间匹配指标 |
+
+Python3.10。依赖仅 PyTorch、torchaudio、NumPy、SoundFile、SciPy、scikit-learn。PowerShell进入仓库根目录后：
 
 ```powershell
+cd code
 .\Setup.cmd
-.\.venv\Scripts\python.exe project_config.py --check
-.\.venv\Scripts\python.exe data.py --action audit --deep
-.\.venv\Scripts\python.exe test_project.py
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-`Setup.cmd` 安装锁定依赖；不下载完整数据、不自动开始训练。若使用 CPU，在 `config.json` 的 sal/cnn 段修改 device；WavLM 正式训练仍建议 GPU。不要把旧 full/fixed10 权重、风险表或结果指针冒充缩减协议产物。
+Setup不下载数据或开始训练。GPU需要匹配的PyTorch/torchaudio CUDA安装；CPU也可准备缓存和推理。下文在 `code/` 中执行，`python` 表示已激活的环境；Setup不会激活当前PowerShell环境，未激活时将下文的 `python` 换为 `.\.venv\Scripts\python.exe`。输出命令拒绝覆盖非空实验目录。
 
-## SAL 只训练一次 冻结后缓存
+## 数据与原权重
+
+音频、标签、权重和大缓存不提交Git。使用组内已有文件，或按[PS公开资源清单](code/manifests/ps_sources.json)获取官方数据。不需要WavLM/SAL权重。
+
+历史原权重 `cnn_bigru_train_20261109_203335_588602_best.pt` 的 SHA256 为：
+`36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428`。
+
+该权重在**完整PS train25380/dev24844**上训练选模。新增头使用固定train6345（train_detector5076+train_edit1269）、dev2484、eval3562；`train_review` 不使用。旧角色名称只用于定位已有音频。各官方划分ID互斥，但不宣称排除了全部来源衍生关系。不能把重新在6345条上训练的CNN当作同一个历史基线。
+
+现有音频布局为 `data/reduced/<role>/audio/<uid>.wav`，粗标签位于该role的 `segment_labels/<train|dev|eval>_seglab_0.16.npy`。生成路径清单并提取真实细标签：
 
 ```powershell
-.\.venv\Scripts\python.exe sal.py --mode check
-.\.venv\Scripts\python.exe sal.py --mode train
-.\.venv\Scripts\python.exe sal.py --mode validate --checkpoint latest
-.\.venv\Scripts\python.exe sal.py --mode predict --split train_edit --checkpoint latest
-.\.venv\Scripts\python.exe sal.py --mode predict --split train_review --checkpoint latest
+python -m cnn_ps.manifests reduced --reduced-root ../data/reduced --output ../data/manifests_ps
+python -m cnn_ps.manifests labels20 --archive ../data/database_segment_labels_v1.2.tar.gz --output ../data/labels20
 ```
 
-模型由通用 WavLM 初始化，不从完整 PS 训练过的 SAL 成品权重续训。dev 选择 checkpoint 后，记录输出 JSON 中的权重路径与 SHA256；后续所有对照显式传同一权重路径，防止新增训练改变 `latest` 指向。每个预测 run 保存逐录音 `predictions.sqlite`、`metrics.json` 和状态记录。
+标签工具先校验官方归档SHA256，输出固定清单的NPZ（1=假）。直接使用官方原始NPY时1=真，准备缓存必须显式指定编码。字典格式NPY和PyTorch checkpoint只读取可信来源文件。
 
-方案及超参数冻结后再运行测试：
+## 主方案复现
+
+将上述原权重放到 `../data/models/original_cnn.pt` 并核对哈希；路径可替换。
 
 ```powershell
-.\.venv\Scripts\python.exe sal.py --mode test --split eval --checkpoint latest
-.\.venv\Scripts\python.exe sal.py --mode test --split lps --checkpoint latest
+python -m cnn_ps.prepare --manifest ../data/manifests_ps/train.json --labels20 ../data/labels20/train.npz --labels20-encoding fake --checkpoint ../data/models/original_cnn.pt --output ../cache/train --channels --device cuda
+python -m cnn_ps.prepare --manifest ../data/manifests_ps/dev.json --labels20 ../data/labels20/dev.npz --labels20-encoding fake --checkpoint ../data/models/original_cnn.pt --output ../cache/dev --device cuda
+python -m cnn_ps.train_head --train-cache ../cache/train --dev-cache ../cache/dev --channel-cache ../cache/train --output ../result/head_run1 --arms aug_erm clean_erm --seeds 666 667 668
+
+# 冻结训练结果后再准备并评估eval。
+python -m cnn_ps.prepare --manifest ../data/manifests_ps/eval.json --labels20 ../data/labels20/eval.npz --labels20-encoding fake --checkpoint ../data/models/original_cnn.pt --output ../cache/eval --device cuda
+python -m cnn_ps.evaluate --dev-cache ../cache/dev --eval-cache ../cache/eval --heads ../result/head_run1/aug_erm_seed666/b_model.pt ../result/head_run1/aug_erm_seed667/b_model.pt ../result/head_run1/aug_erm_seed668/b_model.pt --output ../result/head_eval1 --native20
 ```
 
-正式对照建议把 `latest` 替换为已登记的具体 checkpoint 路径。SAL 保留 batch=8、min_epochs=40、max_epochs=60；缩减减少每轮工作量，不代表几分钟可以训完。修改候选策略不需要重新训练 SAL。
+缓存保留float16上下文及所有8N存储尾帧，真实时长由损失权重处理。跨设备/批大小/库版本重提取可能有微小差异；精确回放历史分数使用组内归档缓存，见[缓存验证](docs/verification_cache.json)。
 
-**实现修正记录**：原 vendor 的 CSM `_mixup_batch` 将同一录音拼接回自身，复核时输入与标签完全不变。本版本保留 vendor 原件，在 `sal.py` 训练实例上覆盖该方法，以不同录音为来源并对齐音频/标签切点；训练和预测元数据记录 `csm_implementation=aligned_cross_recording_v1`。模型结构和损失不变，但这是明确的实现修正，不能声称与未修复上游代码逐字节等价，也没有据此取得新的性能结论。CPU/GPU 推理和跨盘路径也已统一处理。
-
-GPU 训练的 EER 状态在 CPU 上累积和汇总，避免 PyTorch 2.2.1 的 CUDA 累计求和与确定性设置冲突；训练本身仍为 FP32，指标定义保持上游实现。外部文件位于另一盘符时记录绝对路径，项目内 data/result 仍记录可迁移的逻辑相对路径。
-
-## CNN 和语义
+统一160 ms主表EER为sklearn ROC最近交点处平均FPR/FNR。事件IoU≥0.5，先最大化一对一匹配数再最大化IoU；160 ms预测区间对真实20 ms事件，短事件≤320 ms。20 ms时长指标和160 ms帧计数指标不能混用。原CNN从头训练沿用历史genuine-positive EER选模，与主表EER分开记录。
 
 ```powershell
-.\.venv\Scripts\python.exe cnn.py --mode check
-.\.venv\Scripts\python.exe cnn.py --mode train
-.\.venv\Scripts\python.exe cnn.py --mode dev
-.\.venv\Scripts\python.exe cnn.py --mode ps
-.\.venv\Scripts\python.exe cnn.py --mode lps
-.\.venv\Scripts\python.exe semantic.py check
+python -m cnn_ps.predict --audio ../data/example.wav --checkpoint ../data/models/original_cnn.pt --output ../result/example_original.json
+python -m cnn_ps.predict --help
 ```
 
-CNN 网格搜索合并在 `cnn.py --mode grid-plan/grid-search`，默认不自动使用旧网格参数。课程项目可先做单个 CNN 对照，不必再次运行完整网格。
+使用新增头时必须指定对应时间尺度的dev阈值。输出是logit，不是概率；音频要求16kHz单声道。
 
-语义默认导出不使用真值的 ASR/POS/NER 特征，作为可选消融。`semantic.py --help` 查看 manifest/transcribe/annotate/analyze/features 的单一入口。ASR、spaCy 模型未包含在数据包，需按组员环境另备；可用已有合规转写输入先验证核心流程。旧真假比例/POS风险及同分数风险不能直接复用。风险表只能在 `train_edit` 拟合，不能再回灌该角色训练样本；应用到 train_review/dev/eval/lps 时校验冻结检测器及清单。
+## 直接微调CNN的对照
 
-## 下一步主线
+加载同一原CNN并开放全部参数，不加新头。整段训练，不裁剪；同样三种信道及20/160 ms双尺度损失。默认seed666、8轮、batch8条录音、AdamW学习率0.0001，按上述20 ms dev规则选模，epoch0可选。
 
-先阅读交接 Word 与历史证据，审阅并反驳方法假设，再完成缩减 SAL 基线及 LPS 错误诊断。重点辨别内部空洞、碎片、错误合并和全假录音上的声学漏检。之后检查候选的可修正上限，与简单规则对照，再决定是否实施编辑收益网络。
+```powershell
+python -m cnn_ps.finetune --checkpoint ../data/models/original_cnn.pt --expected-sha256 36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428 --train-manifest ../data/manifests_ps/train.json --dev-manifest ../data/manifests_ps/dev.json --train-labels20 ../data/labels20/train.npz --dev-labels20 ../data/labels20/dev.npz --output ../result/cnn_finetune1 --device cuda
+python -m cnn_ps.evaluate_cnn --run ../result/cnn_finetune1 --dev-manifest ../data/manifests_ps/dev.json --dev-labels20 ../data/labels20/dev.npz --eval-manifest ../data/manifests_ps/eval.json --eval-labels20 ../data/labels20/eval.npz --output ../result/cnn_finetune_eval1 --device cuda
+```
 
-**六种编辑动作、编辑收益网络和复查收益选择器尚未实现。** 新方法目标是在 PS 保持性能的约束下改善 LPS，不能预先写成成功。语义三轮结果均不足以支持稳定增益，保留为可选研究问题；复查选择器等有效错误事件足够再做。
+未完成时不能把dev成绩当eval结果。实现启动前已做[独立微调核对](docs/verification_finetune_prelaunch.json)。
 
-固定 dev 上预先约定 PS 退化容忍值与主要指标，所有方法同一 checkpoint、同一清单、同一候选预算。测试集不参与调参。只修改最终区间时，应报告区间/帧级 F1、IoU、漏检和误报时长，不能把未改变声学排序的后处理说成 EER 改善。
+## 从头训练原CNN
+
+原设置：seed666、dropout0.4、AdamW0.001、batch8、4秒且160 ms对齐随机裁剪、最多30轮、patience5；原训练只有160 ms BCE。历史最佳第7轮，第12轮停止。
+
+```powershell
+python -m cnn_ps.manifests full --audio-dir ../data/full/train/audio --labels-file ../data/full/train/segment_labels/train_seglab_0.16.npy --split train --output ../data/full_train.json
+python -m cnn_ps.manifests full --audio-dir ../data/full/dev/audio --labels-file ../data/full/dev/segment_labels/dev_seglab_0.16.npy --split dev --output ../data/full_dev.json
+python -m cnn_ps.baseline --train-manifest ../data/full_train.json --dev-manifest ../data/full_dev.json --output ../result/cnn_from_scratch1 --device cuda
+```
+
+按本机布局替换完整音频目录，并核对条数。历史训练没有完整源码快照，因此不保证重新训练逐位复现权重；旧权重加载及同环境推理已经[验证一致](docs/verification_backbone.json)。

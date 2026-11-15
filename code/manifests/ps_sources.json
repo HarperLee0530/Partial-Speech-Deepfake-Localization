@@ -1,0 +1,58 @@
+[
+  {
+    "name": "database_eval.tar.gz",
+    "kind": "PartialSpoof",
+    "size": 5803817500,
+    "checksum": "md5:79c7c834d0d9979ecd374a98a059ea19",
+    "url": "https://zenodo.org/api/records/5766198/files/database_eval.tar.gz/content",
+    "sha256": "e458a61fb7dbdb8eedfb22f0e9c345ade8a0c9673e9ad481ec671185b3fa1d4f"
+  },
+  {
+    "name": "database_dev.tar.gz",
+    "kind": "PartialSpoof",
+    "size": 2027972850,
+    "checksum": "md5:ddd4cd3221b7210ac879f67452fb209e",
+    "url": "https://zenodo.org/api/records/5766198/files/database_dev.tar.gz/content",
+    "sha256": "3f773b730e5f82479fcebfbd8effd02f8d8f1169e411c460b812daa707e74452"
+  },
+  {
+    "name": "database_protocols.tar.gz",
+    "kind": "PartialSpoof",
+    "size": 5389040,
+    "checksum": "md5:699d81f020e4b7fa8f33747010e1cba8",
+    "url": "https://zenodo.org/api/records/5766198/files/database_protocols.tar.gz/content",
+    "sha256": "00cdede56868570857b342e568f12172328dd68d08c8f8826c77d80075053715"
+  },
+  {
+    "name": "database_vad.tar.gz",
+    "kind": "PartialSpoof",
+    "size": 10240345,
+    "checksum": "md5:95e77e19a1bb4f2e79ed138fd35621ad",
+    "url": "https://zenodo.org/api/records/5766198/files/database_vad.tar.gz/content",
+    "sha256": "2027efef64c2d3e27cab677454443137b00f8f607b23d774c805505f8b2eb118"
+  },
+  {
+    "name": "README_v1.2",
+    "kind": "PartialSpoof",
+    "size": 17948,
+    "checksum": "md5:4fec0742e2a606d1b1186067d79862d6",
+    "url": "https://zenodo.org/api/records/5766198/files/README_v1.2/content",
+    "sha256": "5d0ea8337a8945dfa73ed709a6e308c9b5df30670d67e7edfb79606a5b735573"
+  },
+  {
+    "name": "database_segment_labels_v1.2.tar.gz",
+    "kind": "PartialSpoof",
+    "size": 76583019,
+    "checksum": "md5:c2bf6638e59ec7a5cf93c4a510fe4efe",
+    "url": "https://zenodo.org/api/records/5766198/files/database_segment_labels_v1.2.tar.gz/content",
+    "sha256": "714975e4d7b943ce665caec11d6f48726d39652b9441dfcbeb327240459602b2"
+  },
+  {
+    "name": "database_train.tar.gz",
+    "kind": "PartialSpoof",
+    "size": 2027101056,
+    "checksum": "md5:c4853ddd831e8e96b0e279fc0a512e7e",
+    "url": "https://zenodo.org/api/records/5766198/files/database_train.tar.gz/content",
+    "sha256": "d34d99e0eb59707ab23195bb87fc8a9251373257fae6319119c826f0cd030f71"
+  }
+]
