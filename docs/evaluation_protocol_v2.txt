@@ -2,7 +2,7 @@ PS 部分伪造语音定位：统一评估规范 v2（未来实验方案，供�
 协议标识：ps_native20_event_v2
 
 先说明适用范围
-本文件规定后续新实验采用的评估、阈值选择和checkpoint选择方式。它是一份待实现的规范，不代表当前代码已经切换协议，也不代表已经按v2重新训练或评估。
+本文件规定后续新实验采用的评估、阈值选择和checkpoint选择方式。当前已新增report_native20.py和compare_native20.py，并完成三个固定历史权重按本规范算分与开发集阈值规则的重新评估；结果见results_native20_fixed_reevaluation.json。训练代码尚未切换到按事件F1选择checkpoint，不能把本次重评称为按完整v2重新训练或选模。
 
 已有结果继续保留原记录：此前残差头与全CNN微调按照开发集 J＝0.5×时长F1＋0.5×事件F1 选择checkpoint，160ms主表又使用开发集Frame F1选择报告阈值。不能把这些成绩改名为“按v2事件F1选模”的结果。
 
@@ -173,7 +173,7 @@ v2默认不做平滑、不设置最短事件长度、不补短空隙、不扩张
     没有真实时长：真实时长FPR为NA；这样的开发集不能用于校准。
     没有全真录音：全真录音误报率为NA。
 
-重要兼容差异：当前metrics20.py的_percent在分母为0时返回0，不是null。v2需要新增输出适配层，根据计数把未定义项转成null。不要直接改动旧函数以免改变历史报告；不要把现有返回值不加说明地当成已经符合v2。所有实际有定义的0分仍应保留0，不能统统转NA。
+重要兼容差异：当前metrics20.py的_percent在分母为0时返回0，不是null。新增的report_native20.evaluate_report输出适配层已根据计数把未定义项转成null，旧函数保持不变。新入口应使用适配层，不要把旧函数返回值不加说明地当成已经符合v2。所有实际有定义的0分仍应保留0，不能统统转NA。
 
 七、一个完整小例子
 
@@ -202,7 +202,7 @@ v2默认不做平滑、不设置最短事件长度、不补短空隙、不扩张
     frame_f1_percent：仅有效20ms单元按个数计TP/FP/FN；最后不足20ms的有效单元仍算1帧，所以它不必等于时长F1。
     eer_percent：如报告，固定采用假类为正、有效20ms帧计数的ROC，sklearn.metrics.roc_curve(..., drop_intermediate=False)，找到|FPR-FNR|最小点并报告该点(FPR+FNR)/2。它是补充的阈值无关比较摘要，不用于改变事件判断阈值。单一真值类别时输出null并注明single_class；未计算时输出null并注明not_computed。
 
-当前metrics20没有直接输出frame F1和EER，需要另外从相同的有效20ms单元计算；不要直接调用metrics160.evaluate来处理20ms序列，因为该函数将时间步固定为0.16秒。
+当前metrics20没有直接输出frame F1和EER；新增的report_native20.evaluate_report已从相同有效20ms单元计算这两项。不要直接调用metrics160.evaluate来处理20ms序列，因为该函数将时间步固定为0.16秒。
 
 补充EER若出现多个点的|FPR-FNR|同样最小，沿用np.argmin返回的ROC序列首点，不再插值或另外打破平局。
 
@@ -216,6 +216,10 @@ v2默认不做平滑、不设置最短事件长度、不补短空隙、不扩张
 九、交给组员的改代码位置与最小改动
 
 已有模块可以复用：
+    code/cnn_ps/report_native20.py
+        evaluate_report：新增固定阈值算分适配层，含null规则、有效20ms Frame F1/EER；不选择checkpoint或阈值。
+    code/cnn_ps/compare_native20.py
+        新增三个固定历史权重的开发集校准与测试回放入口，不改变历史checkpoint选择。
     code/cnn_ps/metrics20.py
         choose_threshold：开发集5%真实时长FPR阈值。
         decision_mask：float64阈值比较。

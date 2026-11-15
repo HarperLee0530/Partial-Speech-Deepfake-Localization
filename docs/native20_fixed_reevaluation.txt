@@ -1,0 +1,56 @@
+PS三个固定权重的统一原生20ms重评（2026-11-15）
+
+结果见results_native20_fixed_reevaluation.json和README中的20ms表。
+本次只重新评估，不训练、不重新选择checkpoint。
+
+一、模型
+原CNN：weights/original_cnn.pt，seed666，历史第7轮。
+增强+小修正头：weights/original_cnn.pt + weights/head_aug_erm_seed666.pt，头第8轮。
+增强+直接微调：weights/cnn_finetuned_seed666.pt，第8轮；不再叠加修正头。
+全部权重SHA256见weights/manifest.json。
+两个适配模型的原选模准则都是J=0.5时长F1+0.5事件F1；本次没有将其改称v2事件F1选模。
+
+二、统一条件
+同一PS dev2484/eval3562，实际20ms标签，1=假，逐条UID/标签/时长核对。
+三个模型各自用dev全部真实时长（包括混合录音中的真实部分）校准FPR≤5%阈值。
+相同分数组整体处理，float64 nextafter排除第一组会超预算的分数；判断使用float64(score)>=threshold。
+保存三个模型的开发集阈值与校准结果之后，才读取本次eval输入。
+三个dev阈值分别为4.5316390991210946、0.84801054000854503、0.29229122400283819。
+对应dev真实时长FPR均约5%，完整数值见结果JSON。测试集实际FPR不再调节。
+IoU≥0.5、一对一、先最大化匹配数再最大化IoU；短事件≤320ms并复用完整匹配。
+不做额外平滑、空隙合并或短事件过滤。末帧按实际宽度计时，padding不计分。
+无定义的比率写null；补充Frame F1/EER按有效20ms单元计数，时长F1按实际宽度加权。
+
+三、数据来源与回放方式
+原CNN的原生分数和256维上下文来自已验证的冻结CNN缓存。
+小修正头用当前仓库加载器在缓存上下文上重新前向计算分数；上下文保留原float16缓存精度。
+直接微调模型使用已完成run2中的dev_scores20.npz及run2_eval中的eval_scores20.npz。
+微调模型权重SHA与发布文件一致；eval分数SHA与原complete.json一致。
+所有分数都是原生20ms输出，没有将160ms结果重复八遍。
+dev/微调存档按照每条录音的8*lengths定位，再取lengths20；不能将整个拼接数组直接截尾。
+本次保存新的六份逐帧分数文件（三个模型各dev/eval），附UID、offsets、lengths20、duration和真实标签，便于独立复算。
+全部指标从这些分数重新计算，不是抄写历史汇总表。
+
+四、代码
+code/cnn_ps/report_native20.py：固定阈值的统一算分、空分母处理及补充Frame F1/EER。
+code/cnn_ps/compare_native20.py：三个固定权重的dev校准、eval回放和来源核验。
+code/tests/test_native20_report.py：9项指标边界测试；与原10项测试合计19项通过。
+原metrics20.py、metrics160.py及训练代码未修改。
+
+从code目录运行以下命令，按本机存档位置替换尖括号参数：
+
+python -m cnn_ps.compare_native20 --dev-cache <dev缓存目录> --eval-records <eval逐条NPZ清单.json> --dev-labels20 <dev细标签.npz> --eval-labels20 <eval细标签.npz> --finetuned-run <已完成微调训练目录> --finetuned-evaluation <已完成微调评估目录> --weights-dir ../weights --fixed-ids manifests/ps_fixed_ids.json --output <新的重评目录> --threads 4
+
+该命令针对组内已有存档，所需缓存/分数/音频数据不随Git提交。
+新环境直接从音频推理时，须保持时间对齐、标签和阈值规则一致；不要把160ms阈值用于20ms输出。
+输出目录包括protocol.json、frozen_dev_calibration.json、三份metrics、逐录音计数、dev/eval原始分数、comparison.json、environment.json、complete.json。
+
+五、结论范围
+主指标事件F1：原CNN31.7508%，增强+头43.5979%，增强+直接微调50.2401%。
+短事件召回：44.5932%、54.4320%、62.9841%。
+真实时长FPR：4.5105%、4.8612%、6.0467%。
+全真录音误报：138/365、92/365、69/365。
+原CNN到两个适配方案都包含新增实际20ms监督，不能把提升全部归因于信道增强。
+这是同seed666的固定权重对照，不是多seed统计显著性结论；只评固定3562条PS eval子集，并非完整71237条测试集。
+所有模型共享同一参考事件集合和录音，原CNN训练过完整PS train/dev的历史单独披露。
+开发集5%预算不是测试集5%的保证；直接微调的定位表现较好，但有真实时长误报代价。
