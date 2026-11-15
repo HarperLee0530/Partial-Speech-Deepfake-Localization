@@ -1,8 +1,8 @@
 """Fine-tune all original CNN-BiGRU parameters with three waveform channels.
 
-This is a separate experiment from the frozen-CNN residual-head main method.
-No residual head is added. Train/dev manifests and genuine fine labels are
-explicit; this command never reads eval audio or eval labels.
+This is the retained main training method. Train/dev manifests and actual
+fine labels are explicit; this command never reads eval audio or eval labels.
+The historical J checkpoint-selection rule is retained for reproducibility.
 """
 import argparse
 from pathlib import Path

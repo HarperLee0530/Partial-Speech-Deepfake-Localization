@@ -1,1 +1,1 @@
-"""PS-only CNN-BiGRU and channel-augmented residual frame classification."""
+"""PS-only CNN-BiGRU with direct channel-augmented fine-tuning."""

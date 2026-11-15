@@ -1,5 +1,7 @@
 PS三个固定权重的统一原生20ms重评（2026-11-15）
 
+历史记录：当前主树只保留CNN-BiGRU＋信道增强直接微调。本文所述头权重、缓存训练和compare_native20入口位于清理前提交51b20490d8b795fad13d83375ade72b25042b764；重现本记录应使用该提交。当前原CNN/成品评估入口为cnn_ps.evaluate_cnn，详见根README。
+
 结果见results_native20_fixed_reevaluation.json和README中的20ms表。
 本次只重新评估，不训练、不重新选择checkpoint。
 

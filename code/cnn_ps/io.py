@@ -37,7 +37,7 @@ def load_manifest(path, expected_split=None):
     Official PS .npy label dictionaries use 1=real, 0=fake. Both a top-level
     records list and {"split": ..., "records": [...]} are accepted. An optional
     labels20_file refers to actual fine labels, never repeated coarse labels.
-    Record ordering is preserved for reproducible cached-head training.
+    Record ordering is preserved for reproducible training and score alignment.
     """
     path = Path(path).resolve()
     payload = read_json(path)

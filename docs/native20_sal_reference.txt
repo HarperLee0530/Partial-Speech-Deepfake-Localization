@@ -42,4 +42,4 @@ SAL预测24786个事件，其中3915个达到匹配条件；较多未匹配预�
 数据与证据：
 results_native20_with_sal_reference.json：四模型完整指标、SAL开发集校准、原生输出和旧160ms复现证据。
 verification_sal_native20_fixed_reevaluation.json：独立重算审计。
-三个CNN的代码、原始重评结果、验证记录继续保留；未将SAL依赖或训练代码重新加入CNN仓库。
+三个CNN的原始重评结果与验证记录继续保留；旧三方案代码见清理前提交51b20490d8b795fad13d83375ade72b25042b764。当前主树仅维护CNN-BiGRU＋信道增强直接微调；未将SAL依赖或训练代码重新加入CNN仓库。

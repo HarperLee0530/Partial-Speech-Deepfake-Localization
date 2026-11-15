@@ -1,0 +1,134 @@
+{
+  "status": "passed",
+  "selected_method": "CNN-BiGRU + waveform channel augmentation + full-network fine-tuning",
+  "retained_models": [
+    "original_cnn.pt",
+    "cnn_finetuned_seed666.pt"
+  ],
+  "weights_unchanged": true,
+  "retired_runtime_modules": [
+    "head.py",
+    "train_head.py",
+    "cached_data.py",
+    "prepare.py",
+    "evaluate.py",
+    "compare_native20.py"
+  ],
+  "retired_head_checkpoints": 6,
+  "historical_revision": "51b20490d8b795fad13d83375ade72b25042b764",
+  "unit_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "passed": 19,
+    "failed": 0
+  },
+  "raw_prediction_parity": {
+    "status": "passed",
+    "real_uid": "CON_D_0000003",
+    "checks": [
+      {
+        "checkpoint": "original_cnn.pt",
+        "resolution": 0.02,
+        "scores_and_intervals_exact_to_previous": true,
+        "actual20": 98,
+        "stored20": 104
+      },
+      {
+        "checkpoint": "original_cnn.pt",
+        "resolution": 0.16,
+        "scores_and_intervals_exact_to_previous": true,
+        "actual20": 98,
+        "stored20": 104
+      },
+      {
+        "checkpoint": "cnn_finetuned_seed666.pt",
+        "resolution": 0.02,
+        "scores_and_intervals_exact_to_previous": true,
+        "actual20": 98,
+        "stored20": 104
+      },
+      {
+        "checkpoint": "cnn_finetuned_seed666.pt",
+        "resolution": 0.16,
+        "scores_and_intervals_exact_to_previous": true,
+        "actual20": 98,
+        "stored20": 104
+      }
+    ],
+    "default_resolution_unchanged": 0.16,
+    "default_threshold_unchanged": 0,
+    "explicit_zero_labelled_separately": true,
+    "cli_help_has_no_head": true
+  },
+  "checkpoint_evaluation_smoke": {
+    "status": "passed",
+    "checks": [
+      {
+        "checkpoint": "original_cnn.pt",
+        "dev_uids": [
+          "CON_D_0000003",
+          "CON_D_0000004"
+        ],
+        "eval_uids": [
+          "CON_E_0000028",
+          "CON_E_0000035"
+        ],
+        "calibration_before_eval": true,
+        "dev_archive_threshold_reproduces": true,
+        "eval_archive_metrics_reproduce": true,
+        "checkpoint_unchanged": true,
+        "overwrite_refused": true
+      },
+      {
+        "checkpoint": "cnn_finetuned_seed666.pt",
+        "dev_uids": [
+          "CON_D_0000003",
+          "CON_D_0000004"
+        ],
+        "eval_uids": [
+          "CON_E_0000028",
+          "CON_E_0000035"
+        ],
+        "calibration_before_eval": true,
+        "dev_archive_threshold_reproduces": true,
+        "eval_archive_metrics_reproduce": true,
+        "checkpoint_unchanged": true,
+        "overwrite_refused": true
+      },
+      {
+        "legacy_run_fixture": true,
+        "saved_threshold_preserved": 1.234567,
+        "native20_standard_report": true
+      }
+    ],
+    "cli_source_mutual_exclusion": true,
+    "cli_source_required": true,
+    "cli_checkpoint_success": true,
+    "native20_single_class_null_metrics_supported": true,
+    "source_sha256": "988caf6aa6e400f30342f03b36cb5d288f4416edfd7b30e05acdb57d6f88e314",
+    "all_inference_cpu": true,
+    "no_training": true,
+    "only_two_real_recordings_per_split": true
+  },
+  "sources_sha256": {
+    "code/cnn_ps/__init__.py": "bb066f6cfc013ae55b4ce1d579619c7877b00c41e8e912979b690fec0f96fb78",
+    "code/cnn_ps/augmentation.py": "916e78b88fcd3aced88f48813627bf2fe746b10f2b44c25446cf4cda78d4da76",
+    "code/cnn_ps/backbone.py": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+    "code/cnn_ps/baseline.py": "32df2d55c583e24884a0fcbe1acea2cfe05db2a69e249813726a6b2a1eef6575",
+    "code/cnn_ps/evaluate_cnn.py": "988caf6aa6e400f30342f03b36cb5d288f4416edfd7b30e05acdb57d6f88e314",
+    "code/cnn_ps/finetune.py": "087cc628ebaf20771f64508bc053c655b8dd1b859c5d404e28385ff2a892cd01",
+    "code/cnn_ps/io.py": "9cf90703f1bcb8677e0a777b84e3545f2856cd2dbc2d4616433974f37d3538d9",
+    "code/cnn_ps/manifests.py": "45636fab5d6e914b7101132dfe8712ab9296dcd7215a3cfb80376549c07eff9f",
+    "code/cnn_ps/metrics160.py": "fbcac4d65b9e4410342b1badcde2982cb1ff40096b5d519573663a07aa578f21",
+    "code/cnn_ps/metrics20.py": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+    "code/cnn_ps/predict.py": "9580c8c381cc59c1b74b5380cfb0c226c834e7a2044c0df9b9764e84088b70f7",
+    "code/cnn_ps/report_native20.py": "f0be4b699fe2392a555d9c9c75f7d07fd9b99ec470837d58980226bab7bfe9d9"
+  },
+  "published_weights_sha256": {
+    "original_cnn.pt": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+    "cnn_finetuned_seed666.pt": "ed3bf849955ae0d00f4d2ca7c92f7d9eb719b0d07dd5fb866dfa4b547eab9157"
+  },
+  "training_rule": "Historical J selection retained; no v2 checkpoint reselection",
+  "training_performed": false,
+  "full_dataset_reevaluation_performed": false,
+  "notes": "Cleanup and inference/evaluation entrypoint smoke checks only. Existing completed experiment metrics remain unchanged; archived head/SAL comparisons are reference records."
+}

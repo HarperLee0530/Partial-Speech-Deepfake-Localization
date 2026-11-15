@@ -1,0 +1,17 @@
+当前主方案与历史对照
+
+当前唯一主方案：CNN-BiGRU＋信道增强直接微调。
+主树保留原CNN作为训练起点/对照，以及已选中微调CNN作为成品；两个二进制权重内容保持不变。
+
+以下文件是产生实验时的结果或验证快照，包含已经退役的方案、文件名或当时的测试数量：
+results_ps160.json、verification_head.json、verification_cache.json、verification_evaluation.json、verification_cleanup.json、verification_published_weights.json；
+results_native20_fixed_reevaluation.json、verification_native20_fixed_reevaluation.json、native20_fixed_reevaluation.txt；
+results_native20_with_sal_reference.json、verification_sal_native20_fixed_reevaluation.json、native20_sal_reference.txt。
+保留它们是为了追溯已报告数字，不表示当前仍提供小修正头/SAL训练入口或八个权重。
+
+完整历史代码和八个权重见清理前提交：
+https://github.com/HarperLee0530/Partial-Speech-Deepfake-Localization/tree/51b20490d8b795fad13d83375ade72b25042b764
+
+原CNN和直接微调的有效训练入口、评估方式、两个权重及20ms阈值以根README及weights/README为准。
+本次整理不重训模型、不重选checkpoint、不改已有实验数字，也不删除本机共享音频、缓存或实验原始文件。
+当前训练保留历史J选模用于复现；评价规范中的纯事件F1选模仍是后续新实验协议，不能回写为已完成事实。

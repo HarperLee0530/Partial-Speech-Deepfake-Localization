@@ -1,9 +1,11 @@
-"""Evaluate a completed full-CNN fine-tuning run with dev-only calibration.
+"""Evaluate a fixed CNN-BiGRU checkpoint with dev-only calibration.
 
-The saved selected checkpoint and native20 dev threshold stay fixed. A separate
-160ms reporting threshold is fitted to its saved dev scores, then written to
-disk BEFORE the eval manifest/labels are opened. Fine-label NPZ files must
-contain actual 20ms annotations encoded as 1=fake, 0=real.
+--checkpoint loads an original or fine-tuned CNN and regenerates clean dev
+scores to calibrate a 5% real-duration FPR budget at native 20 ms. --run retains
+the selected checkpoint and saved native20 threshold of a completed historical
+fine-tuning run. Neither mode trains or reselects a checkpoint. A supplementary
+160 ms threshold maximizes dev frame F1. Both thresholds are written to disk
+BEFORE eval data is opened. Fine-label NPZ files use actual20 labels, 1=fake.
 """
 from __future__ import annotations
 
@@ -20,6 +22,7 @@ from . import metrics160, metrics20
 from .backbone import load_backbone
 from .finetune import FineData, fine_collate, save_scores
 from .io import manifest_hash, read_json, save_json, sha256
+from .report_native20 import evaluate_report
 
 
 def load_selected_run(run):
@@ -82,10 +85,44 @@ def saved_dev_records(run, dataset):
 
 
 @torch.inference_mode()
-def evaluate(run, dev_manifest, dev_labels20, eval_manifest, eval_labels20,
-             output, device="cpu", threads=4):
+def infer_records(model, dataset, device, split):
+    """Infer full clean waveforms once; retain storage tails for legacy pooling."""
+    model.eval()
+    rows160, rows20, stored = [], [], []
+    metadata = dict(uids=dataset.uids, lengths=[], lengths20=[], durations=[])
+    last = time.monotonic()
+    loader = DataLoader(dataset, batch_size=1, num_workers=0, collate_fn=fine_collate)
+    for index, batch in enumerate(loader):
+        native = model(batch["features"].to(device), batch["lengths"])[0].float().cpu().numpy()
+        n = int(batch["lengths"][0])
+        native = native[:n].copy()
+        uid = batch["uids"][0]
+        coarse, fine, duration = dataset.coarse[uid], dataset.fine[uid], float(batch["durations"][0])
+        if (uid != dataset.uids[index] or n != len(coarse) * 8
+                or not np.isfinite(native).all() or batch["channels"] != [0]):
+            raise ValueError("Inference changed recording order, grid or unaugmented input")
+        rows160.append(dict(uid=uid, labels=coarse, labels20=fine,
+                            scores=native.reshape(-1, 8).mean(1), duration=duration))
+        rows20.append(dict(uid=uid, labels20=fine, scores20=native[:len(fine)], duration=duration))
+        stored.append(native)
+        metadata["lengths"].append(len(coarse))
+        metadata["lengths20"].append(len(fine))
+        metadata["durations"].append(duration)
+        if time.monotonic() - last >= 20 or index + 1 == len(dataset):
+            print(f"{split} {index + 1}/{len(dataset)}", flush=True)
+            last = time.monotonic()
+    return rows160, rows20, np.concatenate(stored), metadata
+
+
+@torch.inference_mode()
+def evaluate(run=None, dev_manifest=None, dev_labels20=None, eval_manifest=None,
+             eval_labels20=None, output=None, device="cpu", threads=4, *, checkpoint=None):
+    if (run is None) == (checkpoint is None):
+        raise ValueError("Supply exactly one of run or checkpoint")
+    if any(value is None for value in (dev_manifest, dev_labels20, eval_manifest, eval_labels20, output)):
+        raise ValueError("Explicit dev/eval manifests, actual20 label files and output are required")
     output = Path(output).resolve()
-    if output.exists() and any(output.iterdir()):
+    if output.exists() and (not output.is_dir() or any(output.iterdir())):
         raise FileExistsError("Use a new or empty evaluation output directory")
     if threads <= 0:
         raise ValueError("CPU thread count must be positive")
@@ -96,85 +133,98 @@ def evaluate(run, dev_manifest, dev_labels20, eval_manifest, eval_labels20,
     torch.backends.cudnn.allow_tf32 = False
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
-    run, checkpoint, payload, digest = load_selected_run(run)
+    from_run = run is not None
+    if from_run:
+        run, checkpoint, payload, digest = load_selected_run(run)
+    else:
+        checkpoint = Path(checkpoint).resolve()
+        digest = sha256(checkpoint)
+        payload = torch.load(checkpoint, map_location="cpu", weights_only=False)
     model, _ = load_backbone(checkpoint, device=device)
     dev = FineData(dev_manifest, dev_labels20, model.config, "dev", payload.get("seed", 666))
-    settings = payload.get("config", {})
-    if ("dev_manifest_sha256" in settings
-            and manifest_hash(dev.uids) != settings["dev_manifest_sha256"]):
-        raise ValueError("Dev manifest differs from checkpoint selection data")
-    if ("dev_labels20_sha256" in settings
-            and sha256(dev_labels20) != settings["dev_labels20_sha256"]):
-        raise ValueError("Actual20 dev label file differs from checkpoint selection data")
-    dev160, dev20 = saved_dev_records(run, dev)
-    threshold20 = float(payload["threshold"])
-    checked_dev20 = metrics20.evaluate(dev20, threshold20)
-    for name in ("duration_f1_percent", "event_f1_iou05_percent", "real_fpr_percent",
-                 "selection_score_j_percent"):
-        if not np.isclose(checked_dev20[name], payload["dev_metrics"][name], rtol=0., atol=1e-7):
-            raise ValueError(f"Saved dev scores do not reproduce selected checkpoint metric: {name}")
+    output.mkdir(parents=True, exist_ok=True)
+    mode = "completed_run_saved_threshold" if from_run else "fixed_checkpoint_fresh_dev_calibration"
+    save_json(output / "protocol.json", dict(mode=mode, checkpoint_sha256=digest,
+        checkpoint_reselection=False, training_performed=False, eval_read=False,
+        selected_epoch=payload.get("epoch"), metric_protocol_version="ps_native20_event_v2",
+        native20_calibration="Preserve completed run threshold" if from_run else "Fresh clean dev; real-duration FPR cap5%",
+        checkpoint_selection="Historical supplied checkpoint; no v2 checkpoint selection performed",
+        score_archive_layout="scores20 contains 8*lengths stored cells per UID; trim each UID to lengths20 for native20 metrics",
+        device=device, precision="float32", tf32=False, source_sha256=sha256(__file__)))
+    if from_run:
+        settings = payload.get("config", {})
+        if ("dev_manifest_sha256" in settings
+                and manifest_hash(dev.uids) != settings["dev_manifest_sha256"]):
+            raise ValueError("Dev manifest differs from checkpoint selection data")
+        if ("dev_labels20_sha256" in settings
+                and sha256(dev_labels20) != settings["dev_labels20_sha256"]):
+            raise ValueError("Actual20 dev label file differs from checkpoint selection data")
+        dev160, dev20 = saved_dev_records(run, dev)
+        dev_scores_path = run / "dev_scores20.npz"
+        threshold20 = float(payload["threshold"])
+        checked_dev20 = metrics20.evaluate(dev20, threshold20)
+        for field in ("duration_f1_percent", "event_f1_iou05_percent", "real_fpr_percent",
+                      "selection_score_j_percent"):
+            if not np.isclose(checked_dev20[field], payload["dev_metrics"][field], rtol=0., atol=1e-7):
+                raise ValueError(f"Saved dev scores do not reproduce selected checkpoint metric: {field}")
+        threshold_selection = None
+    else:
+        dev160, dev20, dev_scores, dev_metadata = infer_records(model, dev, device, "dev")
+        dev_scores_path = output / "dev_scores20.npz"
+        save_scores(dev_scores_path, dev_scores, dev_metadata)
+        threshold_selection = metrics20.choose_threshold(dev20, max_real_fpr=.05)
+        threshold20 = float(threshold_selection["threshold"])
+    dev_report20 = evaluate_report(dev20, threshold20)
+    if not from_run and dev_report20["real_duration_fpr_percent"] > 5 + 1e-10:
+        raise ValueError("Fresh dev calibration exceeded the declared real-duration FPR budget")
+    save_json(output / "dev_metrics20.json", dev_report20)
     y = np.concatenate([row["labels"] for row in dev160])
     s = np.concatenate([row["scores"] for row in dev160])
-    if len(np.unique(y)) != 2:
+    if len(np.unique(y)) != 2 and from_run:
         raise ValueError("Dev calibration requires both real and fake reference frames")
-    threshold160, dev_f1 = metrics160.choose_threshold(y, s)
-    name = f"cnn_channel_finetune_{int(payload.get('seed', 666))}"
-    calibration = dict(model=name, checkpoint_sha256=digest, selected_epoch=payload["epoch"],
+    threshold160, dev_f1 = metrics160.choose_threshold(y, s) if len(np.unique(y)) == 2 else (None, None)
+    name = f"cnn_channel_finetune_{int(payload.get('seed', 666))}" if from_run else checkpoint.stem
+    calibration = dict(model=name, mode=mode, checkpoint_sha256=digest, selected_epoch=payload.get("epoch"),
                        threshold160=threshold160, threshold20=threshold20,
                        dev_frame_f1_percent=dev_f1, dev_recordings=len(dev),
                        dev_manifest_sha256=sha256(dev_manifest), dev_labels20_sha256=sha256(dev_labels20),
-                       dev_scores20_sha256=sha256(run / "dev_scores20.npz"),
+                       dev_scores20_sha256=sha256(dev_scores_path),
+                       dev_real_duration_fpr_percent=dev_report20["real_duration_fpr_percent"],
+                       threshold20_selection=threshold_selection,
                        checkpoint_reselection=False, eval_read=False,
                        coarse_scope="NumPy float32 mean of ALL eight stored logits; threshold maximizes dev frame F1",
-                       fine_scope="Actual20 duration/event metrics at the saved checkpoint's dev threshold",
+                       fine_scope="Actual20 reporting at saved run threshold" if from_run else "Actual20 reporting at fresh dev real-duration FPR cap5% threshold",
                        source_sha256=sha256(__file__))
-    output.mkdir(parents=True, exist_ok=True)
     # Do not move eval manifest/label loading above this write.
     save_json(output / "frozen_dev_calibration.json", calibration)
     test = FineData(eval_manifest, eval_labels20, model.config, "eval", payload.get("seed", 666))
     if set(dev.uids) & set(test.uids):
         raise ValueError("Dev/eval recording IDs overlap")
-    model.eval()
-    rows160, rows20, stored = [], [], []
-    metadata = dict(uids=test.uids, lengths=[], lengths20=[], durations=[])
-    started = last = time.monotonic()
-    loader = DataLoader(test, batch_size=1, num_workers=0, collate_fn=fine_collate)
-    for index, batch in enumerate(loader):
-        native = model(batch["features"].to(device), batch["lengths"])[0].float().cpu().numpy()
-        n = int(batch["lengths"][0])
-        native = native[:n].copy()
-        uid = batch["uids"][0]
-        coarse, fine, duration = test.coarse[uid], test.fine[uid], float(batch["durations"][0])
-        if (uid != test.uids[index] or n != len(coarse) * 8
-                or not np.isfinite(native).all() or batch["channels"] != [0]):
-            raise ValueError("Eval inference changed recording order, grid or unaugmented input")
-        rows160.append(dict(uid=uid, labels=coarse, labels20=fine,
-                            scores=native.reshape(-1, 8).mean(1), duration=duration))
-        rows20.append(dict(uid=uid, labels20=fine, scores20=native[:len(fine)], duration=duration))
-        stored.append(native)
-        metadata["lengths"].append(len(coarse))
-        metadata["lengths20"].append(len(fine))
-        metadata["durations"].append(duration)
-        if time.monotonic() - last >= 20 or index + 1 == len(test):
-            print(f"eval {index + 1}/{len(test)}", flush=True)
-            last = time.monotonic()
-    if len(np.unique(np.concatenate([row["labels"] for row in rows160]))) != 2:
+    started = time.monotonic()
+    rows160, rows20, stored, metadata = infer_records(model, test, device, "eval")
+    eval_has_both_classes = len(np.unique(np.concatenate([row["labels"] for row in rows160]))) == 2
+    if not eval_has_both_classes and from_run:
         raise ValueError("EER reporting requires both real and fake eval reference frames")
     # Fixed-threshold evaluation only: never call evaluate_dev on eval records.
-    result160 = metrics160.evaluate(rows160, threshold160)
-    result20 = metrics20.evaluate(rows20, threshold20)
+    result160 = (metrics160.evaluate(rows160, threshold160)
+                 if threshold160 is not None and eval_has_both_classes else
+                 dict(status="not_reported", recordings=len(test), threshold=threshold160,
+                      reason="Supplementary160 reporting requires both classes in dev and eval; native20 metrics remain available."))
+    result20 = evaluate_report(rows20, threshold20)
     save_json(output / "metrics160.json", result160)
     save_json(output / "metrics20.json", result20)
     summary160 = {name: {key: value for key, value in result160.items() if key != "per_recording"}}
     summary20 = {name: {key: value for key, value in result20.items() if key != "per_recording"}}
     save_json(output / "summary.json", summary160)
     save_json(output / "summary20.json", summary20)
-    save_scores(output / "eval_scores20.npz", np.concatenate(stored), metadata)
+    save_scores(output / "eval_scores20.npz", stored, metadata)
     if sha256(checkpoint) != digest:
         raise ValueError("Selected checkpoint changed during evaluation")
-    save_json(output / "complete.json", dict(status="complete", model=name, selected_epoch=payload["epoch"],
+    save_json(output / "complete.json", dict(status="complete", model=name, mode=mode, selected_epoch=payload.get("epoch"),
               checkpoint_sha256=digest, eval_recordings=len(test), checkpoint_reselection=False,
               calibration_sha256=sha256(output / "frozen_dev_calibration.json"),
+              dev_scores20_sha256=sha256(dev_scores_path), training_performed=False,
+              threshold_frozen_before_eval=True,
               eval_manifest_sha256=sha256(eval_manifest), eval_labels20_sha256=sha256(eval_labels20),
               eval_scores20_sha256=sha256(output / "eval_scores20.npz"),
               device=device, elapsed_seconds=time.monotonic() - started))
@@ -183,7 +233,9 @@ def evaluate(run, dev_manifest, dev_labels20, eval_manifest, eval_labels20,
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run", required=True, help="Completed fine-tuning directory")
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--run", help="Completed fine-tuning directory; preserve its saved native20 threshold")
+    source.add_argument("--checkpoint", help="Original or fine-tuned CNN weights; calibrate fresh native20 dev scores")
     parser.add_argument("--dev-manifest", required=True)
     parser.add_argument("--dev-labels20", required=True, help="Actual20 NPZ, 1=fake")
     parser.add_argument("--eval-manifest", required=True)
