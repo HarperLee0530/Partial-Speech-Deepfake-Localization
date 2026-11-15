@@ -1,1 +1,1 @@
-"""PS-only CNN-BiGRU with direct channel-augmented fine-tuning."""
+"""PS speech forgery localization with CNN-BiGRU and boundary-assisted dual resolution."""

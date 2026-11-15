@@ -1,5 +1,7 @@
 # 本轮开发集选中权重
 
+**当前主方案是 `boundary`**，默认权重为[cnn_boundary_ps_eventf1_seed666.pt](cnn_boundary_ps_eventf1_seed666.pt)。`dual`保留为结构对照，另两个CNN作为控制；四个权重文件及其原开发集阈值均未改动。
+
 本目录提供四组新权重，已核对源best.pt、complete.json、frozen_eval_plan.json、独立审计和交付文件的SHA一致。四组均来自本轮重新训练。
 
 | 文件 | 组别 | dev选中epoch | 完整logit阈值 |
@@ -16,6 +18,14 @@
 **阈值空间是原生20ms、fake为正类的logit**。执行`float64(score) >= float64(threshold)`以保留同分边界；阈值不是sigmoid概率，不能直接当概率阈值，也不能换成0、0.5或展示舍入值。每组必须使用自己的阈值。
 
 checkpoint的schema是`ps_four_random_cnn_v1`，包含`backbone_state_dict`、可选`adapter_state_dict`、`model_config`、`adapter_options`、`protocol`、所选epoch及dev阈值/指标，不含优化器续训状态。应按`cnn_ps.train_four.evaluate_arms`的加载逻辑重建CNN和adapter，然后strict加载各自state。`cnn_clean/cnn_aug`的adapter为None；`dual/boundary`不能丢掉adapter只加载CNN。
+
+主方案提供独立单音频入口，在`code/`下运行：
+
+```powershell
+python -m cnn_ps.predict_main --audio 'example.wav' --output 'prediction_main.json' --device cpu
+```
+
+它默认加载本目录的主方案文件，完整加载CNN和adapter，读取其开发集阈值；无需标签或原始run元信息。支持`--checkpoint`指定同格式的boundary权重，输入为16kHz单声道。该入口不重新校准，不计算无真值的“准确率”。方法说明见[中文方法论](../docs/main_methodology_zh.md)。
 
 **这四个文件不能直接用于旧`predict`或`load_backbone`。** `train_four --evaluate`也不是任意checkpoint单文件接口：它校验结果目录中的`best.pt`、`complete.json`、`protocol.json`、`dev_metrics.json`、`dev_scores20.npz`及冻结计划，还需要同一PS数据和单原声eval缓存。只有这四个`.pt`和manifest不足以走完整复评CLI；需要配套结果元信息，或按根README重新运行完整实验。复评使用开发集已冻结的阈值。
 

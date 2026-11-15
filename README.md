@@ -1,15 +1,39 @@
-# PS 部分伪造语音定位：四组从随机初始化训练
+# PS 部分伪造语音定位：边界辅助双分辨率 CNN-BiGRU
 
-**本轮四组从同一个随机初始化的 CNN-BiGRU 训练20轮，统一测试和完整独立审计均已完成。** 前两组是控制组，最后两组是候选方法，不加载旧 CNN、B1 或双分辨率权重。
+**当前主方案为 `boundary`：CNN-BiGRU＋信道增强＋双分辨率、局部交叉注意力、分歧门控＋边界辅助组合。** CNN与新增模块全部端到端训练，输出原生20ms伪造区间。
+
+主方案在本轮PS测试上的事件F1为 **55.65%**、≤320ms召回为 **65.30%**、真实时长误报率为 **4.02%**。选择它作为工程主线，是查看现有四组结果后的决定；这次整理不重训、不重选epoch或阈值，不能当作新增盲测。完整[中文方法论](docs/main_methodology_zh.md)包含结构图、公式、损失、训练评价与结论边界。
+
+四组均从相同随机CNN初始化训练20轮，统一测试和独立审计已完成。其余三组保留为对照，数值和原始权重保持不变。
 
 | 组名 | 输入与结构 | 作用 |
 |---|---|---|
 | `cnn_clean` | CNN-BiGRU，只用原声 | 结构基线控制 |
 | `cnn_aug` | 相同CNN，原声／20dB白噪声／轻微EQ轮换 | 信道增强控制 |
-| `dual` | 增强＋20/160ms两分支＋局部交叉注意力＋分歧门控＋粗辅助监督 | 候选方法一 |
-| `boundary` | 在`dual`上加入可学习降采样、边界BCE、同真值片段内部一致性 | 候选方法二 |
+| `dual` | 增强＋20/160ms两分支＋局部交叉注意力＋分歧门控＋粗辅助监督 | 结构对照 |
+| `boundary` | 在`dual`上加入可学习降采样、边界BCE、同真值片段内部一致性 | **当前主方案** |
 
 `dual`同时加入结构与粗辅助监督；`boundary`是三项改动的组合，首轮不能分别归因于其中一项。当前四组不使用位置偏置或可靠性门控扩展。
+
+## 主方案入口
+
+在已安装依赖的环境中进入`code/`，下载仓库中的主方案权重后可直接定位单条音频：
+
+```powershell
+python -m cnn_ps.predict_main --audio 'example.wav' --output 'prediction_main.json' --device cpu
+```
+
+默认加载[主方案权重](weights/cnn_boundary_ps_eventf1_seed666.pt)，包括CNN和全部新增模块，使用checkpoint中冻结的开发集logit阈值`0.42304700613021856`。输入须为16kHz单声道；输出实际20ms分数与伪造时间区间，不需要标签或原训练目录。与旧`cnn_ps.predict`区分，新入口不会遗漏adapter，也不使用默认0/0.5阈值。
+
+重新训练主方案使用专门入口，固定选择`boundary`，训练、校准和评价逻辑复用原对照实现。以下示例使用**新输出目录**；缓存准备见下方完整流程。
+
+```powershell
+python -m cnn_ps.main_method train --train-cache 'D:\SAL_精简实验\data\cnn_ps_features_v2\train' --dev-cache 'D:\SAL_精简实验\data\cnn_ps_features_v2\dev' --output 'D:\SAL_精简实验\result\ps_boundary_main_newrun' --device cuda
+python -m cnn_ps.main_method freeze --output 'D:\SAL_精简实验\result\ps_boundary_main_newrun'
+python -m cnn_ps.main_method evaluate --eval-cache 'D:\SAL_精简实验\data\cnn_ps_features_v2\eval' --output 'D:\SAL_精简实验\result\ps_boundary_main_newrun' --device cuda
+```
+
+默认seed666、20轮、batch8。只训练主方案时，输出目录包含`boundary/`和单方案冻结计划；已有四组实验继续用`train_four`及其原四组冻结计划。`predict_main`只做单音频推理；正式指标须用带真值的统一评价流程计算。
 
 ## 本轮测试结果（seed666）
 
@@ -19,8 +43,8 @@
 |---|---|---:|---:|---:|---:|---:|
 | `cnn_clean` | 控制 | 53.22% | 63.83% | 6.40% | 25.21% (92/365) | 74.08% |
 | `cnn_aug` | 控制 | 50.21% | 56.58% | 4.94% | 12.33% (45/365) | 67.62% |
-| `dual` | 候选 | 54.98% | 61.39% | 6.03% | 15.62% (57/365) | 73.38% |
-| `boundary` | 候选 | 55.65% | 65.30% | 4.02% | 10.14% (37/365) | 71.14% |
+| `dual` | 结构对照 | 54.98% | 61.39% | 6.03% | 15.62% (57/365) | 73.38% |
+| `boundary` | **主方案** | 55.65% | 65.30% | 4.02% | 10.14% (37/365) | 71.14% |
 
 `dual`相对增强控制的事件F1增加4.7709个百分点；按录音配对bootstrap的95%区间为[3.9094, 5.5684]。`boundary`的事件F1、≤320ms召回和上述两类误报率点估计最好，但相对`dual`的事件F1仅增加0.6631个百分点，95%区间[-0.1059, 1.4519]跨0，额外增益尚不确定。该bootstrap只重采样录音，不涵盖训练seed差异；仅有seed666，eval此前已看过。
 
@@ -50,7 +74,7 @@ Python3.10，依赖见`code/requirements.txt`。进入`code/`后可用`Setup.cmd
 
 清单不依赖旧result缓存，音频与官方160ms标签仍在原数据目录。输入16kHz单声道；实际20ms NPZ为**1=假**，官方160ms NPY为1=真，由读取器转换。不能重复粗标签伪造细标签。
 
-## Windows运行顺序
+## 四组对照的完整复现流程
 
 同一PowerShell窗口内依次执行。组员修改本机路径，复现时另选新的`$run`，不要覆盖当前结果。
 
@@ -114,6 +138,6 @@ if ($LASTEXITCODE -ne 0) { throw '统一评估未完成' }
 
 旧CNN/B1/dual权重已移出当前交付，旧结果按本轮清理要求移入回收站；原PS数据及SAL、语义、HAD、prosody材料保留。[权重清单](weights/manifest.json)登记四个新选中权重及完整SHA、epoch、各自dev阈值和配置来源，详见[权重使用说明](weights/README.md)。
 
-本轮checkpoint由`train_four`的结构与配置加载，**不能直接交给旧`predict`或`load_backbone`**。完整复评还需同一数据及`complete.json`、`protocol.json`、dev指标/分数和冻结计划等结果元信息，仅下载`.pt`不足以运行`--evaluate`。阈值是原生20ms、假为正类的**logit阈值**，以float64执行`score >= threshold`；不是sigmoid概率阈值，不默认0或0.5，不使用表格舍入值。
+主方案单音频推理使用`predict_main`，无需原运行目录。本轮checkpoint**不能直接交给旧`predict`或`load_backbone`**。完整复评还需同一数据及`complete.json`、`protocol.json`、dev指标/分数和冻结计划等结果元信息，仅下载`.pt`不足以运行`--evaluate`。阈值是原生20ms、假为正类的**logit阈值**，以float64执行`score >= threshold`；不是sigmoid概率阈值，不默认0或0.5，不使用表格舍入值。
 
-当前入口：[train_four.py](code/cnn_ps/train_four.py)、[dual_resolution.py](code/cnn_ps/dual_resolution.py)、[dual_features.py](code/cnn_ps/dual_features.py)。部分旧入口暂留用于共享函数与回溯，本轮只使用上述四组流程。
+主方案入口：[main_method.py](code/cnn_ps/main_method.py)、[predict_main.py](code/cnn_ps/predict_main.py)。共同实现与对照入口：[train_four.py](code/cnn_ps/train_four.py)、[dual_resolution.py](code/cnn_ps/dual_resolution.py)、[dual_features.py](code/cnn_ps/dual_features.py)。部分旧入口暂留用于共享函数与回溯。

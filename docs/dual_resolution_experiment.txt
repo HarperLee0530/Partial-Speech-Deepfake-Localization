@@ -1,6 +1,8 @@
 PS 四组随机初始化重训规范（2026-11-15，seed666）
 
 当前状态
+当前工程主线已选定为boundary，专用训练入口为cnn_ps.main_method，单音频入口为cnn_ps.predict_main。
+此指定基于本轮已查看的对照结果；不改变原权重、epoch、开发集阈值和四组历史记录。
 四组20轮训练、开发集冻结选择和统一eval已完成，完整独立审计status=passed。
 四个新best.pt位于weights目录，SHA与complete、冻结记录、审计一致。
 本轮建立新的统一结构对照，不是旧CNN成品复评，也不从旧CNN/B1/双分辨率权重继续训练。

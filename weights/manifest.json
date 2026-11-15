@@ -2,7 +2,7 @@
   "format_version": 2,
   "experiment": "ps_four_random_cnn_v1",
   "status": "dev_selected_checkpoints_verified",
-  "note": "Four dev-selected checkpoints are included after the complete independent audit passed. All current arms start from the same random CNN initialization.",
+  "note": "Boundary is the current main method. All four dev-selected checkpoint bytes, epochs, thresholds and historical comparison results remain unchanged.",
   "arms": [
     "cnn_clean",
     "cnn_aug",
@@ -158,7 +158,7 @@
     },
     {
       "arm": "dual",
-      "role": "candidate_method",
+      "role": "structural_ablation",
       "file": "cnn_dual_ps_eventf1_seed666.pt",
       "source_artifact": "dual/best.pt",
       "checkpoint_schema": "ps_four_random_cnn_v1",
@@ -215,7 +215,7 @@
     },
     {
       "arm": "boundary",
-      "role": "candidate_method",
+      "role": "main_method",
       "file": "cnn_boundary_ps_eventf1_seed666.pt",
       "source_artifact": "boundary/best.pt",
       "checkpoint_schema": "ps_four_random_cnn_v1",
@@ -340,5 +340,18 @@
     "runtime_source_git_commit": "df6ccf99317b7af5ec22818b1bb148b933ede7b4",
     "main_source_merge_git_commit": "a50cc1941a066513dddbe7e9e6b8becedfe2b640"
   },
-  "loading_note": "These are train_four payloads, not legacy predict/load_backbone checkpoints. Full --evaluate needs the original selected run metadata and dev artifact files (complete.json, protocol.json, dev_metrics.json, dev_scores20.npz), the frozen plan and the matching clean eval data/cache, not these four .pt files alone."
+  "loading_note": "These are train_four payloads, not legacy predict/load_backbone checkpoints. Full --evaluate needs the original selected run metadata and dev artifact files (complete.json, protocol.json, dev_metrics.json, dev_scores20.npz), the frozen plan and the matching clean eval data/cache, not these four .pt files alone.",
+  "primary_method": {
+    "arm": "boundary",
+    "checkpoint": "weights/cnn_boundary_ps_eventf1_seed666.pt",
+    "training_entry": "python -m cnn_ps.main_method train",
+    "prediction_entry": "python -m cnn_ps.predict_main",
+    "methodology": "docs/main_methodology_zh.md",
+    "designation_date": "2026-11-15",
+    "designation_basis": "Engineering mainline chosen after inspecting the existing PS four-arm evaluation; not a new blind validation.",
+    "backbone_training": "All CNN and adapter parameters jointly trained from random initialization",
+    "checkpoint_or_threshold_reselected": false,
+    "comparison_models_retained": true,
+    "single_seed_only": true
+  }
 }
