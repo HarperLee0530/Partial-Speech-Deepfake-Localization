@@ -210,9 +210,17 @@ class DualResolutionAdapter(nn.Module):
                 previous, following, boundary_probability])
         return torch.stack(features, dim=-1)
 
-    def forward(self, h, z, weights):
+    def forward(self, h, z, weights, fine_condition=None):
         normalized, base, weights, valid = self._inputs(h, z, weights)
-        fine_features = F.gelu(self.fine_projection(normalized)) * valid[:, None]
+        fine_projection = self.fine_projection(normalized)
+        if fine_condition is not None:
+            if fine_condition.shape != fine_projection.shape or fine_condition.device != fine_projection.device:
+                raise ValueError("Fine conditioning must match the projection shape and device")
+            condition = torch.where(valid[:, None], fine_condition.to(fine_projection), torch.zeros_like(fine_projection))
+            if not torch.isfinite(condition).all():
+                raise ValueError("Fine conditioning must be finite on valid frames")
+            fine_projection = fine_projection + condition
+        fine_features = F.gelu(fine_projection) * valid[:, None]
         fine_residual = self.fine_output(fine_features).squeeze(-1) * valid
         fine_logits = base + fine_residual
         coarse_base, coarse_weights = self.masked_pool(base, weights)

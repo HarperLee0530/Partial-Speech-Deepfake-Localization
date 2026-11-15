@@ -1,0 +1,48 @@
+PS 主方案能量5维对照（seed666，2026-11-15）
+
+状态：实现和64项测试已通过；正式两组结果待训练、冻结及评估后填写。
+当前已发布主方案仍是boundary。本轮单独检验能量输入，不把旧冻结CNN韵律消融的收益直接叠加到它上面。
+
+两组
+boundary_control：完整boundary主方案，能量投影旁路，937014个有效训练参数。
+boundary_energy5：同一主方案＋5→32无bias投影，零初始化，在细分支GELU之前相加；937174个有效训练参数。
+两组保留同形投影和能量统计buffer供配对检查，control投影冻结且完全旁路。
+粗分支、局部注意力、分歧门控、可学习降采样、边界头及五项损失都沿用主方案。
+不改变门控输入，不另外叠加修正头，不加载旧CNN权重。
+
+特征
+按20ms帧移、25ms矩形RMS窗、帧中点对齐，从同一份原声/噪声/EQ波形提取：
+1. logRMS减整条录音有效帧中位数；2.相邻差分（首帧0）；
+3/4.与11/51帧邻域均值之差；5.11帧邻域总体标准差。
+邻域排除当前帧，边缘只计算实际存在的邻居；先提取实际帧，再补160ms存储尾格。
+这5列逐值对应旧14维的[3,5,8,9,13]，不再提取音高或调用YIN。
+均值/标准差仅由本轮clean train全部有效帧拟合，等帧权重，std至少1e-4；标准化后clip[-10,10]。
+真实时长mask定义有效格，合法的全0能量向量仍是有效数据，不能把非零判据当padding mask。
+
+共同训练与选择
+同随机CNN/旧adapter起点，seed666；train6345/dev2484；20轮，batch8，每轮794次更新。
+全参数AdamW lr=.001、wd=.0001、clip_norm=5；训练通道、录音顺序、时长加权损失一致。
+L=L20_final+L160_final+.5L160_coarse+.1Lboundary+.05Lconsistency。
+每轮只在dev按真实时长FPR<=5%校准，再按dev事件F1@IoU0.5选模型，epoch0可选，平局保留更早轮。
+42份逐轮权重/分数/指标均存档；双臂全部完成并独立审计后冻结，再生成eval能量缓存和统一测试。
+测试不选模型、不重新搜索阈值，不补空隙、不过滤短事件；report_native20保持原评价定义。
+eval3562此前已分析，仅seed666，本轮为探索性同条件对照；录音bootstrap不覆盖训练种子方差。
+
+运行（在code目录，按本机修改路径；结果目录必须新建）
+python -m cnn_ps.energy_cache --frontend-cache D:\SAL_精简实验\data\cnn_ps_features_v2\train --output D:\SAL_精简实验\data\cnn_ps_energy5_v1\train
+python -m cnn_ps.energy_cache --frontend-cache D:\SAL_精简实验\data\cnn_ps_features_v2\dev --output D:\SAL_精简实验\data\cnn_ps_energy5_v1\dev
+当前机器上述两份缓存已完成，生成器拒绝覆盖非空目录。
+
+python -m cnn_ps.train_energy --arm boundary_control --train-cache D:\SAL_精简实验\data\cnn_ps_features_v2\train --dev-cache D:\SAL_精简实验\data\cnn_ps_features_v2\dev --train-energy D:\SAL_精简实验\data\cnn_ps_energy5_v1\train --dev-energy D:\SAL_精简实验\data\cnn_ps_energy5_v1\dev --output D:\SAL_精简实验\result\ps_boundary_energy5_20261115_run1 --epochs 20 --batch-size 8 --seed 666 --device cuda --threads 4
+另开进程运行相同命令，将arm改为boundary_energy5；不改变其它预算。
+
+两组训练完成并核对后：
+python -m cnn_ps.train_energy --freeze-only --output D:\SAL_精简实验\result\ps_boundary_energy5_20261115_run1 --device cpu
+python -m cnn_ps.energy_cache --frontend-cache D:\SAL_精简实验\data\cnn_ps_features_v2\eval --output D:\SAL_精简实验\data\cnn_ps_energy5_v1\eval
+python -m cnn_ps.train_energy --evaluate --output D:\SAL_精简实验\result\ps_boundary_energy5_20261115_run1 --eval-cache D:\SAL_精简实验\data\cnn_ps_features_v2\eval --eval-energy D:\SAL_精简实验\data\cnn_ps_energy5_v1\eval --device cuda --threads 4
+
+预检
+纯5维与旧14列的12个真实视图及12个合成样本逐值相同；train/dev共21519视图的LogMel与既有缓存逐值一致。
+control的非零残差前向、损失、全部梯度和一次AdamW更新与原boundary相同；候选零初始化输出也相同。
+测试覆盖共同CPU/CUDA RNG、有效全0能量、尾部mask、开发集选模、冻结和测试不校准。
+旧韵律消融使用8轮冻结CNN和旧J选模，其能量事件F1增益约0.22点且区间跨0，仅用于提出本轮假设。
