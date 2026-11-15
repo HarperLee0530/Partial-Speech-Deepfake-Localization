@@ -1,6 +1,6 @@
 # PS 部分伪造语音定位：四组从随机初始化训练
 
-**本轮四组模型从同一个随机初始化的 CNN-BiGRU 开始训练。正式结果尚未产生，当前没有发布成品权重。** 前两组是控制组，最后两组是候选方法，不加载旧 CNN、B1 或双分辨率权重。
+**本轮四组从同一个随机初始化的 CNN-BiGRU 训练20轮，统一测试和完整独立审计均已完成。** 前两组是控制组，最后两组是候选方法，不加载旧 CNN、B1 或双分辨率权重。
 
 | 组名 | 输入与结构 | 作用 |
 |---|---|---|
@@ -10,6 +10,23 @@
 | `boundary` | 在`dual`上加入可学习降采样、边界BCE、同真值片段内部一致性 | 候选方法二 |
 
 `dual`同时加入结构与粗辅助监督；`boundary`是三项改动的组合，首轮不能分别归因于其中一项。当前四组不使用位置偏置或可靠性门控扩展。
+
+## 本轮测试结果（seed666）
+
+四组均训练20轮，完整独立审计通过，测试使用各自已经冻结的开发集阈值。下表为同一3562条PS录音的原生20ms评价，主指标为事件F1@IoU0.5。
+
+| 组别 | 角色 | 事件F1↑ | ≤320ms召回↑ | 真实时长FPR↓ | 全真录音误报率↓ | Frame F1↑ |
+|---|---|---:|---:|---:|---:|---:|
+| `cnn_clean` | 控制 | 53.22% | 63.83% | 6.40% | 25.21% (92/365) | 74.08% |
+| `cnn_aug` | 控制 | 50.21% | 56.58% | 4.94% | 12.33% (45/365) | 67.62% |
+| `dual` | 候选 | 54.98% | 61.39% | 6.03% | 15.62% (57/365) | 73.38% |
+| `boundary` | 候选 | 55.65% | 65.30% | 4.02% | 10.14% (37/365) | 71.14% |
+
+`dual`相对增强控制的事件F1增加4.7709个百分点；按录音配对bootstrap的95%区间为[3.9094, 5.5684]。`boundary`的事件F1、≤320ms召回和上述两类误报率点估计最好，但相对`dual`的事件F1仅增加0.6631个百分点，95%区间[-0.1059, 1.4519]跨0，额外增益尚不确定。该bootstrap只重采样录音，不涵盖训练seed差异；仅有seed666，eval此前已看过。
+
+边界组合也有代价：事件Recall61.35%和Frame F1 71.14%低于`cnn_clean`的62.14%和74.08%；短事件改善主要集中≤80ms，80–160ms及160–320ms召回低于`dual`。未匹配预测事件从`dual`的6634增加到6760，不能说所有误报计数都下降或已经证明减少碎片化。仅信道增强本轮降低部分误报，同时降低事件F1，不能沿用旧实验结论。
+
+详见[中文结果分析](docs/results_four_eventf1_20261115.txt)、[完整数值与审计摘要](docs/results_four_eventf1_20261115.json)。四个开发集选中权重位于[weights目录](weights/README.md)，文件SHA已核对。
 
 ## 共同条件与评价
 
@@ -28,7 +45,7 @@
 Python3.10，依赖见`code/requirements.txt`。进入`code/`后可用`Setup.cmd`建立环境；GPU运行需匹配的PyTorch/CUDA。
 
 - 永久输入：`D:\SAL_精简实验\data\cnn_ps_inputs_v2\manifests\{train,dev,eval}.json`及`labels20\{train,dev,eval}.npz`。
-- 新LogMel缓存：`D:\SAL_精简实验\data\cnn_ps_features_v2\{train,dev}`，train三信道、dev仅原声，当前机器已生成。
+- 新LogMel缓存：`D:\SAL_精简实验\data\cnn_ps_features_v2\{train,dev,eval}`；train三信道，dev/eval仅原声。当前运行的eval缓存是在四组开发集选择冻结之后生成。
 - 本轮结果：`D:\SAL_精简实验\result\ps_four_eventf1_20261115_run1`。
 
 清单不依赖旧result缓存，音频与官方160ms标签仍在原数据目录。输入16kHz单声道；实际20ms NPZ为**1=假**，官方160ms NPY为1=真，由读取器转换。不能重复粗标签伪造细标签。
@@ -38,7 +55,7 @@ Python3.10，依赖见`code/requirements.txt`。进入`code/`后可用`Setup.cmd
 同一PowerShell窗口内依次执行。组员修改本机路径，复现时另选新的`$run`，不要覆盖当前结果。
 
 ```powershell
-$repo = 'D:\Partial-Speech-DualResolution-experiment'
+$repo = 'D:\Partial-Speech-CNN-cleanup'
 $inputs = 'D:\SAL_精简实验\data\cnn_ps_inputs_v2'
 $features = 'D:\SAL_精简实验\data\cnn_ps_features_v2'
 $run = 'D:\SAL_精简实验\result\ps_four_eventf1_20261115_run1'
@@ -76,7 +93,7 @@ if ($LASTEXITCODE -ne 0) { throw 'dual未完成' }
 if ($LASTEXITCODE -ne 0) { throw 'boundary未完成' }
 ```
 
-**四组全部完成后先冻结，再生成eval缓存，最后统一测试。** 冻结检查还核对四组初始化、训练预算、数据和源码一致。
+**四组全部完成后先冻结，再生成或复用eval缓存，最后统一测试。** 冻结检查还核对四组初始化、训练预算、数据和源码一致。当前机器的eval缓存已完成，复现时可在冻结后复用；已有缓存时跳过下方生成命令，评估入口仍会校验缓存哈希。
 
 ```powershell
 & $python -B -m cnn_ps.train_four --freeze-only --output $run --device cpu
@@ -95,6 +112,8 @@ if ($LASTEXITCODE -ne 0) { throw '统一评估未完成' }
 
 逐轮保存用于检查学习过程，或在另行明确的**dev-only**协议下重选。不能看eval后挑更好的epoch并称为原协议结果。
 
-旧CNN/B1/dual权重已移出当前交付，旧结果按本轮清理要求移入回收站；原PS数据及SAL、语义、HAD、prosody材料保留。[权重清单](weights/manifest.json)当前`weights=[]`。正式训练、冻结和评估完成前不填写新成绩，不沿用旧成绩或旧阈值。
+旧CNN/B1/dual权重已移出当前交付，旧结果按本轮清理要求移入回收站；原PS数据及SAL、语义、HAD、prosody材料保留。[权重清单](weights/manifest.json)登记四个新选中权重及完整SHA、epoch、各自dev阈值和配置来源，详见[权重使用说明](weights/README.md)。
+
+本轮checkpoint由`train_four`的结构与配置加载，**不能直接交给旧`predict`或`load_backbone`**。完整复评还需同一数据及`complete.json`、`protocol.json`、dev指标/分数和冻结计划等结果元信息，仅下载`.pt`不足以运行`--evaluate`。阈值是原生20ms、假为正类的**logit阈值**，以float64执行`score >= threshold`；不是sigmoid概率阈值，不默认0或0.5，不使用表格舍入值。
 
 当前入口：[train_four.py](code/cnn_ps/train_four.py)、[dual_resolution.py](code/cnn_ps/dual_resolution.py)、[dual_features.py](code/cnn_ps/dual_features.py)。部分旧入口暂留用于共享函数与回溯，本轮只使用上述四组流程。

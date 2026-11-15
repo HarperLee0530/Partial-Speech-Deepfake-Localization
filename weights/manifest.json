@@ -1,11 +1,22 @@
 {
   "format_version": 2,
   "experiment": "ps_four_random_cnn_v1",
-  "status": "no_published_weights_new_training_pending",
-  "note": "Old CNN/B1/dual weights removed. Four current arms share a random CNN initialization; no pretrained checkpoint or old normalization statistics. No new final result or checkpoint is declared here.",
-  "arms": ["cnn_clean", "cnn_aug", "dual", "boundary"],
-  "controls": ["cnn_clean", "cnn_aug"],
-  "candidate_methods": ["dual", "boundary"],
+  "status": "dev_selected_checkpoints_verified",
+  "note": "Four dev-selected checkpoints are included after the complete independent audit passed. All current arms start from the same random CNN initialization.",
+  "arms": [
+    "cnn_clean",
+    "cnn_aug",
+    "dual",
+    "boundary"
+  ],
+  "controls": [
+    "cnn_clean",
+    "cnn_aug"
+  ],
+  "candidate_methods": [
+    "dual",
+    "boundary"
+  ],
   "initialization": {
     "kind": "random",
     "same_backbone_initialization_across_arms": true,
@@ -13,7 +24,8 @@
     "model_config_file": "code/configs/cnn_ps_structure.json",
     "model_config_sha256": "707381b135e3319f8bb7e78830e4db0f3cb5d03fa006d291fda9af5b0cc0a280",
     "backbone_parameters": 911521,
-    "adapter_normalization": "trainable LayerNorm256; no external mean/std file"
+    "adapter_normalization": "trainable LayerNorm256; no external mean/std file",
+    "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd"
   },
   "training": {
     "train_recordings": 6345,
@@ -33,7 +45,300 @@
     "resolution_seconds": 0.02,
     "freeze_all_arms_before_eval_cache": true,
     "test_threshold_selection": false,
-    "formal_results_available": false
+    "formal_results_available": true,
+    "independent_audit_status": "passed",
+    "eval_previously_inspected": true,
+    "training_seeds": [
+      666
+    ],
+    "threshold_score_space": "native 20ms fake-positive logit",
+    "threshold_decision_rule": "float64(score) >= float64(threshold)",
+    "probability_threshold": false
   },
-  "weights": []
+  "weights": [
+    {
+      "arm": "cnn_clean",
+      "role": "control",
+      "file": "cnn_clean_ps_eventf1_seed666.pt",
+      "source_artifact": "cnn_clean/best.pt",
+      "checkpoint_schema": "ps_four_random_cnn_v1",
+      "selected_epoch": 19,
+      "seed": 666,
+      "threshold": -0.07645973563194274,
+      "threshold_score_space": "native 20ms fake-positive logit",
+      "threshold_decision_rule": "float64(score) >= float64(threshold)",
+      "sha256": "75f7eb62446e1c777c06bc943bbb2b04dd994bee93981e31ecdb2fdcd5b7792d",
+      "bytes": 4206280,
+      "dev_event_f1_iou05_percent": 78.72677843226099,
+      "dev_real_duration_fpr_percent": 4.999744654234862,
+      "backbone_parameters": 911521,
+      "adapter_parameters": 0,
+      "total_parameters": 911521,
+      "configuration_source": "checkpoint.model_config and checkpoint.adapter_options; checkpoint.protocol",
+      "model_config": {
+        "sample_rate": 16000,
+        "hop_length": 320,
+        "n_fft": 512,
+        "win_length": 400,
+        "n_mels": 80,
+        "channels": [
+          16,
+          32,
+          64
+        ],
+        "hidden_size": 128,
+        "gru_layers": 2,
+        "dropout": 0.4
+      },
+      "adapter_options": null,
+      "loss_coefficients": {
+        "main20": 1.0,
+        "main160": 1.0,
+        "coarse_aux": 0.0,
+        "boundary": 0.0,
+        "consistency": 0.0
+      },
+      "training_protocol_sha256": "78494ff5fc45b7b61223f06a231581628d939dab3006fb57216fd0066aee6818",
+      "dev_scores20_sha256": "932cc76bc56c8e18a84cd69b61aecac441a72dc08c6a297e281b8dca1acfe187",
+      "dev_metrics_sha256": "d7487366120edc8254425711e8436778b097ee588a64f4e7d85e74edcce205f0",
+      "eval_scores20_sha256": "e81b68444d8963b1d0cd88e13b9955de5ae08f5343eb89857dcee72b1765add9",
+      "eval_metrics_sha256": "b119dbfce8ef6c4ef0a581f782ffaa56f4fe3569f2acc654225c096b01d5519b",
+      "loader": "cnn_ps.train_four: CNNBiGRU(ModelConfig(**payload[\"model_config\"])) + make_adapter(payload[\"adapter_options\"], payload[\"protocol\"][\"seed\"], device); strict state loading",
+      "compatible_with_legacy_predict_or_load_backbone": false
+    },
+    {
+      "arm": "cnn_aug",
+      "role": "control",
+      "file": "cnn_aug_ps_eventf1_seed666.pt",
+      "source_artifact": "cnn_aug/best.pt",
+      "checkpoint_schema": "ps_four_random_cnn_v1",
+      "selected_epoch": 16,
+      "seed": 666,
+      "threshold": 0.11703586578369142,
+      "threshold_score_space": "native 20ms fake-positive logit",
+      "threshold_decision_rule": "float64(score) >= float64(threshold)",
+      "sha256": "e0941010cd0d9a246138b1cdcee01124421c0e58c57ad487656725c2201a9ef8",
+      "bytes": 4206344,
+      "dev_event_f1_iou05_percent": 76.98126801152738,
+      "dev_real_duration_fpr_percent": 4.99980122630771,
+      "backbone_parameters": 911521,
+      "adapter_parameters": 0,
+      "total_parameters": 911521,
+      "configuration_source": "checkpoint.model_config and checkpoint.adapter_options; checkpoint.protocol",
+      "model_config": {
+        "sample_rate": 16000,
+        "hop_length": 320,
+        "n_fft": 512,
+        "win_length": 400,
+        "n_mels": 80,
+        "channels": [
+          16,
+          32,
+          64
+        ],
+        "hidden_size": 128,
+        "gru_layers": 2,
+        "dropout": 0.4
+      },
+      "adapter_options": null,
+      "loss_coefficients": {
+        "main20": 1.0,
+        "main160": 1.0,
+        "coarse_aux": 0.0,
+        "boundary": 0.0,
+        "consistency": 0.0
+      },
+      "training_protocol_sha256": "afb599949f804821084fdf104598664e1568b752e5dbdb2d5603d0f59899408d",
+      "dev_scores20_sha256": "94bc62afd6ea6855ec8b2622ca9ef8bc69955f4fe3487dde50ba61b3c0402e1c",
+      "dev_metrics_sha256": "70d42f3627e081a3de03834e4584a3ea00cafe45cbb39f9803a30d4e786245fc",
+      "eval_scores20_sha256": "ba5abefe4d7a742a61d3f8f87cf8d5d4fdc5aad574f54fe8c691acacc8f4f133",
+      "eval_metrics_sha256": "edfa21362abb77e6a3cba04adf3cf830ac40d2986fc548f9970ea6816612c05f",
+      "loader": "cnn_ps.train_four: CNNBiGRU(ModelConfig(**payload[\"model_config\"])) + make_adapter(payload[\"adapter_options\"], payload[\"protocol\"][\"seed\"], device); strict state loading",
+      "compatible_with_legacy_predict_or_load_backbone": false
+    },
+    {
+      "arm": "dual",
+      "role": "candidate_method",
+      "file": "cnn_dual_ps_eventf1_seed666.pt",
+      "source_artifact": "dual/best.pt",
+      "checkpoint_schema": "ps_four_random_cnn_v1",
+      "selected_epoch": 17,
+      "seed": 666,
+      "threshold": 0.029058158397674564,
+      "threshold_score_space": "native 20ms fake-positive logit",
+      "threshold_decision_rule": "float64(score) >= float64(threshold)",
+      "sha256": "789ef74c55ef6c05843b269566ede467aab43670bbfb05052a6ece183baaefa6",
+      "bytes": 4309946,
+      "dev_event_f1_iou05_percent": 78.21249102656138,
+      "dev_real_duration_fpr_percent": 4.99963922446273,
+      "backbone_parameters": 911521,
+      "adapter_parameters": 23412,
+      "total_parameters": 934933,
+      "configuration_source": "checkpoint.model_config and checkpoint.adapter_options; checkpoint.protocol",
+      "model_config": {
+        "sample_rate": 16000,
+        "hop_length": 320,
+        "n_fft": 512,
+        "win_length": 400,
+        "n_mels": 80,
+        "channels": [
+          16,
+          32,
+          64
+        ],
+        "hidden_size": 128,
+        "gru_layers": 2,
+        "dropout": 0.4
+      },
+      "adapter_options": {
+        "variant": "fusion",
+        "normalize_mode": "layernorm",
+        "learned_pool": false,
+        "boundary_head": false,
+        "relative_position": false,
+        "reliability_gate": false
+      },
+      "loss_coefficients": {
+        "main20": 1.0,
+        "main160": 1.0,
+        "coarse_aux": 0.5,
+        "boundary": 0.0,
+        "consistency": 0.0
+      },
+      "training_protocol_sha256": "a3df1c8e22503262c4af12e47d80849d935f6fd305c30b609e84262e82314876",
+      "dev_scores20_sha256": "f7b36253e981f5e72ba09ca414226e06a13ea07b745e666bc078d5110cde05da",
+      "dev_metrics_sha256": "c6c9f625e48b28aca760fa6b23e36059fac31d73db08b5f84d26680741ce3376",
+      "eval_scores20_sha256": "f089816c598d3f15d854de22ae65ed9c7472bef34e18b9eaefdf405379bdcb7e",
+      "eval_metrics_sha256": "ec149224be26a861dcd452bc2b1b57319ea91011f6875afe44f544674e711d88",
+      "loader": "cnn_ps.train_four: CNNBiGRU(ModelConfig(**payload[\"model_config\"])) + make_adapter(payload[\"adapter_options\"], payload[\"protocol\"][\"seed\"], device); strict state loading",
+      "compatible_with_legacy_predict_or_load_backbone": false
+    },
+    {
+      "arm": "boundary",
+      "role": "candidate_method",
+      "file": "cnn_boundary_ps_eventf1_seed666.pt",
+      "source_artifact": "boundary/best.pt",
+      "checkpoint_schema": "ps_four_random_cnn_v1",
+      "selected_epoch": 19,
+      "seed": 666,
+      "threshold": 0.42304700613021856,
+      "threshold_score_space": "native 20ms fake-positive logit",
+      "threshold_decision_rule": "float64(score) >= float64(threshold)",
+      "sha256": "51405763d016e54833ca1173c7095724c669cc1900e464fda273d76ec7b62673",
+      "bytes": 4319153,
+      "dev_event_f1_iou05_percent": 78.99109437570976,
+      "dev_real_duration_fpr_percent": 4.999637938733813,
+      "backbone_parameters": 911521,
+      "adapter_parameters": 25493,
+      "total_parameters": 937014,
+      "configuration_source": "checkpoint.model_config and checkpoint.adapter_options; checkpoint.protocol",
+      "model_config": {
+        "sample_rate": 16000,
+        "hop_length": 320,
+        "n_fft": 512,
+        "win_length": 400,
+        "n_mels": 80,
+        "channels": [
+          16,
+          32,
+          64
+        ],
+        "hidden_size": 128,
+        "gru_layers": 2,
+        "dropout": 0.4
+      },
+      "adapter_options": {
+        "variant": "fusion",
+        "normalize_mode": "layernorm",
+        "learned_pool": true,
+        "boundary_head": true,
+        "relative_position": false,
+        "reliability_gate": false
+      },
+      "loss_coefficients": {
+        "main20": 1.0,
+        "main160": 1.0,
+        "coarse_aux": 0.5,
+        "boundary": 0.1,
+        "consistency": 0.05
+      },
+      "training_protocol_sha256": "f3eeb1963d8be48da62ab1000c0bf1f8d5423f755cf842ab8ab4c69caac46cc2",
+      "dev_scores20_sha256": "de9c4331fb600ef560b366af90b6f9aef421542bcd252be587ec03a85683f5b3",
+      "dev_metrics_sha256": "9659a62bb4a0beb6db9ec92fd4c2ba61ba44672b18322e9de88500e7ae6de1c5",
+      "eval_scores20_sha256": "832e122351f6f137b79d59af9b8a408a67db3b4fa24a8fe73ec755cbc314cd42",
+      "eval_metrics_sha256": "b6641dc1e5a0ec04697968654306211c5f63afa51f45cf1f817ef06530508470",
+      "loader": "cnn_ps.train_four: CNNBiGRU(ModelConfig(**payload[\"model_config\"])) + make_adapter(payload[\"adapter_options\"], payload[\"protocol\"][\"seed\"], device); strict state loading",
+      "compatible_with_legacy_predict_or_load_backbone": false
+    }
+  ],
+  "checkpoint_schema": "ps_four_random_cnn_v1",
+  "provenance": {
+    "result_summary": "docs/results_four_eventf1_20261115.json",
+    "comparison_sha256": "63380430b7180740fcfdff420acd36e1908ab057a0b854070e901f33f5f4cab8",
+    "frozen_eval_plan_sha256": "0bf5d913052d80a69a484c36d99cd24f8a258be4ae8fb6b3de502524dbdfb2ef",
+    "experiment_plan_sha256": "3aa78ecc6f728af70acc66a878288d7794f2c8829d7940a6de91e40179f5eb61",
+    "independent_audit_sha256": "5c9d3ebded574a9182accc7a5fb99f6c521cda733109cf7260258cf17584b0a4",
+    "runtime_source_sha256": {
+      "train_four.py": "2d990a76a9200a5352f795b8ee4e6fe5bafc91ac8c88634176dd89bb2f48f972",
+      "train_dual.py": "36b1fddb9b561d64a81c7fdf4f377b862b514283678e81a8a06e112a44542cbd",
+      "dual_resolution.py": "bf30db4e453f90f9c2ba514a7e12595c25ef9f34305c137e38161b3b81a154b7",
+      "dual_features.py": "c4b8fb69a4d4cb4493114db9ee36b54b5c6f07f4e7faa2f9a1014e0b1e1bc6df",
+      "backbone.py": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+      "finetune.py": "ef03f3224dab65713f6ca23000029b9381cd2105afa052cf2bca2208ef75a18e",
+      "metrics20.py": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+      "report_native20.py": "40e4375ae49f1302b4bd35b4eb1c53683eea73eae17daa1f1cf3d8ea55a1e985",
+      "augmentation.py": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0"
+    },
+    "checkout_source_verification": {
+      "train_four.py": {
+        "runtime_sha256": "2d990a76a9200a5352f795b8ee4e6fe5bafc91ac8c88634176dd89bb2f48f972",
+        "working_tree_sha256": "63aea5eb8a1ac8ced11df3920378c72e4bf16f5d5870cd469c60526ffcc22246",
+        "identical_after_newline_normalization": true
+      },
+      "train_dual.py": {
+        "runtime_sha256": "36b1fddb9b561d64a81c7fdf4f377b862b514283678e81a8a06e112a44542cbd",
+        "working_tree_sha256": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f",
+        "identical_after_newline_normalization": true
+      },
+      "dual_resolution.py": {
+        "runtime_sha256": "bf30db4e453f90f9c2ba514a7e12595c25ef9f34305c137e38161b3b81a154b7",
+        "working_tree_sha256": "6e71e877d6a26084493402794c79118e8fd5525bf7be686a5bffac6cb6e2f229",
+        "identical_after_newline_normalization": true
+      },
+      "dual_features.py": {
+        "runtime_sha256": "c4b8fb69a4d4cb4493114db9ee36b54b5c6f07f4e7faa2f9a1014e0b1e1bc6df",
+        "working_tree_sha256": "7a755887889605e336c2aca94a7df4590383cb361bec89ef246abde31d22e53f",
+        "identical_after_newline_normalization": true
+      },
+      "backbone.py": {
+        "runtime_sha256": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+        "working_tree_sha256": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+        "identical_after_newline_normalization": true
+      },
+      "finetune.py": {
+        "runtime_sha256": "ef03f3224dab65713f6ca23000029b9381cd2105afa052cf2bca2208ef75a18e",
+        "working_tree_sha256": "087cc628ebaf20771f64508bc053c655b8dd1b859c5d404e28385ff2a892cd01",
+        "identical_after_newline_normalization": true
+      },
+      "metrics20.py": {
+        "runtime_sha256": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+        "working_tree_sha256": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+        "identical_after_newline_normalization": true
+      },
+      "report_native20.py": {
+        "runtime_sha256": "40e4375ae49f1302b4bd35b4eb1c53683eea73eae17daa1f1cf3d8ea55a1e985",
+        "working_tree_sha256": "f0be4b699fe2392a555d9c9c75f7d07fd9b99ec470837d58980226bab7bfe9d9",
+        "identical_after_newline_normalization": true
+      },
+      "augmentation.py": {
+        "runtime_sha256": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0",
+        "working_tree_sha256": "916e78b88fcd3aced88f48813627bf2fe746b10f2b44c25446cf4cda78d4da76",
+        "identical_after_newline_normalization": true
+      }
+    },
+    "checkout_source_note": "Runtime hashes identify training files. Git checkout CRLF/LF conversion changes some raw file hashes; all current source texts match after newline normalization.",
+    "runtime_source_git_commit": "df6ccf99317b7af5ec22818b1bb148b933ede7b4",
+    "main_source_merge_git_commit": "a50cc1941a066513dddbe7e9e6b8becedfe2b640"
+  },
+  "loading_note": "These are train_four payloads, not legacy predict/load_backbone checkpoints. Full --evaluate needs the original selected run metadata and dev artifact files (complete.json, protocol.json, dev_metrics.json, dev_scores20.npz), the frozen plan and the matching clean eval data/cache, not these four .pt files alone."
 }

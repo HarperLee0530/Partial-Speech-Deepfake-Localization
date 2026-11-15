@@ -1,7 +1,8 @@
 PS 四组随机初始化重训规范（2026-11-15，seed666）
 
 当前状态
-正式结果尚未产生，weights/manifest.json中weights=[]。
+四组20轮训练、开发集冻结选择和统一eval已完成，完整独立审计status=passed。
+四个新best.pt位于weights目录，SHA与complete、冻结记录、审计一致。
 本轮建立新的统一结构对照，不是旧CNN成品复评，也不从旧CNN/B1/双分辨率权重继续训练。
 旧六组方案已取消；当前只有四组，前两组是控制，最后两组是候选方法。旧成绩不进入本轮结果表。
 组员原实现与成品未取得，因此按文字方案重建，不能称为对既有成绩的精确复现。
@@ -69,6 +70,8 @@ dual/boundary加0.5×独立粗BCE；boundary再加0.1×边界BCE＋0.05×片段�
 选模与测试隔离
 每轮在dev真实音频时长上选择满足FPR≤5%的最宽松分数边界，同分组不拆开。
 再比较该阈值下的dev事件F1@IoU0.5，取最大者；差异≤1e-10个百分点取更早epoch。
+阈值作用于原生20ms、fake为正类的logit；用float64(score)>=float64(threshold)比较保留同分边界。
+不是sigmoid概率阈值，不默认0/0.5，复评必须保留完整阈值，不能用展示舍入值。
 不使用旧J复合选模，不看测试挑epoch，不在测试重新校准阈值。
 四组全部complete后执行train_four --freeze-only，校验已选模型及dev产物哈希，
 核对四组初始CNN、数据、训练预算和源码一致，保存frozen_eval_plan.json。
@@ -99,4 +102,17 @@ best.pt/dev_metrics.json/dev_scores20.npz与complete.json共同确定当前选�
 当前训练入口train_four.py不接受旧checkpoint或normalization；旧入口暂留用于共享函数和回溯。
 不要改运行中的源码，也不要覆盖非空结果目录。
 旧CNN/B1/dual权重移出当前交付，旧结果按用户要求移到回收站；原PS音频标签及SAL、语义、HAD、prosody材料保留。
-当前没有正式成绩或新发布权重，不沿用旧F1和旧阈值。
+当前结果见docs/results_four_eventf1_20261115.json与同名中文txt，全部为本轮新模型结果。
+权重路径、SHA、选中epoch、完整dev阈值和配置来源见weights/manifest.json。
+checkpoint schema为ps_four_random_cnn_v1，使用train_four加载，不兼容旧predict/load_backbone。
+完整--evaluate还需要原运行的complete/protocol/dev指标/dev分数等结果元信息与匹配数据，不是只下载权重即可执行。
+只交付四个开发集选中权重，不恢复旧权重、不发布全部逐轮权重。
+
+结果解释
+本轮boundary事件F1点估计55.6473%最高，短事件召回65.2976%，真实时长FPR4.01695%，全真录音误报37/365。
+dual相对cnn_aug事件F1增加4.7709个百分点，录音配对bootstrap 95%区间[3.9094,5.5684]；
+boundary相对dual增加0.6631个百分点，区间[-0.1059,1.4519]跨0，不能声称边界包额外事件F1增益稳定。
+仅seed666，bootstrap重采样录音不覆盖训练seed方差，当前eval并非新盲测。
+boundary事件Recall与Frame F1低于cnn_clean；≤320ms增益主要来自≤80ms，80–160ms和160–320ms反而低于dual。
+boundary未匹配预测事件6760比dual6634多126；开发集碎片化proxy也从219升到268。
+因此不能声称所有误报计数降低、所有短长度段改善或已实现减少碎片化。

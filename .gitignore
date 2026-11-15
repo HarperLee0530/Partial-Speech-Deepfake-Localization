@@ -22,6 +22,8 @@ __pycache__/
 Thumbs.db
 desktop.ini
 
-# Published CNN starting point and selected fine-tuned model.
-!/weights/original_cnn.pt
-!/weights/cnn_finetuned_seed666.pt
+# Current four dev-selected checkpoints; all other weight files stay ignored.
+!/weights/cnn_clean_ps_eventf1_seed666.pt
+!/weights/cnn_aug_ps_eventf1_seed666.pt
+!/weights/cnn_dual_ps_eventf1_seed666.pt
+!/weights/cnn_boundary_ps_eventf1_seed666.pt
