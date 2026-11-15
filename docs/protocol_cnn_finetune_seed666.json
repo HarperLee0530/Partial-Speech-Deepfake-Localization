@@ -1,0 +1,69 @@
+{
+  "status": "frozen_before_new_eval",
+  "source_git_commit": "7db2ff4bea33fb775b423e1d6596bfcc7ec1997c",
+  "experiment": "cnn_channel_finetune_seed666",
+  "new_run": "cnn_channel_finetune_20261115_run2",
+  "original_checkpoint_sha256": "36899e66bcf84b1f5aa8a6f2d57128eb80b077bc28eaa94d9bb8fbb713a2a428",
+  "counts": {
+    "train": 6345,
+    "dev": 2484,
+    "eval": 3562
+  },
+  "primary_comparators": [
+    "cnn_original_threshold0",
+    "aug_erm_666"
+  ],
+  "secondary_comparators": [
+    "cnn_dev_f1_calibrated",
+    "clean_erm_666"
+  ],
+  "descriptive_reference_only": "aug_erm mean +/- sample SD from seeds666667668",
+  "primary_metrics160": [
+    "spoof_f1_percent",
+    "eer_percent",
+    "real_fpr_percent"
+  ],
+  "secondary_metrics160": [
+    "event_f1_iou05_percent",
+    "short_event_recall_le320ms_percent"
+  ],
+  "native20": "Same actual-duration/event metrics and checkpoint-specific frozen dev threshold; report separately",
+  "model_selection": "Dev-only actual20 FPR5% J, epoch0 eligible; never choose an epoch from eval performance",
+  "threshold_selection": "160 dev-F1 threshold; 20 threshold chosen during dev epoch selection",
+  "new_pilot_seeds": [
+    666
+  ],
+  "limitations": [
+    "Single new seed cannot establish repeatability.",
+    "Training strategy comparison, not isolated proof of augmentation: trainable layers, learning rate and minibatch definition differ.",
+    "Same fixed3562 PS eval, not full71237.",
+    "No changes selected using new eval scores."
+  ],
+  "eval_read_for_new_model": false,
+  "settings": {
+    "seed": 666,
+    "epochs": 8,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "device": "cuda",
+    "cpu_threads": 4,
+    "trainable_parameters": 911521,
+    "train_manifest_sha256": "3b02c95393d0de6c632e7313312f53650879c369efe1923baf78566772b186f7",
+    "dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+    "train_labels20_sha256": "0282c190c4f29c79f8e7e435008ac8cb95741f438366ada668aa250a49b77eb6",
+    "dev_labels20_sha256": "e497f2933f2fb4d96acdae494b4baeb871ed7cc2981e22a995acc4e9c0c6cb04",
+    "channels": [
+      "original",
+      "white_noise_20db",
+      "mild_eq"
+    ],
+    "assignment_seed": 20261779,
+    "channel_assignment": "(shuffled balanced per-record assignment + epoch - 1) modulo 3",
+    "input": "Full recording waveform, transform before label-grid padding, no crop",
+    "loss": "Duration-weighted coarse160 BCE + actual20 BCE, coefficients 1 and 1",
+    "optimizer": "AdamW, weight_decay=1e-4, gradient clip norm=5",
+    "selection": "Dev actual20 real-duration FPR<=5%; J=.5 durationF1+.5 eventF1, epoch0 eligible, earliest ties",
+    "source_code_sha256": "afec21c9dd4b0d2cfaf2dbadcf441655d5fe3ae999bdd1155907306d0f66c75c",
+    "augmentation_sha256": "916e78b88fcd3aced88f48813627bf2fe746b10f2b44c25446cf4cda78d4da76"
+  }
+}

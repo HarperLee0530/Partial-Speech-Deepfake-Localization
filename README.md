@@ -22,7 +22,7 @@ h → 按 train 统计量归一化并截断 → Linear(256,32) → Tanh → Line
 
 ## 已完成结果与限制
 
-以下为**固定 3,562 条 PS eval 子集**、160 ms、假帧为正类；不是 71,237 条完整测试集成绩。新增头报告 seed666/667/668 的均值±样本标准差。
+以下为**固定 3,562 条 PS eval 子集**、160 ms、假帧为正类；不是 71,237 条完整测试集成绩。新增头的F1/EER报告seed666/667/668的均值±样本标准差，误报率列为均值。
 
 | 方法 | Frame F1 ↑ | EER ↓ | 真实帧误报率 ↓ |
 |---|---:|---:|---:|
@@ -34,7 +34,26 @@ h → 按 train 统计量归一化并截断 → Linear(256,32) → Tanh → Line
 
 [结果明细](docs/results_ps160.json)保存各seed、阈值、checkpoint哈希。[独立回放验证](docs/verification_evaluation.json)已用清理后代码重算全部3562条录音，8个模型/阈值组合的160 ms结果与原报告完全一致。
 
-**直接微调对照尚待正式运行**：不加新头，增强音频后更新全部 CNN 参数。先跑seed666，与已有同seed结果配对；未完成时不列入结果表。学习率、batch和可训练参数范围不同，这是两种训练方案的比较。若要把增益单独归因于增强，还需要“原声直接微调”对照。
+**直接微调对照已完成一个种子**：不加新头，增强音频后更新原CNN全部参数，同时沿用真实20/160 ms双尺度监督。seed666训练8轮，dev选中第8轮；起始模型核验和训练共19.68分钟。下面单独列出同seed比较，避免与上面的三seed均值混用。
+
+| 方法，固定3562条PS eval | 160 ms Frame F1 ↑ | EER ↓ | 真实帧误报率 ↓ |
+|---|---:|---:|---:|
+| 最初原CNN，阈值0 | 78.8702% | 19.7829% | 5.6269% |
+| 冻结CNN+头+增强，seed666 | 80.9346% | 16.2184% | 5.7480% |
+| 全CNN直接微调+增强，seed666 | **82.8403%** | **16.0585%** | 6.8100% |
+
+相对同seed头方案，直接微调的Frame F1提高1.9057个百分点，EER降低0.1599个百分点，但误报率增加1.0620个百分点。160 ms事件F1从29.9108%到31.6143%，短事件召回从14.2449%到14.5308%。
+
+20 ms结果另行比较：
+
+| 同seed方法 | 时长F1 ↑ | 事件F1 ↑ | ≤320 ms事件召回 ↑ | 真实时长误报率 ↓ |
+|---|---:|---:|---:|---:|
+| 冻结CNN+头+增强 | 70.3340% | 43.5979% | 54.4320% | 4.8612% |
+| 全CNN直接微调+增强 | **74.7840%** | **50.2401%** | **62.9841%** | 6.0467% |
+
+这次直接微调改善了召回和定位，但有误报代价，不能称全面胜出。新方案只有一个seed；学习率、batch和可训练参数范围不同，这是训练方案比较。原CNN原先只有160 ms监督，两种适配方案都新增真实20 ms监督；若要把增益单独归因于信道增强，还需要“原声全CNN微调”对照。
+
+[完整新结果及逐轮dev记录](docs/results_cnn_finetune_seed666.json)、[训练前固定的对比协议](docs/protocol_cnn_finetune_seed666.json)、[独立逐帧分数复算](docs/verification_finetune_result.json)。原结构911,521参数不变，无新增头；26个参数张量均有更新。所有模型测试UID完全一致，模型与阈值未根据eval调整。
 
 ## 代码与环境
 
@@ -110,7 +129,7 @@ python -m cnn_ps.finetune --checkpoint ../data/models/original_cnn.pt --expected
 python -m cnn_ps.evaluate_cnn --run ../result/cnn_finetune1 --dev-manifest ../data/manifests_ps/dev.json --dev-labels20 ../data/labels20/dev.npz --eval-manifest ../data/manifests_ps/eval.json --eval-labels20 ../data/labels20/eval.npz --output ../result/cnn_finetune_eval1 --device cuda
 ```
 
-未完成时不能把dev成绩当eval结果。实现启动前已做[独立微调核对](docs/verification_finetune_prelaunch.json)。
+上述命令可复现新的直接微调实验。已完成seed666结果见上表；重新运行请使用新的输出目录。实现启动前已做[独立微调核对](docs/verification_finetune_prelaunch.json)。
 
 ## 从头训练原CNN
 
