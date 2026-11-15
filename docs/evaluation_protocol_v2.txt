@@ -1,0 +1,359 @@
+PS 部分伪造语音定位：统一评估规范 v2（未来实验方案，供组员改代码）
+协议标识：ps_native20_event_v2
+
+先说明适用范围
+本文件规定后续新实验采用的评估、阈值选择和checkpoint选择方式。它是一份待实现的规范，不代表当前代码已经切换协议，也不代表已经按v2重新训练或评估。
+
+已有结果继续保留原记录：此前残差头与全CNN微调按照开发集 J＝0.5×时长F1＋0.5×事件F1 选择checkpoint，160ms主表又使用开发集Frame F1选择报告阈值。不能把这些成绩改名为“按v2事件F1选模”的结果。
+
+此前已经看过的PS eval子集不是新的盲测集。下一轮可以预先固定本规范开展对照，但论文/报告需说明这一点；若需要更严格的最终结论，应预先另留未参与开发的数据。不要根据后续eval分数再调整本规范。
+
+一、我们到底在评价什么
+
+任务是找出一条录音中“哪几个时间区间是假语音”，因此v2主指标采用：
+    原生20ms预测的 Event F1，事件匹配条件为 IoU≥0.5。
+
+每个方法必须同时报告：
+    1. Event F1@IoU0.5（主指标）；
+    2. 事件Precision、事件Recall，以及匹配数/预测事件数/真实事件数；
+    3. 短事件召回率：真实事件时长≤320ms，以及找回数/真实短事件数；
+    4. 真实时长误报率：被错判为假的真实语音时长÷全部真实语音时长；
+    5. 全真录音误报率：出现至少一次假区间报警的全真录音数÷全真录音数。
+
+第4项包含“半真半假录音里的真实部分”，不能只在全真录音上计算。第5项是应用层面的另一个问题：一条完全正常的录音，会不会至少被误报一次？两者都要给出，不能互相替代。
+
+EER、逐帧F1、时长F1作为补充指标。160ms历史结果另列一张表，清楚写明时间尺度、阈值和旧选模规则，不能与原生20ms结果混在同一列比较高低。
+
+不单独追求召回率：把整段音频都报成假，可能提高某些召回，却会造成大量误报。也不单独追求低误报：一律判真会漏掉所有假区间。用事件F1概括找回与误报的平衡，同时保留两项误报指标和短事件召回，才能看出代价。
+
+二、输入数据及时间轴必须一致
+
+每条录音至少提供：
+    uid：唯一录音ID。
+    duration：真实音频时长，单位秒，必须为正的有限数。
+    labels20：官方实际20ms细粒度真值标签，统一为0＝真、1＝假。
+    scores20：该方法原生20ms预测分数，越大越像假语音。
+
+“真值标签”指人工/官方提供的参考答案，包含真实和伪造两类，并不是只指真人那一类。
+
+官方PS原始标注通常为1＝真、0＝假，需要转换成1-labels。组内已经导出的labels20 NPZ为1＝假，不要再次反转。必须记录源文件哈希和原始编码。
+
+第k帧时间区间统一为 [k×0.02, (k+1)×0.02)，再裁剪到真实音频末尾。它的实际宽度为：
+    width[k]＝max(0, min((k+1)×0.02, duration)－k×0.02)。
+例如音频0.205秒，最后一个有效20ms单元只有0.005秒，不能按0.02秒计入时长指标。缓存里的额外尾帧、batch padding和真实音频末尾之外的单元均不计分。
+
+labels20必须覆盖实际音频时长；有效单元的分数必须有限。读取时检查重复ID、长度、时长、分数方向和train/dev/eval划分，发现不一致应报错，而不是静默裁剪掉有问题的录音。
+
+这些入口检查需要在v2实现中落实：当前metrics20._prepare只拒绝负时长，尚未拒绝零时长，也不能单靠该函数验证数据划分。v2入口必须额外拒绝duration=0并核对清单。
+
+不能把160ms标签重复8遍作为20ms真值；也不能把160ms预测重复8遍后称为“原生20ms预测”。只有160ms输出的方法可保留在历史160ms表，并注明分辨率限制。组内已有SAL的PS数据库只保存160ms输出，不能直接放入v2原生20ms主表；若以后比较，需要从相应模型获得真实20ms输出，再按同一开发集规则校准。
+
+所有方法使用同一批固定录音、相同实际20ms标签和时间对齐。对于当前组内子集，train6345、dev2484、eval3562；原始CNN骨干曾在完整PS train25380/dev24844上训练，此训练历史必须单独披露，不得写成所有方法只见过6345条训练数据。
+
+最初原CNN使用weights/original_cnn.pt作为固定参考，不重新挑选历史checkpoint；也应在同一dev上按第三节单独校准20ms阈值，再冻结后评估。不能给新方案校准阈值，却只让原CNN沿用160ms的阈值0作为唯一比较。其selection.metric应写fixed_historical_baseline，并保留原训练选模记录，不能写成按v2事件F1选出的原CNN。已有残差头或微调权重也可用统一20ms口径重评，但仍需标明原先的旧J选模规则。
+
+后续新训练方案建议固定seed666/667/668配对对照，每个seed分别校准和评估，最后报告均值及样本标准差。只有一个seed时写明单次结果。确定性的同一个原CNN权重只评估一次，不能重复算三次当作三个独立训练seed。若声称某个模块带来增益，对照应尽量保持训练数据、初始权重、训练轮数、损失、增强和后处理一致，只改变研究的因素；无法保持一致时注明差异。
+
+三、怎样确定真假阈值：只看开发集，保留现有算法
+
+统一使用 code/cnn_ps/metrics20.py 中：
+    choose_threshold(dev_records, max_real_fpr=0.05)
+
+目标是在开发集上，真实语音时长误报率不超过5%。这不是选一个使事件F1最大的阈值，也不是在测试集上搜阈值。
+
+现有函数的规则需要原样保留：
+    1. 汇总开发集中全部真实单元的分数与实际宽度，包括半真半假录音中的真实部分。
+    2. 分数从大到小排列，完全相同的分数作为一组，不拆分一组里的单元。
+    3. 允许误报的真实时长预算＝全部真实时长×0.05。
+    4. 从高分开始累计，找到第一组“整组纳入就会超过预算”的同分组。
+    5. 将阈值设为该组分数上方最接近的float64数：
+           np.nextafter(np.float64(boundary), np.float64(np.inf))。
+       因此这组及更低分组都被排除；前面的组全部保留。
+
+这是现有实现中“在真实分数组边界上尽可能宽松、又满足预算”的规则。它没有使用假事件F1搜索阈值。大同分组可能导致实际开发集FPR明显低于5%，这属于正常结果，不能拆分同分组凑够5%。
+
+判断时必须调用 decision_mask(scores, threshold)，或显式使用：
+    np.asarray(scores, dtype=np.float64) >= np.float64(threshold)。
+阈值不能再转float32、只保留几位小数或改用score>threshold。否则nextafter边界可能被舍入回原同分值，造成整组突然被纳入。JSON保存完整浮点精度；表格显示可以四舍五入，但不能反过来用表格数字重新判断。
+
+每个模型、每个seed、每个epoch可以得到自己的开发集阈值；统一的是算法和5%预算，并非所有模型共用同一个数字。选择好的checkpoint必须与它自己的开发集阈值一起保存。
+
+5%只约束开发集，不保证测试集、其他数据集或真实应用也恰好5%。测试集必须如实报告自己的FPR，不能再调整阈值把它压回5%。5%是这次预先固定的比较设定，不是通用安全标准。
+
+四、怎样选择checkpoint：未来改成开发集事件F1
+
+未来v2按以下顺序执行：
+    每个epoch得到未增强的开发集原生20ms分数；
+    先按第三节确定开发集阈值；
+    固定此阈值计算开发集事件F1；
+    只按这个事件F1选择checkpoint，越高越好。
+
+有可用初始模型的本次CNN对照保留epoch0作为候选，所有对照一致。若事件F1差异不超过1e-10个百分点，视为数值平局，保留更早的epoch，不再按短召回、测试分数或其他指标二次挑选。
+
+开发集必须包含真实语音时长及至少一个真实假事件，否则当前阈值/选模协议无法成立，应报错说明。不要把未定义F1当成100分或用别的指标临时替代。
+
+伪代码（只是修改建议，当前代码尚未切换）：
+
+    from cnn_ps.metrics20 import choose_threshold, evaluate
+
+    best = None
+    for epoch in candidate_epochs_in_ascending_order:
+        dev_records = infer_original_dev_audio(model)
+        choice = choose_threshold(dev_records, max_real_fpr=0.05)
+        metric = evaluate(dev_records, threshold=choice['threshold'])
+        assert metric['event_counts']['truth'] > 0
+        score = metric['event_f1_iou05_percent']
+
+        if best is None or score > best['value'] + 1e-10:
+            best = {
+                'epoch': epoch,
+                'value': score,
+                'threshold20': choice['threshold'],
+                'selection_metric': 'event_f1_iou05_percent',
+                'protocol_version': 'ps_native20_event_v2'
+            }
+            save_checkpoint_weights_and_dev_metadata(model, best, choice, metric)
+
+    # 训练和选模结束，先保存checkpoint哈希、阈值和开发集校准记录。
+    selected_model, frozen_threshold = load_selected_checkpoint_and_threshold()
+    test_records = infer_original_eval_audio(selected_model)
+    test_metric = evaluate(test_records, threshold=frozen_threshold)
+    # 在v2输出适配层按第六节处理未定义值；禁止对test调用choose_threshold/evaluate_dev。
+
+这次协议变化不要求修改损失函数。可继续保留当前160ms BCE＋真实20ms BCE，或者在未来预先声明的消融中改变损失。训练损失与选模指标是不同概念：不是把事件匹配F1直接当作可微训练损失。
+
+五、如何把逐帧判断变成事件，如何匹配
+
+一个“事件”是一条录音里连续的一段假区间。对预测和真值采用相同规则：
+    将连续的1合并成一个区间；
+    遇到0即结束区间；
+    各录音分别处理，不能跨录音连接；
+    末尾裁剪到真实duration，零时长区间丢弃。
+
+v2默认不做平滑、不设置最短事件长度、不补短空隙、不扩张或收缩边界。若以后研究这些后处理，应另列预先声明的消融，不要在算分时临时加上。
+
+两个区间的IoU＝交集时长÷并集时长。例如真实区间[1.00,1.20)，预测[0.98,1.18)，交集0.18秒、并集0.22秒，IoU＝0.18/0.22≈0.8182，可匹配。
+
+在每条录音内，预测事件与真实事件一对一匹配：一个预测最多匹配一个真实事件，反之亦然。首先最大化IoU≥0.5的匹配个数，在匹配个数相同的方案中，再最大化匹配IoU总和。不能贪心地先选最大IoU，也不能让一个很长的预测同时算找回多个短事件。
+
+直接复用 code/cnn_ps/metrics160.py 的 match_events(pred, truth, threshold=0.5)。该函数虽然位于metrics160.py，但输入是秒单位区间，本身不限定160ms；metrics20.py也在调用它。现有实现使用1e-10的IoU数值容差，应对所有方法一致保留。
+
+若存在完全等价的最优匹配，保留同一函数在固定区间顺序下的结果，不为了增加短事件召回而重排或改配。记录依赖版本，保持可复核。
+
+短事件由“真实区间的实际时长”决定：≤0.32秒。沿用metrics20对边界的1e-9秒数值容差。短事件召回必须从上面那一次完整匹配中统计，不能先删掉长事件再重新匹配短事件。
+
+六、怎样汇总指标和处理空分母
+
+所有录音先分别提取事件并匹配，再把计数相加，最后算一次指标，即micro汇总。不要先算每条录音的F1再取平均。无真实事件或无预测事件的录音也必须参加汇总。
+
+设全数据集匹配总数为M，预测事件总数为Npred，真实事件总数为Ntrue：
+    Event Precision＝M/Npred；
+    Event Recall＝M/Ntrue；
+    Event F1＝2M/(Npred＋Ntrue)。
+报告百分数时乘100。未匹配预测数＝Npred－M；漏掉的真实事件数＝Ntrue－M。
+
+真实短事件总数S，完整匹配中找回的真实短事件数Ms：
+    短事件召回＝Ms/S。
+不能用“找回的短事件秒数÷全部短事件秒数”代替个数召回。
+
+对每个有效20ms单元使用实际width权重，累计TP_seconds、FP_seconds、FN_seconds、TN_seconds：
+    真实时长FPR＝FP_seconds/(FP_seconds＋TN_seconds)。
+分母包含所有录音中真实的那一部分，包括混合录音。它与“全部音频时长”不是同一个分母。
+
+全真录音定义：实际有效时间内没有任何真值假区间。只要预测出现一个正时长假区间，即算该录音误报一次，无论该区间多短、总共报了几次：
+    全真录音误报率＝false_alarm_recordings/fully_genuine_recordings。
+
+空分母统一输出JSON null，表格写NA，并保留原始计数：
+    Npred=0：事件Precision为NA。
+    Ntrue=0：事件Recall为NA。
+    Npred=Ntrue=0：事件F1为NA，不能算100%。
+    Ntrue>0、Npred=0：事件Recall=0、事件F1=0；Precision仍为NA。
+    Ntrue=0、Npred>0：事件Precision=0、事件F1=0；Recall为NA。
+    S=0：短事件召回为NA。
+    没有真实时长：真实时长FPR为NA；这样的开发集不能用于校准。
+    没有全真录音：全真录音误报率为NA。
+
+重要兼容差异：当前metrics20.py的_percent在分母为0时返回0，不是null。v2需要新增输出适配层，根据计数把未定义项转成null。不要直接改动旧函数以免改变历史报告；不要把现有返回值不加说明地当成已经符合v2。所有实际有定义的0分仍应保留0，不能统统转NA。
+
+七、一个完整小例子
+
+一条4秒录音有两个真实事件：
+    G1=[1.00,1.20)，长0.20秒，是短事件；
+    G2=[2.00,2.60)，长0.60秒，不是短事件。
+模型预测两个事件：
+    P1=[0.98,1.18)，与G1的IoU=0.18/0.22≈0.8182，匹配成功；
+    P2=[3.00,3.20)，没有对应真实事件，是误报。
+
+因此M=1、Npred=2、Ntrue=2：
+    事件Precision=50%，事件Recall=50%，事件F1=50%。
+只有一个真实短事件G1且已找回，所以短事件召回=100%。
+这不能说明整体定位已经优秀：长事件G2完全漏掉了，还误报了P2。
+
+同一例子另算时长：
+    真正的假时长0.80秒；真正的真时长3.20秒；
+    TP=0.18秒，FP=0.22秒，FN=0.62秒，TN=2.98秒；
+    真实时长FPR=0.22/3.20=6.875%；时长F1=30%。
+可见事件个数指标与时长指标回答不同问题，不能相互替换。这一例子没有全真录音，所以全真录音误报率为NA，不能据此声称没有全真误报。
+
+八、补充指标与历史表怎样分开
+
+原生20ms补充指标：
+    duration_f1_percent：按实际width累计TP/FP/FN后算2TP/(2TP+FP+FN)。
+    frame_f1_percent：仅有效20ms单元按个数计TP/FP/FN；最后不足20ms的有效单元仍算1帧，所以它不必等于时长F1。
+    eer_percent：如报告，固定采用假类为正、有效20ms帧计数的ROC，sklearn.metrics.roc_curve(..., drop_intermediate=False)，找到|FPR-FNR|最小点并报告该点(FPR+FNR)/2。它是补充的阈值无关比较摘要，不用于改变事件判断阈值。单一真值类别时输出null并注明single_class；未计算时输出null并注明not_computed。
+
+当前metrics20没有直接输出frame F1和EER，需要另外从相同的有效20ms单元计算；不要直接调用metrics160.evaluate来处理20ms序列，因为该函数将时间步固定为0.16秒。
+
+补充EER若出现多个点的|FPR-FNR|同样最小，沿用np.argmin返回的ROC序列首点，不再插值或另外打破平局。
+
+历史160ms表可以继续保存原CNN、残差头、直接微调、SAL的已完成结果，但至少注明：
+    prediction_grid_seconds=0.16；
+    truth_event_grid_seconds=0.02（若以实际细粒度真值定义事件）；
+    checkpoint_selection_protocol（例如旧J或SAL的dev EER）；
+    threshold_protocol（例如原argmax/logit0或dev Frame F1校准）。
+原有95%或80%的Frame F1不是事件F1。已有SAL的160ms事件F1也不能与CNN的原生20ms事件F1直接放在同一指标列，借此宣布模型优劣。
+
+九、交给组员的改代码位置与最小改动
+
+已有模块可以复用：
+    code/cnn_ps/metrics20.py
+        choose_threshold：开发集5%真实时长FPR阈值。
+        decision_mask：float64阈值比较。
+        evaluate：固定阈值下的时长、事件、短事件与全真录音指标。
+        evaluate_dev：包含相同阈值选择，但仍附带旧selection_score_j_percent，不能继续拿J选v2 checkpoint。
+    code/cnn_ps/metrics160.py
+        match_events：秒单位、一对一事件匹配。
+    code/cnn_ps/train_head.py
+        train_one：当前读取selection_score_j_percent；未来改为明确的事件F1选模，同时更新保存字段与协议名称。
+    code/cnn_ps/finetune.py
+        validate和main选模循环：同样替换旧J选择，并保存v2元数据。
+    code/cnn_ps/evaluate.py / evaluate_cnn.py
+        当前主报告仍有160ms开发集F1校准；未来v2评估入口应读取已冻结的20ms阈值，另存v2报告，保持旧入口/旧文件可回放。
+    code/cnn_ps/predict.py
+        v2事件推理使用resolution=0.02及所选checkpoint的20ms开发集阈值，不能拿160ms阈值代替。
+
+需要改动的是“选模字段、协议标记、独立20ms主报告及null适配”，不要求换CNN结构、不要求换损失，也不要求加入新的后处理。checkpoint选择、开发集校准记录和eval结果应写入新的输出目录，拒绝覆盖旧实验。
+
+新增最少回归检查：
+    1. 上述两个真实事件/两个预测事件例子得到事件P/R/F1均50%、短召回100%。
+    2. IoU恰好0.5可匹配；一个预测不能重复匹配两个真实事件。
+    3. 浮点同分组阈值不被float32舍入回去。
+    4. 0.205秒录音末帧只贡献0.005秒，尾部padding不改变指标。
+    5. 空预测、空真值、全真集、没有全真录音时的null/0规则正确。
+    6. 用同一次完整事件匹配统计短召回；不能重新匹配短子集。
+    7. 读取eval前已保存所选权重哈希、阈值和开发集校准记录；eval不调用阈值搜索。
+
+十、必须保存的JSON字段
+
+下面是字段模板，不是实验结果。status必须由template_not_result改成实际状态；占位字符串必须替换。计数用整数，时长和阈值用有限数，比例字段单位为百分数；真实结果中有定义的指标不得留null。无定义或未计算的补充指标用null，并写入undefined_metrics原因。每个seed单独保存；多seed均值/样本标准差另存汇总，不能平均阈值后重新算分。
+
+{
+  "protocol_version": "ps_native20_event_v2",
+  "status": "template_not_result",
+  "model_id": "<method_name>",
+  "seed": 666,
+  "dataset": "PS",
+  "split": "eval",
+  "recordings": 0,
+  "active_20ms_frames": 0,
+  "audio_seconds": 0.0,
+  "prediction_grid_seconds": 0.02,
+  "truth_grid_seconds": 0.02,
+  "positive_label": "fake",
+  "score_definition": "<fake_logit_or_logit_fake_minus_logit_real>",
+  "selection": {
+    "source_split": "dev",
+    "metric": "event_f1_iou05_percent",
+    "value_percent": null,
+    "selected_epoch": 0,
+    "epoch_zero_eligible": true,
+    "tie_rule": "earliest_epoch_within_1e-10_percentage_points"
+  },
+  "operating_point": {
+    "threshold": null,
+    "source_split": "dev",
+    "method": "metrics20.choose_threshold_real_duration_fpr_cap",
+    "dev_real_duration_fpr_limit": 0.05,
+    "dev_real_duration_fpr_percent": null,
+    "comparison": "float64(score)>=float64(threshold)",
+    "threshold_details_file": "frozen_dev_calibration.json"
+  },
+  "postprocessing": {
+    "merge_contiguous_positive_frames": true,
+    "clip_to_actual_duration": true,
+    "smoothing": false,
+    "minimum_event_length_seconds": 0.0,
+    "gap_filling_seconds": 0.0
+  },
+  "matching": {
+    "iou_threshold": 0.5,
+    "iou_numeric_tolerance": 1e-10,
+    "one_to_one": true,
+    "objective": "maximum_cardinality_then_maximum_total_iou",
+    "aggregation": "micro_across_all_recordings",
+    "short_truth_max_seconds": 0.32,
+    "short_duration_numeric_tolerance_seconds": 1e-9,
+    "short_recall_reuses_full_matching": true
+  },
+  "event_counts": {
+    "matched": 0,
+    "predicted": 0,
+    "truth": 0,
+    "unmatched_predictions": 0,
+    "missed_truth": 0
+  },
+  "event_precision_percent": null,
+  "event_recall_percent": null,
+  "event_f1_iou05_percent": null,
+  "short_event_counts": {"matched": 0, "truth": 0},
+  "short_event_recall_le320ms_percent": null,
+  "duration_counts_seconds": {
+    "tp": 0.0, "fp": 0.0, "fn": 0.0, "tn": 0.0,
+    "real": 0.0, "fake": 0.0
+  },
+  "real_duration_fpr_percent": null,
+  "fully_genuine": {
+    "recordings": 0,
+    "false_alarm_recordings": 0,
+    "false_alarm_recording_rate_percent": null
+  },
+  "supplementary_native20": {
+    "duration_f1_percent": null,
+    "frame_confusion_tp_fp_fn_tn": [0, 0, 0, 0],
+    "frame_f1_percent": null,
+    "eer_percent": null,
+    "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR"
+  },
+  "undefined_metrics": {
+    "<null_field_path>": "<zero_denominator_or_single_class_or_not_computed>"
+  },
+  "provenance": {
+    "checkpoint_sha256": "<sha256>",
+    "dev_predictions_sha256": "<sha256>",
+    "eval_predictions_sha256": "<sha256>",
+    "dev_manifest_sha256": "<sha256>",
+    "eval_manifest_sha256": "<sha256>",
+    "dev_labels20_sha256": "<sha256>",
+    "eval_labels20_sha256": "<sha256>",
+    "source_label_encoding": "<1_real_or_1_fake>",
+    "source_commit": "<git_commit>",
+    "evaluator_source_sha256": "<sha256>",
+    "training_protocol_file": "training_protocol.json",
+    "checkpoint_selected_without_eval": true,
+    "threshold_selected_without_eval": true,
+    "eval_previously_inspected": true,
+    "environment_file": "environment.json"
+  },
+  "per_recording_file": "per_recording.json"
+}
+
+字段映射：现有metrics20的real_fpr_percent在v2输出中命名为real_duration_fpr_percent，明确它按时长加权；从confusion_seconds_tp_fp_fn_tn映射出duration_counts_seconds。fully_genuine中的false_alarm_recording_rate_percent可复用，但按第六节修正空分母。不是重新定义已有数字。
+
+frozen_dev_calibration.json必须保存choose_threshold的完整返回值、开发集事件计数及事件F1、协议版本、所选epoch、checkpoint哈希，并记录eval_read=false和checkpoint_reselection=false。
+
+per_recording.json必须覆盖全部录音，每条至少保存：
+    uid、duration、active_20ms_frames、event_tp、event_pred、event_truth、short_tp、short_truth、
+    tp_seconds、fp_seconds、fn_seconds、tn_seconds、fully_genuine、fully_genuine_false_alarm。
+若另存预测/真实区间与匹配索引，也应保持原顺序，便于组员逐条检查。保存的分数文件要附uids、实际长度和duration，不能只有一长串无法对回音频的分数。
+
+代码交付时，请同时注明：哪些是沿用的旧实现，哪些是v2新改的选模/输出规则。先让组员用小例子和保存分数核对计算，再开展预先固定的新对照。旧结果继续按旧协议解释，不因本规范发布而变成新的实验成绩。

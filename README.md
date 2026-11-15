@@ -4,6 +4,8 @@
 
 仓库只维护 CNN 路线：原 CNN 从头训练、残差头主方案、直接微调对照、推理和统一评估。旧 SAL、WavLM、语义、候选收益网络、生成器分组、事件长度权重和 LPS 入口已移出当前版本；历史提交仍可查阅。本地数据和历史实验不属于代码清理范围。
 
+**后续评价标准**见 [PS 统一评估规范 v2](docs/evaluation_protocol_v2.txt)：原生20 ms事件F1为主，同时报告短事件召回、真实时长误报率和全真录音误报率。这是供组员修改代码的规范；当前训练代码和下列已完成实验仍使用原有选模规则，尚未切换v2。
+
 ## 模型与训练
 
 ```text
@@ -113,7 +115,7 @@ python -m cnn_ps.evaluate --dev-cache ../cache/dev --eval-cache ../cache/eval --
 
 缓存保留float16上下文及所有8N存储尾帧，真实时长由损失权重处理。跨设备/批大小/库版本重提取可能有微小差异；精确回放历史分数使用组内归档缓存，见[缓存验证](docs/verification_cache.json)。
 
-统一160 ms主表EER为sklearn ROC最近交点处平均FPR/FNR。事件IoU≥0.5，先最大化一对一匹配数再最大化IoU；160 ms预测区间对真实20 ms事件，短事件≤320 ms。20 ms时长指标和160 ms帧计数指标不能混用。原CNN从头训练沿用历史genuine-positive EER选模，与主表EER分开记录。
+已有160 ms结果表的EER为sklearn ROC最近交点处平均FPR/FNR。事件IoU≥0.5，先最大化一对一匹配数再最大化IoU；160 ms预测区间对真实20 ms事件，短事件≤320 ms。20 ms时长指标和160 ms帧计数指标不能混用。原CNN从头训练沿用历史genuine-positive EER选模，与结果表EER分开记录。
 
 ```powershell
 python -m cnn_ps.predict --audio ../data/example.wav --checkpoint ../weights/original_cnn.pt --output ../result/example_original.json
