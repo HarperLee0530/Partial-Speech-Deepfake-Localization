@@ -9,7 +9,7 @@ import soundfile as sf
 import torch
 
 from cnn_ps.backbone import CNNBiGRU, LogMel
-from cnn_ps.predict_main import decode_events, load_main_checkpoint, predict, waveform_batch
+from cnn_ps.predict_mel import decode_events, load_main_checkpoint, predict, waveform_batch
 from cnn_ps.train_four import ARMS, SCHEMA, make_adapter, model_config
 
 

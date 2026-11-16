@@ -1,19 +1,18 @@
-"""Train, freeze and evaluate the selected PS boundary-assisted main method.
+"""Train, freeze and evaluate frozen WavLM + CNN + boundary auxiliary design.
 
-This entry fixes the arm to ``boundary`` and delegates all optimization,
-calibration and reporting to the audited four-arm implementation. Use a new
-output directory for a new main-only run. Existing four-arm runs keep their
-original frozen plans and are handled by ``cnn_ps.train_four``.
+WavLM features are cached with a frozen public encoder. The projection, CNN
+and adapter are trained jointly. Use a new output directory for a new run.
+Existing paired runs retain their original train_wavlm frozen plans.
 """
 from __future__ import annotations
 
 import argparse
 from pathlib import Path
 
-from . import train_four
+from . import train_wavlm
 
 
-MAIN_ARM = "boundary"
+MAIN_ARM = "wavlm_frozen"
 
 
 def main(argv=None):
@@ -22,14 +21,17 @@ def main(argv=None):
     train = commands.add_parser("train", help="Train the main method from random initialization")
     train.add_argument("--train-cache", type=Path, required=True)
     train.add_argument("--dev-cache", type=Path, required=True)
+    train.add_argument("--train-ssl", type=Path, required=True)
+    train.add_argument("--dev-ssl", type=Path, required=True)
     train.add_argument("--epochs", type=int, default=20)
     train.add_argument("--batch-size", type=int, default=8)
     freeze = commands.add_parser("freeze", help="Freeze a completed main-only run using dev selection")
     evaluate = commands.add_parser("evaluate", help="Evaluate with the frozen dev threshold")
     evaluate.add_argument("--eval-cache", type=Path, required=True)
+    evaluate.add_argument("--eval-ssl", type=Path, required=True)
     for command in (train, freeze, evaluate):
         command.add_argument("--output", type=Path, required=True,
-                             help="Root of a main-only run; its model is stored in boundary/")
+                             help="Root of a main-only run; its model is stored in wavlm_frozen/")
         command.add_argument("--seed", type=int, default=666)
         command.add_argument("--threads", type=int, default=4)
         command.add_argument("--device", choices=("cpu", "cuda"),
@@ -40,7 +42,7 @@ def main(argv=None):
                  ["--arms", MAIN_ARM, "--freeze-only" if command == "freeze" else "--evaluate"])
     for name, value in args.items():
         forwarded.extend(["--" + name.replace("_", "-"), str(value)])
-    return train_four.main(forwarded)
+    return train_wavlm.main(forwarded)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-"""Offline prediction with the experimental frozen WavLM or paired Mel model."""
+"""Offline prediction with the frozen WavLM main method or paired Mel control."""
 from pathlib import Path
 import argparse
 import numpy as np
@@ -6,7 +6,7 @@ import soundfile as sf
 import torch
 from .backbone import LogMel, ModelConfig
 from .io import sha256,save_json
-from .predict_main import waveform_batch,decode_events
+from .predict_mel import waveform_batch,decode_events
 from .train_four import setup,make_adapter
 from .train_dual import forward_batch
 from .train_wavlm import SCHEMA,ARMS
@@ -14,12 +14,16 @@ from .wavlm_backend import ProjectedCNN
 from .wavlm_frontend import FrozenWavLM
 
 @torch.inference_mode()
-def predict(audio,output,checkpoint,model_folder=None,device='cpu',threads=2):
+def predict(audio,output,checkpoint,model_folder=None,device='cpu',threads=2,expected_arm=None):
+    if threads <= 0 or device not in ('cpu', 'cuda'):
+        raise ValueError('threads must be positive and device must be cpu or cuda')
     if Path(output).exists():
         raise FileExistsError(output)
     setup(666,threads)
     payload=torch.load(checkpoint,map_location='cpu',weights_only=False)
     protocol=payload['protocol'];arm=protocol['arm']
+    if expected_arm is not None and arm != expected_arm:
+        raise ValueError('Default inference requires the wavlm_frozen checkpoint; use predict_mel for Mel')
     if payload['schema']!=SCHEMA or arm not in ARMS or payload['adapter_options']!=ARMS[arm]:
         raise ValueError('Wrong experiment checkpoint')
     threshold=float(payload['threshold']);dev=payload['dev_metrics']
@@ -47,6 +51,9 @@ def predict(audio,output,checkpoint,model_folder=None,device='cpu',threads=2):
     scores=scores[0,:actual20].cpu().numpy().copy()
     result=dict(arm=arm,checkpoint_sha256=sha256(checkpoint),selected_epoch=payload['epoch'],
         threshold=threshold,threshold_source='Frozen dev calibration',duration_seconds=duration,
+        score_kind='native20 fake-positive raw logits, not calibrated probabilities',
+        threshold_decision_rule='float64(score) >= float64(threshold)',
+        native20_actual_frames=actual20,stored20_frames=int(batch['lengths'][0]),
         scores20=scores.tolist(),predicted_fake_intervals_seconds=decode_events(scores,threshold,duration).tolist(),
         postprocessing='Consecutive fake frames only',resolution_seconds=.02,
         precision_note='CPU/GPU numerical differences may occur; archived scores define the experiment')

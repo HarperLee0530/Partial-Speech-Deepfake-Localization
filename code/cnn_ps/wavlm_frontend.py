@@ -52,13 +52,24 @@ class FrozenWavLM(torch.nn.Module):
             raise RuntimeError('Invalid WavLM features')
         return feature
 
+def verify_frozen_plan(frozen_plan):
+    """Revalidate the exact completed single-arm or paired plan before eval access."""
+    from .train_wavlm import freeze_eval_plan, SCHEMA as TRAIN_SCHEMA
+    path = Path(frozen_plan)
+    if path.name != 'frozen_eval_plan.json':
+        raise ValueError('Expected the canonical frozen_eval_plan.json')
+    plan = read_json(path)
+    if plan.get('schema') != TRAIN_SCHEMA or not isinstance(plan.get('arms'), dict):
+        raise ValueError('Invalid frozen WavLM training plan')
+    return freeze_eval_plan(path.parent, list(plan['arms']))
+
+
 def build_cache(reference, model_folder, output, device='cuda', limit=None, frozen_plan=None):
     reference, model_folder, output = map(Path, (reference, model_folder, output))
     if read_json(reference/'complete.json')['split']=='eval':
         if frozen_plan is None:
             raise ValueError('Eval requires a verified frozen training plan')
-        from .train_wavlm import freeze_eval_plan, ARMS
-        freeze_eval_plan(Path(frozen_plan).parent,list(ARMS))
+        verify_frozen_plan(frozen_plan)
     data = FeatureData(reference, verify_hashes=True)
     if output.exists():
         raise FileExistsError(output)

@@ -1,6 +1,5 @@
 {
   "schema": "ps_frozen_wavlm_weights_v1",
-  "primary_method_unchanged": "boundary",
   "models": {
     "mel_control": {
       "file": "cnn_mel_control_wavlm_trial_seed666.pt",
@@ -8,7 +7,8 @@
       "bytes": 4319601,
       "selected_epoch": 19,
       "threshold": 0.42304700613021856,
-      "external_wavlm_required": false
+      "external_wavlm_required": false,
+      "role": "paired_control"
     },
     "wavlm_frozen": {
       "file": "cnn_wavlm_frozen_seed666.pt",
@@ -16,7 +16,8 @@
       "bytes": 4574181,
       "selected_epoch": 19,
       "threshold": 0.35863286256790167,
-      "external_wavlm_required": true
+      "external_wavlm_required": true,
+      "role": "main_method"
     }
   },
   "external_pretraining": {
@@ -51,5 +52,7 @@
     "peak_cuda_bytes": 567555072
   },
   "model_download": "python -m cnn_ps.download_wavlm --output MODEL_FOLDER",
-  "note": "WavLM experimental weight contains the trainable projection, CNN and boundary adapter; frozen public WavLM is downloaded separately."
+  "note": "Main backend contains trainable projection, CNN and boundary adapter. Frozen pinned public WavLM must be downloaded separately. Adoption preserves all weights and dev thresholds.",
+  "primary_method": "wavlm_frozen",
+  "designation_date": "2026-11-16"
 }
