@@ -1,0 +1,55 @@
+PS 可学习滤波器配对实验（2026-11-16）
+
+状态：实现和预检中；尚无本轮正式测试结论。已发布主方案仍为boundary。
+
+比较对象
+fixed_mel：固定80维Mel＋完整boundary主方案。
+learnable_mel：同一模型，仅开放80个滤波器频率节点位移参数。
+两组都从相同随机CNN/adapter初始化；不加载旧模型，也不增加能量特征。
+
+前端定义
+输入16kHz单声道，25ms周期Hann窗，20ms帧移，FFT512；保持原标签格中点对齐。
+先从相同增强波形缓存257维线性功率，训练时每次用当前滤波器重新计算80维特征。
+滤波器从原torchaudio HTK Mel80三角矩阵初始化，保持Slaney面积归一化与ln(max(power,1e-10))。
+82个频率节点中首尾固定，内部80节点为：
+f_i = f_i_initial + 0.2 * min(initial_left_gap, initial_right_gap) * tanh(raw_shift_i)。
+所有raw_shift初始0；相邻节点决定三角形左右边界，因此中心频率与带宽联动。
+约束保证频率顺序和非空频带。名义范围0–8000Hz，实际端点保留原float32计算值，不另行取整。
+这是借鉴可学习滤波器研究的受约束适配，不是FastAudio独立中心/带宽的完整复现。
+论文来源：https://arxiv.org/abs/2109.02774
+
+公平对照
+两组使用相同power→Mel→log计算路径，仅raw_shift.requires_grad不同。
+原CNN和完整双分辨率、局部注意力、分歧门控、可学习粗聚合、边界辅助设计及五项损失均保留。
+train6345/dev2484；seed666；20轮，batch8，每轮794次更新，共15880次。
+所有有效参数用同一AdamW lr=.001、weight_decay=.0001；全局梯度裁剪5；不为前端单独搜索学习率。
+损失L=L20_final+L160_final+.5L160_coarse+.1Lboundary+.05Lconsistency。
+原声、20dB白噪声和轻微EQ的波形、训练通道轮换与数据顺序相同；dev/eval仅原声。
+两组均保留CNN逐帧LayerNorm，不拟合新的输入归一化统计。
+
+评估
+每轮只在dev按真实时长FPR≤5%校准，再按事件F1@IoU0.5选择轮次；epoch0可选，平局保留更早轮次。
+保存两臂epoch0–20全部权重、分数和指标。双方完成后验证并冻结，再构建本轮eval功率缓存和测试。
+测试阈值不调整；原生20ms输出，连续正帧成事件，无平滑/补间隙/短事件过滤；一对一IoU≥0.5匹配。
+主要比较本轮两组的事件F1、≤320ms召回、真实时长FPR、全真录音误报率；Frame/时长F1和EER补充。
+当前eval3562此前已分析，本轮仍属探索性固定子集、单seed比较，不是新增盲测。
+历史主方案用CPU预计算LogMel，本轮在GPU应用滤波器可能引入微小浮点差异；不可假设历史训练轨迹必然逐值复现。
+因此本轮固定前端控制组必须重新训练，主要结论以本轮同路径两臂为准。
+
+运行（进入code目录；按本机数据位置替换路径，使用新结果目录）
+python -m cnn_ps.power_cache --frontend-cache D:\SAL_精简实验\data\cnn_ps_features_v2\train --output D:\SAL_精简实验\data\cnn_ps_power_v1\train --threads 1
+python -m cnn_ps.power_cache --frontend-cache D:\SAL_精简实验\data\cnn_ps_features_v2\dev --output D:\SAL_精简实验\data\cnn_ps_power_v1\dev --threads 1
+当前本机上述两个缓存已完成，拒绝覆盖。原LogMel缓存和原始音频/标签保留。
+
+python -m cnn_ps.train_filterbank --arm fixed_mel --train-cache D:\SAL_精简实验\data\cnn_ps_features_v2\train --dev-cache D:\SAL_精简实验\data\cnn_ps_features_v2\dev --train-power D:\SAL_精简实验\data\cnn_ps_power_v1\train --dev-power D:\SAL_精简实验\data\cnn_ps_power_v1\dev --output D:\SAL_精简实验\result\ps_learnable_filterbank_20261116_run1 --epochs 20 --batch-size 8 --seed 666 --threads 4 --device cuda
+另一进程相同命令，将arm改为learnable_mel。
+
+双方训练并审计完成后：
+python -m cnn_ps.train_filterbank --freeze-only --output D:\SAL_精简实验\result\ps_learnable_filterbank_20261116_run1 --device cpu
+python -m cnn_ps.power_cache --frontend-cache D:\SAL_精简实验\data\cnn_ps_features_v2\eval --output D:\SAL_精简实验\data\cnn_ps_power_v1\eval --threads 1
+python -m cnn_ps.train_filterbank --evaluate --output D:\SAL_精简实验\result\ps_learnable_filterbank_20261116_run1 --eval-cache D:\SAL_精简实验\data\cnn_ps_features_v2\eval --eval-power D:\SAL_精简实验\data\cnn_ps_power_v1\eval --threads 4 --device cuda
+
+预检
+新固定滤波矩阵与原Mel逐值相同；同设备两臂初始输出相同；端点、有效频带和前端梯度经过合成测试。
+train/dev全部21519波形视图逐一复现原缓存，功率经初始滤波器回算LogMel的最大误差0。
+存储尾部功率保留，监督和评估用实际时长mask；批次补零不能进入有效数据。
