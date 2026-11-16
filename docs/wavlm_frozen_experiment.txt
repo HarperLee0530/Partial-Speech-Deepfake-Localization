@@ -40,3 +40,8 @@ train6345/dev2484，seed666，20轮，batch8，AdamW lr.001/wd.0001，梯度裁�
 
 主方案原权重、主分支和原实验结果保留。单seed且PS eval子集以前查看过，
 后续若有增益，只能作为探索性结果；预训练收益不能直接写成自己新结构的贡献。
+
+依赖与官方权重（进入code目录）：
+pip install -r requirements-wavlm.txt
+python -m cnn_ps.download_wavlm --output MODEL_FOLDER
+下载脚本固定官方revision并核对权重SHA256，预训练模型不放进Git仓库。
