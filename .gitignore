@@ -27,3 +27,7 @@ desktop.ini
 !/weights/cnn_aug_ps_eventf1_seed666.pt
 !/weights/cnn_dual_ps_eventf1_seed666.pt
 !/weights/cnn_boundary_ps_eventf1_seed666.pt
+
+# Frozen WavLM experiment; pretrained encoder is downloaded separately.
+!/weights/cnn_mel_control_wavlm_trial_seed666.pt
+!/weights/cnn_wavlm_frozen_seed666.pt

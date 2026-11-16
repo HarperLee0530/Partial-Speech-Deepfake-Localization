@@ -1,5 +1,19 @@
 # PS 部分伪造语音定位：边界辅助双分辨率 CNN-BiGRU
 
+本实验分支已完成[冻结 WavLM 特征对照](docs/results_wavlm_frozen_20261116.txt)。原 Mel 控制组完整复现历史训练记录和选中参数，测试事件 F1 为 **55.65%**；冻结 WavLM＋可训练投影层后为 **62.53%**，20 ms Frame F1 从 **71.14%** 提高到 **82.09%**，但真实时长误报率从 **4.02%** 增至 **6.38%**。原主方案继续保留，实验结果尚未用于替换默认入口。
+
+这是单 seed、额外预训练特征与接入层的整体比较：WavLM-Base-Plus 冻结约 9438 万参数，额外使用 9.4 万小时预训练音频，后端新增 63056 个可训练参数。开发集的 5% 误报约束不保证测试集也低于 5%。[完整结果与区间](docs/results_wavlm_frozen_20261116.json) · [方法与预检](docs/wavlm_frozen_experiment.txt) · [两组后端权重清单](weights/wavlm_manifest.json)。
+
+实验推理使用 [`predict_wavlm`](code/cnn_ps/predict_wavlm.py)，进入 `code/`：
+
+```powershell
+pip install -r requirements-wavlm.txt
+python -m cnn_ps.download_wavlm --output MODEL_FOLDER
+python -m cnn_ps.predict_wavlm --audio example.wav --output prediction.json --checkpoint ../weights/cnn_wavlm_frozen_seed666.pt --model-folder MODEL_FOLDER --device cpu
+```
+
+官方 WavLM 权重由下载脚本按固定 revision 和 SHA 校验，不随本仓库的定位后端权重一起存放。原主方案仍使用下方说明中的 `predict_main`。
+
 **当前主方案为 `boundary`：CNN-BiGRU＋信道增强＋双分辨率、局部交叉注意力、分歧门控＋边界辅助组合。** CNN与新增模块全部端到端训练，输出原生20ms伪造区间。
 
 主方案在本轮PS测试上的事件F1为 **55.65%**、≤320ms召回为 **65.30%**、真实时长误报率为 **4.02%**。选择它作为工程主线，是查看现有四组结果后的决定；这次整理不重训、不重选epoch或阈值，不能当作新增盲测。完整[中文方法论](docs/main_methodology_zh.md)包含结构图、公式、损失、训练评价与结论边界。

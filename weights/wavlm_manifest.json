@@ -1,0 +1,55 @@
+{
+  "schema": "ps_frozen_wavlm_weights_v1",
+  "primary_method_unchanged": "boundary",
+  "models": {
+    "mel_control": {
+      "file": "cnn_mel_control_wavlm_trial_seed666.pt",
+      "sha256": "20e1e8b08eaf1e592089b8c2d52497239359ca10375b3c951ce792c4e2695659",
+      "bytes": 4319601,
+      "selected_epoch": 19,
+      "threshold": 0.42304700613021856,
+      "external_wavlm_required": false
+    },
+    "wavlm_frozen": {
+      "file": "cnn_wavlm_frozen_seed666.pt",
+      "sha256": "b52127f2c5564e64fbd3589a2203f6d8719be60a1c1546d59e79f5b295d747b2",
+      "bytes": 4574181,
+      "selected_epoch": 19,
+      "threshold": 0.35863286256790167,
+      "external_wavlm_required": true
+    }
+  },
+  "external_pretraining": {
+    "schema": "ps_frozen_wavlm_last_v1",
+    "split": "train",
+    "model_id": "microsoft/wavlm-base-plus",
+    "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+    "model_sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+    "reference": "D:\\SAL_精简实验\\data\\cnn_ps_features_v2\\train",
+    "reference_sha256": "e82d9fc9b2326c49222785f60ddb7aa564c6236d48c63823154c17480ac6170b",
+    "feature_dim": 768,
+    "layer": "last_hidden_state",
+    "frozen": true,
+    "dtype": "float32",
+    "channels": 3,
+    "recordings": 6345,
+    "probe_only": false,
+    "normalization": "none, official preprocessor_config",
+    "grid": "stride320, receptive400, sidepad40; full recording padded to official storage grid",
+    "source_sha256": "d2596db126c378804b8b435f99731627add5e4a0cdb156e5226638ecfae88bb4",
+    "device": "cuda",
+    "test_read": false,
+    "status": "complete",
+    "elapsed_seconds": 431.0469999999623,
+    "features_sha256": "10591d2448aee64d25bdf1a8a86be16cc95fda212cb51e91c0e7c36edd180e2e",
+    "shape": [
+      3,
+      1110368,
+      768
+    ],
+    "source_unchanged": true,
+    "peak_cuda_bytes": 567555072
+  },
+  "model_download": "python -m cnn_ps.download_wavlm --output MODEL_FOLDER",
+  "note": "WavLM experimental weight contains the trainable projection, CNN and boundary adapter; frozen public WavLM is downloaded separately."
+}
