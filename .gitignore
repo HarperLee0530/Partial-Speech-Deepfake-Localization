@@ -27,3 +27,7 @@ desktop.ini
 !/weights/cnn_aug_ps_eventf1_seed666.pt
 !/weights/cnn_dual_ps_eventf1_seed666.pt
 !/weights/cnn_boundary_ps_eventf1_seed666.pt
+
+# Paired filterbank experiment; original main checkpoints remain reproducible.
+!/weights/boundary_fixed_mel_seed666.pt
+!/weights/boundary_learnable_mel_seed666.pt

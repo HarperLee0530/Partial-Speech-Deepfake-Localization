@@ -1,6 +1,13 @@
 # PS 部分伪造语音定位：边界辅助双分辨率 CNN-BiGRU
 
-本实验分支正在检验[固定 Mel 与可学习滤波器](docs/learnable_filterbank_experiment.txt)。两组保留相同的完整 `boundary` 后端，只比较80个频率节点是否可训练；正式结果待完成训练、冻结及统一评估后填写。当前主方案和下方历史结果仍按原定义保留。
+本实验分支已完成[固定Mel与可学习滤波器对照](docs/results_learnable_filterbank_20261116.txt)。本轮可学习滤波器相对同路径固定前端的事件F1提高1.1806个百分点。结论以本轮配对控制组为准，暂不自动替换已发布boundary主方案。支持作为候选继续验证；同时需披露帧/时长指标和误报事件数量的代价。本轮固定前端事件F1为54.20%，可学习前端为55.38%。只有seed666且eval此前已分析，不能与下方历史成绩混为严格单因素比较。[全精度指标与置信区间](docs/results_learnable_filterbank_20261116.json) · [实验定义与复现步骤](docs/learnable_filterbank_experiment.txt) · [两新增权重清单](weights/learnable_filterbank_manifest.json)。
+
+实验单音频入口为[`predict_filterbank`](code/cnn_ps/predict_filterbank.py)，默认加载本轮可学习权重；原`predict_main`继续对应已发布主方案。进入`code/`运行：
+
+```powershell
+python -m cnn_ps.predict_filterbank --audio example.wav --output prediction_learnable.json --device cpu
+python -m cnn_ps.predict_filterbank --audio example.wav --output prediction_fixed.json --checkpoint ../weights/boundary_fixed_mel_seed666.pt --device cpu
+```
 
 **当前主方案为 `boundary`：CNN-BiGRU＋信道增强＋双分辨率、局部交叉注意力、分歧门控＋边界辅助组合。** CNN与新增模块全部端到端训练，输出原生20ms伪造区间。
 

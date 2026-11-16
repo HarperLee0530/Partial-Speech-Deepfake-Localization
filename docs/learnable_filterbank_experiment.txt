@@ -1,6 +1,8 @@
 PS 可学习滤波器配对实验（2026-11-16）
 
-状态：实现和预检中；尚无本轮正式测试结论。已发布主方案仍为boundary。
+状态：两组20轮、冻结测试与完整独立审计均已完成。已发布主方案仍为boundary。
+本轮可学习滤波器相对同路径固定前端的事件F1提高1.1806个百分点。结论以本轮配对控制组为准，暂不自动替换已发布boundary主方案。支持作为候选继续验证；同时需披露帧/时长指标和误报事件数量的代价。
+完整结果见docs/results_learnable_filterbank_20261116.txt/.json。
 
 比较对象
 fixed_mel：固定80维Mel＋完整boundary主方案。
@@ -53,3 +55,8 @@ python -m cnn_ps.train_filterbank --evaluate --output D:\SAL_精简实验\result
 新固定滤波矩阵与原Mel逐值相同；同设备两臂初始输出相同；端点、有效频带和前端梯度经过合成测试。
 train/dev全部21519波形视图逐一复现原缓存，功率经初始滤波器回算LogMel的最大误差0。
 存储尾部功率保留，监督和评估用实际时长mask；批次补零不能进入有效数据。
+
+独立音频推理（进入code目录）
+python -m cnn_ps.predict_filterbank --audio example.wav --output prediction_learnable.json --device cpu
+python -m cnn_ps.predict_filterbank --audio example.wav --output prediction_fixed.json --checkpoint ../weights/boundary_fixed_mel_seed666.pt --device cpu
+实验入口默认可学习权重不表示替换主方案；原predict_main继续用于原boundary。
