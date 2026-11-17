@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "checks": [
+    "identical paired models give zero delta and zero interval",
+    "known micro-averaged F1 delta equals25pp",
+    "reversed UID pairing rejected"
+  ]
+}

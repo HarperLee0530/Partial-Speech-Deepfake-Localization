@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "unit_tests": 63,
+  "unit_tests_passed": true,
+  "packaged_prediction_exactly_matches_original": true,
+  "checkpoint_sha256": "160a4b3cacbee48398d11f218e3ca2dff76615670ae05255f6775119dd37b50e",
+  "training_source_bytes": "unchanged",
+  "bootstrap_recomputed": "exact match",
+  "markdown_links": "valid",
+  "runtime_entrypoints": "help and explicit path arguments validated"
+}

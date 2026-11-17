@@ -1,0 +1,38 @@
+{
+  "unit_tests": 63,
+  "unit_tests_passed": true,
+  "trainable_parameters": {
+    "layer12": 1000070,
+    "fusion6_9_12": 1000073
+  },
+  "smoke": {
+    "status": "passed",
+    "last_layer_cache_bitwise_equal": true,
+    "frozen_encoder_parameters": 94381936,
+    "training_updates_per_arm": 1,
+    "real_audio_splits": {
+      "train": 4,
+      "dev": 4,
+      "eval": 2
+    },
+    "purpose": "Pipeline verification only; not evidence of performance improvement"
+  },
+  "inference": {
+    "layer12": {
+      "max_absolute_score_difference": 0.0,
+      "frames": 98,
+      "threshold_exact": true
+    },
+    "fusion6_9_12": {
+      "max_absolute_score_difference": 0.0,
+      "frames": 98,
+      "threshold_exact": true
+    }
+  },
+  "environment": {
+    "python": "3.10.18 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:08:55) [MSC v.1929 64 bit (AMD64)]",
+    "torch": "2.2.1+cu121",
+    "cuda": "12.1",
+    "gpu": "NVIDIA GeForce RTX 4080 Laptop GPU"
+  }
+}

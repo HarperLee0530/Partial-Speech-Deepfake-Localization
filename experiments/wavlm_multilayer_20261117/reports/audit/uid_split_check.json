@@ -1,0 +1,13 @@
+{
+  "counts": {
+    "train": 6345,
+    "dev": 2484,
+    "eval": 3562
+  },
+  "overlap": {
+    "train_dev": 0,
+    "train_eval": 0,
+    "dev_eval": 0
+  },
+  "scope": "UID only; not content/speaker/pretraining overlap"
+}

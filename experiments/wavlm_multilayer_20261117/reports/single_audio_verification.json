@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "models": {
+    "layer12": {
+      "uid": "CON_D_0000003",
+      "max_absolute_score_difference": 0.0,
+      "differing_decisions": 0,
+      "frames": 98,
+      "threshold_exact": true,
+      "layer_weights": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "selected_epoch": 20
+    },
+    "fusion6_9_12": {
+      "uid": "CON_D_0000003",
+      "max_absolute_score_difference": 0.0,
+      "differing_decisions": 0,
+      "frames": 98,
+      "threshold_exact": true,
+      "layer_weights": [
+        0.7043034434318542,
+        0.14928434789180756,
+        0.1464122235774994
+      ],
+      "selected_epoch": 18
+    }
+  }
+}

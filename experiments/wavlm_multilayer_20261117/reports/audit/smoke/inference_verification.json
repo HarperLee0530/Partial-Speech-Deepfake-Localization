@@ -1,0 +1,12 @@
+{
+  "layer12": {
+    "max_absolute_score_difference": 0.0,
+    "frames": 98,
+    "threshold_exact": true
+  },
+  "fusion6_9_12": {
+    "max_absolute_score_difference": 0.0,
+    "frames": 98,
+    "threshold_exact": true
+  }
+}

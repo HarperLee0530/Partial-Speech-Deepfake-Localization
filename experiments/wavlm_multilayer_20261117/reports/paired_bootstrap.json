@@ -1,0 +1,30 @@
+{
+  "method": "paired recording percentile bootstrap",
+  "repetitions": 2000,
+  "seed": 20261117,
+  "difference": "fusion minus baseline, percentage points",
+  "metrics": {
+    "event_f1_iou05_percent": {
+      "delta_pp": 8.417870736823872,
+      "ci95_pp": [
+        7.368475139373269,
+        9.43387018261592
+      ]
+    },
+    "short_event_recall_le320ms_percent": {
+      "delta_pp": 5.874707564335836,
+      "ci95_pp": [
+        4.677890970213118,
+        7.036697934515875
+      ]
+    },
+    "real_duration_fpr_percent": {
+      "delta_pp": -1.1239070896720254,
+      "ci95_pp": [
+        -1.6371876977774662,
+        -0.6315497309608351
+      ]
+    }
+  },
+  "limitation": "Conditional on two fixed trained models; not training-seed variability"
+}

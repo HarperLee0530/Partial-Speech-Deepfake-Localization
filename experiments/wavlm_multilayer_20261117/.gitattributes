@@ -1,0 +1,5 @@
+# Preserve the exact source bytes referenced by the checkpoint hashes.
+* -text
+*.pt binary
+*.npz binary
+*.png binary

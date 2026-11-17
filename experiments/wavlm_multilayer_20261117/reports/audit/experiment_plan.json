@@ -1,0 +1,28 @@
+{
+  "status": "declared_before_full_training",
+  "arms": [
+    "layer12",
+    "fusion6_9_12"
+  ],
+  "layers": [
+    6,
+    9,
+    12
+  ],
+  "seed": 666,
+  "epochs": 20,
+  "batch_size": 8,
+  "threads": 4,
+  "train": 6345,
+  "dev": 2484,
+  "eval": 3562,
+  "selection": "dev FPR<=5%, then maximum event F1, earliest tie; epoch0 eligible",
+  "fusion": "softmax of 3 global trainable scalar logits, zero initialized; no per-layer normalization or extra projection",
+  "frozen_encoder": true,
+  "unchanged_original_source": true,
+  "evaluation": "Both predeclared arms; no test-dependent tuning",
+  "limitations": [
+    "single seed",
+    "eval previously inspected in historical project"
+  ]
+}

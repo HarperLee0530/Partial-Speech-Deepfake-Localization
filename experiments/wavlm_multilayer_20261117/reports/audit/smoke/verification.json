@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "last_layer_cache_bitwise_equal": true,
+  "frozen_encoder_parameters": 94381936,
+  "training_updates_per_arm": 1,
+  "real_audio_splits": {
+    "train": 4,
+    "dev": 4,
+    "eval": 2
+  },
+  "purpose": "Pipeline verification only; not evidence of performance improvement"
+}

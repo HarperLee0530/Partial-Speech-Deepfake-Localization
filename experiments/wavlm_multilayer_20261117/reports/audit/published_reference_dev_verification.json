@@ -1,0 +1,22 @@
+{
+  "checkpoint_sha256": "b52127f2c5564e64fbd3589a2203f6d8719be60a1c1546d59e79f5b295d747b2",
+  "split": "dev",
+  "recordings": 2484,
+  "threshold": 0.35863286256790167,
+  "source": "published checkpoint; fixed published threshold; new layer12 cache",
+  "metrics": {
+    "event_f1_iou05_percent": 76.95752076827902,
+    "short_event_recall_le320ms_percent": 72.98013245033113,
+    "real_fpr_percent": 4.999603224052759
+  },
+  "archived": {
+    "event_f1_iou05_percent": 76.95752076827902,
+    "short_event_recall_le320ms_percent": 72.98013245033113,
+    "real_fpr_percent": 4.999603224052759
+  },
+  "delta_pp": {
+    "event_f1_iou05_percent": 0.0,
+    "short_event_recall_le320ms_percent": 0.0,
+    "real_fpr_percent": 0.0
+  }
+}
