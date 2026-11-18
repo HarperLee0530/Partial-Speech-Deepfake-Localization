@@ -1,0 +1,100 @@
+{
+  "eval": {
+    "recordings": 3562,
+    "grid_seconds": 0.16,
+    "wavlm": {
+      "frame_f1_spoof_percent": 95.38366899355425,
+      "event_f1_percent": 89.23139117691647,
+      "accuracy_percent": 95.51251218719533,
+      "eer_percent": 4.503134250640869
+    },
+    "logmel": {
+      "frame_f1_spoof_percent": 69.89344748929788,
+      "event_f1_percent": 47.15717326964017,
+      "accuracy_percent": 74.94962625934352,
+      "eer_percent": 23.14249038696289
+    },
+    "delta_logmel_minus_wavlm_pp": {
+      "frame_f1_spoof_percent": -25.49022150425637,
+      "event_f1_percent": -42.07421790727631,
+      "accuracy_percent": -20.56288592785181,
+      "eer_percent": 18.63935613632202
+    },
+    "paired_recording_bootstrap95_pp": {
+      "frame_f1_spoof_percent": [
+        -26.390275871094733,
+        -24.599947357912058
+      ],
+      "event_f1_percent": [
+        -43.28652478015884,
+        -40.88258232325237
+      ],
+      "accuracy_percent": [
+        -21.180244840478096,
+        -19.921997965993327
+      ]
+    },
+    "identical_uids_labels_durations": true,
+    "confusion_old": [
+      35663,
+      2466,
+      986,
+      37810
+    ],
+    "confusion_new": [
+      22368,
+      15761,
+      3509,
+      35287
+    ]
+  },
+  "lps": {
+    "recordings": 3800,
+    "grid_seconds": 0.02,
+    "wavlm": {
+      "frame_f1_spoof_percent": 62.44152418483442,
+      "event_f1_percent": 10.619944774332282,
+      "accuracy_percent": 60.20077842894752,
+      "eer_percent": 37.90935516357422
+    },
+    "logmel": {
+      "frame_f1_spoof_percent": 74.80764250599475,
+      "event_f1_percent": 5.302868314139964,
+      "accuracy_percent": 60.85157399074069,
+      "eer_percent": 52.2657470703125
+    },
+    "delta_logmel_minus_wavlm_pp": {
+      "frame_f1_spoof_percent": 12.366118321160329,
+      "event_f1_percent": -5.317076460192318,
+      "accuracy_percent": 0.6507955617931671,
+      "eer_percent": 14.356391906738281
+    },
+    "paired_recording_bootstrap95_pp": {
+      "frame_f1_spoof_percent": [
+        10.519596905321979,
+        14.200924360060966
+      ],
+      "event_f1_percent": [
+        -6.022848438276865,
+        -4.634871893013579
+      ],
+      "accuracy_percent": [
+        -1.7154368638220316,
+        3.1271104602879927
+      ]
+    },
+    "identical_uids_labels_durations": true,
+    "confusion_old": [
+      392957,
+      404883,
+      67843,
+      322094
+    ],
+    "confusion_new": [
+      690393,
+      107447,
+      357549,
+      32388
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+2026-11-17 SAL普通特征对照
+
+目的：将SAL的WavLM前端换成原CNN方案的普通特征，其余算法与训练规则保持一致。
+
+唯一模型替换：原cnn.LogMel（80维、16kHz、n_fft512、win400、hop320、原补齐）
+ -> 原方案LayerNorm(80) -> 必要的Linear(80,1024)维度适配
+ -> 原SAL的两层1024维Conformer -> 原160ms池化 -> 原8类位置头和2类真假头。
+去除WavLM及其25层混合权重，所有新任务参数随机初始化，不使用旧SAL任务权重。
+
+数据：原reduced清单；训练train_detector5076条、开发2484条、PS eval3562条、LPS3800条。
+保持旧SAL的160ms PS监督和20ms LPS评价，不改成主方案的20ms PS监督。
+训练保持seed888、batch8、Adam1e-5、weight_decay1e-4、StepLR每10轮乘0.1、RawBoost4概率0.5、
+CSM比例0.2两轮、位置损失+10倍二分类损失、FP32确定性、最少40最多60轮及开发EER早停patience10。
+旧SAL实际40轮结束；新实验按相同早停规则，实际轮数可能不同。
+
+运行：复用D:/SAL_精简实验/code/.venv/Scripts/python.exe环境。
+code/run_logmel.py smoke：原特征数值等价、长度、真批次损失反传验证。
+code/run_logmel.py train：新训练，已有实验目录拒绝覆盖。
+code/run_logmel.py evaluate：只加载冻结开发集所选权重，完整PS eval及LPS预测。
+code/compare_results.py：配对UID/标签/时长核对、帧F1/事件F1/准确率和2000次配对bootstrap。
+code/finish_pipeline.py：等待本次训练完成后自动串行运行评价和比较。
+
+结果路径：result/logmel_sal_20261117；最终报告result/comparison.txt、comparison.csv、comparison.json。
+状态：result/pipeline_status.json；训练状态result/logmel_sal_20261117/status.json。
+历史参照：D:/SAL_精简实验/result/sal_reduced_eval_20261113和sal_reduced_lps_20261113。
+完整源码独立于原工程；原数据只读、旧源码与旧权重不覆盖。
+
+归因限制：两组直接比较表示前端替换效果，不等价于将各模块贡献拆成百分比。
+LogMel仍保留学习到的维度适配，WavLM替换同时移除大型预训练编码器。
+原优化配方可能更适合预训练前端，不等于从零LogMel组已达到最优。
+未加入相同输入下无SPL/CSM对照，因此尚不能量化SAL技巧本身的净收益。
+单种子；bootstrap不能替代多种子重训。旧测试集已有历史查看，不称为全新盲测。

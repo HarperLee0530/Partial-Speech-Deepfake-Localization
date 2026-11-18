@@ -1,0 +1,53 @@
+D:\SAL_����ʵ��\code\.venv\lib\site-packages\s3prl\upstream\byol_s\byol_a\common.py:20: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("sox_io")
+ESPnet is not installed, cannot use espnet_hubert upstream
+Global seed set to 888
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4060 Laptop GPU') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Found 5076 samples in train set.
+Found 2484 samples in dev set.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+D:\SAL_����ʵ��\code\.venv\lib\site-packages\lightning\pytorch\trainer\connectors\data_connector.py:442: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 24 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+
+   | Name         | Type                             | Params
+-------------------------------------------------------------------
+0  | net          | LogMelSAL                        | 23.8 M
+1  | criterion    | MaskedMultiClassCrossEntropyLoss | 0     
+2  | criterion2   | MaskedMultiClassCrossEntropyLoss | 0     
+3  | train_loss   | MeanMetric                       | 0     
+4  | val_loss     | MeanMetric                       | 0     
+5  | test_loss    | MeanMetric                       | 0     
+6  | val_eer      | EERMetric                        | 0     
+7  | val_eer_best | MinMetric                        | 0     
+8  | test_eer     | EERMetric                        | 0     
+9  | val_acc      | F1Metric                         | 0     
+10 | test_acc     | F1Metric                         | 0     
+-------------------------------------------------------------------
+23.8 M    Trainable params
+0         Non-trainable params
+23.8 M    Total params
+95.167    Total estimated model params size (MB)
+D:\SAL_����ʵ��\code\.venv\lib\site-packages\lightning\pytorch\trainer\connectors\data_connector.py:442: PossibleUserWarning: The dataloader, val_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 24 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+D:\SAL_����ʵ��\code\.venv\lib\site-packages\torchmetrics\utilities\prints.py:43: UserWarning: The ``compute`` method of metric MeanMetric was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
+  warnings.warn(*args, **kwargs)  # noqa: B028
+TRAIN_EPOCH 1
+EPOCH_METRICS 1 {"train/loss": 8.05577278137207, "train/loss_step": 8.231221199035645, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 7.109836578369141, "val/eer": 28.93330192565918, "val/eer_best": 28.93330192565918, "val/acc": 70.97765350341797, "train/loss_epoch": 8.05577278137207, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 2
+EPOCH_METRICS 2 {"train/loss": 7.3973541259765625, "train/loss_step": 6.549410343170166, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 6.283515453338623, "val/eer": 23.365758895874023, "val/eer_best": 23.365758895874023, "val/acc": 76.19202423095703, "train/loss_epoch": 7.3973541259765625, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 3
+EPOCH_METRICS 3 {"train/loss": 6.971418380737305, "train/loss_step": 6.256719589233398, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 6.044421672821045, "val/eer": 20.7828426361084, "val/eer_best": 20.7828426361084, "val/acc": 77.39173126220703, "train/loss_epoch": 6.971418380737305, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 4
+EPOCH_METRICS 4 {"train/loss": 6.496360778808594, "train/loss_step": 7.285663604736328, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 5.407670974731445, "val/eer": 18.92699432373047, "val/eer_best": 18.92699432373047, "val/acc": 80.94928741455078, "train/loss_epoch": 6.496360778808594, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 5
+EPOCH_METRICS 5 {"train/loss": 6.179332256317139, "train/loss_step": 4.056698799133301, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 5.118709564208984, "val/eer": 17.74509620666504, "val/eer_best": 17.74509620666504, "val/acc": 82.21222686767578, "train/loss_epoch": 6.179332256317139, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 6
+EPOCH_METRICS 6 {"train/loss": 6.073462963104248, "train/loss_step": 5.910396575927734, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 5.398289203643799, "val/eer": 16.52335548400879, "val/eer_best": 16.52335548400879, "val/acc": 81.48590087890625, "train/loss_epoch": 6.073462963104248, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 7
+EPOCH_METRICS 7 {"train/loss": 5.848397731781006, "train/loss_step": 5.054329872131348, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 5.024721145629883, "val/eer": 16.287639617919922, "val/eer_best": 16.287639617919922, "val/acc": 82.6729507446289, "train/loss_epoch": 5.848397731781006, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 8

@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "frontend_exact": true,
+  "frame_alignment": true,
+  "train_count": 5076,
+  "dev_count": 2484,
+  "parameters": 23791786,
+  "real_batch_loss": 8.96877670288086,
+  "no_wavlm": true
+}

@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "historical_commit": "77b2dc3",
+  "shared_functions_ast_equal": {
+    "cross_recording_mixup": true,
+    "make_data_module": true,
+    "training_config": true,
+    "get_dataset": true,
+    "calculate_metrics": true
+  },
+  "settings_equal": true,
+  "trainer_and_data_configs_equal_except_frontend_and_paths": true,
+  "unchanged_vendor_files": {
+    "vendor/SAL/configs/__init__.py": "40afe33e9461a043b773aa939b3ec32715d0031bc64114839ffc1607af407fa8",
+    "vendor/SAL/src/eval.py": "7040f430b46697dad291f3bae6a646172747908d59ecdc127503549ac3d6ee97",
+    "vendor/SAL/src/train.py": "8593f2727e36995c5187bdd39fdf91edc44a4d8a0bd4bf93d312d6458572d46c",
+    "vendor/SAL/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/SAL/src/data/base_dataset.py": "0e2228ded6e22cbeb03f96e7192fac214351a1c0ed66d1ef84df58da9fa51d3e",
+    "vendor/SAL/src/data/had.py": "134c912f250f8ffd85350f715e489e4f76a7e5dbad76fb5142fc76333bad891d",
+    "vendor/SAL/src/data/llama_partialspoof.py": "9d6124a4be4a52ab3337eb1cb708b3e1c591ca593ad03d2b06a7953caa6c2a4b",
+    "vendor/SAL/src/data/partialspoof.py": "7b7d333f61e9ba821b17f1778d3e8d91e3d482b08d7f5f9402f954210fd8ac9d",
+    "vendor/SAL/src/data/RawBoost.py": "29744e4dbdcd75d2720967977db6eb1dc40e1c26b52a81545d411cc748028879",
+    "vendor/SAL/src/data/utils.py": "0b8ad17c86633a7d35bab2dc023151c84da03971e5c8cf454102367f51b8ecc2",
+    "vendor/SAL/src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/SAL/src/evaluator/evaluator.py": "eced5afe646fd4b69c8660bb4917ee77a6cd1b8e349a7cfa77773dc646019c96",
+    "vendor/SAL/src/evaluator/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/SAL/src/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/SAL/src/models/criterion/basic_loss.py": "5363a975a488e6dc3e446910f2015b7fa2b30127f3e4a905a6e0e9cde27a0914",
+    "vendor/SAL/src/models/criterion/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/SAL/src/models/modules/attention.py": "eb070211cb7f551067b0149220bd7c00e9edee517364f0e61b915f505c2337b3",
+    "vendor/SAL/src/models/modules/conformer.py": "80473cc35287d4ca37ac126430be3cf243430260b44b0d6d71f70031c470af2a",
+    "vendor/SAL/src/models/modules/transformer.py": "28e60ecb7877cfd810d14937db716d7dc98a96fd192cfa1163e151e6ff76d3da",
+    "vendor/SAL/src/models/modules/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/SAL/src/models/net/model.py": "133fd7f5f8d2ff63002015b404955c3f8592bdf4aa3ffe814c82e704bf3c0d13",
+    "vendor/SAL/src/models/net/ssl_linear.py": "b1d3e8caf7c3627dd8d9edcd119351ab193aa8eabac9e799f2242209b3eaeac2",
+    "vendor/SAL/src/models/net/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/SAL/src/trainers/baseline_trainer.py": "ebdebd42acab64b5b04cff64e4e8f24598b80dc6aaaf6707c734a0c1d909f2e9",
+    "vendor/SAL/src/trainers/csm_trainer.py": "ad2d0a072bbef3bca94391b8474c979df4a95a631c2aaf36b617af7abfad6f16",
+    "vendor/SAL/src/trainers/label_generators.py": "d90b669a9ea08a650413b33577968a0000b8db905d91843da4095d18d6d895c3",
+    "vendor/SAL/src/trainers/SAL.py": "e5ec6f1632914b603984005a0ba40465d21de2c6bd00903196cb6107b7241ab1",
+    "vendor/SAL/src/trainers/sal_trainer.py": "79285727904bbd3c95d5a64b2a4750fbbb0f698c02807b3c871a2c85b36eea2a",
+    "vendor/SAL/src/trainers/spl_trainer.py": "2a8d753ed2a114fb8c9900b1782716dc6a3f4912a456cd5e28fa7930bf57e25a",
+    "vendor/SAL/src/trainers/transition_trainer.py": "9679bbcf797cac337c81a137ca44819a80967c27447144e8b84376adf0e369f3",
+    "vendor/SAL/src/trainers/__init__.py": "939c5cb050c7e5d9a0ec8b264b140882250c9b419cfe2454719acaf1ee9d1465",
+    "vendor/SAL/src/utils/instantiators.py": "2afc4b19faca9cd6c633ebe3df96c77bcae49e1d20fea5c48b4719a7cb22da8e",
+    "vendor/SAL/src/utils/logging_utils.py": "cbacfd213db9cc581aecd3b612bc2652a618a098404c3f8037ac7b1ab2e714da",
+    "vendor/SAL/src/utils/pylogger.py": "2f0b102be9383a4031796e0e6f005e9602e370f506d18347edf98ab618b71cc2",
+    "vendor/SAL/src/utils/rich_utils.py": "080042db773ce826bf3c8b4eb7f8e21f3932992d6607dc36b69dffce0c570dd8",
+    "vendor/SAL/src/utils/utils.py": "5d1ce7f27251407cf76df3a0a0a439b9b87421004ec4e7b14e1e1d4e23c61162",
+    "vendor/SAL/src/utils/__init__.py": "fee4e51e493120cd5036cd3ae1e29bce6f2b20d427473d76201051ebc8ccca48"
+  },
+  "roles": {
+    "train_detector": {
+      "count": 5076,
+      "manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce"
+    },
+    "dev": {
+      "count": 2484,
+      "manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1"
+    },
+    "eval": {
+      "count": 3562,
+      "manifest_sha256": "203792d5718e75e54614ad005386a3037cd9ddb83dd6dc7a93266dfc9c4252b1"
+    },
+    "lps": {
+      "count": 3800,
+      "manifest_sha256": "7e4ff246af20815b7cd65ec0c0821cc1ba3b2a8de984df3261f50925222d3f21"
+    }
+  },
+  "uid_disjoint": true,
+  "note": "UID independence does not independently prove source-recording or speaker independence."
+}

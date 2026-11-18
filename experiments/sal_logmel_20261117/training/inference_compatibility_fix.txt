@@ -1,0 +1,1 @@
+After training launch, load_model alone changed torch.load(checkpoint_path, mmap=True) to torch.load(str(checkpoint_path), mmap=True) for PyTorch 2.2.1 path compatibility. Training process and model/loss/config unchanged. Initial training-source bytes preserved with verified SHA256 in training_source_snapshot. Current code is the corrected inference entry.

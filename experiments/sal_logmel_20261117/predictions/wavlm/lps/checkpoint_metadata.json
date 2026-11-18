@@ -1,0 +1,54 @@
+{
+  "epoch": 24,
+  "global_step": 15875,
+  "lightning_version": "2.0.8",
+  "hyper_parameters": {
+    "optimizer": "functools.partial(<class 'torch.optim.adam.Adam'>, lr=1e-05, weight_decay=0.0001)",
+    "scheduler": "functools.partial(<class 'torch.optim.lr_scheduler.StepLR'>, step_size=10, gamma=0.1)",
+    "v2": "10",
+    "mixup": "False",
+    "mixup2": "True",
+    "mixup_ratio": "0.2",
+    "compile": "False",
+    "vis": "False",
+    "vis_top_k_hard": "10",
+    "vis_top_k_easy": "5"
+  },
+  "callbacks": "{\"EarlyStopping{'monitor': 'val/eer', 'mode': 'min'}\": {'wait_count': 0, 'stopped_epoch': 0, 'best_score': tensor(1.8525), 'patience': 10}, \"ModelCheckpoint{'monitor': 'val/eer', 'mode': 'min', 'every_n_train_steps': 0, 'every_n_epochs': 1, 'train_time_interval': None}\": {'monitor': 'val/eer', 'best_model_score': tensor(1.8525), 'best_model_path': 'C:\\\\Users\\\\ROG\\\\OneDrive\\\\文档\\\\ChatGPT\\\\NNDLproject\\\\partial_speech_project\\\\data\\\\models\\\\sal_train_reduced_20261112_122313_966079\\\\best-epoch=024.ckpt', 'current_score': tensor(1.8525), 'dirpath': 'C:\\\\Users\\\\ROG\\\\OneDrive\\\\文档\\\\ChatGPT\\\\NNDLproject\\\\partial_speech_project\\\\data\\\\models\\\\sal_train_reduced_20261112_122313_966079', 'best_k_models': {'C:\\\\Users\\\\ROG\\\\OneDrive\\\\文档\\\\ChatGPT\\\\NNDLproject\\\\partial_speech_project\\\\data\\\\models\\\\sal_train_reduced_20261112_122313_966079\\\\best-epoch=024.ckpt': tensor(1.8525)}, 'kth_best_model_path': 'C:\\\\Users\\\\ROG\\\\OneDrive\\\\文档\\\\ChatGPT\\\\NNDLproject\\\\partial_speech_project\\\\data\\\\models\\\\sal_train_reduced_20261112_122313_966079\\\\best-epoch=024.ckpt', 'kth_value': tensor(1.8525), 'last_model_path': 'C:\\\\Users\\\\ROG\\\\OneDrive\\\\文档\\\\ChatGPT\\\\NNDLproject\\\\partial_speech_project\\\\data\\\\models\\\\sal_train_reduced_20261112_122313_966079\\\\last.ckpt'}}",
+  "state_dict_keys": 571,
+  "strict_load": "<All keys matched successfully>",
+  "project_training": {
+    "profile": "reduced",
+    "manifests": {
+      "train_detector": {
+        "count": 5076,
+        "sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce"
+      },
+      "dev": {
+        "count": 2484,
+        "sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1"
+      }
+    },
+    "run": "sal_train_reduced_20261112_122313_966079",
+    "config": {
+      "seed": 888,
+      "batch_size": 8,
+      "num_workers": 0,
+      "max_epochs": 60,
+      "min_epochs": 40,
+      "patience": 10,
+      "learning_rate": 1e-05,
+      "weight_decay": 0.0001,
+      "mixup_ratio": 0.2,
+      "device": "cuda",
+      "note": "SAL model/loss retained; local aligned_cross_recording_v1 fixes upstream self-mixing no-op. Batch8/workers0 for Windows. Fresh SAL head and general WavLM backbone; see README implementation note."
+    },
+    "protocol": "sal_reduced_v1",
+    "training_data_profile": "reduced",
+    "training_split": "train_detector",
+    "training_manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+    "training_dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+    "csm_implementation": "aligned_cross_recording_v1",
+    "validation_eer_implementation": "official_formula_cpu_v1"
+  }
+}

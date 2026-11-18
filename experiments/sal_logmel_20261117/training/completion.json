@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "checkpoint": "D:\\Partial-Speech-SAL-LogMel-experiment\\result\\logmel_sal_20261117\\checkpoints\\best-epoch=022.ckpt",
+  "sha256": "f513b12ec4b66ea08eef3e7a65da5b4a5ea6312957c4dd37f6bd3ebcaa8796e6",
+  "best_dev_eer_percent": 12.854819297790527,
+  "epochs_run": 40,
+  "protocol": "sal_logmel_reduced_v1",
+  "training_data_profile": "reduced",
+  "training_split": "train_detector",
+  "training_manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+  "training_dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+  "csm_implementation": "aligned_cross_recording_v1"
+}

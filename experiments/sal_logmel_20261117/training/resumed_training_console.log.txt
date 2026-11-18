@@ -1,0 +1,109 @@
+D:\SAL_精简实验\code\.venv\lib\site-packages\s3prl\upstream\byol_s\byol_a\common.py:20: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("sox_io")
+ESPnet is not installed, cannot use espnet_hubert upstream
+Global seed set to 888
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4060 Laptop GPU') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Found 5076 samples in train set.
+Found 2484 samples in dev set.
+D:\SAL_精简实验\code\.venv\lib\site-packages\lightning\pytorch\callbacks\model_checkpoint.py:617: UserWarning: Checkpoint directory D:\Partial-Speech-SAL-LogMel-experiment\result\logmel_sal_20261117\checkpoints exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+Restoring states from the checkpoint path at D:\Partial-Speech-SAL-LogMel-experiment\result\logmel_sal_20261117\checkpoints\last.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+D:\SAL_精简实验\code\.venv\lib\site-packages\lightning\pytorch\trainer\connectors\data_connector.py:442: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 24 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+
+   | Name         | Type                             | Params
+-------------------------------------------------------------------
+0  | net          | LogMelSAL                        | 23.8 M
+1  | criterion    | MaskedMultiClassCrossEntropyLoss | 0     
+2  | criterion2   | MaskedMultiClassCrossEntropyLoss | 0     
+3  | train_loss   | MeanMetric                       | 0     
+4  | val_loss     | MeanMetric                       | 0     
+5  | test_loss    | MeanMetric                       | 0     
+6  | val_eer      | EERMetric                        | 0     
+7  | val_eer_best | MinMetric                        | 0     
+8  | test_eer     | EERMetric                        | 0     
+9  | val_acc      | F1Metric                         | 0     
+10 | test_acc     | F1Metric                         | 0     
+-------------------------------------------------------------------
+23.8 M    Trainable params
+0         Non-trainable params
+23.8 M    Total params
+95.167    Total estimated model params size (MB)
+Restored all states from the checkpoint at D:\Partial-Speech-SAL-LogMel-experiment\result\logmel_sal_20261117\checkpoints\last.ckpt
+D:\SAL_精简实验\code\.venv\lib\site-packages\lightning\pytorch\trainer\connectors\data_connector.py:442: PossibleUserWarning: The dataloader, val_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 24 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+D:\SAL_精简实验\code\.venv\lib\site-packages\torchmetrics\utilities\prints.py:43: UserWarning: The ``compute`` method of metric MeanMetric was called before the ``update`` method which may lead to errors, as metric states have not yet been updated.
+  warnings.warn(*args, **kwargs)  # noqa: B028
+TRAIN_EPOCH 8
+EPOCH_METRICS 8 {"train/loss": 5.564924716949463, "train/loss_step": 5.332866668701172, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 7.586345672607422, "val/eer": 16.77899169921875, "val/eer_best": 16.77899169921875, "val/acc": 74.2298583984375, "train/loss_epoch": 5.564924716949463, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 9
+EPOCH_METRICS 9 {"train/loss": 5.364344120025635, "train/loss_step": 3.836707830429077, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 4.453330039978027, "val/eer": 15.294976234436035, "val/eer_best": 15.294976234436035, "val/acc": 84.67306518554688, "train/loss_epoch": 5.364344120025635, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 10
+EPOCH_METRICS 10 {"train/loss": 5.2596211433410645, "train/loss_step": 4.92227840423584, "train/lr": 1.0000047041103244e-05, "train/lr_step": 9.999999747378752e-06, "val/loss": 5.181040287017822, "val/eer": 14.425152778625488, "val/eer_best": 14.425152778625488, "val/acc": 82.52118682861328, "train/loss_epoch": 5.2596211433410645, "train/lr_epoch": 1.0000047041103244e-05}
+TRAIN_EPOCH 11
+EPOCH_METRICS 11 {"train/loss": 4.896275520324707, "train/loss_step": 4.998003959655762, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.439816474914551, "val/eer": 13.674844741821289, "val/eer_best": 13.674844741821289, "val/acc": 85.40481567382812, "train/loss_epoch": 4.896275520324707, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 12
+EPOCH_METRICS 12 {"train/loss": 4.797192573547363, "train/loss_step": 3.2851028442382812, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.318177700042725, "val/eer": 13.588526725769043, "val/eer_best": 13.588526725769043, "val/acc": 85.87998962402344, "train/loss_epoch": 4.797192573547363, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 13
+EPOCH_METRICS 13 {"train/loss": 4.880017280578613, "train/loss_step": 4.19345760345459, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.076587677001953, "val/eer": 13.16689395904541, "val/eer_best": 13.16689395904541, "val/acc": 86.82855987548828, "train/loss_epoch": 4.880017280578613, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 14
+EPOCH_METRICS 14 {"train/loss": 4.811356544494629, "train/loss_step": 3.535980701446533, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.31427526473999, "val/eer": 13.5088472366333, "val/eer_best": 13.16689395904541, "val/acc": 85.9902114868164, "train/loss_epoch": 4.811356544494629, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 15
+EPOCH_METRICS 15 {"train/loss": 4.924819469451904, "train/loss_step": 3.5191755294799805, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.248043537139893, "val/eer": 13.107134819030762, "val/eer_best": 13.107134819030762, "val/acc": 86.05525207519531, "train/loss_epoch": 4.924819469451904, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 16
+EPOCH_METRICS 16 {"train/loss": 4.9352593421936035, "train/loss_step": 6.602823734283447, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.515211582183838, "val/eer": 13.515487670898438, "val/eer_best": 13.107134819030762, "val/acc": 85.3054428100586, "train/loss_epoch": 4.9352593421936035, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 17
+EPOCH_METRICS 17 {"train/loss": 4.815385341644287, "train/loss_step": 4.506928443908691, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.204908847808838, "val/eer": 13.210052490234375, "val/eer_best": 13.107134819030762, "val/acc": 86.31001281738281, "train/loss_epoch": 4.815385341644287, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 18
+EPOCH_METRICS 18 {"train/loss": 4.879257678985596, "train/loss_step": 3.405324935913086, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.270575046539307, "val/eer": 13.35944938659668, "val/eer_best": 13.107134819030762, "val/acc": 85.98478698730469, "train/loss_epoch": 4.879257678985596, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 19
+EPOCH_METRICS 19 {"train/loss": 4.8541178703308105, "train/loss_step": 5.504985809326172, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.144653797149658, "val/eer": 13.034096717834473, "val/eer_best": 13.034096717834473, "val/acc": 86.47442626953125, "train/loss_epoch": 4.8541178703308105, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 20
+EPOCH_METRICS 20 {"train/loss": 4.768646717071533, "train/loss_step": 4.113363265991211, "train/lr": 1.0000034080803744e-06, "train/lr_step": 9.999999974752427e-07, "val/loss": 4.143688201904297, "val/eer": 13.077254295349121, "val/eer_best": 13.034096717834473, "val/acc": 86.6514892578125, "train/loss_epoch": 4.768646717071533, "train/lr_epoch": 1.0000034080803744e-06}
+TRAIN_EPOCH 21
+EPOCH_METRICS 21 {"train/loss": 4.717412948608398, "train/loss_step": 3.9442825317382812, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.1017889976501465, "val/eer": 13.060654640197754, "val/eer_best": 13.034096717834473, "val/acc": 86.68220520019531, "train/loss_epoch": 4.717412948608398, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 22
+EPOCH_METRICS 22 {"train/loss": 4.81395149230957, "train/loss_step": 4.482036590576172, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.201571464538574, "val/eer": 13.113774299621582, "val/eer_best": 13.034096717834473, "val/acc": 86.40757751464844, "train/loss_epoch": 4.81395149230957, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 23
+EPOCH_METRICS 23 {"train/loss": 4.73831844329834, "train/loss_step": 3.0491549968719482, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.013426780700684, "val/eer": 12.854819297790527, "val/eer_best": 12.854819297790527, "val/acc": 86.93876647949219, "train/loss_epoch": 4.73831844329834, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 24
+EPOCH_METRICS 24 {"train/loss": 4.753487586975098, "train/loss_step": 5.350557327270508, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.161846160888672, "val/eer": 12.91789722442627, "val/eer_best": 12.854819297790527, "val/acc": 86.44913482666016, "train/loss_epoch": 4.753487586975098, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 25
+EPOCH_METRICS 25 {"train/loss": 4.817047119140625, "train/loss_step": 3.259143829345703, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.285801887512207, "val/eer": 13.123734474182129, "val/eer_best": 12.854819297790527, "val/acc": 86.05706024169922, "train/loss_epoch": 4.817047119140625, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 26
+EPOCH_METRICS 26 {"train/loss": 4.843461513519287, "train/loss_step": 3.4037632942199707, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.03904914855957, "val/eer": 12.854819297790527, "val/eer_best": 12.854819297790527, "val/acc": 86.89360046386719, "train/loss_epoch": 4.843461513519287, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 27
+EPOCH_METRICS 27 {"train/loss": 4.768921375274658, "train/loss_step": 5.477075099945068, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.103557109832764, "val/eer": 12.878058433532715, "val/eer_best": 12.854819297790527, "val/acc": 86.67678833007812, "train/loss_epoch": 4.768921375274658, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 28
+EPOCH_METRICS 28 {"train/loss": 4.743823528289795, "train/loss_step": 5.195286750793457, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.058574676513672, "val/eer": 12.868099212646484, "val/eer_best": 12.854819297790527, "val/acc": 86.77616119384766, "train/loss_epoch": 4.743823528289795, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 29
+EPOCH_METRICS 29 {"train/loss": 4.794656753540039, "train/loss_step": 5.380617141723633, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.0472636222839355, "val/eer": 12.91457748413086, "val/eer_best": 12.854819297790527, "val/acc": 86.85023498535156, "train/loss_epoch": 4.794656753540039, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 30
+EPOCH_METRICS 30 {"train/loss": 4.711599826812744, "train/loss_step": 4.736666679382324, "train/lr": 1.0000055539194364e-07, "train/lr_step": 1.0000000116860974e-07, "val/loss": 4.149277210235596, "val/eer": 12.997576713562012, "val/eer_best": 12.854819297790527, "val/acc": 86.53766632080078, "train/loss_epoch": 4.711599826812744, "train/lr_epoch": 1.0000055539194364e-07}
+TRAIN_EPOCH 31
+EPOCH_METRICS 31 {"train/loss": 4.798164367675781, "train/loss_step": 5.5020060539245605, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.2092695236206055, "val/eer": 13.044055938720703, "val/eer_best": 12.854819297790527, "val/acc": 86.2684555053711, "train/loss_epoch": 4.798164367675781, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 32
+EPOCH_METRICS 32 {"train/loss": 4.788510322570801, "train/loss_step": 3.4454848766326904, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.262261867523193, "val/eer": 13.080574989318848, "val/eer_best": 12.854819297790527, "val/acc": 86.14198303222656, "train/loss_epoch": 4.788510322570801, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 33
+EPOCH_METRICS 33 {"train/loss": 4.811794757843018, "train/loss_step": 4.794993877410889, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.165828227996826, "val/eer": 13.004216194152832, "val/eer_best": 12.854819297790527, "val/acc": 86.47623443603516, "train/loss_epoch": 4.811794757843018, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 34
+Trainer was signaled to stop but the required `min_epochs=40` or `min_steps=None` has not been met. Training will continue...
+EPOCH_METRICS 34 {"train/loss": 4.736850738525391, "train/loss_step": 4.640286445617676, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.06529426574707, "val/eer": 13.010856628417969, "val/eer_best": 12.854819297790527, "val/acc": 86.82313537597656, "train/loss_epoch": 4.736850738525391, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 35
+EPOCH_METRICS 35 {"train/loss": 4.737015724182129, "train/loss_step": 4.29880428314209, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.1075005531311035, "val/eer": 13.000896453857422, "val/eer_best": 12.854819297790527, "val/acc": 86.71653747558594, "train/loss_epoch": 4.737015724182129, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 36
+EPOCH_METRICS 36 {"train/loss": 4.748082637786865, "train/loss_step": 3.312417507171631, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.391188144683838, "val/eer": 13.110454559326172, "val/eer_best": 12.854819297790527, "val/acc": 85.67041015625, "train/loss_epoch": 4.748082637786865, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 37
+EPOCH_METRICS 37 {"train/loss": 4.775639533996582, "train/loss_step": 2.9519994258880615, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.086071014404297, "val/eer": 12.951096534729004, "val/eer_best": 12.854819297790527, "val/acc": 86.79241943359375, "train/loss_epoch": 4.775639533996582, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 38
+EPOCH_METRICS 38 {"train/loss": 4.684972763061523, "train/loss_step": 4.3630266189575195, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.133655071258545, "val/eer": 13.034096717834473, "val/eer_best": 12.854819297790527, "val/acc": 86.5774154663086, "train/loss_epoch": 4.684972763061523, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 39
+EPOCH_METRICS 39 {"train/loss": 4.703304767608643, "train/loss_step": 4.709088325500488, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.001245498657227, "val/eer": 12.878058433532715, "val/eer_best": 12.854819297790527, "val/acc": 87.02368927001953, "train/loss_epoch": 4.703304767608643, "train/lr_epoch": 9.999927996773295e-09}
+TRAIN_EPOCH 40
+EPOCH_METRICS 40 {"train/loss": 4.749208927154541, "train/loss_step": 4.686302185058594, "train/lr": 9.999927996773295e-09, "train/lr_step": 9.99999993922529e-09, "val/loss": 4.124224662780762, "val/eer": 12.91789722442627, "val/eer_best": 12.854819297790527, "val/acc": 86.5864486694336, "train/loss_epoch": 4.749208927154541, "train/lr_epoch": 9.999927996773295e-09}

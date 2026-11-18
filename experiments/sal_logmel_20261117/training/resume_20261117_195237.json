@@ -1,0 +1,7 @@
+{
+  "checkpoint": "D:\\Partial-Speech-SAL-LogMel-experiment\\result\\logmel_sal_20261117\\checkpoints\\last.ckpt",
+  "sha256": "703ed1644c5099d5a4bed749711e84e5d6b3951ed51d2413d3da9fb31c26f2c2",
+  "saved_epoch": 6,
+  "global_step": 4445,
+  "note": "Restore Lightning model/optimizer/scheduler/callback/loop states. Original checkpoint did not save RNG states; reseed 888, not bitwise equivalent to uninterrupted training."
+}

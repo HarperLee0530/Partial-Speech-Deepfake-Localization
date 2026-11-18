@@ -1,0 +1,29 @@
+{
+  "status": "trained",
+  "protocol": "sal_logmel_reduced_v1",
+  "training_data_profile": "reduced",
+  "training_split": "train_detector",
+  "training_manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+  "training_dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+  "csm_implementation": "aligned_cross_recording_v1",
+  "started": "2026-11-17T19:52:38.359523+08:00",
+  "phase": "validation",
+  "epoch": 40,
+  "updated": "2026-11-17T22:23:51.425918+08:00",
+  "metrics": {
+    "train/loss": 4.749208927154541,
+    "train/loss_step": 4.686302185058594,
+    "train/lr": 9.999927996773295e-09,
+    "train/lr_step": 9.99999993922529e-09,
+    "val/loss": 4.124224662780762,
+    "val/eer": 12.91789722442627,
+    "val/eer_best": 12.854819297790527,
+    "val/acc": 86.5864486694336,
+    "train/loss_epoch": 4.749208927154541,
+    "train/lr_epoch": 9.999927996773295e-09
+  },
+  "checkpoint": "D:\\Partial-Speech-SAL-LogMel-experiment\\result\\logmel_sal_20261117\\checkpoints\\best-epoch=022.ckpt",
+  "sha256": "f513b12ec4b66ea08eef3e7a65da5b4a5ea6312957c4dd37f6bd3ebcaa8796e6",
+  "best_dev_eer_percent": 12.854819297790527,
+  "epochs_run": 40
+}

@@ -1,0 +1,64 @@
+{
+  "settings": {
+    "seed": 888,
+    "batch_size": 8,
+    "num_workers": 0,
+    "max_epochs": 60,
+    "min_epochs": 40,
+    "patience": 10,
+    "learning_rate": 1e-05,
+    "weight_decay": 0.0001,
+    "mixup_ratio": 0.2,
+    "device": "cuda",
+    "note": "SAL model/loss retained; local aligned_cross_recording_v1 fixes upstream self-mixing no-op. Batch8/workers0 for Windows. Fresh SAL head and general WavLM backbone; see README implementation note."
+  },
+  "model": {
+    "_target_": "src.trainers.SAL.SALTrainer",
+    "criterion": {
+      "_target_": "src.models.criterion.basic_loss.MaskedCrossEntropyLoss",
+      "_convert_": "all"
+    },
+    "optimizer": {
+      "_target_": "torch.optim.Adam",
+      "_partial_": true,
+      "lr": 1e-05,
+      "weight_decay": 0.0001
+    },
+    "scheduler": {
+      "_target_": "torch.optim.lr_scheduler.StepLR",
+      "_partial_": true,
+      "step_size": 10,
+      "gamma": 0.1
+    },
+    "net": {
+      "_target_": "logmel_model.LogMelSAL"
+    },
+    "compile": false,
+    "v2": 10,
+    "mixup2": true,
+    "mixup_ratio": 0.2,
+    "vis": false
+  },
+  "data": {
+    "_target_": "src.data.partialspoof.PartialSpoofDataModule",
+    "root": "D:\\SAL_精简实验\\data\\reduced\\train_detector",
+    "sample_rate": 16000,
+    "resolution_train": 0.16,
+    "resolution_test": 0.16,
+    "max_label_len": 25,
+    "batch_size": 8,
+    "num_workers": 0,
+    "use_augmentation": true,
+    "augmentation_algo": 4,
+    "augmentation_prob": 0.5
+  },
+  "frontend": "original cnn.LogMel + LayerNorm(80) + Linear(80,1024)",
+  "protocol": "sal_logmel_reduced_v1",
+  "training_data_profile": "reduced",
+  "training_split": "train_detector",
+  "training_manifest_sha256": "240fde8cbf178b8ea3f3bf430239c04b173ac80a45cc526df0153b149f74bdce",
+  "training_dev_manifest_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+  "csm_implementation": "aligned_cross_recording_v1",
+  "test_used_for_selection": false,
+  "historical_reference": "sal_baseline_20261112 / sal_frozen_test_20261113"
+}
