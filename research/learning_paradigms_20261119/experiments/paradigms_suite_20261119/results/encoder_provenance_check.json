@@ -1,0 +1,12 @@
+{
+  "wavlm_train_dev_encoder_and_grid_match": true,
+  "matched_fields": [
+    "model_id",
+    "revision",
+    "model_sha256",
+    "feature_dim",
+    "layer",
+    "normalization",
+    "grid"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "boundary_exclusion": true,
+  "disagreement_rejected": true,
+  "padding_excluded": true,
+  "masked_loss_gradient": true,
+  "empty_mask_safe": true,
+  "coral_identity_zero": true,
+  "coral_gradient_finite": true,
+  "ewc_anchor_zero_and_displacement_positive": true
+}

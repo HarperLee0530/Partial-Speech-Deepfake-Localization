@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "b4d6bd2c91fac73bd789f921469578153157e5f0e4afe0391b31d45f4c584136",
+  "updates": 128,
+  "initial_digests": {
+    "backbone": "91e40c70bc259b7ee19983a743cc61c87c1d0fc910bca6aa26fea137c74dab2c",
+    "adapter": "07fd62812a54d3ed4bb2df9ab9c9497313bcf02bca48a48391f05944b8102cae"
+  },
+  "final_layer_weights": [
+    0.7047916650772095,
+    0.14855073392391205,
+    0.14665760099887848
+  ],
+  "backbone_trainable": 974580,
+  "adapter_trainable": 25493
+}

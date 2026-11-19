@@ -1,0 +1,4 @@
+{
+  "eval_backend_max_abs_difference": 9.5367431640625e-07,
+  "fisher_gradients_finite_nonzero": true
+}

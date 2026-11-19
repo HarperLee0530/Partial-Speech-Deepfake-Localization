@@ -1,0 +1,8 @@
+{
+  "recordings": 2484,
+  "max_archive_score_difference": 0.00067901611328125,
+  "changed_frame_decisions": 0,
+  "compared_frames": 434150,
+  "original_tolerance_pass": false,
+  "amendment": "Report full observed discrepancy and decision changes; numerical ceiling0.01. No training or threshold changes."
+}

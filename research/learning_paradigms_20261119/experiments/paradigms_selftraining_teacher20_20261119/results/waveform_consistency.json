@@ -1,0 +1,5 @@
+{
+  "recordings": 384,
+  "max_clean_feature_absolute_error": 1.9073486328125e-06,
+  "noise_source_matches_cached_clean_audio": true
+}

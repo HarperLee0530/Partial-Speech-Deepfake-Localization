@@ -1,0 +1,5 @@
+{
+  "kind": "mel",
+  "checkpoint_sha256": "2e58846e0a95e4e24cb4584f48a6a9ac5958aa2d91426d10db19c41eff645173",
+  "reused_from": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\paradigms_selftraining_teacher20_20261119\\results\\seed666\\warm\\last.pt"
+}

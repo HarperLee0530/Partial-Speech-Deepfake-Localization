@@ -1,0 +1,8 @@
+{
+  "recordings": 384,
+  "real_seconds": 732.2211580276489,
+  "fake_seconds": 555.2620535194874,
+  "fully_real_recordings": 35,
+  "fully_fake_recordings": 1,
+  "partial_fake_recordings": 348
+}

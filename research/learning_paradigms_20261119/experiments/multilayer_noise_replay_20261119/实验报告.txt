@@ -1,0 +1,217 @@
+﻿多层WavLM：噪声增强与旧样本回放小型对照
+
+所有新训练方案从同一原始多层WavLM checkpoint出发；额外评估上一轮低通回放的两个冻结模型。
+冻结WavLM；融合标量、投影、CNN-BiGRU和完整双分辨率模块更新，原五项损失不变。
+256条目标录音轮换15dB/5dB白噪声，256条独立UID旧样本轮换原音频/20dB噪声/EQ。
+对照：原模型、仅旧样本、仅噪声增强、新旧各半回放、上一轮低通加回放。
+每种训练两个微调种子，4轮、batch8、128更新、AdamW lr1e-4；固定最后一轮和原阈值。
+新旧回放多计算旧样本，不是等算力比较；两个种子不是独立预训练模型。
+原性能：全部2484条dev。压力：沿用上轮384条dev，白噪声10dB/0dB、粉红噪声10dB和低通2.6kHz。
+10dB是未训练的中间强度，0dB是未训练的更强强度，粉红噪声是未训练的频谱类型。
+整个dev曾用于源模型选模；384条及其10dB结果上一轮已查看，本轮是探索性重测，非新盲测。
+正式eval和LPS未使用。合成噪声不能代表真实未知环境或未知伪造算法。
+录音配对bootstrap2000次，95%区间未校正同源依赖或多重比较。
+保护线：事件/帧F1降幅<=0.5pp、真实时长误报增幅<=0.5pp、短事件召回降幅<=1pp。
+
+结果（%，更新模型为两种子均值）：
+方案 | 条件 | 事件F1 | 帧F1 | 真实时长误报 | 短事件召回 | EER
+原模型 | clean_full | 83.408 | 94.993 | 5.000 | 78.448 | 4.328
+原模型 | clean_subset | 83.948 | 93.981 | 5.860 | 79.346 | 5.094
+原模型 | noise10 | 48.639 | 72.722 | 43.339 | 31.373 | 26.249
+原模型 | noise0 | 15.851 | 59.610 | 95.989 | 3.791 | 48.766
+原模型 | pink10 | 58.748 | 81.635 | 23.528 | 41.961 | 16.430
+原模型 | lp2600 | 77.873 | 91.510 | 9.143 | 71.373 | 7.162
+只继续训练旧条件 | clean_full | 83.715 | 95.215 | 4.762 | 78.439 | 4.086
+只继续训练旧条件 | clean_subset | 83.798 | 94.403 | 5.520 | 78.758 | 4.648
+只继续训练旧条件 | noise10 | 50.691 | 76.136 | 37.027 | 32.614 | 21.762
+只继续训练旧条件 | noise0 | 16.588 | 60.195 | 95.026 | 3.660 | 47.585
+只继续训练旧条件 | pink10 | 59.912 | 84.207 | 20.456 | 43.464 | 13.626
+只继续训练旧条件 | lp2600 | 79.061 | 92.624 | 7.606 | 72.484 | 6.043
+仅白噪声增强 | clean_full | 81.898 | 94.630 | 3.743 | 79.953 | 4.971
+仅白噪声增强 | clean_subset | 81.620 | 93.864 | 4.207 | 80.392 | 5.566
+仅白噪声增强 | noise10 | 58.944 | 87.058 | 12.181 | 46.144 | 11.198
+仅白噪声增强 | noise0 | 29.240 | 66.003 | 50.423 | 13.660 | 34.226
+仅白噪声增强 | pink10 | 61.249 | 87.542 | 10.140 | 52.026 | 10.904
+仅白噪声增强 | lp2600 | 80.794 | 93.591 | 4.623 | 79.150 | 5.715
+白噪声增强加旧样本回放 | clean_full | 82.705 | 94.891 | 3.873 | 79.640 | 4.680
+白噪声增强加旧样本回放 | clean_subset | 83.095 | 94.238 | 4.350 | 80.327 | 5.164
+白噪声增强加旧样本回放 | noise10 | 58.330 | 86.919 | 12.925 | 44.052 | 11.310
+白噪声增强加旧样本回放 | noise0 | 28.387 | 65.769 | 52.063 | 12.941 | 34.889
+白噪声增强加旧样本回放 | pink10 | 61.799 | 87.877 | 10.385 | 51.634 | 10.511
+白噪声增强加旧样本回放 | lp2600 | 81.653 | 93.906 | 4.851 | 78.562 | 5.376
+上一轮低通加回放 | clean_full | 84.000 | 95.364 | 4.389 | 79.130 | 4.018
+上一轮低通加回放 | clean_subset | 84.187 | 94.554 | 5.208 | 79.542 | 4.585
+上一轮低通加回放 | noise10 | 50.876 | 77.453 | 33.610 | 33.791 | 20.578
+上一轮低通加回放 | noise0 | 16.862 | 60.274 | 94.376 | 3.856 | 46.975
+上一轮低通加回放 | pink10 | 60.088 | 84.900 | 18.364 | 44.706 | 12.852
+上一轮低通加回放 | lp2600 | 80.841 | 93.407 | 6.174 | 75.229 | 5.582
+
+原域保护线：
+{
+  "old_only": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    }
+  },
+  "new_only": {
+    "666": {
+      "point_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": false,
+      "interval_checks": {
+        "event_f1": false,
+        "frame_f1": false,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": false
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": false,
+      "interval_checks": {
+        "event_f1": false,
+        "frame_f1": false,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": false
+    }
+  },
+  "replay": {
+    "666": {
+      "point_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": false,
+      "interval_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": false
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": false,
+      "interval_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": false
+    }
+  }
+}
+
+回放事件F1差值与95%区间：
+seed666 vs original, clean_full: -0.606 [-1.285, +0.049]pp
+seed666 vs original, clean_subset: -0.648 [-2.185, +0.909]pp
+seed666 vs original, noise10: +9.528 [+6.566, +12.677]pp
+seed666 vs original, noise0: +12.294 [+9.925, +14.859]pp
+seed666 vs original, pink10: +3.219 [+0.343, +6.163]pp
+seed666 vs original, lp2600: +4.087 [+2.218, +5.906]pp
+seed666 vs 666_new_only, clean_full: +0.821 [+0.494, +1.174]pp
+seed666 vs 666_new_only, clean_subset: +1.638 [+0.574, +2.767]pp
+seed666 vs 666_new_only, noise10: -0.661 [-1.688, +0.378]pp
+seed666 vs 666_new_only, noise0: -0.966 [-1.979, +0.039]pp
+seed666 vs 666_new_only, pink10: +0.622 [-0.264, +1.535]pp
+seed666 vs 666_new_only, lp2600: +0.927 [-0.091, +1.953]pp
+seed666 vs 666_previous_replay, clean_full: -1.245 [-1.796, -0.707]pp
+seed666 vs 666_previous_replay, clean_subset: -0.812 [-2.214, +0.522]pp
+seed666 vs 666_previous_replay, noise10: +7.503 [+4.880, +10.181]pp
+seed666 vs 666_previous_replay, noise0: +11.226 [+8.905, +13.913]pp
+seed666 vs 666_previous_replay, pink10: +1.700 [-0.639, +4.116]pp
+seed666 vs 666_previous_replay, lp2600: +0.932 [-0.678, +2.645]pp
+seed667 vs original, clean_full: -0.800 [-1.505, -0.140]pp
+seed667 vs original, clean_subset: -1.058 [-2.633, +0.552]pp
+seed667 vs original, noise10: +9.854 [+6.981, +13.085]pp
+seed667 vs original, noise0: +12.777 [+10.319, +15.318]pp
+seed667 vs original, pink10: +2.882 [-0.065, +5.942]pp
+seed667 vs original, lp2600: +3.472 [+1.494, +5.321]pp
+seed667 vs 667_new_only, clean_full: +0.794 [+0.453, +1.148]pp
+seed667 vs 667_new_only, clean_subset: +1.310 [+0.319, +2.420]pp
+seed667 vs 667_new_only, noise10: -0.567 [-1.656, +0.604]pp
+seed667 vs 667_new_only, noise0: -0.741 [-1.768, +0.179]pp
+seed667 vs 667_new_only, pink10: +0.477 [-0.450, +1.367]pp
+seed667 vs 667_new_only, lp2600: +0.791 [-0.317, +1.842]pp
+seed667 vs 667_previous_replay, clean_full: -1.344 [-1.905, -0.809]pp
+seed667 vs 667_previous_replay, clean_subset: -1.373 [-2.793, -0.022]pp
+seed667 vs 667_previous_replay, noise10: +7.404 [+4.716, +10.211]pp
+seed667 vs 667_previous_replay, noise0: +11.824 [+9.348, +14.524]pp
+seed667 vs 667_previous_replay, pink10: +1.722 [-0.692, +4.253]pp
+seed667 vs 667_previous_replay, lp2600: +0.691 [-0.856, +2.216]pp
+
+核验：
+{
+  "original_checkpoint_unchanged": true,
+  "all_backends_start_identical": true,
+  "all_updates_128": true,
+  "thresholds_never_recalibrated": true,
+  "source_full2484_reproduced_within_original_tolerance": false,
+  "source_full2484_threshold_decisions_identical": false,
+  "source_reproduction": {
+    "recordings": 2484,
+    "max_archive_score_difference": 0.00067901611328125,
+    "changed_frame_decisions": 1,
+    "compared_frames": 434150,
+    "original_tolerance_pass": false,
+    "amendment": "Report full observed discrepancy and decision changes; numerical ceiling0.001. No training or threshold changes.",
+    "exact_float64_decision_changes": 1
+  },
+  "native20_frame_and_event_counts_verified": true,
+  "all_prediction_uids_match": true,
+  "all_frozen_checkpoint_hashes_match": true,
+  "formal_test_accessed": false
+}
+原归档分数存在已知微小数值差异；本轮预定最大容差0.001，准确判定差异见核验，不声称逐位复现。
+原权重未修改；全部模型与阈值在评估前冻结。
+复现：使用D:/SAL_精简实验/code/.venv/Scripts/python.exe运行run.py，完成后运行report.py。

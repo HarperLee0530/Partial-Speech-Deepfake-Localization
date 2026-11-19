@@ -1,0 +1,104 @@
+{
+  "old_only": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    }
+  },
+  "new_only": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    }
+  },
+  "replay": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    }
+  }
+}

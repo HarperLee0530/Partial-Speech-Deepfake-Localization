@@ -1,0 +1,149 @@
+﻿多层WavLM：旧样本与噪声损失3:1回放对照
+
+所有新训练方案从同一原始多层WavLM checkpoint出发；以上一轮噪声增强1:1回放、仅噪声、仅旧样本的冻结分数为对照；源模型重新推理验证可比性。
+冻结WavLM；融合标量、投影、CNN-BiGRU和完整双分辨率模块更新，原五项损失不变。
+256条目标录音轮换15dB/5dB白噪声，256条独立UID旧样本轮换原音频/20dB噪声/EQ。
+对照：原模型、仅旧样本、仅噪声增强、旧:新损失1:1与3:1。3:1指0.75旧损失+0.25噪声损失；每步仍各8条，与1:1同数据、同更新次数和同算力。
+每种训练两个微调种子，4轮、batch8、128更新、AdamW lr1e-4；固定最后一轮和原阈值。
+3:1与1:1同算力；相比仅噪声方案仍额外计算旧批次。两个种子不是独立预训练模型。
+原性能：全部2484条dev。压力：沿用上轮384条dev，白噪声10dB/0dB、粉红噪声10dB和低通2.6kHz。
+10dB是未训练的中间强度，0dB是未训练的更强强度，粉红噪声是未训练的频谱类型。
+整个dev曾用于源模型选模；所有压力条件已在上轮查看，3:1也是根据上轮原域退化选择的后续方案，本轮为探索性重测，非新盲测。
+正式eval和LPS未使用。合成噪声不能代表真实未知环境或未知伪造算法。
+录音配对bootstrap2000次，95%区间未校正同源依赖或多重比较。
+保护线：事件/帧F1降幅<=0.5pp、真实时长误报增幅<=0.5pp、短事件召回降幅<=1pp。
+
+结果（%，更新模型为两种子均值）：
+方案 | 条件 | 事件F1 | 帧F1 | 真实时长误报 | 短事件召回 | EER
+原模型 | clean_full | 83.408 | 94.993 | 5.000 | 78.448 | 4.328
+原模型 | clean_subset | 83.948 | 93.981 | 5.860 | 79.346 | 5.094
+原模型 | noise10 | 48.639 | 72.722 | 43.339 | 31.373 | 26.249
+原模型 | noise0 | 15.851 | 59.610 | 95.989 | 3.791 | 48.766
+原模型 | pink10 | 58.748 | 81.635 | 23.528 | 41.961 | 16.430
+原模型 | lp2600 | 77.873 | 91.510 | 9.143 | 71.373 | 7.162
+只继续训练旧条件 | clean_full | 83.715 | 95.215 | 4.762 | 78.439 | 4.086
+只继续训练旧条件 | clean_subset | 83.798 | 94.403 | 5.520 | 78.758 | 4.648
+只继续训练旧条件 | noise10 | 50.691 | 76.136 | 37.027 | 32.614 | 21.762
+只继续训练旧条件 | noise0 | 16.588 | 60.195 | 95.026 | 3.660 | 47.585
+只继续训练旧条件 | pink10 | 59.912 | 84.207 | 20.456 | 43.464 | 13.626
+只继续训练旧条件 | lp2600 | 79.061 | 92.624 | 7.606 | 72.484 | 6.043
+仅白噪声增强 | clean_full | 81.898 | 94.630 | 3.743 | 79.953 | 4.971
+仅白噪声增强 | clean_subset | 81.620 | 93.864 | 4.207 | 80.392 | 5.566
+仅白噪声增强 | noise10 | 58.944 | 87.058 | 12.181 | 46.144 | 11.198
+仅白噪声增强 | noise0 | 29.240 | 66.003 | 50.423 | 13.660 | 34.226
+仅白噪声增强 | pink10 | 61.249 | 87.542 | 10.140 | 52.026 | 10.904
+仅白噪声增强 | lp2600 | 80.794 | 93.591 | 4.623 | 79.150 | 5.715
+上一轮噪声增强加1:1回放 | clean_full | 82.705 | 94.891 | 3.873 | 79.640 | 4.680
+上一轮噪声增强加1:1回放 | clean_subset | 83.095 | 94.238 | 4.350 | 80.327 | 5.164
+上一轮噪声增强加1:1回放 | noise10 | 58.330 | 86.919 | 12.925 | 44.052 | 11.310
+上一轮噪声增强加1:1回放 | noise0 | 28.387 | 65.769 | 52.063 | 12.941 | 34.889
+上一轮噪声增强加1:1回放 | pink10 | 61.799 | 87.877 | 10.385 | 51.634 | 10.511
+上一轮噪声增强加1:1回放 | lp2600 | 81.653 | 93.906 | 4.851 | 78.562 | 5.376
+噪声增强加3:1旧样本权重 | clean_full | 83.154 | 95.017 | 3.906 | 79.338 | 4.522
+噪声增强加3:1旧样本权重 | clean_subset | 83.688 | 94.358 | 4.441 | 80.458 | 4.971
+噪声增强加3:1旧样本权重 | noise10 | 58.644 | 86.984 | 13.105 | 43.856 | 11.295
+噪声增强加3:1旧样本权重 | noise0 | 27.943 | 65.530 | 53.634 | 12.418 | 35.203
+噪声增强加3:1旧样本权重 | pink10 | 62.672 | 88.161 | 10.427 | 51.634 | 10.228
+噪声增强加3:1旧样本权重 | lp2600 | 82.349 | 93.958 | 5.028 | 78.235 | 5.235
+
+原域保护线：
+{
+  "replay": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": false
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": false,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": false
+    }
+  }
+}
+
+回放事件F1差值与95%区间：
+seed666 vs original, clean_full: -0.308 [-0.962, +0.333]pp
+seed666 vs original, clean_subset: -0.249 [-1.734, +1.240]pp
+seed666 vs original, noise10: +9.846 [+7.068, +12.919]pp
+seed666 vs original, noise0: +11.777 [+9.418, +14.376]pp
+seed666 vs original, pink10: +4.275 [+1.662, +7.012]pp
+seed666 vs original, lp2600: +4.824 [+2.957, +6.627]pp
+seed666 vs 666_new_only, clean_full: +1.119 [+0.701, +1.537]pp
+seed666 vs 666_new_only, clean_subset: +2.036 [+0.950, +3.188]pp
+seed666 vs 666_new_only, noise10: -0.344 [-1.738, +1.107]pp
+seed666 vs 666_new_only, noise0: -1.483 [-2.763, -0.311]pp
+seed666 vs 666_new_only, pink10: +1.678 [+0.408, +3.012]pp
+seed666 vs 666_new_only, lp2600: +1.663 [+0.406, +2.960]pp
+seed666 vs 666_previous_replay, clean_full: +0.298 [+0.004, +0.589]pp
+seed666 vs 666_previous_replay, clean_subset: +0.399 [-0.181, +1.037]pp
+seed666 vs 666_previous_replay, noise10: +0.317 [-0.642, +1.292]pp
+seed666 vs 666_previous_replay, noise0: -0.518 [-1.387, +0.296]pp
+seed666 vs 666_previous_replay, pink10: +1.055 [+0.149, +2.078]pp
+seed666 vs 666_previous_replay, lp2600: +0.736 [-0.113, +1.633]pp
+seed667 vs original, clean_full: -0.200 [-0.850, +0.420]pp
+seed667 vs original, clean_subset: -0.270 [-1.797, +1.228]pp
+seed667 vs original, noise10: +10.165 [+7.277, +13.276]pp
+seed667 vs original, noise0: +12.408 [+9.926, +14.990]pp
+seed667 vs original, pink10: +3.573 [+0.831, +6.469]pp
+seed667 vs original, lp2600: +4.128 [+2.284, +5.918]pp
+seed667 vs 667_new_only, clean_full: +1.393 [+0.974, +1.819]pp
+seed667 vs 667_new_only, clean_subset: +2.099 [+0.965, +3.318]pp
+seed667 vs 667_new_only, noise10: -0.256 [-1.652, +1.162]pp
+seed667 vs 667_new_only, noise0: -1.110 [-2.350, +0.117]pp
+seed667 vs 667_new_only, pink10: +1.169 [-0.052, +2.429]pp
+seed667 vs 667_new_only, lp2600: +1.447 [+0.197, +2.649]pp
+seed667 vs 667_previous_replay, clean_full: +0.599 [+0.308, +0.889]pp
+seed667 vs 667_previous_replay, clean_subset: +0.788 [+0.229, +1.427]pp
+seed667 vs 667_previous_replay, noise10: +0.311 [-0.539, +1.107]pp
+seed667 vs 667_previous_replay, noise0: -0.369 [-1.186, +0.458]pp
+seed667 vs 667_previous_replay, pink10: +0.691 [-0.168, +1.642]pp
+seed667 vs 667_previous_replay, lp2600: +0.657 [-0.064, +1.465]pp
+
+核验：
+{
+  "original_checkpoint_unchanged": true,
+  "all_backends_start_identical": true,
+  "all_updates_128": true,
+  "thresholds_never_recalibrated": true,
+  "source_full2484_reproduced_within_original_tolerance": false,
+  "source_full2484_threshold_decisions_identical": false,
+  "source_reproduction": {
+    "recordings": 2484,
+    "max_archive_score_difference": 0.00067901611328125,
+    "changed_frame_decisions": 1,
+    "compared_frames": 434150,
+    "original_tolerance_pass": false,
+    "amendment": "Report full observed discrepancy and decision changes; numerical ceiling0.001. No training or threshold changes.",
+    "exact_float64_decision_changes": 1
+  },
+  "native20_frame_and_event_counts_verified": true,
+  "all_prediction_uids_match": true,
+  "all_frozen_checkpoint_hashes_match": true,
+  "formal_test_accessed": false
+}
+原归档分数存在已知微小数值差异；本轮预定最大容差0.001，准确判定差异见核验，不声称逐位复现。
+原权重未修改；全部模型与阈值在评估前冻结。
+复现：使用D:/SAL_精简实验/code/.venv/Scripts/python.exe运行run.py，完成后运行report.py。

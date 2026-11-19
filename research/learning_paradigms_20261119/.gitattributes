@@ -1,0 +1,4 @@
+* text eol=lf
+# Historical byte hashes must survive checkout on Windows and Linux.
+experiments/** -text
+experiments/**/results/**/*.npz -diff -text

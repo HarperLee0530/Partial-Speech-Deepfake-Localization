@@ -1,0 +1,182 @@
+{
+  "666_mel_control": {
+    "checkpoint_sha256": "89594051e43c75ec7c253f463b651f87d274d077631cabf17c908ff313a00772",
+    "threshold": 3.6729266643524174,
+    "threshold_source": "666_mel_control",
+    "kind": "mel"
+  },
+  "666_selftraining_reference": {
+    "checkpoint_sha256": "f1b1dceee1910c20e8b53d72b5a88ff95773f463bc3c3c2a6355b8a816b9ec72",
+    "threshold": 3.6759312152862553,
+    "threshold_source": "666_selftraining_reference",
+    "kind": "mel"
+  },
+  "666_multitask": {
+    "checkpoint_sha256": "8d3743d9332793c03eaa89f97ab8c57e4124eb58fcd6074de6dfb693d17dc249",
+    "threshold": 3.707281827926636,
+    "threshold_source": "666_multitask",
+    "kind": "boundary"
+  },
+  "666_wavlm_control": {
+    "checkpoint_sha256": "286885e409c0de79d911366394897faf477cf7e6e41270fba3ab30bed34d52f1",
+    "threshold": 3.692634820938111,
+    "threshold_source": "666_wavlm_control",
+    "kind": "wav"
+  },
+  "666_cotraining_mel": {
+    "checkpoint_sha256": "113b00a2d66b98cbb7bac2221621793db4a56fa935e40d17db332cadb8f4b556",
+    "threshold": 3.6498296260833745,
+    "threshold_source": "666_cotraining_mel",
+    "kind": "mel"
+  },
+  "666_cotraining_wavlm": {
+    "checkpoint_sha256": "34b49c7bedfa6c796b1360f8da3ccbf2fe862035d8aa162eb64a2fc0c94f5dc2",
+    "threshold": 4.2116785049438485,
+    "threshold_source": "666_cotraining_wavlm",
+    "kind": "wav"
+  },
+  "666_coral": {
+    "checkpoint_sha256": "1b69d76a87d8384585bbcdad8962e52a80160eab800e3c8011a2ee03369be65d",
+    "threshold": 3.3385062217712407,
+    "threshold_source": "666_coral",
+    "kind": "mel"
+  },
+  "666_continual_source": {
+    "checkpoint_sha256": "2e58846e0a95e4e24cb4584f48a6a9ac5958aa2d91426d10db19c41eff645173",
+    "threshold": 2.8206789493560795,
+    "threshold_source": "666_continual_source",
+    "kind": "mel"
+  },
+  "666_continual_naive": {
+    "checkpoint_sha256": "013459d5eede729754f98348eb5fe6f460602ac6403a7ab207217f74fdd765db",
+    "threshold": 2.8206789493560795,
+    "threshold_source": "666_continual_source",
+    "kind": "mel"
+  },
+  "666_continual_ewc": {
+    "checkpoint_sha256": "9146145b2ffc512793e20d81bce69b4e56071ee55b7d3f56a171f48865c71a3f",
+    "threshold": 2.8206789493560795,
+    "threshold_source": "666_continual_source",
+    "kind": "mel"
+  },
+  "666_continual_replay": {
+    "checkpoint_sha256": "aa59e9a0809b8c413b4466fa8d5b680cb587e71379de34a832cd4391344a9610",
+    "threshold": 2.8206789493560795,
+    "threshold_source": "666_continual_source",
+    "kind": "mel"
+  },
+  "666_meta_erm": {
+    "checkpoint_sha256": "9a5bd21d834207db6cdddc22b7145491e10c3b035687198a8c3001bea601d085",
+    "threshold": 1.3131906986236574,
+    "threshold_source": "666_meta_erm",
+    "kind": "meta"
+  },
+  "666_meta_fomaml": {
+    "checkpoint_sha256": "0ffff0375fd29f74ec627ed0a80b7d60a33a91105043e5ebb93ed4f57f8b76dc",
+    "threshold": 0.954225778579712,
+    "threshold_source": "666_meta_fomaml",
+    "kind": "meta"
+  },
+  "666_meta_erm_adapt": {
+    "checkpoint_sha256": "5934e260a378c7c0de81a7da069fb33ca6543fa9eb6205b1db6e2bc953145630",
+    "threshold": 1.3131906986236574,
+    "threshold_source": "666_meta_erm",
+    "kind": "meta"
+  },
+  "666_meta_fomaml_adapt": {
+    "checkpoint_sha256": "55b43fcf994a63d621cb31a8375592c59085008248434aee33250daf599854aa",
+    "threshold": 0.954225778579712,
+    "threshold_source": "666_meta_fomaml",
+    "kind": "meta"
+  },
+  "667_mel_control": {
+    "checkpoint_sha256": "acf06e0da732fd22ee78ce1ce119883203724944df18a97c743a63ca7f58bc5a",
+    "threshold": 2.840657711029053,
+    "threshold_source": "667_mel_control",
+    "kind": "mel"
+  },
+  "667_selftraining_reference": {
+    "checkpoint_sha256": "cce3ec646e318c07d5408de9863118bf6d1ab5723b11cad1c5489c89ad15c758",
+    "threshold": 2.96277666091919,
+    "threshold_source": "667_selftraining_reference",
+    "kind": "mel"
+  },
+  "667_multitask": {
+    "checkpoint_sha256": "5bea7a8cbdaa77bdaff6eb7f9ffcfa050b06ec2556f5feea43a2f4363d775b77",
+    "threshold": 3.018093347549439,
+    "threshold_source": "667_multitask",
+    "kind": "boundary"
+  },
+  "667_wavlm_control": {
+    "checkpoint_sha256": "f7e73e85cc8a9716c3c92333965137bfa462b2092ec4adf6e6ebe35388a601bc",
+    "threshold": 4.412948608398438,
+    "threshold_source": "667_wavlm_control",
+    "kind": "wav"
+  },
+  "667_cotraining_mel": {
+    "checkpoint_sha256": "c8e6d18f59609b6a01f5fb13aa0d1fbe40be83865ca6592d096bbabe713cd2d0",
+    "threshold": 3.035561084747315,
+    "threshold_source": "667_cotraining_mel",
+    "kind": "mel"
+  },
+  "667_cotraining_wavlm": {
+    "checkpoint_sha256": "080e022890d080a891915bdb7ce318958f245774391e166d59371a4f822b8bed",
+    "threshold": 5.122626304626466,
+    "threshold_source": "667_cotraining_wavlm",
+    "kind": "wav"
+  },
+  "667_coral": {
+    "checkpoint_sha256": "1f3a6370758ab7dc2971dd199e062ff94b4edb715a720073901836016d90f560",
+    "threshold": 2.6728396415710454,
+    "threshold_source": "667_coral",
+    "kind": "mel"
+  },
+  "667_continual_source": {
+    "checkpoint_sha256": "21b48f254c3bfeebea1220047a369fd8968b5ae1465ec0d6b429d1a8eff494fa",
+    "threshold": 1.3587244749069216,
+    "threshold_source": "667_continual_source",
+    "kind": "mel"
+  },
+  "667_continual_naive": {
+    "checkpoint_sha256": "9fa38cc723056e0b57f3e7f5a6eab9ebf603ad31f563f0135e4fdd6ef0fcd9be",
+    "threshold": 1.3587244749069216,
+    "threshold_source": "667_continual_source",
+    "kind": "mel"
+  },
+  "667_continual_ewc": {
+    "checkpoint_sha256": "f13e5c6b9d971219b184a44cb660d169eebf403613eb75afe70f61b6cab3b719",
+    "threshold": 1.3587244749069216,
+    "threshold_source": "667_continual_source",
+    "kind": "mel"
+  },
+  "667_continual_replay": {
+    "checkpoint_sha256": "067ac0649ba6f2c2fca9b2c4122b3789f3b04c7841b1f5b8536eb7f970a0e08d",
+    "threshold": 1.3587244749069216,
+    "threshold_source": "667_continual_source",
+    "kind": "mel"
+  },
+  "667_meta_erm": {
+    "checkpoint_sha256": "b1c59f734f4047048f3970ad746dedfe25e6bd53780402f7bfa0cccd99b979c9",
+    "threshold": 1.90031635761261,
+    "threshold_source": "667_meta_erm",
+    "kind": "meta"
+  },
+  "667_meta_fomaml": {
+    "checkpoint_sha256": "72bf1cd985f960fccd25594ba8f3a5b0be7128387fc240562a645ceb7e09de76",
+    "threshold": 1.6242806911468508,
+    "threshold_source": "667_meta_fomaml",
+    "kind": "meta"
+  },
+  "667_meta_erm_adapt": {
+    "checkpoint_sha256": "0500a8cb9f1e74eadb19695520111779920edc73281801fad5bfcec0002043d2",
+    "threshold": 1.90031635761261,
+    "threshold_source": "667_meta_erm",
+    "kind": "meta"
+  },
+  "667_meta_fomaml_adapt": {
+    "checkpoint_sha256": "445db6fe9b89a517b9986d61a5e5e2ef415ed353df72eb55df50f69a4fd06c04",
+    "threshold": 1.6242806911468508,
+    "threshold_source": "667_meta_fomaml",
+    "kind": "meta"
+  }
+}

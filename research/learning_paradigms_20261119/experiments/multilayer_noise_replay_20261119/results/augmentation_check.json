@@ -1,0 +1,32 @@
+{
+  "noise15": {
+    "measured_snr_db": 14.999999995366046,
+    "same_length": true,
+    "finite": true,
+    "deterministic": true
+  },
+  "noise5": {
+    "measured_snr_db": 5.000000003470809,
+    "same_length": true,
+    "finite": true,
+    "deterministic": true
+  },
+  "noise10": {
+    "measured_snr_db": 9.999999992848686,
+    "same_length": true,
+    "finite": true,
+    "deterministic": true
+  },
+  "noise0": {
+    "measured_snr_db": 3.2164284383529067e-09,
+    "same_length": true,
+    "finite": true,
+    "deterministic": true
+  },
+  "pink10": {
+    "measured_snr_db": 10.000000002723297,
+    "same_length": true,
+    "finite": true,
+    "deterministic": true
+  }
+}

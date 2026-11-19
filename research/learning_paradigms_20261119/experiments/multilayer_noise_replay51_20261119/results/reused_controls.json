@@ -1,0 +1,342 @@
+{
+  "files": [
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\clean_full_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\clean_full_metrics.json",
+      "sha256": "5bdaa69fc0cc8d19c907557c4b96070c99fbaa28fe481be986bf91ebe898f8b0"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\clean_full_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\clean_full_scores.npz",
+      "sha256": "0c986d322052211dea8755906689ee459e79930da4913ee23a7fe310769effcb"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\clean_subset_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\clean_subset_metrics.json",
+      "sha256": "0543d317e07963e1d1c387b076bc60e48bccfc267803ce65f72b5f05c15e2b59"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\lp2600_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\lp2600_metrics.json",
+      "sha256": "c5fb7821122862f4da3ddfff11ca5b55be2c7c4e4380db8158e97ac34c3c95ab"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\lp2600_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\lp2600_scores.npz",
+      "sha256": "42cce2b4fbf46f2e9ac67fd660a11f6661c3f4d138c1471a5a79be93cd5ee7d0"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\noise0_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\noise0_metrics.json",
+      "sha256": "b2824486b877674a4481bc72308baafc7070c1f40dec605666f545a1c1fba7bb"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\noise0_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\noise0_scores.npz",
+      "sha256": "aa3b0fd455922793af42674aa911f29c2d914cd755e20c36cc8d3784caffcee1"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\noise10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\noise10_metrics.json",
+      "sha256": "0c6130d4da47d81e6e6ff473977a64cda2fb74f9ce1779726921db8b4900eb6c"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\noise10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\noise10_scores.npz",
+      "sha256": "73290980d8386efaea45bce59838a2a8ba397952f34599c908bc9403d9486667"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\pink10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\pink10_metrics.json",
+      "sha256": "0e15270a9a1bf4cbdb503ba80c5071cc501f5bde8f323f7cb28e80ee7d3e26e4"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_old_only\\pink10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_old_only\\pink10_scores.npz",
+      "sha256": "d2b4e517fb9de0c8d1fa879797531b78473cbfe9deee8ae7b35bf0ac62e09b7f"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\clean_full_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\clean_full_metrics.json",
+      "sha256": "e8033a83ce188ed7516279bc27de860d3e3243f672af28663e820f7c3458810b"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\clean_full_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\clean_full_scores.npz",
+      "sha256": "b95f5d7e498a26ccf7f22e3a004c3ebbbabbf4742fca588944c69a323cc30e8e"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\clean_subset_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\clean_subset_metrics.json",
+      "sha256": "49d1d5b66a202720eeb2d7118585c5453fccf492e3301e309b97d1c5db133ba5"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\lp2600_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\lp2600_metrics.json",
+      "sha256": "1e9f36fedba93d4264a2401b99c983fa1a1517fc0c8333228500335e16c269f0"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\lp2600_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\lp2600_scores.npz",
+      "sha256": "4eb87b929eace9c2dc317d0e2b594fd23cb8fdaf59a7c605df59b955c9b93b71"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\noise0_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\noise0_metrics.json",
+      "sha256": "bd655812b4912ed4798e8771faf6d49f25872e72dd5ae37c03cc18fb0db92b20"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\noise0_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\noise0_scores.npz",
+      "sha256": "cce0c9ff357a38f5645a3d5dbaf52e67b2bff4f69158c654a6eefedc82335d3c"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\noise10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\noise10_metrics.json",
+      "sha256": "822dc25abd010f7447666cc76c912d3a09ab77cff0fb0c90094223b2afefc590"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\noise10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\noise10_scores.npz",
+      "sha256": "1541f18ed41e73f74d4ac89cb0670c8b20aa4e2b2a35cfcf89f54bec6c2803d5"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\pink10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\pink10_metrics.json",
+      "sha256": "b04c7ba49cdf7ad74d2359ac9c42e94d77b37dd400080faa37c4503970543445"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_new_only\\pink10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_new_only\\pink10_scores.npz",
+      "sha256": "e93ecf90ddf4024fa667502dda9463efb984d056e49373c30208166f7a371f64"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\clean_full_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\clean_full_metrics.json",
+      "sha256": "dde2177b313ee4807e79e4aae8fb9f4d927de76fce43e15b8b0ff6c70874a35f"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\clean_full_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\clean_full_scores.npz",
+      "sha256": "0912efe7c144402d28170ca457f53473e77fdcdfa6277a61ea386830f41e01e8"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\clean_subset_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\clean_subset_metrics.json",
+      "sha256": "29c0fc619ff09d9b5a20d982da2b913f5335c6122f1009e987fc75680d309652"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\lp2600_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\lp2600_metrics.json",
+      "sha256": "c7e7225b83c1d5d64eac40db58281bc09724b235553b2d9a4b2285027a5e764d"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\lp2600_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\lp2600_scores.npz",
+      "sha256": "224087b0d756cc9fcee46ea62c8878622dc6537fca85a7973dde236f72d4fac2"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\noise0_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\noise0_metrics.json",
+      "sha256": "f88f23defc466f4ae9f08d81a479743629c6904d70db0611ffcf1b094ffe559d"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\noise0_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\noise0_scores.npz",
+      "sha256": "5b1d413f9cee4ae9bf4650b9bf3934ece14eb770862268c6eb45b964d584db0f"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\noise10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\noise10_metrics.json",
+      "sha256": "16473fae61294f234875c2692e045a07f32363cd437df4176e02066e1dd5e41e"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\noise10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\noise10_scores.npz",
+      "sha256": "265d90d07a725777ced776e61e2553b1681f1c1ec88ca603ca6b61621ece9e6f"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\pink10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\pink10_metrics.json",
+      "sha256": "31d1f07bcaa936ceb71951c403cef18ee745e758e255be5fd6c637c4388bb765"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\666_replay\\pink10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\666_previous_replay\\pink10_scores.npz",
+      "sha256": "8e511e60fa9f81b185a3cf3f0cf2efdbb815219b46838803702e48b817289981"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\clean_full_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\clean_full_metrics.json",
+      "sha256": "25352930308489c4d533b79d23e24a5990da828eb29b5842e70d1e192fb2539f"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\clean_full_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\clean_full_scores.npz",
+      "sha256": "6130677ef1baa02a5bb4f8d538e0750bfc3cc13bd70ad8d256cfd469b5525d7d"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\clean_subset_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\clean_subset_metrics.json",
+      "sha256": "94073ff7c0d5beaa85929d6f0a1cb2885dba8554a0ba5c26f1c88583ee2fea13"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\lp2600_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\lp2600_metrics.json",
+      "sha256": "c428261553bbda88518cec4488978cc567532670367bfac795a59c5d5bae6783"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\lp2600_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\lp2600_scores.npz",
+      "sha256": "fd0dec803fbb6f1a644709205bb863557b4ce8a40ce5d2c88256ec3e23b4df55"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\noise0_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\noise0_metrics.json",
+      "sha256": "809e94cdef61e4e370c3366552f14a86d9d25eef07479e88af49de3ab82b106f"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\noise0_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\noise0_scores.npz",
+      "sha256": "2902e285ae745b5167853d77cc991bdea812284714ed9d7db53e8fb65b54cd75"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\noise10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\noise10_metrics.json",
+      "sha256": "800128fcafd3bedd88dc570505ab6693e2c67415e6d8f9eb347a9f0a6173a433"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\noise10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\noise10_scores.npz",
+      "sha256": "4105b8d0939107a2d65c66cd48535abc05deda5c767a86566f9c789485440d2d"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\pink10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\pink10_metrics.json",
+      "sha256": "3724acfed531a262cb14969626057bc6aa44df3e99bceeea076ffab4d5e92032"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_old_only\\pink10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_old_only\\pink10_scores.npz",
+      "sha256": "cb7e5be0d64072d68f69b96b52181087f6c0ad9dabfcba72db56414a21f5e98c"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\clean_full_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\clean_full_metrics.json",
+      "sha256": "08966401bf4500bacb32aef96045d5b2feee0e4d6615da5b3f861ca8f7315399"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\clean_full_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\clean_full_scores.npz",
+      "sha256": "65b12a7c49886fd6bbabd1068e3713c92a462ba7516d03e57926327c358f7b55"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\clean_subset_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\clean_subset_metrics.json",
+      "sha256": "803a0c06f5fabc0e197f705fc932bf0d970d54d4238add4560010a61a5747f53"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\lp2600_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\lp2600_metrics.json",
+      "sha256": "2977d3bb42699e63a2ea6cea33d3c390b10d68d6a898ce513583f597fb11e506"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\lp2600_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\lp2600_scores.npz",
+      "sha256": "b6c34784631afff2c3f7696a0db832ad73e08ddf639003d9cf7881c433f1279d"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\noise0_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\noise0_metrics.json",
+      "sha256": "946822f453ac62d52bd43bc2aee59d3fbc051fa438554f66a7dc1fb07c15a219"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\noise0_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\noise0_scores.npz",
+      "sha256": "3dce5dbeea21c43c4a00402054a87bb5a560c71ab45cb91732d55f08e59584be"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\noise10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\noise10_metrics.json",
+      "sha256": "fd10b57ccbf5241fe26bbec0722178b3402f7fd2fca3ded0ca0d3cc9ab806531"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\noise10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\noise10_scores.npz",
+      "sha256": "89f6c7e8ebbaa2cc1da4076acfaf035f2622d5abc84cfc95325857892ae24129"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\pink10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\pink10_metrics.json",
+      "sha256": "23029dea4db1c013f5a4ad346300e0bc1cc6dc03bf41d53a6debaf7259a454bd"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_new_only\\pink10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_new_only\\pink10_scores.npz",
+      "sha256": "543f04cd27d6fc932270c9a991285e22d25852b0ddf61f47bd51d7d6b7eb56e9"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\clean_full_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\clean_full_metrics.json",
+      "sha256": "9e93598bde003684983015b31702369c992e1740d83b0afd14962ff7b746fce2"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\clean_full_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\clean_full_scores.npz",
+      "sha256": "9ab3ba483490b0fab94b2fe5d9bb09d4fc879b975e6c18be0a198d800ce930bc"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\clean_subset_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\clean_subset_metrics.json",
+      "sha256": "ca6d55d4134d70830d0a2b6b89606cf679c95e117ca5d63dfcfd76dbd3902bf2"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\lp2600_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\lp2600_metrics.json",
+      "sha256": "cddb646c613db4fcde0e6be2a82b8af683336ba551c7f300718a3d2f91366df8"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\lp2600_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\lp2600_scores.npz",
+      "sha256": "970d7736adc8e86399072a8162d9babd36c8a23de00ddef08b988d1197afe18a"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\noise0_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\noise0_metrics.json",
+      "sha256": "4e99940268313535a0eba12cb8fbbff9421842561b8494c8de5b3bf759870af3"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\noise0_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\noise0_scores.npz",
+      "sha256": "b57052d20a44023e2019d11cda08ce4946ad480b1524b021017064557b7f50e5"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\noise10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\noise10_metrics.json",
+      "sha256": "73641e4c584c08a5764fcbca2bf97e9b17cca37303f5054898e4a8af686be191"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\noise10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\noise10_scores.npz",
+      "sha256": "b8b6e38fa80cc00dd1a645a7f8ffbb368df437ab200f94ec78922c9a704c9931"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\pink10_metrics.json",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\pink10_metrics.json",
+      "sha256": "c78da06d0df79bfde301b78ca32a65dec1821d247dfba2ae6d5b743414cee9c6"
+    },
+    {
+      "source": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay31_20261119\\results\\evaluation\\667_replay\\pink10_scores.npz",
+      "destination": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_noise_replay51_20261119\\results\\evaluation\\667_previous_replay\\pink10_scores.npz",
+      "sha256": "9f552e6811e65f09b71c27c81831b9d5e5ac67caafb8fa9cfcab5acf68d15f2d"
+    }
+  ],
+  "fresh_original_max_difference": {
+    "clean_full": 0.0,
+    "noise10": 0.0,
+    "noise0": 0.0,
+    "pink10": 0.0,
+    "lp2600": 0.0
+  },
+  "previous_plan_sha256": "92ad27712a619c37d995cdbfb9f58101c884a8772552af403544fd3d87e9a67b"
+}

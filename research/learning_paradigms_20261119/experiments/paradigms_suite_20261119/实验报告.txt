@@ -1,0 +1,166 @@
+﻿其他学习范式：六类方法小型筛选 — 2026-11-19
+
+本轮覆盖课件的迁移学习、多任务学习、协同训练、领域适应、持续学习与元学习；领域适应属于迁移学习子类。
+每个方案均运行两个随机种子666/667，固定最终训练轮次，不按留出结果挑选模型。
+384条标注训练、768条隐藏标签训练、256条校准开发、384条留出开发。元学习另外使用32条独立训练录音的标签作目标任务支持集。
+本轮校准/留出UID均与前一轮半监督实验的640条开发UID互斥，但整个官方开发集在历史项目中用过。
+正式eval和LPS未读取，原模型不替换。仅UID互斥，没有证明说话人或源录音独立。
+
+评价条件：
+clean=原音频；band=6阶Butterworth因果3.4kHz低通，采样率和时长不变。未补偿滤波群延迟。
+band是人工构造的通道变化，不代表新伪造算法或新真实数据集。
+迁移、多任务、协同组没有在下游训练中见过band。CORAL用band未标注训练音频；持续学习用384条band标签；元学习适应用32条band标签。
+这些目标域信息权限不同，不能把全部方法当成同一公平排行榜。
+通用WavLM的预训练包含额外数据和参数；与Log-Mel的差异属于系统级比较，不是单因素预训练消融。
+
+方法和对照：
+迁移：冻结通用WavLM + 768到80维可学习投影 + 原CNN-BiGRU。教师20轮、后续4轮，与CNN监督训练预算对应。
+多任务：复用CNN教师20轮，追加4轮真假监督+0.1边界辅助损失，边界正类权重10。推理不使用辅助边界头修正结果。
+协同：Mel/WavLM两个教师共同筛选高置信度一致伪标签，再分别训练两个学生4轮；独立视角假设未证明，只称协同训练启发方案。
+域适应：原监督损失+100倍Deep CORAL协方差对齐，额外输入clean源特征和band未标注目标特征。
+持续学习：相同CNN源模型，追加4轮band训练；直接微调、EWC(lambda1000，64条旧录音估计Fisher)、回放(目标/clean损失各半)。
+EWC以每条clean旧录音的20ms+160ms监督损失梯度平方平均，作为经验Fisher近似；没有搜索正则强度。
+元学习：另外一对完全相同WavLM小型逐帧MLP。ERM与一阶MAML各200个任务episode，任务为clean/noise/EQ；支持8条、查询8条且互斥。
+一阶MAML一步内循环SGD0.01，外循环AdamW0.001；不是二阶MAML。两组随后均用相同32条band支持数据做5步SGD0.01适应。
+持续学习全部沿用源模型clean阈值；元学习适应后沿用各自适应前clean阈值；其余方法各自在clean校准。band上不重调阈值。
+适应前后可能出现误报变化，必须与F1一起解释。回放、协同、CORAL有额外前向计算，未声称严格等算力。
+
+两个种子的均值（%）：
+方法 | 条件 | 帧F1 | 事件F1 | 真实时长误报率 | <=320ms短事件召回 | EER
+CNN纯监督 | clean | 83.55 | 49.22 | 4.87 | 29.25 | 12.24
+CNN纯监督 | band | 66.48 | 29.46 | 54.31 | 11.56 | 31.36
+此前自训练 | clean | 83.21 | 48.54 | 4.68 | 28.86 | 12.56
+此前自训练 | band | 68.02 | 30.77 | 43.61 | 12.90 | 30.51
+多任务边界监督 | clean | 83.45 | 48.91 | 4.81 | 28.61 | 12.31
+多任务边界监督 | band | 66.36 | 28.99 | 55.18 | 11.24 | 31.46
+WavLM迁移 | clean | 78.12 | 54.01 | 4.56 | 52.81 | 15.00
+WavLM迁移 | band | 80.31 | 54.53 | 7.71 | 51.60 | 14.85
+协同训练-Mel | clean | 83.42 | 49.50 | 4.78 | 29.05 | 12.42
+协同训练-Mel | band | 66.76 | 29.62 | 53.01 | 11.49 | 30.99
+协同训练-WavLM | clean | 78.45 | 53.08 | 4.19 | 48.34 | 14.29
+协同训练-WavLM | band | 80.41 | 53.19 | 6.88 | 47.89 | 14.45
+CORAL域适应 | clean | 82.49 | 46.99 | 4.83 | 30.08 | 12.61
+CORAL域适应 | band | 67.27 | 35.46 | 32.83 | 19.41 | 30.98
+持续学习-源模型 | clean | 80.20 | 45.52 | 4.57 | 28.74 | 14.29
+持续学习-源模型 | band | 68.16 | 31.20 | 25.94 | 15.64 | 28.98
+持续学习-直接微调 | clean | 81.65 | 45.89 | 17.40 | 32.89 | 15.96
+持续学习-直接微调 | band | 72.09 | 38.98 | 16.26 | 26.76 | 21.68
+持续学习-EWC | clean | 81.40 | 46.13 | 11.92 | 34.93 | 14.96
+持续学习-EWC | band | 70.14 | 38.22 | 14.95 | 25.80 | 22.52
+持续学习-回放 | clean | 83.98 | 51.14 | 7.06 | 34.99 | 12.03
+持续学习-回放 | band | 71.68 | 39.07 | 14.63 | 26.76 | 21.90
+元学习对照ERM | clean | 53.61 | 20.67 | 4.16 | 44.96 | 25.87
+元学习对照ERM | band | 57.75 | 19.56 | 5.55 | 46.36 | 25.55
+一阶MAML | clean | 51.17 | 21.23 | 3.97 | 42.72 | 27.56
+一阶MAML | band | 54.29 | 20.20 | 4.79 | 44.06 | 26.81
+ERM适应后 | clean | 50.28 | 20.57 | 3.19 | 42.15 | 25.79
+ERM适应后 | band | 54.40 | 19.40 | 4.20 | 43.55 | 25.37
+一阶MAML适应后 | clean | 50.18 | 20.70 | 3.64 | 41.19 | 27.55
+一阶MAML适应后 | band | 53.42 | 19.62 | 4.41 | 41.89 | 26.73
+
+预定配对比较：以下为各种子的事件F1变化及配对录音bootstrap95%区间，单位百分点。
+此前自训练 相对 CNN纯监督
+  seed666 clean: -0.11 [-1.06, +0.87]
+  seed666 band: +0.98 [-0.02, +2.03]
+  seed667 clean: -1.24 [-2.57, +0.11]
+  seed667 band: +1.63 [-0.40, +3.82]
+多任务边界监督 相对 CNN纯监督
+  seed666 clean: -0.41 [-1.03, +0.23]
+  seed666 band: +0.01 [-0.75, +0.80]
+  seed667 clean: -0.20 [-1.13, +0.63]
+  seed667 band: -0.95 [-1.72, -0.15]
+WavLM迁移 相对 CNN纯监督
+  seed666 clean: +11.14 [+7.48, +14.66]
+  seed666 band: +27.25 [+23.81, +30.79]
+  seed667 clean: -1.55 [-5.13, +2.13]
+  seed667 band: +22.88 [+19.02, +26.66]
+协同训练-Mel 相对 CNN纯监督
+  seed666 clean: +0.56 [-0.21, +1.38]
+  seed666 band: +0.85 [-0.09, +1.82]
+  seed667 clean: +0.00 [-1.19, +1.16]
+  seed667 band: -0.55 [-1.78, +0.56]
+协同训练-WavLM 相对 WavLM迁移
+  seed666 clean: +0.55 [-1.10, +2.40]
+  seed666 band: -0.60 [-2.16, +1.03]
+  seed667 clean: -2.41 [-4.04, -0.84]
+  seed667 band: -2.09 [-3.45, -0.82]
+CORAL域适应 相对 CNN纯监督
+  seed666 clean: -2.51 [-3.78, -1.12]
+  seed666 band: +3.25 [+1.11, +5.40]
+  seed667 clean: -1.94 [-3.34, -0.52]
+  seed667 band: +8.73 [+5.36, +11.99]
+持续学习-直接微调 相对 持续学习-源模型
+  seed666 clean: +2.44 [+0.02, +5.07]
+  seed666 band: +4.47 [+1.80, +7.09]
+  seed667 clean: -1.70 [-4.52, +0.93]
+  seed667 band: +11.08 [+8.64, +13.46]
+持续学习-EWC 相对 持续学习-直接微调
+  seed666 clean: -1.04 [-3.07, +0.89]
+  seed666 band: -1.00 [-2.66, +0.61]
+  seed667 clean: +1.51 [-0.46, +3.18]
+  seed667 band: -0.51 [-2.34, +1.27]
+持续学习-回放 相对 持续学习-直接微调
+  seed666 clean: +3.26 [+0.97, +5.52]
+  seed666 band: +0.46 [-0.93, +1.85]
+  seed667 clean: +7.23 [+4.80, +9.67]
+  seed667 band: -0.27 [-1.86, +1.47]
+一阶MAML 相对 元学习对照ERM
+  seed666 clean: +1.87 [+0.84, +2.99]
+  seed666 band: +2.15 [+1.09, +3.26]
+  seed667 clean: -0.74 [-1.75, +0.22]
+  seed667 band: -0.88 [-1.84, +0.06]
+ERM适应后 相对 元学习对照ERM
+  seed666 clean: +0.02 [-0.58, +0.64]
+  seed666 band: +0.04 [-0.48, +0.53]
+  seed667 clean: -0.21 [-1.13, +0.70]
+  seed667 band: -0.36 [-1.26, +0.56]
+一阶MAML适应后 相对 一阶MAML
+  seed666 clean: -0.88 [-1.43, -0.37]
+  seed666 band: -1.29 [-1.86, -0.76]
+  seed667 clean: -0.19 [-0.94, +0.53]
+  seed667 band: +0.13 [-0.56, +0.81]
+一阶MAML适应后 相对 ERM适应后
+  seed666 clean: +0.97 [-0.05, +2.07]
+  seed666 band: +0.82 [-0.21, +1.91]
+  seed667 clean: -0.72 [-1.69, +0.18]
+  seed667 band: -0.39 [-1.36, +0.58]
+
+协同伪标签事后诊断（不反馈到训练）：
+{
+  "666": {
+    "selected_seconds": 1011.389232577756,
+    "selected_duration_accuracy_percent": 98.38218649111509,
+    "real_precision_percent": 98.04496098503412,
+    "fake_precision_percent": 98.63856540479475,
+    "diagnostic_only_after_training": true
+  },
+  "667": {
+    "selected_seconds": 1149.664403341245,
+    "selected_duration_accuracy_percent": 99.41030998644815,
+    "real_precision_percent": 99.23858646943609,
+    "fake_precision_percent": 99.6057903717941,
+    "diagnostic_only_after_training": true
+  }
+}
+
+解释边界：
+这是多个方法的探索性筛选；未做多重比较校正，不能据某一个正向置信区间宣称方法已被证明。
+两个种子不包含充分的训练随机性估计；bootstrap仅对固定模型按录音重采样，未处理同源依赖。
+持续学习只测合成通道的旧任务保持，元学习仅有三个人工任务条件；两者均不是完整真实任务分布的验证。
+一个固定超参数配方失败不能否定整个学习范式。
+
+核验：
+{"all_checkpoints_match_frozen": true, "all_thresholds_match_declared_sources": true, "audit_uids_aligned": true, "metrics_recomputed_from_recording_counts": true, "finite_scores": true, "formal_test_accessed": false, "original_weights_unchanged": true, "mel_and_wavlm_cache_integrity": true, "band_cache_integrity": true, "boundary_padding_gradients": true, "batch_single_inference_consistency": true, "fisher_gradients_valid": true, "meta_initializations_and_update_counts_matched": true}
+
+文件：results/summary.csv为全部种子结果；means.json为均值；paired_comparisons.json为完整配对区间。
+results/plan.json记录先验协议与源文件hash；frozen_thresholds.json记录模型hash和阈值来源。
+每个seed目录保留模型、损失记录、逐录音指标和预测。原始输入缓存只读。
+
+复现：使用D:/SAL_精简实验/code/.venv/Scripts/python.exe运行suite.py，再运行report.py。
+代码依赖本机只读Log-Mel/WavLM缓存和上一轮warm20权重；并非无依赖的独立发布包。
+
+扩展方法原始文献：
+https://arxiv.org/abs/1703.03400
+https://pmc.ncbi.nlm.nih.gov/articles/PMC5380101/
+https://arxiv.org/abs/1607.01719
+https://arxiv.org/abs/2110.13900

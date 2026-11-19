@@ -1,0 +1,21 @@
+{
+  "original_checkpoint_unchanged": true,
+  "all_backends_start_identical": true,
+  "all_updates_128": true,
+  "thresholds_never_recalibrated": true,
+  "source_full2484_reproduced_within_original_tolerance": false,
+  "source_full2484_threshold_decisions_identical": false,
+  "source_reproduction": {
+    "recordings": 2484,
+    "max_archive_score_difference": 0.00067901611328125,
+    "changed_frame_decisions": 1,
+    "compared_frames": 434150,
+    "original_tolerance_pass": false,
+    "amendment": "Report full observed discrepancy and decision changes; numerical ceiling0.001. No training or threshold changes.",
+    "exact_float64_decision_changes": 1
+  },
+  "native20_frame_and_event_counts_verified": true,
+  "all_prediction_uids_match": true,
+  "all_frozen_checkpoint_hashes_match": true,
+  "formal_test_accessed": false
+}

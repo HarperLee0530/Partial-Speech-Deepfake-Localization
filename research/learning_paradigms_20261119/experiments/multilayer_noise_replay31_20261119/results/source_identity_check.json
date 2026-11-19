@@ -1,0 +1,13 @@
+{
+  "recordings": 8,
+  "max_archive_score_difference": 8.20159912109375e-05,
+  "batch_single_difference": 1.52587890625e-05,
+  "source_weights_verified": true,
+  "full_original_architecture_loaded": true,
+  "threshold": -0.17905920743942258,
+  "layer_weights": [
+    0.7043034434318542,
+    0.14928434789180756,
+    0.1464122235774994
+  ]
+}

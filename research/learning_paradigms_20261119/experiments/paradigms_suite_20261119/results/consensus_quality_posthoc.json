@@ -1,0 +1,16 @@
+{
+  "666": {
+    "selected_seconds": 1011.389232577756,
+    "selected_duration_accuracy_percent": 98.38218649111509,
+    "real_precision_percent": 98.04496098503412,
+    "fake_precision_percent": 98.63856540479475,
+    "diagnostic_only_after_training": true
+  },
+  "667": {
+    "selected_seconds": 1149.664403341245,
+    "selected_duration_accuracy_percent": 99.41030998644815,
+    "real_precision_percent": 99.23858646943609,
+    "fake_precision_percent": 99.6057903717941,
+    "diagnostic_only_after_training": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "boundary_exclusion": true,
+  "disagreement_rejected": true,
+  "padding_excluded": true,
+  "masked_loss_gradient": true,
+  "empty_mask_safe": true,
+  "train_dev_disjoint": true,
+  "labeled_unlabeled_disjoint": true,
+  "calibration_audit_disjoint": true,
+  "cuda": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch_version": "2.2.1+cu121"
+}

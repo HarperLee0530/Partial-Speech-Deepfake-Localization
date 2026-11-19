@@ -1,0 +1,30 @@
+[
+  {
+    "epoch": 1,
+    "supervised": 0.5707125272601843,
+    "weighted_auxiliary": 0.0775611971039325,
+    "seconds": 21.625,
+    "updates": 48
+  },
+  {
+    "epoch": 2,
+    "supervised": 0.5368797729412714,
+    "weighted_auxiliary": 0.04255255290384715,
+    "seconds": 21.235000000015134,
+    "updates": 96
+  },
+  {
+    "epoch": 3,
+    "supervised": 0.5113827828317881,
+    "weighted_auxiliary": 0.028209102883314092,
+    "seconds": 20.79700000002049,
+    "updates": 144
+  },
+  {
+    "epoch": 4,
+    "supervised": 0.4789454247802496,
+    "weighted_auxiliary": 0.024589637488437194,
+    "seconds": 20.03200000000652,
+    "updates": 192
+  }
+]

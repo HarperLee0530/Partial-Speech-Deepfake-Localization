@@ -1,0 +1,7 @@
+{
+  "selected_duration_accuracy_percent": 94.79474836146802,
+  "fake_pseudo_precision_percent": 94.59473645591724,
+  "real_pseudo_precision_percent": 95.13287039856044,
+  "diagnostic_only": true,
+  "performed_after_all_training": true
+}

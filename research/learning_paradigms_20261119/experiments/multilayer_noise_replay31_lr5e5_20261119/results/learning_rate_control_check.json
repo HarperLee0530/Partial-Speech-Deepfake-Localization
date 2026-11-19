@@ -1,0 +1,15 @@
+{
+  "same_initial_parameters": true,
+  "same_training_and_evaluation_uids": true,
+  "same_threshold": true,
+  "same_128_updates_and_eight_plus_eight_batches": true,
+  "same_old_to_noise_loss_weights": [
+    0.75,
+    0.25
+  ],
+  "learning_rates": {
+    "control": 0.0001,
+    "candidate": 5e-05
+  },
+  "fresh_original_predictions_identical_to_cached_control_run": true
+}

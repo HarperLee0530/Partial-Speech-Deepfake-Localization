@@ -1,0 +1,15 @@
+{
+  "all_checkpoints_match_frozen": true,
+  "all_thresholds_match_declared_sources": true,
+  "audit_uids_aligned": true,
+  "metrics_recomputed_from_recording_counts": true,
+  "finite_scores": true,
+  "formal_test_accessed": false,
+  "original_weights_unchanged": true,
+  "mel_and_wavlm_cache_integrity": true,
+  "band_cache_integrity": true,
+  "boundary_padding_gradients": true,
+  "batch_single_inference_consistency": true,
+  "fisher_gradients_valid": true,
+  "meta_initializations_and_update_counts_matched": true
+}

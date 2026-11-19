@@ -1,0 +1,9 @@
+# PyTorch2.2.1 / torchaudio2.2.1: install the appropriate CUDA build separately.
+numpy==1.26.4
+scipy==1.15.3
+soundfile==0.13.1
+scikit-learn==1.6.1
+transformers==4.51.3
+huggingface-hub==0.36.2
+safetensors==0.8.0
+tokenizers==0.21.4

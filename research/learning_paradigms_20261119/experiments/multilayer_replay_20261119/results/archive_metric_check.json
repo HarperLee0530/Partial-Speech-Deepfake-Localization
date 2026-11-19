@@ -1,0 +1,27 @@
+{
+  "event_f1_iou05_percent": {
+    "archive": 83.40817915094904,
+    "current": 83.40817915094904,
+    "delta": 0.0
+  },
+  "frame_f1_percent": {
+    "archive": 94.99325159402004,
+    "current": 94.99300598046845,
+    "delta": -0.00024561355158425613
+  },
+  "real_duration_fpr_percent": {
+    "archive": 4.999707368095952,
+    "current": 5.000118801353019,
+    "delta": 0.00041143325706727296
+  },
+  "short_event_recall_le320ms_percent": {
+    "archive": 78.4484389782403,
+    "current": 78.4484389782403,
+    "delta": 0.0
+  },
+  "eer_percent": {
+    "archive": 4.328216468855528,
+    "current": 4.328216468855528,
+    "delta": 0.0
+  }
+}

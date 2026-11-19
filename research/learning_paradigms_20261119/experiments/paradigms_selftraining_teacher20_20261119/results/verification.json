@@ -1,0 +1,20 @@
+{
+  "cache_hashes_pass": true,
+  "checkpoints_match_frozen": true,
+  "update_counts_match": true,
+  "audit_uid_order_match": true,
+  "thresholds_not_refit_on_noise": true,
+  "tests": {
+    "boundary_exclusion": true,
+    "disagreement_rejected": true,
+    "padding_excluded": true,
+    "masked_loss_gradient": true,
+    "empty_mask_safe": true,
+    "train_dev_disjoint": true,
+    "labeled_unlabeled_disjoint": true,
+    "calibration_audit_disjoint": true,
+    "cuda": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "torch_version": "2.2.1+cu121"
+  },
+  "decision": "两个种子clean事件F1方向不一致，本轮收益不稳定，不建议加入主方案。"
+}

@@ -1,0 +1,37 @@
+{
+  "original": {
+    "path": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\tmp\\publish_sal_logmel_20261118\\experiments\\wavlm_multilayer_20261117\\weights\\best.pt",
+    "sha256": "160a4b3cacbee48398d11f218e3ca2dff76615670ae05255f6775119dd37b50e",
+    "threshold": -0.17905920743942258
+  },
+  "666_old_only": {
+    "path": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_replay_20261119\\results\\seed666\\old_only\\last.pt",
+    "sha256": "b4d6bd2c91fac73bd789f921469578153157e5f0e4afe0391b31d45f4c584136",
+    "threshold": -0.17905920743942258
+  },
+  "666_new_only": {
+    "path": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_replay_20261119\\results\\seed666\\new_only\\last.pt",
+    "sha256": "f28c8ea2eb799924421ed8c2107b376c6a0fd923c629d9b84b70edaa5404b4b3",
+    "threshold": -0.17905920743942258
+  },
+  "666_replay": {
+    "path": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_replay_20261119\\results\\seed666\\replay\\last.pt",
+    "sha256": "4bd785809efdd913a18a3cf4e0a5997794d2745471d1b8c88e0889ff56fa5b63",
+    "threshold": -0.17905920743942258
+  },
+  "667_old_only": {
+    "path": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_replay_20261119\\results\\seed667\\old_only\\last.pt",
+    "sha256": "51924696e79ba5a989cdb4cca130eb6d042ae631eb982a10a0a330806638784e",
+    "threshold": -0.17905920743942258
+  },
+  "667_new_only": {
+    "path": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_replay_20261119\\results\\seed667\\new_only\\last.pt",
+    "sha256": "e125f5b37fd1b21560b700533a18a0a2ebefd9592da1d3381b42122725a39292",
+    "threshold": -0.17905920743942258
+  },
+  "667_replay": {
+    "path": "C:\\Users\\35432\\Desktop\\学习打卡\\NNDL\\experiments\\multilayer_replay_20261119\\results\\seed667\\replay\\last.pt",
+    "sha256": "537d1df9faa32f3fc3a11fea2d578376b841fb279f823bf07fc0a9a6f8e018d8",
+    "threshold": -0.17905920743942258
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "reason": "Warm8 seed666 selected only 6.6203 percent duration, almost entirely fake. Strengthen teacher before assessing method. No pilot audit results inspected when deciding.",
+  "pilot_status_at_preregistration": {
+    "status": "running",
+    "seed": 666,
+    "stage": "selftraining",
+    "epoch": 2,
+    "step": 33,
+    "steps": 48,
+    "elapsed_seconds": 193.76
+  },
+  "pilot_comparison_existed": false,
+  "only_protocol_change": "warm epochs 8 to 20",
+  "report_both_runs": true
+}

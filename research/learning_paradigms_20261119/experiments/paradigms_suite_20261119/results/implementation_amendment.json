@@ -1,0 +1,16 @@
+{
+  "reason": "Empirical Fisher backward unavailable for cuDNN eval-mode GRU; use native backend with unchanged dropout-free eval semantics. Verified predictions agree within 1e-6.",
+  "old_sha256": "7f9029d08fd6a6bbad1774fe08e8cb5cacf5cb9ef179bc45e6232e58af40cf6f",
+  "new_sha256": "2e4ac61142e68fb56709f08f7774881fba43e99a69bef7eb4e8aea31a22e335a",
+  "status_at_amendment": {
+    "status": "running",
+    "seed": 666,
+    "arm": "cotraining_mel",
+    "epoch": 1,
+    "step": 25,
+    "steps": 48,
+    "elapsed_seconds": 294.11
+  },
+  "audit_started": false,
+  "hyperparameters_changed": false
+}

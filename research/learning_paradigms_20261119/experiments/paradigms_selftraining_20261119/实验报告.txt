@@ -1,0 +1,52 @@
+﻿课件自训练小型对照实验 — 2026-11-19
+
+问题：在384条标注录音的限制下，增加768条隐藏标签训练录音的伪标签，是否改善CNN-BiGRU的定位表现？
+依据：课件第5—7页Self-Training。双视图筛选和预测边界排除是针对定位任务的实验设计。
+本次没有使用正式eval/LPS数据，没有修改或替换原项目模型。
+
+协议：
+从随机初始化训练相同911,521参数CNN-BiGRU；两个种子666/667；8轮监督热身。
+每个种子从同一热身权重分叉：纯监督4轮，半监督4轮。相同有标签顺序、增强、dropout种子和192次更新。
+两组均使用原音频/20dB噪声/轻微EQ轮换。半监督每次额外使用16条未标注音频，计算量更大。
+伪标签由固定热身教师给出；原音频与EQ预测同类且各自置信度>=0.9；排除任一预测边界前后2帧。
+有标签数据保留20ms和160ms真值监督；额外伪标签损失只在被选中20ms帧计算，真假类别均衡，权重0.3。
+固定最终轮，不用开发成绩选epoch。256条开发录音单独校准真实时长FPR<=5%的阈值。
+全部模型和阈值冻结后，在另外384条开发录音上报告clean和20dB波形噪声表现；噪声沿用clean阈值。
+帧F1和事件F1均采用原生20ms口径；事件一对一IoU>=0.5；短事件<=320ms。
+
+两个种子的平均结果（百分比；均值不能代表训练稳定性）：
+clean
+  supervised: 帧F1 68.293; 事件F1 33.700; 真实时长FPR 5.008; 短事件召回 15.408; EER 22.060
+  selftraining: 帧F1 67.899; 事件F1 33.918; 真实时长FPR 4.904; 短事件召回 15.652; EER 22.378
+  半监督-监督: 帧F1 -0.395pp; 事件F1 +0.217pp; FPR -0.104pp
+noise20db
+  supervised: 帧F1 27.225; 事件F1 8.645; 真实时长FPR 3.064; 短事件召回 6.577; EER 34.511
+  selftraining: 帧F1 32.310; 事件F1 13.021; 真实时长FPR 3.877; 短事件召回 9.805; EER 34.240
+  半监督-监督: 帧F1 +5.085pp; 事件F1 +4.375pp; FPR +0.813pp
+
+各个种子的事件F1差值与固定模型配对录音bootstrap95%区间：
+666_clean: +0.296pp [-0.523, +1.093]
+666_noise20db: +5.715pp [+4.032, +7.460]
+667_clean: +0.138pp [-0.519, +0.762]
+667_noise20db: +3.036pp [+1.752, +4.487]
+
+伪标签事后诊断（全部训练完成后才读取对应真值，不回灌训练）：
+seed666: 有效时长覆盖 6.620%; {"selected_duration_accuracy_percent": 99.1223873422505, "fake_pseudo_precision_percent": 99.12177616963419, "real_pseudo_precision_percent": 100.0, "diagnostic_only": true, "performed_after_all_training": true}
+seed667: 有效时长覆盖 20.721%; {"selected_duration_accuracy_percent": 97.66347359614518, "fake_pseudo_precision_percent": 97.91538366924122, "real_pseudo_precision_percent": 95.63611933525281, "diagnostic_only": true, "performed_after_all_training": true}
+
+结论：两个种子clean事件F1仅有正向点估计，配对区间尚不足以支持一致改善；不建议据此替换主模型。
+
+限制：
+Hidden labels simulate scarcity; no genuinely new unlabeled data.
+UID-disjoint only; source/speaker independence not established.
+Dev historically used in earlier experiments; audit is fresh only for this training run.
+Noise condition is seen as augmentation; robustness check, not unseen-domain proof.
+Small fixed training budget; no comparison to fully supervised full-data model.
+20dB噪声与训练增强同类，因此只证明/否定该扰动条件的稳健性，不是新合成器或新数据集泛化。
+这里的半监督用隐藏已有标签模拟少标注；不意味着优于利用全部真实标签训练的当前正式模型。
+两个随机种子、同一小型划分；录音bootstrap不包含来源相关性、训练随机性或历史开发集复用。
+
+复现：
+D:/SAL_精简实验/code/.venv/Scripts/python.exe -X utf8 run_experiment.py
+D:/SAL_精简实验/code/.venv/Scripts/python.exe -X utf8 summarize.py
+run_experiment.py校验已冻结协议；已完成的训练阶段自动跳过。依赖本机只读特征缓存。

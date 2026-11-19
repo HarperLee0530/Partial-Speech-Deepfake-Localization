@@ -1,0 +1,9 @@
+{
+  "files": {
+    "dev.pt": "eff4e22cd2b6df123b7c8529c07bee77c75d78eca6eb325d58b9bd3546e47a46",
+    "train.pt": "98e9bc3bd5dedfc99a5ea2541ed59826ff34b75f64c7ba9c6db8105e84a7e770"
+  },
+  "filter": "butter6_lowpass3400_causal_sos",
+  "train_count": 1184,
+  "dev_count": 384
+}

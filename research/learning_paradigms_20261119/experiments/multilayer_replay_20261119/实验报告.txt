@@ -1,0 +1,193 @@
+﻿多层WavLM融合方案：旧样本回放小型对照 — 2026-11-19
+
+直接使用已发布fusion6/9/12第18轮最佳checkpoint。不是此前384条录音从零训练的小CNN。
+所有更新方案从完全相同的已训练权重出发。两个种子只改变微调顺序/dropout，不代表两个独立预训练模型。
+公开WavLM冻结；三个融合标量、投影、原CNN-BiGRU及完整双分辨率模块均更新。原五项训练损失保持不变。
+原始logit阈值-0.17905920743942258在所有模型、条件中固定，完全没有重新校准。
+
+设计：
+原模型不更新；old_only只继续训练旧条件；new_only只微调新条件；replay新旧损失各半。
+新条件是3.4kHz低通。256条目标训练录音、256条独立UID旧记忆录音；原模型训练时已见过这512条录音的原条件。
+旧记忆轮换原音频、20dB噪声、轻微EQ。4轮、batch8、128次AdamW更新、lr1e-4。固定最后一轮，无选模。
+new_only和replay的目标数据顺序相同；old_only和replay的旧数据顺序/视图相同。回放额外计算旧数据，非等算力对照。
+保持原性能：全部2484条dev原音频。适应/泛化检查：另外固定384条dev的3.4kHz低通、未训练2.6kHz低通及未训练10dB噪声。
+384条压力检查UID避开了此前两轮课件小实验的校准/留出UID，但整个官方dev曾用于原模型选择，不能称为全新盲测。
+评估修订：原始1e-4分数复现门槛触发；保留训练和阈值不变，另行记录全量最大分数误差和float64阈值判定差异，见核验。
+正式eval/LPS没有使用；因果低通未补偿群延迟；合成扰动不等于新伪造方法/真实新数据集。
+
+预定原域保护线：事件F1、帧F1最多下降0.5pp；真实时长误报最多增加0.5pp；短事件召回最多下降1pp。
+分别报告点估计和配对95%区间是否通过，点估计通过不能证明非劣。
+
+结果（%）；更新模型为两个微调种子的均值，原模型为一个固定checkpoint：
+方案 | 条件 | 事件F1 | 帧F1 | 真实时长误报率 | 短事件召回 | EER
+原模型 | clean_full | 83.408 | 94.993 | 5.000 | 78.448 | 4.328
+原模型 | clean_subset | 83.948 | 93.981 | 5.860 | 79.346 | 5.094
+原模型 | lp3400 | 80.049 | 92.816 | 7.066 | 74.902 | 6.017
+原模型 | lp2600 | 77.873 | 91.510 | 9.143 | 71.373 | 7.162
+原模型 | noise10 | 48.639 | 72.722 | 43.339 | 31.373 | 26.249
+只继续训练旧条件 | clean_full | 83.715 | 95.215 | 4.762 | 78.439 | 4.086
+只继续训练旧条件 | clean_subset | 83.798 | 94.403 | 5.520 | 78.758 | 4.648
+只继续训练旧条件 | lp3400 | 82.215 | 93.807 | 6.161 | 76.275 | 5.087
+只继续训练旧条件 | lp2600 | 79.061 | 92.624 | 7.606 | 72.484 | 6.043
+只继续训练旧条件 | noise10 | 50.691 | 76.136 | 37.027 | 32.614 | 21.762
+只微调新条件 | clean_full | 83.896 | 95.315 | 4.339 | 79.290 | 4.089
+只微调新条件 | clean_subset | 84.288 | 94.362 | 5.226 | 79.935 | 4.739
+只微调新条件 | lp3400 | 82.833 | 94.341 | 5.243 | 77.451 | 4.815
+只微调新条件 | lp2600 | 80.947 | 93.376 | 5.985 | 75.817 | 5.640
+只微调新条件 | noise10 | 50.520 | 77.814 | 31.637 | 33.856 | 20.679
+新旧各半回放 | clean_full | 84.000 | 95.364 | 4.389 | 79.130 | 4.018
+新旧各半回放 | clean_subset | 84.187 | 94.554 | 5.208 | 79.542 | 4.585
+新旧各半回放 | lp3400 | 82.888 | 94.519 | 5.292 | 77.255 | 4.612
+新旧各半回放 | lp2600 | 80.841 | 93.407 | 6.174 | 75.229 | 5.582
+新旧各半回放 | noise10 | 50.876 | 77.453 | 33.610 | 33.791 | 20.578
+
+原域保护线：
+{
+  "old_only": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    }
+  },
+  "new_only": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    }
+  },
+  "replay": {
+    "666": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    },
+    "667": {
+      "point_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "point_pass": true,
+      "interval_checks": {
+        "event_f1": true,
+        "frame_f1": true,
+        "real_fpr": true,
+        "short_recall": true
+      },
+      "interval_pass": true
+    }
+  }
+}
+
+回放相对原模型：各微调种子的事件F1差值与配对录音bootstrap95%区间（pp）：
+seed666 clean_full: +0.640 [+0.162, +1.123]
+seed666 clean_subset: +0.164 [-0.921, +1.349]
+seed666 lp3400: +2.860 [+1.608, +4.095]
+seed666 lp2600: +3.155 [+1.603, +4.660]
+seed666 noise10: +2.025 [+0.359, +3.850]
+seed667 clean_full: +0.544 [+0.067, +1.010]
+seed667 clean_subset: +0.315 [-0.759, +1.463]
+seed667 lp3400: +2.817 [+1.552, +4.053]
+seed667 lp2600: +2.781 [+1.403, +4.186]
+seed667 noise10: +2.450 [+0.875, +4.147]
+
+核验：
+{
+  "original_checkpoint_unchanged": true,
+  "all_backends_start_identical": true,
+  "all_updates_128": true,
+  "thresholds_never_recalibrated": true,
+  "source_full2484_reproduced_within_original_tolerance": false,
+  "source_full2484_threshold_decisions_identical": false,
+  "source_reproduction": {
+    "recordings": 2484,
+    "max_archive_score_difference": 0.00067901611328125,
+    "changed_frame_decisions": 0,
+    "compared_frames": 434150,
+    "original_tolerance_pass": false,
+    "amendment": "Report full observed discrepancy and decision changes; numerical ceiling0.01. No training or threshold changes.",
+    "exact_float64_decision_changes": 1,
+    "float32_comparison_count_is_not_authoritative": true
+  },
+  "native20_frame_and_event_counts_verified": true,
+  "all_prediction_uids_match": true,
+  "all_frozen_checkpoint_hashes_match": true,
+  "formal_test_accessed": false
+}
+
+解释限制：同一个原模型、两个微调种子、单个记忆池、固定1:1配比和学习率；不包含完整重训随机性。
+配对bootstrap仅按录音重采样，未修正同源依赖与多重比较。性能保持和未见条件收益应分别判断。
+只改善训练时见过的3.4kHz条件，只能称目标条件适应，不能直接称广泛泛化增强。
+
+代码run.py、完整结果results/summary.csv、区间paired_comparisons.json、保护线preservation_screen.json。
+模型在results/seed*/{old_only,new_only,replay}/last.pt，原权重没有替换。
+特征缓存位于D:/SAL_精简实验/data/multilayer_replay_pilot_20261119，保留float32三层特征，不压成固定融合特征。
+复现：run.py保存原始训练协议；由于归档分数1e-4复现门槛触发，已有冻结模型使用evaluate_resume.py评估，再运行report.py。评估修订见results/evaluation_amendment.json。

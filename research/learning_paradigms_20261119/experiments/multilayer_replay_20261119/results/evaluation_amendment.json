@@ -1,0 +1,6 @@
+{
+  "reason": "Archive raw-score tolerance1e-4 failed at CON_D_0001234 with0.0001544952392578125 before full metrics were produced.",
+  "change": "Continue evaluation with0.01 sanity ceiling; report maximum error and exact threshold decision discrepancies. Keep original preregistration, training, models and thresholds unchanged.",
+  "evaluator_sha256": "35626a78763f714a8cdea30f0f0ecc6719acd53d65e6d51d6de75b71d57afbf6",
+  "frozen_models_sha256": "7bd762841afa4d2db5ff2acbcdca2b6a9885fcf4cec82c35b327bf03386e7d9c"
+}

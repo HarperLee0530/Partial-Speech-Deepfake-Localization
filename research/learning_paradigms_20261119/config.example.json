@@ -1,0 +1,7 @@
+{
+  "data_cache": "/your/data/cnn_ps_features_v2",
+  "encoder": "/your/models/wavlm_base_plus_hf",
+  "source_checkpoint": "/your/repo/experiments/wavlm_multilayer_20261117/weights/best.pt",
+  "source_release": "/your/repo/experiments/wavlm_multilayer_20261117",
+  "audio_path_map": []
+}

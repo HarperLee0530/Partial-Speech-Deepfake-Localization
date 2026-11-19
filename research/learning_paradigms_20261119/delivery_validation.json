@@ -1,0 +1,15 @@
+{
+  "archived_files_exact_git_blob_bytes": 1132,
+  "per_record_metric_aggregates_checked": 327,
+  "python_files_syntax_checked": 271,
+  "portable_profiles_preflight_passed": [
+    "noise11",
+    "noise31",
+    "noise51",
+    "noise31_lr5e5"
+  ],
+  "portable_full_training_repeated": false,
+  "credential_pattern_scan_matches": 0,
+  "change_scope": "Only new files under research/learning_paradigms_20261119; default source, weights and docs unchanged.",
+  "historical_numeric_tolerance_caveat": "Documented in README and each archived verification.json; no claims of byte-identical original training."
+}

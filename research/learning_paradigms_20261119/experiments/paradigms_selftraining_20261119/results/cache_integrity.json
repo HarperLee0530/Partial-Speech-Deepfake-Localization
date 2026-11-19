@@ -1,0 +1,16 @@
+{
+  "train": {
+    "features": true,
+    "labels20": true,
+    "weights20": true,
+    "labels160": true,
+    "weights160": true
+  },
+  "dev": {
+    "features": true,
+    "labels20": true,
+    "weights20": true,
+    "labels160": true,
+    "weights160": true
+  }
+}
