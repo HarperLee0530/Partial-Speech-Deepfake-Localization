@@ -1,0 +1,8 @@
+{
+  "pid": 60732,
+  "state": "released",
+  "started_utc": "2026-11-18T11:53:55.035439+00:00",
+  "release": "Automatically at workflow exit",
+  "display_may_sleep": true,
+  "ended_utc": "2026-11-18T17:07:49.440647+00:00"
+}

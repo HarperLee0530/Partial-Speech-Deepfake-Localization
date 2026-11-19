@@ -1,0 +1,4 @@
+B0_full {'shape': [24, 3, 768], 'frozen': True, 'parameter_bytes_unchanged': True, 'max_difference_from_original': 0.0}
+B1_no_conv_position {'shape': [24, 3, 768], 'frozen': True, 'parameter_bytes_unchanged': True, 'max_difference_from_original': 3.377654552459717}
+B2_position_gate_one {'shape': [24, 3, 768], 'frozen': True, 'parameter_bytes_unchanged': True, 'max_difference_from_original': 1.7861518859863281}
+B3_no_relative_bias {'shape': [24, 3, 768], 'frozen': True, 'parameter_bytes_unchanged': True, 'max_difference_from_original': 2.765803337097168}

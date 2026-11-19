@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "schema": "ps_frozen_wavlm_multilayer_cnn_v1",
+  "arm": "layer12",
+  "epoch": 20,
+  "threshold": 1.0518684387207033,
+  "event_f1_iou05_percent": 76.42769643586304,
+  "checkpoint": "best.pt",
+  "checkpoint_sha256": "36f0d9fbc7d6cd88605da0a7ed7290835fdbe87b96ed3dc36357defdee338f63",
+  "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+  "last_backbone_sha256": "d9eec215ff65ea91c2c4e9209605c510578a05266030d451b5a8aa6cdc555b46",
+  "trained_epochs": 20,
+  "updates": 15880,
+  "archived_epochs": 21,
+  "protocol_sha256": "c95ce0d70a2d0b3b4c16d9d8cea2081954a2a2daf2102620d9bcedcad5c6565f",
+  "eval_read": false,
+  "dev_scores20_sha256": "dc487d38a8394879484c370db8d46c3fd2971142980dfa88ceaee282a8860843",
+  "dev_metrics_sha256": "0c3216727253bb85e564bf3bb5db2937fdf3c85d9a903da2a8a71a683de8ac19",
+  "total_seconds": 2610.561999999998
+}

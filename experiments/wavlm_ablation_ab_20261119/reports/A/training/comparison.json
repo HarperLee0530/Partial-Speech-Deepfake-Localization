@@ -1,0 +1,1181 @@
+{
+  "status": "complete",
+  "schema": "ps_frozen_wavlm_ablation_a_v1",
+  "metric_protocol": "ps_native20_event_v2",
+  "models": {
+    "A2_layer6": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": -0.5488589406013488,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 88.68136206269628,
+      "duration_precision_percent": 89.20135657818275,
+      "duration_recall_percent": 88.16739497084623,
+      "duration_accuracy_percent": 91.30680777893721,
+      "real_fpr_percent": 6.717390811348375,
+      "spoof_fnr_percent": 11.832605029153784,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4095.3326249999877,
+        495.7776250000007,
+        549.6187499999959,
+        6884.73124999999
+      ],
+      "fake_seconds": 4644.951374999983,
+      "real_seconds": 7380.50887499999,
+      "fp_seconds": 495.7776250000007,
+      "fn_seconds": 549.6187499999959,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 72.14860681114551,
+      "event_precision_percent": 68.28410689170182,
+      "event_recall_percent": 76.47676555526385,
+      "event_counts": {
+        "matched": 8739,
+        "predicted": 12798,
+        "truth": 11427,
+        "unmatched_predictions": 4059,
+        "missed_truth": 2688
+      },
+      "short_event_recall_le320ms_percent": 72.75799324148687,
+      "short_event_counts": {
+        "matched": 5598,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1215.1218910727346,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 37,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 19.019812500000015,
+        "predicted_events": 71,
+        "false_alarm_recording_rate_percent": 10.136986301369863,
+        "duration_fpr_percent": 1.5350318792623379,
+        "unmatched_fp_events_per_hour": 206.28707477502908
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4412,
+          "recall_percent": 72.06795164978764
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 440,
+          "recall_percent": 71.77814029363785
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 746,
+          "recall_percent": 77.78936392075079
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1101,
+          "recall_percent": 81.85873605947955
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 2040,
+          "recall_percent": 85.42713567839196
+        }
+      },
+      "event_recall_le80ms_percent": 72.06795164978764,
+      "event_recall_le160ms_percent": 72.0415738678545,
+      "event_recall_le320ms_percent": 72.75799324148687,
+      "event_recall_le640ms_percent": 74.11218055094591,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.717390811348375,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        206206,
+        24843,
+        27509,
+        344492
+      ],
+      "frame_f1_percent": 88.73578848619945,
+      "eer_percent": 9.431559264209339,
+      "supplementary_native20": {
+        "duration_f1_percent": 88.68136206269628,
+        "frame_confusion_tp_fp_fn_tn": [
+          206206,
+          24843,
+          27509,
+          344492
+        ],
+        "frame_f1_percent": 88.73578848619945,
+        "eer_percent": 9.431559264209339,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A3_layer9": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 1.1133022308349612,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 86.34363773600523,
+      "duration_precision_percent": 89.6938749188908,
+      "duration_recall_percent": 83.23466437794531,
+      "duration_accuracy_percent": 89.83006024655073,
+      "real_fpr_percent": 6.019102239749004,
+      "spoof_fnr_percent": 16.7653356220547,
+      "confusion_seconds_tp_fp_fn_tn": [
+        3866.209687499987,
+        444.24037499999844,
+        778.7416874999908,
+        6936.268499999992
+      ],
+      "fake_seconds": 4644.951374999978,
+      "real_seconds": 7380.50887499999,
+      "fp_seconds": 444.24037499999844,
+      "fn_seconds": 778.7416874999908,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 68.5383911488229,
+      "event_precision_percent": 65.31113753468094,
+      "event_recall_percent": 72.10116391003763,
+      "event_counts": {
+        "matched": 8239,
+        "predicted": 12615,
+        "truth": 11427,
+        "unmatched_predictions": 4376,
+        "missed_truth": 3188
+      },
+      "short_event_recall_le320ms_percent": 69.37873667793086,
+      "short_event_counts": {
+        "matched": 5338,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1310.0205457832685,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 31,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 12.43849999999999,
+        "predicted_events": 53,
+        "false_alarm_recording_rate_percent": 8.493150684931507,
+        "duration_fpr_percent": 1.0038739356765247,
+        "unmatched_fp_events_per_hour": 153.9889431419231
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4312,
+          "recall_percent": 70.4344985298922
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 397,
+          "recall_percent": 64.76345840130506
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 629,
+          "recall_percent": 65.58915537017727
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 939,
+          "recall_percent": 69.81412639405204
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 1962,
+          "recall_percent": 82.1608040201005
+        }
+      },
+      "event_recall_le80ms_percent": 70.4344985298922,
+      "event_recall_le160ms_percent": 69.91833704528582,
+      "event_recall_le320ms_percent": 69.37873667793086,
+      "event_recall_le640ms_percent": 69.44352251355238,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.019102239749004,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        194694,
+        22244,
+        39021,
+        347091
+      ],
+      "frame_f1_percent": 86.40528300044602,
+      "eer_percent": 10.772563452817096,
+      "supplementary_native20": {
+        "duration_f1_percent": 86.34363773600523,
+        "frame_confusion_tp_fp_fn_tn": [
+          194694,
+          22244,
+          39021,
+          347091
+        ],
+        "frame_f1_percent": 86.40528300044602,
+        "eer_percent": 10.772563452817096,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A4_mean": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 0.12700997292995456,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 88.48541302608186,
+      "duration_precision_percent": 88.92018195390806,
+      "duration_recall_percent": 88.05487495549943,
+      "duration_accuracy_percent": 91.14803786823879,
+      "real_fpr_percent": 6.905268269865728,
+      "spoof_fnr_percent": 11.945125044500559,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4090.1061249999852,
+        509.64393749999897,
+        554.8452499999959,
+        6870.8649374999995
+      ],
+      "fake_seconds": 4644.951374999981,
+      "real_seconds": 7380.508874999999,
+      "fp_seconds": 509.64393749999897,
+      "fn_seconds": 554.8452499999959,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 70.78870093883121,
+      "event_precision_percent": 67.11104140526976,
+      "event_recall_percent": 74.89279775969196,
+      "event_counts": {
+        "matched": 8558,
+        "predicted": 12752,
+        "truth": 11427,
+        "unmatched_predictions": 4194,
+        "missed_truth": 2869
+      },
+      "short_event_recall_le320ms_percent": 71.09435924096698,
+      "short_event_counts": {
+        "matched": 5470,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1255.536144656085,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 34,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 26.37937499999997,
+        "predicted_events": 59,
+        "false_alarm_recording_rate_percent": 9.315068493150685,
+        "duration_fpr_percent": 2.1290000403534926,
+        "unmatched_fp_events_per_hour": 171.42165368629176
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4343,
+          "recall_percent": 70.94086899705978
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 424,
+          "recall_percent": 69.16802610114192
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 703,
+          "recall_percent": 73.30552659019813
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1050,
+          "recall_percent": 78.06691449814126
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 2038,
+          "recall_percent": 85.34338358458962
+        }
+      },
+      "event_recall_le80ms_percent": 70.94086899705978,
+      "event_recall_le160ms_percent": 70.77951002227171,
+      "event_recall_le320ms_percent": 71.09435924096698,
+      "event_recall_le640ms_percent": 72.1318729948003,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.905268269865728,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        205935,
+        25535,
+        27780,
+        343800
+      ],
+      "frame_f1_percent": 88.5389683674237,
+      "eer_percent": 9.370855611046547,
+      "supplementary_native20": {
+        "duration_f1_percent": 88.48541302608186,
+        "frame_confusion_tp_fp_fn_tn": [
+          205935,
+          25535,
+          27780,
+          343800
+        ],
+        "frame_f1_percent": 88.5389683674237,
+        "eer_percent": 9.370855611046547,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A5_fixed_pool": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 0.028007090091705326,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 89.99585516999842,
+      "duration_precision_percent": 90.00039603441839,
+      "duration_recall_percent": 89.99131476376328,
+      "duration_accuracy_percent": 92.27199277050539,
+      "real_fpr_percent": 6.292653838181316,
+      "spoof_fnr_percent": 10.00868523623671,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4180.052812499987,
+        464.4298749999996,
+        464.8985624999976,
+        6916.0789999999915
+      ],
+      "fake_seconds": 4644.951374999985,
+      "real_seconds": 7380.508874999991,
+      "fp_seconds": 464.4298749999996,
+      "fn_seconds": 464.8985624999976,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 74.98443014324268,
+      "event_precision_percent": 71.3382840891136,
+      "event_recall_percent": 79.0233657127855,
+      "event_counts": {
+        "matched": 9030,
+        "predicted": 12658,
+        "truth": 11427,
+        "unmatched_predictions": 3628,
+        "missed_truth": 2397
+      },
+      "short_event_recall_le320ms_percent": 75.87730699246165,
+      "short_event_counts": {
+        "matched": 5838,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1086.0956444473716,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 57,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 36.93887500000002,
+        "predicted_events": 106,
+        "false_alarm_recording_rate_percent": 15.616438356164384,
+        "duration_fpr_percent": 2.9812255356926665,
+        "unmatched_fp_events_per_hour": 307.9778862838462
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4674,
+          "recall_percent": 76.34759882391376
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 449,
+          "recall_percent": 73.2463295269168
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 715,
+          "recall_percent": 74.55683003128259
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1057,
+          "recall_percent": 78.58736059479554
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 2135,
+          "recall_percent": 89.40536013400335
+        }
+      },
+      "event_recall_le80ms_percent": 76.34759882391376,
+      "event_recall_le160ms_percent": 76.06533036377134,
+      "event_recall_le320ms_percent": 75.87730699246165,
+      "event_recall_le640ms_percent": 76.2805620090718,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.292653838181316,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        210439,
+        23262,
+        23276,
+        346073
+      ],
+      "frame_f1_percent": 90.04355862871617,
+      "eer_percent": 8.084581648820793,
+      "supplementary_native20": {
+        "duration_f1_percent": 89.99585516999842,
+        "frame_confusion_tp_fp_fn_tn": [
+          210439,
+          23262,
+          23276,
+          346073
+        ],
+        "frame_f1_percent": 90.04355862871617,
+        "eer_percent": 8.084581648820793,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A6_no_attention": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": -0.5664323568344115,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 87.8618081364997,
+      "duration_precision_percent": 89.0684134434768,
+      "duration_recall_percent": 86.687457519402,
+      "duration_accuracy_percent": 90.74834162792233,
+      "real_fpr_percent": 6.6959254892841145,
+      "spoof_fnr_percent": 13.312542480598005,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4026.5902499999866,
+        494.1933750000007,
+        618.3611249999934,
+        6886.315499999991
+      ],
+      "fake_seconds": 4644.95137499998,
+      "real_seconds": 7380.508874999991,
+      "fp_seconds": 494.1933750000007,
+      "fn_seconds": 618.3611249999934,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 72.20696158419089,
+      "event_precision_percent": 67.92656587473002,
+      "event_recall_percent": 77.06309617572416,
+      "event_counts": {
+        "matched": 8806,
+        "predicted": 12964,
+        "truth": 11427,
+        "unmatched_predictions": 4158,
+        "missed_truth": 2621
+      },
+      "short_event_recall_le320ms_percent": 74.33064725760333,
+      "short_event_counts": {
+        "matched": 5719,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1244.7590103671916,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 74,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 60.07643749999995,
+        "predicted_events": 155,
+        "false_alarm_recording_rate_percent": 20.273972602739725,
+        "duration_fpr_percent": 4.84858863645534,
+        "unmatched_fp_events_per_hour": 450.34502239619025
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4528,
+          "recall_percent": 73.96275726886638
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 458,
+          "recall_percent": 74.71451876019576
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 733,
+          "recall_percent": 76.43378519290928
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1100,
+          "recall_percent": 81.78438661710037
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 1987,
+          "recall_percent": 83.20770519262982
+        }
+      },
+      "event_recall_le80ms_percent": 73.96275726886638,
+      "event_recall_le160ms_percent": 74.03118040089088,
+      "event_recall_le320ms_percent": 74.33064725760333,
+      "event_recall_le640ms_percent": 75.43976103551277,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.6959254892841145,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        202767,
+        24768,
+        30948,
+        344567
+      ],
+      "frame_f1_percent": 87.92065040650407,
+      "eer_percent": 10.453705484699743,
+      "supplementary_native20": {
+        "duration_f1_percent": 87.8618081364997,
+        "frame_confusion_tp_fp_fn_tn": [
+          202767,
+          24768,
+          30948,
+          344567
+        ],
+        "frame_f1_percent": 87.92065040650407,
+        "eer_percent": 10.453705484699743,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A7_fixed_gate": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": 0.1899383068084717,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 88.42717430667463,
+      "duration_precision_percent": 90.10858273671167,
+      "duration_recall_percent": 86.80736593286733,
+      "duration_accuracy_percent": 91.22353341943816,
+      "real_fpr_percent": 5.997134750413811,
+      "spoof_fnr_percent": 13.192634067132667,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4032.159937499983,
+        442.61906249999964,
+        612.7914374999942,
+        6937.889812499987
+      ],
+      "fake_seconds": 4644.951374999977,
+      "real_seconds": 7380.508874999987,
+      "fp_seconds": 442.61906249999964,
+      "fn_seconds": 612.7914374999942,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 72.21075233297547,
+      "event_precision_percent": 68.36056602298491,
+      "event_recall_percent": 76.52052157171612,
+      "event_counts": {
+        "matched": 8744,
+        "predicted": 12791,
+        "truth": 11427,
+        "unmatched_predictions": 4047,
+        "missed_truth": 2683
+      },
+      "short_event_recall_le320ms_percent": 73.40785027293995,
+      "short_event_counts": {
+        "matched": 5648,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1211.5295129764368,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 37,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 20.921625000000006,
+        "predicted_events": 73,
+        "false_alarm_recording_rate_percent": 10.136986301369863,
+        "duration_fpr_percent": 1.6885214478834578,
+        "unmatched_fp_events_per_hour": 212.09797828981863
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4438,
+          "recall_percent": 72.49264946096046
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 464,
+          "recall_percent": 75.69331158238172
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 746,
+          "recall_percent": 77.78936392075079
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1092,
+          "recall_percent": 81.18959107806691
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 2004,
+          "recall_percent": 83.91959798994975
+        }
+      },
+      "event_recall_le80ms_percent": 72.49264946096046,
+      "event_recall_le160ms_percent": 72.78396436525613,
+      "event_recall_le320ms_percent": 73.40785027293995,
+      "event_recall_le640ms_percent": 74.56577054983958,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 5.997134750413811,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        203029,
+        22173,
+        30686,
+        347162
+      ],
+      "frame_f1_percent": 88.48179518300695,
+      "eer_percent": 9.686106794645644,
+      "supplementary_native20": {
+        "duration_f1_percent": 88.42717430667463,
+        "frame_confusion_tp_fp_fn_tn": [
+          203029,
+          22173,
+          30686,
+          347162
+        ],
+        "frame_f1_percent": 88.48179518300695,
+        "eer_percent": 9.686106794645644,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A8_no_boundary": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": -0.34937906265258784,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 88.81544088824614,
+      "duration_precision_percent": 89.45730907887524,
+      "duration_recall_percent": 88.18271805913149,
+      "duration_accuracy_percent": 91.42126337742457,
+      "real_fpr_percent": 6.540545789940543,
+      "spoof_fnr_percent": 11.81728194086852,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4096.044374999985,
+        482.72556250000036,
+        548.9069999999969,
+        6897.783312499995
+      ],
+      "fake_seconds": 4644.951374999981,
+      "real_seconds": 7380.508874999996,
+      "fp_seconds": 482.72556250000036,
+      "fn_seconds": 548.9069999999969,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 72.10369061145478,
+      "event_precision_percent": 69.44714656290532,
+      "event_recall_percent": 74.97155858930603,
+      "event_counts": {
+        "matched": 8567,
+        "predicted": 12336,
+        "truth": 11427,
+        "unmatched_predictions": 3769,
+        "missed_truth": 2860
+      },
+      "short_event_recall_le320ms_percent": 71.04237067845074,
+      "short_event_counts": {
+        "matched": 5466,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1128.3060870788709,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 45,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 18.405750000000012,
+        "predicted_events": 81,
+        "false_alarm_recording_rate_percent": 12.32876712328767,
+        "duration_fpr_percent": 1.4854727412130257,
+        "unmatched_fp_events_per_hour": 235.34159234897683
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4268,
+          "recall_percent": 69.71577915713819
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 466,
+          "recall_percent": 76.01957585644372
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 732,
+          "recall_percent": 76.32950990615224
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1093,
+          "recall_percent": 81.2639405204461
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 2008,
+          "recall_percent": 84.08710217755444
+        }
+      },
+      "event_recall_le80ms_percent": 69.71577915713819,
+      "event_recall_le160ms_percent": 70.28953229398664,
+      "event_recall_le320ms_percent": 71.04237067845074,
+      "event_recall_le640ms_percent": 72.56333665228455,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.540545789940543,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        206230,
+        24186,
+        27485,
+        345149
+      ],
+      "frame_f1_percent": 88.86715173086908,
+      "eer_percent": 9.476495343515806,
+      "supplementary_native20": {
+        "duration_f1_percent": 88.81544088824614,
+        "frame_confusion_tp_fp_fn_tn": [
+          206230,
+          24186,
+          27485,
+          345149
+        ],
+        "frame_f1_percent": 88.86715173086908,
+        "eer_percent": 9.476495343515806,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A9_no_consistency": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": -0.30916994810104365,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 88.87680271882103,
+      "duration_precision_percent": 89.42677071000035,
+      "duration_recall_percent": 88.33355790511374,
+      "duration_accuracy_percent": 91.45963560937307,
+      "real_fpr_percent": 6.572955479306288,
+      "spoof_fnr_percent": 11.666442094886266,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4103.050812499989,
+        485.1175624999992,
+        541.9005624999967,
+        6895.391312499998
+      ],
+      "fake_seconds": 4644.951374999985,
+      "real_seconds": 7380.508874999998,
+      "fp_seconds": 485.1175624999992,
+      "fn_seconds": 541.9005624999967,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 72.14765100671141,
+      "event_precision_percent": 67.76078099777078,
+      "event_recall_percent": 77.14185700533824,
+      "event_counts": {
+        "matched": 8815,
+        "predicted": 13009,
+        "truth": 11427,
+        "unmatched_predictions": 4194,
+        "missed_truth": 2612
+      },
+      "short_event_recall_le320ms_percent": 73.57681310111775,
+      "short_event_counts": {
+        "matched": 5661,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1255.536144656085,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 58,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 24.022937500000005,
+        "predicted_events": 110,
+        "false_alarm_recording_rate_percent": 15.89041095890411,
+        "duration_fpr_percent": 1.9388190549211075,
+        "unmatched_fp_events_per_hour": 319.59969331342535
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4412,
+          "recall_percent": 72.06795164978764
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 472,
+          "recall_percent": 76.99836867862969
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 777,
+          "recall_percent": 81.02189781021897
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1118,
+          "recall_percent": 83.12267657992565
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 2036,
+          "recall_percent": 85.25963149078727
+        }
+      },
+      "event_recall_le80ms_percent": 72.06795164978764,
+      "event_recall_le160ms_percent": 72.51670378619154,
+      "event_recall_le320ms_percent": 73.57681310111775,
+      "event_recall_le640ms_percent": 74.99723420732381,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.572955479306288,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        206599,
+        24321,
+        27116,
+        345014
+      ],
+      "frame_f1_percent": 88.92958989314192,
+      "eer_percent": 9.396902024655818,
+      "supplementary_native20": {
+        "duration_f1_percent": 88.87680271882103,
+        "frame_confusion_tp_fp_fn_tn": [
+          206599,
+          24321,
+          27116,
+          345014
+        ],
+        "frame_f1_percent": 88.92958989314192,
+        "eer_percent": 9.396902024655818,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    },
+    "A10_no_coarse_aux": {
+      "recordings": 3562,
+      "frames": 603050,
+      "threshold": -0.17664985358715055,
+      "resolution_seconds": 0.02,
+      "positive_label": "fake",
+      "duration_f1_percent": 89.71339358272006,
+      "duration_precision_percent": 89.82844306717142,
+      "duration_recall_percent": 89.59863842492865,
+      "duration_accuracy_percent": 92.06356051944041,
+      "real_fpr_percent": 6.385131370768813,
+      "spoof_fnr_percent": 10.401361575071347,
+      "confusion_seconds_tp_fp_fn_tn": [
+        4161.813187499994,
+        471.2551874999999,
+        483.1381874999971,
+        6909.253687499976
+      ],
+      "fake_seconds": 4644.951374999991,
+      "real_seconds": 7380.508874999976,
+      "fp_seconds": 471.2551874999999,
+      "fn_seconds": 483.1381874999971,
+      "audio_seconds": 12025.46025,
+      "event_f1_iou05_percent": 74.17584719138776,
+      "event_precision_percent": 71.13932187048047,
+      "event_recall_percent": 77.48315393366588,
+      "event_counts": {
+        "matched": 8854,
+        "predicted": 12446,
+        "truth": 11427,
+        "unmatched_predictions": 3592,
+        "missed_truth": 2573
+      },
+      "short_event_recall_le320ms_percent": 73.75877306992462,
+      "short_event_counts": {
+        "matched": 5675,
+        "truth": 7694
+      },
+      "unmatched_fp_events_per_hour": 1075.3185101584781,
+      "fully_genuine": {
+        "recordings": 365,
+        "false_alarm_recordings": 23,
+        "audio_seconds": 1239.050000000001,
+        "fp_seconds": 14.57512500000001,
+        "predicted_events": 45,
+        "false_alarm_recording_rate_percent": 6.301369863013699,
+        "duration_fpr_percent": 1.1763145151527377,
+        "unmatched_fp_events_per_hour": 130.7453290827649
+      },
+      "metric_note": "Duration metrics use clipped real 20ms reference; event TP is maximum-cardinality one-to-one IoU>=0.5 matching, then total-IoU tie-break.",
+      "fp_event_rate_denominator": "All evaluated audio duration; an unmatched predicted event is an FP event even if it partially overlaps a true fake event.",
+      "event_duration_bins": {
+        "le80ms": {
+          "truth": 6122,
+          "matched": 4462,
+          "recall_percent": 72.88467820973538
+        },
+        "gt80_le160ms": {
+          "truth": 613,
+          "matched": 452,
+          "recall_percent": 73.7357259380098
+        },
+        "gt160_le320ms": {
+          "truth": 959,
+          "matched": 761,
+          "recall_percent": 79.35349322210637
+        },
+        "gt320_le640ms": {
+          "truth": 1345,
+          "matched": 1094,
+          "recall_percent": 81.33828996282529
+        },
+        "gt640ms": {
+          "truth": 2388,
+          "matched": 2085,
+          "recall_percent": 87.31155778894473
+        }
+      },
+      "event_recall_le80ms_percent": 72.88467820973538,
+      "event_recall_le160ms_percent": 72.96213808463251,
+      "event_recall_le320ms_percent": 73.75877306992462,
+      "event_recall_le640ms_percent": 74.88660250027658,
+      "metric_protocol_version": "ps_native20_event_v2",
+      "evaluation_only": true,
+      "selection_note": "Fixed supplied checkpoint and threshold; no checkpoint or threshold selection is performed here.",
+      "real_duration_fpr_percent": 6.385131370768813,
+      "active_20ms_frames": 603050,
+      "frame_confusion_tp_fp_fn_tn": [
+        209533,
+        23619,
+        24182,
+        345716
+      ],
+      "frame_f1_percent": 89.7613238888163,
+      "eer_percent": 8.382881937432284,
+      "supplementary_native20": {
+        "duration_f1_percent": 89.71339358272006,
+        "frame_confusion_tp_fp_fn_tn": [
+          209533,
+          23619,
+          24182,
+          345716
+        ],
+        "frame_f1_percent": 89.7613238888163,
+        "eer_percent": 8.382881937432284,
+        "eer_rule": "fake_positive_frame_ROC_nearest_crossing_mean_FPR_FNR",
+        "frame_rule": "Each positive-duration20ms cell counts once, including the fractional final cell."
+      },
+      "undefined_metrics": {}
+    }
+  },
+  "frozen": {
+    "A2_layer6": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A2_layer6",
+      "epoch": 12,
+      "threshold": -0.5488589406013488,
+      "event_f1_iou05_percent": 83.30075232509923,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "92d81069f4b6f1809828e5ca73e0e6b0fff4ccc6d9384bd71d3195d6fed6d883",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "8abe451229be7df992538172fff1dd85a18f6d383ae6314e9372b706ee7eca60",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "32811870fc6c922c0de9b9273514cfbba7d87a848176ede8ec84584271348c19",
+      "eval_read": false,
+      "dev_scores20_sha256": "07cfe44bbd3b14b0a70fa54c2b47e51868787e14669346ec3b3db13dda05e435",
+      "dev_metrics_sha256": "914ba8db8cd91f582349b0d4e49ce33b456cd81fa30df8fa948051cc3c1f7cbe",
+      "total_seconds": 3746.2810000000027
+    },
+    "A3_layer9": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A3_layer9",
+      "epoch": 19,
+      "threshold": 1.1133022308349612,
+      "event_f1_iou05_percent": 78.90945889636288,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "fd8d4fd615bce5747198dd8abb0ceaff7cb098c38b6faf242feeaa81a6259013",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "1e32193b7bcfa2f5d4002033f12cc89869aca555ff627d05327e8c73dc74c36a",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "92f5c200170203c8fe77c34608155f1e2ff91270e6a50b738c98ee1f05fd1c9b",
+      "eval_read": false,
+      "dev_scores20_sha256": "c4790062a8580f6c6178a67c088141e781a28290169f378cdf1b35b0c77a09fa",
+      "dev_metrics_sha256": "8b1fb87f5927e8db3dc41849f1c8c009aef244ad7593fc0ec936ee6b6f1ae44b",
+      "total_seconds": 3749.1089999999967
+    },
+    "A4_mean": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A4_mean",
+      "epoch": 13,
+      "threshold": 0.12700997292995456,
+      "event_f1_iou05_percent": 83.25137745127081,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "0ea318173390d16f368c56839a58ee3c892c6398ed625c5483ff366a2ab26991",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "f39a255691b6f8e41293eda96398e8b0a5aebaffc30e1e15af7646ecdfffd552",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "45caf65ccf962d8b0279cf12b4b29d181f0bbec8f66d0019e802e1a7e533993c",
+      "eval_read": false,
+      "dev_scores20_sha256": "aeb97a8571dfc67bbd82292e6da1ee277058c48de423dc3faca86084e03f0973",
+      "dev_metrics_sha256": "12c7518e0b55e4ef60e76f03df0c0233bfd84fb31ad855c8a66cbbe020c974d5",
+      "total_seconds": 3933.9530000000086
+    },
+    "A5_fixed_pool": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A5_fixed_pool",
+      "epoch": 15,
+      "threshold": 0.028007090091705326,
+      "event_f1_iou05_percent": 83.86637393935798,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "f9e074245e75b61705b80abf239bf39816c0de22d603be97eea660ab7019b1f7",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "b0436a519a8fba561fea0fffe0fc10110dc6fa7f0ca24f2e5ad1bd2d157cdee8",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "d2b390e78a290c21af3d2b7990a8770b4f159335e05a9c3bac9399d70fa35bdf",
+      "eval_read": false,
+      "dev_scores20_sha256": "389fee3f72e3929ea3d85a13dc6f745b5ba6d4d5cebd6093edc37b74cbf63703",
+      "dev_metrics_sha256": "9bcb17b4337f842aea861e3044953f6db38c2d72e9029392a65886dcdb558adf",
+      "total_seconds": 3936.5939999999973
+    },
+    "A6_no_attention": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A6_no_attention",
+      "epoch": 18,
+      "threshold": -0.5664323568344115,
+      "event_f1_iou05_percent": 84.10642806687073,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "5af54b05f00e17219a930b1e5eaa0f8161e68ebaaf906d45fa4e9940fc000723",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "0f027c7ff8c2c28e78d11818dc4e31a48ac30518f7793f5aa9ca320c875580a4",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "1df6a34626b474bbf8ff8cfa1aee339cd9cacca1aa7ff0bf75e4c0f74cf966ba",
+      "eval_read": false,
+      "dev_scores20_sha256": "2e576e0ba1371fb66e60034256031c4caca2a34b07602fdb2d41d02ede1afbb4",
+      "dev_metrics_sha256": "00b537d9ac1fd9a47ffef81c34f4409ca5166d59f2688525da2191abdfb4ebb0",
+      "total_seconds": 3650.968000000008
+    },
+    "A7_fixed_gate": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A7_fixed_gate",
+      "epoch": 20,
+      "threshold": 0.1899383068084717,
+      "event_f1_iou05_percent": 83.42931781749094,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "0a9ea0fc14c86b062734b3b6004174987fd407e68b33ed45f4ccac7fded020a5",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "46fe50fb51cf21fde2157f3075920e29f5883b9f08f1bbc98d6c4c53a89613db",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "334c5dc8a850c5b88082215728c86c47c4a090e6d20c9ed31320fed8ee4dfd6d",
+      "eval_read": false,
+      "dev_scores20_sha256": "5f2092e433d97f4c41e8d9c090f9e9f6fb6580e1ce71c4af0b36518d8752345a",
+      "dev_metrics_sha256": "ae11577d990f4b648565857ca4c77d5d887abf678e41605ab1aef238ee52c541",
+      "total_seconds": 3653.6089999999967
+    },
+    "A8_no_boundary": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A8_no_boundary",
+      "epoch": 14,
+      "threshold": -0.34937906265258784,
+      "event_f1_iou05_percent": 83.23962196434981,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "092a1ca23a274b5cc0ac9522761988337d391452354c0f8dbff2dc3068b94fc7",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "9dd18e9d44aad7db5a9b7d12946838fd5aeefe2a9274e2f44699ee11b1b93f11",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "1374d842d30af8b00401b12ad1f8397414c01dcf1cabb6e84a706769aba290c4",
+      "eval_read": false,
+      "dev_scores20_sha256": "e927cf825ecab2f9f3186c3f32b0d1cb287d7d4cc08f8d1176776156d9019863",
+      "dev_metrics_sha256": "ee70d080f9eabe237f754e762cc644ecae0cc6fbda32e5173b1a73656a1ef193",
+      "total_seconds": 3839.3600000000006
+    },
+    "A9_no_consistency": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A9_no_consistency",
+      "epoch": 20,
+      "threshold": -0.30916994810104365,
+      "event_f1_iou05_percent": 83.35890475628467,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "60a5f355fb1d3d1217fbe328686beac2b73b91a3023f3b767d36dbc1c5568cac",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "5fbbf6e09bd980edccb35f3fcd89466f077567f67c5931de344a1df397da90b5",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "2259865d20a584c1d261e62b0ce3e3a3491f5c2f2acaa680ce375b1a3c77adce",
+      "eval_read": false,
+      "dev_scores20_sha256": "932acffdc23e5c49680ec52b4ea81447f5da6f23841ec5e2978e3810924856c9",
+      "dev_metrics_sha256": "3c15631db4bb3fab7d78998610f5d410abd663da5e589d4dd97d92f1c849318c",
+      "total_seconds": 3840.7189999999973
+    },
+    "A10_no_coarse_aux": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A10_no_coarse_aux",
+      "epoch": 12,
+      "threshold": -0.17664985358715055,
+      "event_f1_iou05_percent": 84.33275769665933,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "65dc5b0f1bb93361f57c169341ea372b80930695a5dec2e4ff0f62cca7631a08",
+      "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+      "last_backbone_sha256": "ec1872b7d3f3389da7370f3da0f9af3fd076f31b857d175649b1929d6c862c5a",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "c32a1a47754a245ba3910ea992a6925002f1956a454c7fc80304e352adbf22a4",
+      "eval_read": false,
+      "dev_scores20_sha256": "5282eec4dc9b734ee9ecf26d88c3e43ea2d51356ffadeca73c32df8fe95891c6",
+      "dev_metrics_sha256": "c4d532db36bc3ebca7260956f39c6f8b734a36909545b3828ca8c81b3f1cd9c2",
+      "total_seconds": 2917.5
+    }
+  },
+  "test_threshold_selection": false,
+  "eval_previously_inspected": true
+}

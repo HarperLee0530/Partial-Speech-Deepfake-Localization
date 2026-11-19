@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "split": "dev",
+  "sample_indices": [
+    0,
+    114,
+    123,
+    204,
+    245,
+    249,
+    311,
+    328,
+    663,
+    882,
+    930,
+    951,
+    964,
+    1038,
+    1306,
+    1326,
+    1329,
+    1389,
+    1540,
+    1560,
+    1572,
+    1630,
+    1707,
+    1721,
+    1732,
+    1839,
+    1852,
+    1915,
+    1929,
+    2287,
+    2429,
+    2445
+  ],
+  "uids": [
+    "CON_D_0000003",
+    "CON_D_0001178",
+    "CON_D_0001267",
+    "CON_D_0002271",
+    "CON_D_0002551",
+    "CON_D_0002602",
+    "CON_D_0003329",
+    "CON_D_0003472",
+    "CON_D_0006985",
+    "CON_D_0009611",
+    "CON_D_0010101",
+    "CON_D_0010317",
+    "CON_D_0010467",
+    "CON_D_0011376",
+    "CON_D_0014086",
+    "CON_D_0014275",
+    "CON_D_0014302",
+    "CON_D_0015065",
+    "CON_D_0016807",
+    "CON_D_0017030",
+    "CON_D_0017142",
+    "CON_D_0017733",
+    "CON_D_0018624",
+    "CON_D_0018760",
+    "CON_D_0018861",
+    "CON_D_0019848",
+    "CON_D_0019952",
+    "CON_D_0020576",
+    "CON_D_0020712",
+    "LA_D_3444541",
+    "LA_D_7883377",
+    "LA_D_8450008"
+  ],
+  "models": {
+    "A0_full": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A1_layer12": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A2_layer6": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A3_layer9": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A4_mean": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A5_fixed_pool": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A6_no_attention": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A7_fixed_gate": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A8_no_boundary": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A9_no_consistency": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    },
+    "A10_no_coarse_aux": {
+      "recordings": 32,
+      "max_absolute_score_difference": 0.0,
+      "unequal_score_frames": 0,
+      "differing_decisions": 0,
+      "threshold_exact": true
+    }
+  }
+}

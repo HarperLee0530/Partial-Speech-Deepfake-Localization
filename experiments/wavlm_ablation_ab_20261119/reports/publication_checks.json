@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "check": "Portable release entry vs archived dev scores; no training",
+  "models": {
+    "A5_fixed_pool": {
+      "max_score_difference": 0.0,
+      "frames": 98,
+      "threshold": 0.028007090091705326
+    },
+    "B2_position_gate_one": {
+      "max_score_difference": 0.0,
+      "frames": 98,
+      "threshold": 0.40948054194450384
+    }
+  }
+}

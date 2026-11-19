@@ -1,0 +1,8 @@
+C:\Users\ROG\OneDrive\文档\ChatGPT\NNDLproject\partial_speech_project\code\.venv\lib\site-packages\torch\nn\functional.py:5476: UserWarning: 1Torch was not compiled with flash attention. (Triggered internally at ..\aten\src\ATen\native\transformers\cuda\sdp_utils.cpp:263.)
+  attn_output = scaled_dot_product_attention(q, k, v, attn_mask, dropout_p, is_causal)
+{'arm': 'B3_no_relative_bias', 'split': 'train', 'channel': 0, 'recordings': 3080, 'per_channel': 6345, 'elapsed_seconds': 30.0}
+{'arm': 'B3_no_relative_bias', 'split': 'train', 'channel': 0, 'recordings': 5930, 'per_channel': 6345, 'elapsed_seconds': 60.0}
+{'arm': 'B3_no_relative_bias', 'split': 'train', 'channel': 1, 'recordings': 2444, 'per_channel': 6345, 'elapsed_seconds': 90.0}
+{'arm': 'B3_no_relative_bias', 'split': 'train', 'channel': 1, 'recordings': 5554, 'per_channel': 6345, 'elapsed_seconds': 120.0}
+{'arm': 'B3_no_relative_bias', 'split': 'train', 'channel': 2, 'recordings': 2220, 'per_channel': 6345, 'elapsed_seconds': 150.0}
+{'arm': 'B3_no_relative_bias', 'split': 'train', 'channel': 2, 'recordings': 5321, 'per_channel': 6345, 'elapsed_seconds': 180.0}

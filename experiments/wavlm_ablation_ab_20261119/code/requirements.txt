@@ -1,0 +1,6 @@
+torch==2.2.1
+torchaudio==2.2.1
+numpy==1.26.4
+soundfile==0.13.1
+scipy==1.15.3
+scikit-learn==1.6.1

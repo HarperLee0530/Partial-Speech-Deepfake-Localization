@@ -1,0 +1,20 @@
+{
+  "status": "code_ready_not_trained",
+  "unit_tests_passed": 8,
+  "optimizer_steps": 0,
+  "dataset_access": false,
+  "original_files_changed": [],
+  "new_files": {
+    "benchmark_wavlm_ablation_b.py": "3a30765b04b2b35c828adfe475a5ec382cb3a85a1993dca6049fdc099aa64364",
+    "cnn_ps/cache_wavlm_ablation_b.py": "02be7531df9d1ffb1c1b9a69b327ed03d9f2a86dc7efd3d56ee228f6834dfef3",
+    "cnn_ps/train_wavlm_ablation_b.py": "5cb01e0e5d1639e44c5710ff14d65422ecd3a22e295a842d6192a4d52c441d84",
+    "cnn_ps/wavlm_ablation_b.py": "293f835490b7a5db2e25d49cac84ada3a296819527efe3291f605dcc8d6015e5",
+    "report_wavlm_ablation_b.py": "73f7f4b24334ff2e59f54474df4f87ea4391c18831b699ec9b101895b896e7ec",
+    "run_wavlm_ablation_b.py": "c36648218b81fbf1264849355d8374749edf335e8d738e117792f8d0b5c641cc",
+    "tests/test_wavlm_ablation_b.py": "ba55f994054676b3e5b23b527dd9b35e4312c0f42835b0de85f63d66b8a67eed",
+    "verify_wavlm_ablation_b.py": "44873b7023d8b268f144ef143492310de80b974712ba12cbeccc5185ef9342b3",
+    "WAVLM_ABLATION_B_RUNNING.md": "4aed6603d30591986809ffeb2cd8d6fe4068524f7bf8328bdbe2a3f0a686e770"
+  },
+  "pretrained_forward_status": "passed",
+  "training_output_exists": false
+}

@@ -1,0 +1,306 @@
+{
+  "comparisons": {
+    "A1_layer12": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A1_layer12, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 8.417870736823872,
+          "ci95_pp": [
+            7.372118571965048,
+            9.450580203884318
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": 5.874707564335836,
+          "ci95_pp": [
+            4.678157400829723,
+            7.10150715086251
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -1.1239070896720254,
+          "ci95_pp": [
+            -1.6182919259432704,
+            -0.6341425180143415
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A2_layer6": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A2_layer6, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 1.5280801764517093,
+          "ci95_pp": [
+            0.6925769618588682,
+            2.371052827166316
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -0.1559656875487434,
+          "ci95_pp": [
+            -1.211393590992461,
+            0.841016404382671
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -1.0130466783023921,
+          "ci95_pp": [
+            -1.4152375139456603,
+            -0.5939414244366055
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A3_layer9": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A3_layer9, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 5.138295838774326,
+          "ci95_pp": [
+            4.1460337053342755,
+            6.122198586385109
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": 3.223290876007269,
+          "ci95_pp": [
+            2.0180066074690757,
+            4.375526283384313
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -0.31475810670302096,
+          "ci95_pp": [
+            -0.8191426698315522,
+            0.16726698302461954
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A4_mean": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A4_mean, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 2.8879860487660096,
+          "ci95_pp": [
+            2.018935321630164,
+            3.7238963240365037
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": 1.5076683129711483,
+          "ci95_pp": [
+            0.4065976263967947,
+            2.5260043392571507
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -1.2009241368197454,
+          "ci95_pp": [
+            -1.679921749882907,
+            -0.7106991425694901
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A5_fixed_pool": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A5_fixed_pool, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": -1.3077431556454542,
+          "ci95_pp": [
+            -2.1352721055565165,
+            -0.5299339909380656
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -3.275279438523526,
+          "ci95_pp": [
+            -4.2923877085571736,
+            -2.2411521711447833
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -0.588309705135333,
+          "ci95_pp": [
+            -1.0436620962860321,
+            -0.15701199953138098
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A6_no_attention": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A6_no_attention, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 1.4697254034063292,
+          "ci95_pp": [
+            0.6587150106507551,
+            2.2945135017183946
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -1.7286197036652027,
+          "ci95_pp": [
+            -2.7342553894418997,
+            -0.691741792985602
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -0.9915813562381315,
+          "ci95_pp": [
+            -1.4354102564040414,
+            -0.5819750068508359
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A7_fixed_gate": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A7_fixed_gate, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 1.4659346546217478,
+          "ci95_pp": [
+            0.6521930016135069,
+            2.292015164752198
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -0.8058227190018243,
+          "ci95_pp": [
+            -1.854122858542425,
+            0.19894432586771227
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -0.2927906173678281,
+          "ci95_pp": [
+            -0.6614115447831392,
+            0.0831596016320224
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A8_no_boundary": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A8_no_boundary, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 1.5729963761424415,
+          "ci95_pp": [
+            0.7728332519387475,
+            2.3627440832017963
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": 1.5596568754873914,
+          "ci95_pp": [
+            0.515733083266835,
+            2.5611661240060326
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -0.83620165689456,
+          "ci95_pp": [
+            -1.1900441057731137,
+            -0.49136924800616033
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A9_no_consistency": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A9_no_consistency, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 1.5290359808858085,
+          "ci95_pp": [
+            0.7160099483475708,
+            2.318808599973604
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -0.9747855471796214,
+          "ci95_pp": [
+            -2.0460908301373335,
+            0.06498212786631112
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -0.8686113462603053,
+          "ci95_pp": [
+            -1.2280310356696198,
+            -0.5096322318056848
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "A10_no_coarse_aux": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261118,
+      "difference": "A0_full minus A10_no_coarse_aux, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": -0.49916020379053805,
+          "ci95_pp": [
+            -1.2754577699095677,
+            0.2763247507887903
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -1.1567455159864863,
+          "ci95_pp": [
+            -2.138757736662602,
+            -0.19556640920793839
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": -0.6807872377228303,
+          "ci95_pp": [
+            -1.0682435024883383,
+            -0.2925451958860621
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    }
+  },
+  "multiplicity": "Exploratory unadjusted 95% intervals across ten comparisons; not confirmatory familywise inference",
+  "limitation": "Paired recording resampling conditional on fixed models; not training-seed variability or speaker-cluster bootstrap"
+}

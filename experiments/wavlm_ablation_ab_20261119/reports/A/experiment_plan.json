@@ -1,0 +1,210 @@
+{
+  "arms": {
+    "A0_full": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A1_layer12": {
+      "feature_mode": "layer12",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A2_layer6": {
+      "feature_mode": "layer6",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A3_layer9": {
+      "feature_mode": "layer9",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A4_mean": {
+      "feature_mode": "mean",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A5_fixed_pool": {
+      "feature_mode": "learned",
+      "learned_pool": false,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A6_no_attention": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": false,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A7_fixed_gate": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": false,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A8_no_boundary": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": false,
+      "consistency": true,
+      "coarse_aux": true
+    },
+    "A9_no_consistency": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": false,
+      "coarse_aux": true
+    },
+    "A10_no_coarse_aux": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": false
+    }
+  },
+  "seed": 666,
+  "epochs": 20,
+  "batch_size": 8,
+  "threads_per_worker": 4,
+  "workers": 2,
+  "reference_root": "C:\\Users\\ROG\\OneDrive\\文档\\ChatGPT\\NNDLproject\\handoff_audit\\multilayer_20261117\\full",
+  "new_arms": [
+    "A2_layer6",
+    "A3_layer9",
+    "A4_mean",
+    "A5_fixed_pool",
+    "A6_no_attention",
+    "A7_fixed_gate",
+    "A8_no_boundary",
+    "A9_no_consistency",
+    "A10_no_coarse_aux"
+  ],
+  "losses": {
+    "A0_full": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A1_layer12": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A2_layer6": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A3_layer9": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A4_mean": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A5_fixed_pool": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A6_no_attention": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A7_fixed_gate": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.05
+    },
+    "A8_no_boundary": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.0,
+      "consistency": 0.05
+    },
+    "A9_no_consistency": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.5,
+      "boundary": 0.1,
+      "consistency": 0.0
+    },
+    "A10_no_coarse_aux": {
+      "main20": 1.0,
+      "main160": 1.0,
+      "coarse_aux": 0.0,
+      "boundary": 0.1,
+      "consistency": 0.05
+    }
+  },
+  "source_sha256": {
+    "wavlm_ablation_a.py": "3a5ab9ae1dedd9a5ad6d8ca9c20be8e670245c92f3d93ced20639d516a4fa402",
+    "train_wavlm_ablation_a.py": "e550bfdc5400cf601807ae5b8248cf00d514c2004c19082315ee3670caf898f8"
+  },
+  "primary_metric": "event F1 at IoU0.5",
+  "selection": "dev duration-FPR<=5%; maximum dev event F1; epoch0 eligible; earliest tie",
+  "calibration": "separate dev threshold per model; never test calibration",
+  "references": "Reuse A0/A1 only after exact CPU/CUDA step and full-dev parity checks",
+  "latency": "After all training, sequential full-audio inference on fixed dev sample; no GPU contention",
+  "uncertainty": "paired recording bootstrap; single training seed; exploratory comparisons",
+  "eval_previously_inspected": true
+}

@@ -1,0 +1,19 @@
+Detached restart {'pid': 60732, 'state': 'active', 'started_utc': '2026-11-18T11:53:55.035439+00:00', 'release': 'Automatically at workflow exit', 'display_may_sleep': True}
+START A2_layer6 pid=63316
+START A3_layer9 pid=37456
+COMPLETE A2_layer6
+COMPLETE A3_layer9
+START A4_mean pid=10124
+START A5_fixed_pool pid=55008
+COMPLETE A4_mean
+COMPLETE A5_fixed_pool
+START A6_no_attention pid=49352
+START A7_fixed_gate pid=18236
+COMPLETE A6_no_attention
+COMPLETE A7_fixed_gate
+START A8_no_boundary pid=45828
+START A9_no_consistency pid=22892
+COMPLETE A8_no_boundary
+COMPLETE A9_no_consistency
+START A10_no_coarse_aux pid=61772
+COMPLETE A10_no_coarse_aux

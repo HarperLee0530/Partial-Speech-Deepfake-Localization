@@ -1,0 +1,45 @@
+{
+  "schema": "ps_frozen_wavlm_positional_cache_v1",
+  "arm": "B2_position_gate_one",
+  "encoder_intervention": "gate_one",
+  "split": "dev",
+  "layers": [
+    6,
+    9,
+    12
+  ],
+  "frozen": true,
+  "model_id": "microsoft/wavlm-base-plus",
+  "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+  "model_sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+  "reference": "C:\\Users\\ROG\\OneDrive\\文档\\ChatGPT\\NNDLproject\\handoff_audit\\multilayer_20261117\\full\\reference\\dev",
+  "reference_sha256": "d1b3da1a9b38b82505351c1c794088dcc55aa322e6a04deb2a483aa3ad8a7675",
+  "recordings": 2484,
+  "channels": 1,
+  "dtype": "float32",
+  "encoder_sources": {
+    "transformers_version": "4.51.3",
+    "torch_version": "2.2.1+cu121",
+    "transformers_wavlm_sha256": "bcf114b78f283c3fe56dba03cd025469d97a8b4f50651b1f49b7b48e8445f45c",
+    "source_sha256": {
+      "wavlm_ablation_b.py": "293f835490b7a5db2e25d49cac84ada3a296819527efe3291f605dcc8d6015e5",
+      "cache_wavlm_ablation_b.py": "02be7531df9d1ffb1c1b9a69b327ed03d9f2a86dc7efd3d56ee228f6834dfef3",
+      "wavlm_frontend.py": "644c4abcd3e65f31472cc74b5951ebe962b0ba1e600ac9f34ddb7f084f5a9008",
+      "wavlm_multilayer.py": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+      "augmentation.py": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0"
+    }
+  },
+  "test_read": false,
+  "normalization": "none; unchanged official preprocessing",
+  "grid": "stride320/receptive400/sidepad40; unchanged full recording storage grid",
+  "status": "complete",
+  "shape": [
+    1,
+    442776,
+    3,
+    768
+  ],
+  "source_unchanged": true,
+  "features_sha256": "332528d343dc2f14505fc13ba1a96e95d54f2cd59ddd7b3afcfdd9ad83321644",
+  "elapsed_seconds": 31.046999999991385
+}

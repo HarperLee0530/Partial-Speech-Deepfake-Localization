@@ -1,0 +1,85 @@
+{
+  "arms": {
+    "B0_full": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true,
+      "encoder_intervention": "original"
+    },
+    "B1_no_conv_position": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true,
+      "encoder_intervention": "no_conv_position"
+    },
+    "B2_position_gate_one": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true,
+      "encoder_intervention": "gate_one"
+    },
+    "B3_no_relative_bias": {
+      "feature_mode": "learned",
+      "learned_pool": true,
+      "attention": true,
+      "gate": true,
+      "boundary": true,
+      "consistency": true,
+      "coarse_aux": true,
+      "encoder_intervention": "no_relative_bias"
+    }
+  },
+  "reference": "A0 full backend, not A5",
+  "seed": 666,
+  "epochs": 20,
+  "batch_size": 8,
+  "threads": 4,
+  "baseline": {
+    "status": "complete",
+    "schema": "ps_frozen_wavlm_multilayer_cnn_v1",
+    "arm": "fusion6_9_12",
+    "epoch": 18,
+    "threshold": -0.17905920743942258,
+    "event_f1_iou05_percent": 83.40817915094904,
+    "checkpoint": "best.pt",
+    "checkpoint_sha256": "160a4b3cacbee48398d11f218e3ca2dff76615670ae05255f6775119dd37b50e",
+    "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+    "last_backbone_sha256": "dbf9a6d7226ad6406e0e74320100230f93a8c1c43d43532d9edcff2ad3434e98",
+    "trained_epochs": 20,
+    "updates": 15880,
+    "archived_epochs": 21,
+    "protocol_sha256": "f6a3dc2dd3da94267e4c5766beeaf26cd943fc0c18db78d5580872421c719e3a",
+    "eval_read": false,
+    "dev_scores20_sha256": "d2528fa96e67653060d94d2cbb20280b439014498d4e7075a8adff179151f772",
+    "dev_metrics_sha256": "946794d1c012fd3fff5b58a2f5112afb1c959188080162e38b059d29704046b5",
+    "total_seconds": 2758.2660000000033
+  },
+  "encoder_sources": {
+    "transformers_version": "4.51.3",
+    "torch_version": "2.2.1+cu121",
+    "transformers_wavlm_sha256": "bcf114b78f283c3fe56dba03cd025469d97a8b4f50651b1f49b7b48e8445f45c",
+    "source_sha256": {
+      "wavlm_ablation_b.py": "293f835490b7a5db2e25d49cac84ada3a296819527efe3291f605dcc8d6015e5",
+      "cache_wavlm_ablation_b.py": "02be7531df9d1ffb1c1b9a69b327ed03d9f2a86dc7efd3d56ee228f6834dfef3",
+      "wavlm_frontend.py": "644c4abcd3e65f31472cc74b5951ebe962b0ba1e600ac9f34ddb7f084f5a9008",
+      "wavlm_multilayer.py": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+      "augmentation.py": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0"
+    }
+  },
+  "trainer_sha256": "5cb01e0e5d1639e44c5710ff14d65422ecd3a22e295a842d6192a4d52c441d84",
+  "selection": "dev duration FPR<=5%, best dev event F1, earliest tie, epoch0 eligible",
+  "test_previously_inspected": true,
+  "discard_generated_caches": true
+}

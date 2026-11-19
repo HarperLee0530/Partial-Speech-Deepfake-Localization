@@ -1,0 +1,6 @@
+C:\Users\ROG\OneDrive\文档\ChatGPT\NNDLproject\partial_speech_project\code\.venv\lib\site-packages\torch\nn\functional.py:5476: UserWarning: 1Torch was not compiled with flash attention. (Triggered internally at ..\aten\src\ATen\native\transformers\cuda\sdp_utils.cpp:263.)
+  attn_output = scaled_dot_product_attention(q, k, v, attn_mask, dropout_p, is_causal)
+B0_full {'recordings': 32, 'max_absolute_score_difference': 0.0, 'unequal_score_frames': 0, 'differing_decisions': 0, 'threshold_exact': True} {'mean_ms': 33.109146874267026, 'real_time_factor': 0.00924122097018482}
+B1_no_conv_position {'recordings': 32, 'max_absolute_score_difference': 0.0, 'unequal_score_frames': 0, 'differing_decisions': 0, 'threshold_exact': True} {'mean_ms': 24.240096873654693, 'real_time_factor': 0.006765746408350739}
+B2_position_gate_one {'recordings': 32, 'max_absolute_score_difference': 0.0, 'unequal_score_frames': 0, 'differing_decisions': 0, 'threshold_exact': True} {'mean_ms': 22.818168748017342, 'real_time_factor': 0.006368866595571619}
+B3_no_relative_bias {'recordings': 32, 'max_absolute_score_difference': 0.0, 'unequal_score_frames': 0, 'differing_decisions': 0, 'threshold_exact': True} {'mean_ms': 23.072787497767422, 'real_time_factor': 0.006439934211373627}

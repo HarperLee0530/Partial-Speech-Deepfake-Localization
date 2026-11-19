@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "schema": "ps_frozen_wavlm_ablation_a_v1",
+  "arm": "A9_no_consistency",
+  "epoch": 20,
+  "threshold": -0.30916994810104365,
+  "event_f1_iou05_percent": 83.35890475628467,
+  "checkpoint": "best.pt",
+  "checkpoint_sha256": "60a5f355fb1d3d1217fbe328686beac2b73b91a3023f3b767d36dbc1c5568cac",
+  "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+  "last_backbone_sha256": "5fbbf6e09bd980edccb35f3fcd89466f077567f67c5931de344a1df397da90b5",
+  "trained_epochs": 20,
+  "updates": 15880,
+  "archived_epochs": 21,
+  "protocol_sha256": "2259865d20a584c1d261e62b0ce3e3a3491f5c2f2acaa680ce375b1a3c77adce",
+  "eval_read": false,
+  "dev_scores20_sha256": "932acffdc23e5c49680ec52b4ea81447f5da6f23841ec5e2978e3810924856c9",
+  "dev_metrics_sha256": "3c15631db4bb3fab7d78998610f5d410abd663da5e589d4dd97d92f1c849318c",
+  "total_seconds": 3840.7189999999973
+}

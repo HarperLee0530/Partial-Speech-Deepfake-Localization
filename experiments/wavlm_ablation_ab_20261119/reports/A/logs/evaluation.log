@@ -1,0 +1,9 @@
+{'arm': 'A2_layer6', 'event_f1': 72.14860681114551, 'real_fpr': 6.717390811348375}
+{'arm': 'A3_layer9', 'event_f1': 68.5383911488229, 'real_fpr': 6.019102239749004}
+{'arm': 'A4_mean', 'event_f1': 70.78870093883121, 'real_fpr': 6.905268269865728}
+{'arm': 'A5_fixed_pool', 'event_f1': 74.98443014324268, 'real_fpr': 6.292653838181316}
+{'arm': 'A6_no_attention', 'event_f1': 72.20696158419089, 'real_fpr': 6.6959254892841145}
+{'arm': 'A7_fixed_gate', 'event_f1': 72.21075233297547, 'real_fpr': 5.997134750413811}
+{'arm': 'A8_no_boundary', 'event_f1': 72.10369061145478, 'real_fpr': 6.540545789940543}
+{'arm': 'A9_no_consistency', 'event_f1': 72.14765100671141, 'real_fpr': 6.572955479306288}
+{'arm': 'A10_no_coarse_aux', 'event_f1': 74.17584719138776, 'real_fpr': 6.385131370768813}

@@ -1,0 +1,13 @@
+test_backend_initialization_outputs_losses_match_a0 (test_wavlm_ablation_b.BGroupTests) ... ok
+test_cache_cross_arm_and_stale_source_rejected (test_wavlm_ablation_b.BGroupTests) ... ok
+test_control_exact_and_all_switches_preserve_weights_rng (test_wavlm_ablation_b.BGroupTests) ... ok
+test_default_clis_never_train_or_create_outputs (test_wavlm_ablation_b.BGroupTests) ... ok
+test_disabled_parameters_cannot_affect_output (test_wavlm_ablation_b.BGroupTests) ... ok
+test_double_intervention_rejected (test_wavlm_ablation_b.BGroupTests) ... ok
+test_eval_guard_precedes_dataset_access (test_wavlm_ablation_b.BGroupTests) ... ok
+test_gate_one_and_zero_bias_match_explicit_attention (test_wavlm_ablation_b.BGroupTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.836s
+
+OK

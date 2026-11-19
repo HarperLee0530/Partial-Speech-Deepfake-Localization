@@ -1,0 +1,92 @@
+{
+  "B1_no_conv_position": {
+    "method": "paired recording percentile bootstrap",
+    "repetitions": 2000,
+    "seed": 20261119,
+    "difference": "B0_full minus B1_no_conv_position, percentage points",
+    "metrics": {
+      "event_f1_iou05_percent": {
+        "delta_pp": 3.0723710368040287,
+        "ci95_pp": [
+          2.1632528543946705,
+          3.9763760992508463
+        ]
+      },
+      "short_event_recall_le320ms_percent": {
+        "delta_pp": 1.8455939693267425,
+        "ci95_pp": [
+          0.6557611392814717,
+          3.046943983432582
+        ]
+      },
+      "real_duration_fpr_percent": {
+        "delta_pp": -1.4523244848750059,
+        "ci95_pp": [
+          -2.0052854837457597,
+          -0.9147904139645093
+        ]
+      }
+    },
+    "limitation": "Conditional on two fixed trained models; not training-seed variability"
+  },
+  "B2_position_gate_one": {
+    "method": "paired recording percentile bootstrap",
+    "repetitions": 2000,
+    "seed": 20261119,
+    "difference": "B0_full minus B2_position_gate_one, percentage points",
+    "metrics": {
+      "event_f1_iou05_percent": {
+        "delta_pp": 0.39411718773870064,
+        "ci95_pp": [
+          -0.49136419657074304,
+          1.3021540074618587
+        ]
+      },
+      "short_event_recall_le320ms_percent": {
+        "delta_pp": -0.41590850012997294,
+        "ci95_pp": [
+          -1.5552629325821008,
+          0.7373226037445175
+        ]
+      },
+      "real_duration_fpr_percent": {
+        "delta_pp": -0.65926179107805,
+        "ci95_pp": [
+          -1.1354674185687288,
+          -0.21385241062036697
+        ]
+      }
+    },
+    "limitation": "Conditional on two fixed trained models; not training-seed variability"
+  },
+  "B3_no_relative_bias": {
+    "method": "paired recording percentile bootstrap",
+    "repetitions": 2000,
+    "seed": 20261119,
+    "difference": "B0_full minus B3_no_relative_bias, percentage points",
+    "metrics": {
+      "event_f1_iou05_percent": {
+        "delta_pp": 4.5934633165041845,
+        "ci95_pp": [
+          3.6177244293091695,
+          5.518554313381024
+        ]
+      },
+      "short_event_recall_le320ms_percent": {
+        "delta_pp": -2.105536781907986,
+        "ci95_pp": [
+          -3.2552227966406906,
+          -0.9491005464904848
+        ]
+      },
+      "real_duration_fpr_percent": {
+        "delta_pp": -0.2654584911667106,
+        "ci95_pp": [
+          -0.7399273608750294,
+          0.20730881965497527
+        ]
+      }
+    },
+    "limitation": "Conditional on two fixed trained models; not training-seed variability"
+  }
+}

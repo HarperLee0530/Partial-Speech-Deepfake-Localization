@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "models": {
+    "A0_full": {
+      "status": "passed",
+      "source": "C:\\Users\\ROG\\OneDrive\\文档\\ChatGPT\\NNDLproject\\handoff_audit\\multilayer_20261117\\full\\training\\fusion6_9_12",
+      "source_complete": {
+        "status": "complete",
+        "schema": "ps_frozen_wavlm_multilayer_cnn_v1",
+        "arm": "fusion6_9_12",
+        "epoch": 18,
+        "threshold": -0.17905920743942258,
+        "event_f1_iou05_percent": 83.40817915094904,
+        "checkpoint": "best.pt",
+        "checkpoint_sha256": "160a4b3cacbee48398d11f218e3ca2dff76615670ae05255f6775119dd37b50e",
+        "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+        "last_backbone_sha256": "dbf9a6d7226ad6406e0e74320100230f93a8c1c43d43532d9edcff2ad3434e98",
+        "trained_epochs": 20,
+        "updates": 15880,
+        "archived_epochs": 21,
+        "protocol_sha256": "f6a3dc2dd3da94267e4c5766beeaf26cd943fc0c18db78d5580872421c719e3a",
+        "eval_read": false,
+        "dev_scores20_sha256": "d2528fa96e67653060d94d2cbb20280b439014498d4e7075a8adff179151f772",
+        "dev_metrics_sha256": "946794d1c012fd3fff5b58a2f5112afb1c959188080162e38b059d29704046b5",
+        "total_seconds": 2758.2660000000033
+      },
+      "dev_recordings": 2484,
+      "max_absolute_score_difference": 0.0,
+      "checkpoint_sha256": "160a4b3cacbee48398d11f218e3ca2dff76615670ae05255f6775119dd37b50e",
+      "protocol_sha256": "f6a3dc2dd3da94267e4c5766beeaf26cd943fc0c18db78d5580872421c719e3a"
+    },
+    "A1_layer12": {
+      "status": "passed",
+      "source": "C:\\Users\\ROG\\OneDrive\\文档\\ChatGPT\\NNDLproject\\handoff_audit\\multilayer_20261117\\full\\training\\layer12",
+      "source_complete": {
+        "status": "complete",
+        "schema": "ps_frozen_wavlm_multilayer_cnn_v1",
+        "arm": "layer12",
+        "epoch": 20,
+        "threshold": 1.0518684387207033,
+        "event_f1_iou05_percent": 76.42769643586304,
+        "checkpoint": "best.pt",
+        "checkpoint_sha256": "36f0d9fbc7d6cd88605da0a7ed7290835fdbe87b96ed3dc36357defdee338f63",
+        "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+        "last_backbone_sha256": "d9eec215ff65ea91c2c4e9209605c510578a05266030d451b5a8aa6cdc555b46",
+        "trained_epochs": 20,
+        "updates": 15880,
+        "archived_epochs": 21,
+        "protocol_sha256": "c95ce0d70a2d0b3b4c16d9d8cea2081954a2a2daf2102620d9bcedcad5c6565f",
+        "eval_read": false,
+        "dev_scores20_sha256": "dc487d38a8394879484c370db8d46c3fd2971142980dfa88ceaee282a8860843",
+        "dev_metrics_sha256": "0c3216727253bb85e564bf3bb5db2937fdf3c85d9a903da2a8a71a683de8ac19",
+        "total_seconds": 2610.561999999998
+      },
+      "dev_recordings": 2484,
+      "max_absolute_score_difference": 0.0,
+      "checkpoint_sha256": "36f0d9fbc7d6cd88605da0a7ed7290835fdbe87b96ed3dc36357defdee338f63",
+      "protocol_sha256": "c95ce0d70a2d0b3b4c16d9d8cea2081954a2a2daf2102620d9bcedcad5c6565f"
+    }
+  },
+  "smoke": {
+    "arms": 11,
+    "train": 4,
+    "dev": 4,
+    "updates_per_arm": 1,
+    "eval_read": false
+  },
+  "synthetic_equivalence": "CPU/CUDA output, loss, gradient and one AdamW update tested bitwise equal",
+  "reuse_scope": "Existing seed666 full and layer12 arms only; no new test access in verification"
+}

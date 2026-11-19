@@ -1,0 +1,20 @@
+{
+  "phase": "epoch_complete",
+  "arm": "A7_fixed_gate",
+  "epoch": 20,
+  "updates": 15880,
+  "loss": 0.20060998128647317,
+  "loss_components": {
+    "main": 0.1644761165092589,
+    "coarse_aux": 0.06204729892667711,
+    "boundary": 0.04831937523980998,
+    "consistency": 0.005565552832236189
+  },
+  "train_seconds": 125.81200000000536,
+  "total_seconds": 179.75,
+  "best_epoch": 20,
+  "threshold": 0.1899383068084717,
+  "event_f1_iou05_percent": 83.42931781749094,
+  "short_event_recall_le320ms_percent": 79.39451277199622,
+  "real_fpr_percent": 4.999949085134474
+}

@@ -1,0 +1,54 @@
+版本比较：GitHub后续上传与当前A/B消融实验（2026-11-19）
+
+一、结论
+现有A/B组的内部对照不会因这次上传而失效，不需要仅因这次更新重启B组。
+但组员最新上传包研究的是另一条WavLM-Large/SAL路线，不能把当前CNN-BiGRU消融当成该SAL后端的消融，也不能直接比较两份报告的事件F1。
+
+二、版本证据
+当前项目基准：4e28bb646b5fd17461871c2dc4a4832f41ae2045（2026-11-16）。
+远端main：6beb5aae790eb4a5f0185ef27b0df63973683df6（2026-11-17）；相对基准只新增90个文件，均为我们此前发布的多层融合实验。
+查询所有9个远端分支后，按提交者时间最新的分支为results/sal-logmel-20261118：6f63fa65ac439c108d4d50d49b062e68ebc2104e（2026-11-18 09:14:27+08:00）。提交时间不等于实际上传时间。
+该分支相对main只新增169个文件，全部位于experiments/sal_logmel_20261117/，没有修改或删除原文件；相对我们的基准共新增259个文件。
+code、docs、weights及根README在基准/main/最新分支的Git对象ID逐项一致，见review_summary.json。
+add-sal-experiments分支的最新提交实际为11月7日，不是此次后续更新。
+
+三、新增内容
+1. Log-Mel替换SAL的WavLM前端的独立实验；保留SAL的Conformer、SPL位置监督、CSM混合和训练配方。
+2. 普通前端：原80维Log-Mel→LayerNorm80→Linear80到1024→两层1024维Conformer→池化→8类位置头与2类真假头。
+3. 对照复用历史WavLM-Large SAL模型，不是重新训练WavLM对照。该SAL已有25个隐藏状态的可学习加权，源码为直接加权求和；不同于我们3层softmax融合。
+4. 发布源代码快照、配置、训练/恢复日志、PS及LPS指标、逐录音预测证据压缩包、校验清单及结果复核脚本；README明确此快照不替换主方案。
+5. 记录了推理路径兼容修复：torch.load(checkpoint_path, mmap=True)改为torch.load(str(checkpoint_path), mmap=True)。这是新实验推理入口兼容性修复，未改变其训练模型或损失，也未修改当前CNN主线。
+6. 没有发布该Log-Mel实验的285MB最佳训练检查点。
+
+四、关键差异
+当前A0/B0：冻结WavLM-Base-Plus，6/9/12层softmax融合，768→80投影，CNN-BiGRU，双分辨率/局部注意力/门控，边界辅助及同段一致性。
+新包SAL参照：WavLM-Large，25状态加权，1024维Conformer，SPL与CSM；新训练组以Log-Mel取代WavLM。
+
+当前训练：6,345条；seed666；20轮；AdamW lr0.001；开发集真实时长FPR≤5%校准，再按事件F1选轮次。
+新包训练：train_detector 5,076条；seed888；两组实际40轮；Adam lr0.00001并StepLR；开发EER选轮次，固定argmax预测。
+
+当前PS：实际20ms标签和原生20ms事件评价，同时含160ms辅助训练目标。
+新包PS：160ms官方标签/评价；LPS为20ms。Log-Mel特征步长20ms不代表PS采用20ms评价。
+两份报告都列PS eval 3,562条，但相同录音数量不意味着标签网格、阈值和评价任务相同。
+
+五、指标与结论影响
+新包报告PS事件F1：WavLM+SAL 89.2314%，Log-Mel+SAL 47.1572%；EER分别4.5031%、23.1425%。这些数字来自上传报告，本次未下载大预测包或重新计算。
+当前A0事件F1 73.6767%，A5 74.9844%，属于20ms协议，不能用89.2314%与这些数直接排名。
+新实验支持它所用固定SAL配方依赖WavLM前端；不能据此分摊WavLM、SPL、CSM各自贡献，也不构成当前注意力、门控、边界等消融结论的反证。
+我们的多层融合结果仅支持本CNN-BiGRU系统中特定层组合与学习权重的条件收益，不证明全世界首次使用WavLM多层融合，也不证明对那个25状态融合SAL模型继续增加融合会有相同收益。
+B组仅检验冻结Base-Plus位置机制在当前后端上的影响，不能直接外推到WavLM-Large+SAL。
+单种子、历史测试集已查看、探索性多重比较等既有局限保持不变。
+
+六、建议
+继续按已冻结方案完成B组，报告中明确代码版本与CNN-BiGRU路线。
+把新上传的SAL前端对照作为独立实验章节，并明确PS160ms协议。
+如后续要比较两条路线，另立公平对照：统一数据划分、实际20ms标签、选模/阈值规则、事件匹配定义，并声明预训练模型规模与训练预算差异；不要中途更换B组组件或合并两份成绩。
+
+七、本次操作边界
+远端分支下载到本审查目录中的独立裸仓库；只读取选择的说明、配置和源码，没有执行远端实验脚本、加载模型或调用GPU。
+未pull/checkout/merge当前项目；未覆盖现有文件；未操作B组训练进程。
+审查前后当前项目代码哈希一致；B组冻结计划中记录的编码器与训练源码哈希也仍一致。证据见review_summary.json。
+
+远端证据：
+https://github.com/HarperLee0530/Partial-Speech-Deepfake-Localization/tree/results/sal-logmel-20261118/experiments/sal_logmel_20261117
+https://github.com/HarperLee0530/Partial-Speech-Deepfake-Localization/blob/6f63fa65ac439c108d4d50d49b062e68ebc2104e/experiments/sal_logmel_20261117/README.md

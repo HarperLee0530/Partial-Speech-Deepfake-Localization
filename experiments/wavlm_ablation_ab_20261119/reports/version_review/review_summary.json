@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-11-19T12:24:09.312826+08:00",
+  "baseline": "4e28bb646b5fd17461871c2dc4a4832f41ae2045",
+  "remote_main": "6beb5aae790eb4a5f0185ef27b0df63973683df6",
+  "latest_commit_by_committer_date": "6f63fa65ac439c108d4d50d49b062e68ebc2104e",
+  "latest_branch": "results/sal-logmel-20261118",
+  "new_files_since_main": 169,
+  "modified_existing_files": 0,
+  "deleted_existing_files": 0,
+  "identical_git_objects": {
+    "code": {
+      "4e28bb646b5fd17461871c2dc4a4832f41ae2045": "e9edf90b27d9cab3c6121959370287c1ac36ce7c",
+      "6beb5aae790eb4a5f0185ef27b0df63973683df6": "e9edf90b27d9cab3c6121959370287c1ac36ce7c",
+      "6f63fa65ac439c108d4d50d49b062e68ebc2104e": "e9edf90b27d9cab3c6121959370287c1ac36ce7c"
+    },
+    "docs": {
+      "4e28bb646b5fd17461871c2dc4a4832f41ae2045": "5c6f43e37681bd0c57c2303f58000fc8e272602f",
+      "6beb5aae790eb4a5f0185ef27b0df63973683df6": "5c6f43e37681bd0c57c2303f58000fc8e272602f",
+      "6f63fa65ac439c108d4d50d49b062e68ebc2104e": "5c6f43e37681bd0c57c2303f58000fc8e272602f"
+    },
+    "weights": {
+      "4e28bb646b5fd17461871c2dc4a4832f41ae2045": "ac38c43a0ba02015de1c477905d7a6d7ced0d7b3",
+      "6beb5aae790eb4a5f0185ef27b0df63973683df6": "ac38c43a0ba02015de1c477905d7a6d7ced0d7b3",
+      "6f63fa65ac439c108d4d50d49b062e68ebc2104e": "ac38c43a0ba02015de1c477905d7a6d7ced0d7b3"
+    },
+    "README.md": {
+      "4e28bb646b5fd17461871c2dc4a4832f41ae2045": "f641db96ef60f04e521c71000689d79213eeb04d",
+      "6beb5aae790eb4a5f0185ef27b0df63973683df6": "f641db96ef60f04e521c71000689d79213eeb04d",
+      "6f63fa65ac439c108d4d50d49b062e68ebc2104e": "f641db96ef60f04e521c71000689d79213eeb04d"
+    }
+  },
+  "local_source_files_changed": [],
+  "b_training_sources_match_frozen_plan": true,
+  "scope": "Static source/config/artifact review only; did not rerun external experiments or operate training processes"
+}

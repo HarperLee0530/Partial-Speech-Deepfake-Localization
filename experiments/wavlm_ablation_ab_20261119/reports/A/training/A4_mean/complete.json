@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "schema": "ps_frozen_wavlm_ablation_a_v1",
+  "arm": "A4_mean",
+  "epoch": 13,
+  "threshold": 0.12700997292995456,
+  "event_f1_iou05_percent": 83.25137745127081,
+  "checkpoint": "best.pt",
+  "checkpoint_sha256": "0ea318173390d16f368c56839a58ee3c892c6398ed625c5483ff366a2ab26991",
+  "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+  "last_backbone_sha256": "f39a255691b6f8e41293eda96398e8b0a5aebaffc30e1e15af7646ecdfffd552",
+  "trained_epochs": 20,
+  "updates": 15880,
+  "archived_epochs": 21,
+  "protocol_sha256": "45caf65ccf962d8b0279cf12b4b29d181f0bbec8f66d0019e802e1a7e533993c",
+  "eval_read": false,
+  "dev_scores20_sha256": "aeb97a8571dfc67bbd82292e6da1ee277058c48de423dc3faca86084e03f0973",
+  "dev_metrics_sha256": "12c7518e0b55e4ef60e76f03df0c0233bfd84fb31ad855c8a66cbbe020c974d5",
+  "total_seconds": 3933.9530000000086
+}
