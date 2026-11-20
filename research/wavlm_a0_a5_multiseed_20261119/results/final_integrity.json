@@ -1,0 +1,8 @@
+{
+  "all_four_checkpoints_match_pre_eval_freeze": true,
+  "all_four_completed_20_epochs_15880_updates": true,
+  "all_selections_match_dev_rule": true,
+  "eval_thresholds_unchanged": true,
+  "frozen_source_hashes_match": true,
+  "report_completed": true
+}

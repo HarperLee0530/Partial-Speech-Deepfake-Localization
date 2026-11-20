@@ -1,0 +1,7 @@
+# Selected research artifacts only; root ignore rules still exclude caches/data.
+!results/**/best.pt
+!reference/**/best.pt
+!results/**/dev_scores20.npz
+!results/**/eval_scores20.npz
+!reference/**/dev_scores20.npz
+!results/logs/*.log

@@ -1,0 +1,125 @@
+{
+  "schema": "a0_a5_paired_multiseed_v1",
+  "source_commit": "483c0252cf8b7104376399008d21d414fdced0b6",
+  "seeds": [
+    667,
+    668
+  ],
+  "arms": [
+    "A0_full",
+    "A5_fixed_pool"
+  ],
+  "historical_seed666": {
+    "A0_full": {
+      "checkpoint_sha256": "160a4b3cacbee48398d11f218e3ca2dff76615670ae05255f6775119dd37b50e",
+      "epoch": 18,
+      "threshold": -0.17905920743942258
+    },
+    "A5_fixed_pool": {
+      "checkpoint_sha256": "f9e074245e75b61705b80abf239bf39816c0de22d603be97eea660ab7019b1f7",
+      "epoch": 15,
+      "threshold": 0.028007090091705326
+    }
+  },
+  "initial_digests": {
+    "667": {
+      "A0_full": {
+        "cnn": "7e2081078b1597a3daa1755f98d48a3ca56e2b426612ae5b423fad23276c569f",
+        "projection": "61c70d51b3c427e88b073487923ee14824cb89c4e0a46a1027bc6ff7b186d87d",
+        "adapter": "141fe8a2f1109b22e8996317f62e6f603c86ae4dbc5986573bd392650f03fbb3"
+      },
+      "A5_fixed_pool": {
+        "cnn": "7e2081078b1597a3daa1755f98d48a3ca56e2b426612ae5b423fad23276c569f",
+        "projection": "61c70d51b3c427e88b073487923ee14824cb89c4e0a46a1027bc6ff7b186d87d",
+        "adapter": "141fe8a2f1109b22e8996317f62e6f603c86ae4dbc5986573bd392650f03fbb3"
+      }
+    },
+    "668": {
+      "A0_full": {
+        "cnn": "3694a89defbb4f7163deab0fd94c96e8796f83f336495f904f4b56088de71f1d",
+        "projection": "29b0ae3893f1b16d1a580c2ffe16eb217f15db6f977e3d123c6bad7053403d77",
+        "adapter": "f224c2b3324bacc0ff72819fd9f36688bb560f09760aeb2d874fc0970c98f1dd"
+      },
+      "A5_fixed_pool": {
+        "cnn": "3694a89defbb4f7163deab0fd94c96e8796f83f336495f904f4b56088de71f1d",
+        "projection": "29b0ae3893f1b16d1a580c2ffe16eb217f15db6f977e3d123c6bad7053403d77",
+        "adapter": "f224c2b3324bacc0ff72819fd9f36688bb560f09760aeb2d874fc0970c98f1dd"
+      }
+    }
+  },
+  "source_sha256": {
+    "run.py": "a1840e0b4d017bf63104009a6b5d58a228ef8779ea7bbd889791fc721ce2d3bd",
+    "code\\benchmark_wavlm_ablation_a.py": "bf7eb069b0a5f585c06bcb861dc3f88911f197b6fa6650fd29d39cc817bdcf81",
+    "code\\benchmark_wavlm_ablation_b.py": "3a30765b04b2b35c828adfe475a5ec382cb3a85a1993dca6049fdc099aa64364",
+    "code\\cnn_ps\\__init__.py": "0aec19536565f40d22757b4f6a9a94dbe00b081458aec91f757700f4095aa9d2",
+    "code\\cnn_ps\\augmentation.py": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0",
+    "code\\cnn_ps\\backbone.py": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61",
+    "code\\cnn_ps\\baseline.py": "df1ea264f7865cfde2a43d75bb5c44279fba7fd56bed9028485c16855d5619df",
+    "code\\cnn_ps\\cache_wavlm_ablation_b.py": "02be7531df9d1ffb1c1b9a69b327ed03d9f2a86dc7efd3d56ee228f6834dfef3",
+    "code\\cnn_ps\\diagnose_events.py": "45c61758b60ba7d1a4789e28109e2a85c2ad4d78b1f44bc6139bfcd829ec1050",
+    "code\\cnn_ps\\download_wavlm.py": "161f7f031f272f277aec9ee000609dac50bdc17d11e041d7211715ba996bd14c",
+    "code\\cnn_ps\\dual_cache.py": "0708265c646f2b47de29f3b48ef15485d20e497db5eb0b64b6d60944006bbae9",
+    "code\\cnn_ps\\dual_features.py": "7a755887889605e336c2aca94a7df4590383cb361bec89ef246abde31d22e53f",
+    "code\\cnn_ps\\dual_resolution.py": "6e71e877d6a26084493402794c79118e8fd5525bf7be686a5bffac6cb6e2f229",
+    "code\\cnn_ps\\evaluate_cnn.py": "b465e7832e9f57cd2d2aa836d4c955432fb21fa82bca9eb88b37a518ffab8c11",
+    "code\\cnn_ps\\finetune.py": "ef03f3224dab65713f6ca23000029b9381cd2105afa052cf2bca2208ef75a18e",
+    "code\\cnn_ps\\io.py": "d23dad5219835272621722a1ab8e3a49fc297af7e579f4188ea3dc8a8ff27919",
+    "code\\cnn_ps\\main_method.py": "964c4cc3976c9ad194a8cad7d346170a3707408cfcbf98f839fe3bee81d448f7",
+    "code\\cnn_ps\\manifests.py": "b005f9714464395632d78037c3578ac08f51c38818474327de2e9050878fdbd5",
+    "code\\cnn_ps\\mel_main_method.py": "74821572b3e0df6013239bd2335ecd84dbbb938442ecf1a673037b022cbf6ac0",
+    "code\\cnn_ps\\metrics160.py": "fbcac4d65b9e4410342b1badcde2982cb1ff40096b5d519573663a07aa578f21",
+    "code\\cnn_ps\\metrics20.py": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+    "code\\cnn_ps\\predict.py": "1994e3e27965536f81879ad3d176c0d52e874738267a86f8b5548698f14beb2f",
+    "code\\cnn_ps\\predict_main.py": "68d6712f1f913875fe56108ad9846b2d6164523c8437a273f4e423f1c9fe0cd5",
+    "code\\cnn_ps\\predict_mel.py": "0884e3fd1619774f1c3b443cb1596dde5dd2098c275640a64e2765077a796489",
+    "code\\cnn_ps\\predict_wavlm.py": "dfd57fe13db93628377c51d8c26bdb5ed6c193dbcc73687e93f77dc66bf3921d",
+    "code\\cnn_ps\\predict_wavlm_multilayer.py": "9c14ccd750bda039830c92b4346f46f683bb796657acd370152fcf59896b7385",
+    "code\\cnn_ps\\report_native20.py": "40e4375ae49f1302b4bd35b4eb1c53683eea73eae17daa1f1cf3d8ea55a1e985",
+    "code\\cnn_ps\\train_dual.py": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f",
+    "code\\cnn_ps\\train_four.py": "63aea5eb8a1ac8ced11df3920378c72e4bf16f5d5870cd469c60526ffcc22246",
+    "code\\cnn_ps\\train_wavlm.py": "e65798e21ff72f08475ab716c7b6710bdfd45aff1d1996c0092e85177c4f2ffb",
+    "code\\cnn_ps\\train_wavlm_ablation_a.py": "e550bfdc5400cf601807ae5b8248cf00d514c2004c19082315ee3670caf898f8",
+    "code\\cnn_ps\\train_wavlm_ablation_b.py": "5cb01e0e5d1639e44c5710ff14d65422ecd3a22e295a842d6192a4d52c441d84",
+    "code\\cnn_ps\\train_wavlm_multilayer.py": "1dfe771284b9e76a0e1ee98df2c87a8a41f7299885d821e2d199872960ef5a0b",
+    "code\\cnn_ps\\wavlm_ablation_a.py": "3a5ab9ae1dedd9a5ad6d8ca9c20be8e670245c92f3d93ced20639d516a4fa402",
+    "code\\cnn_ps\\wavlm_ablation_b.py": "293f835490b7a5db2e25d49cac84ada3a296819527efe3291f605dcc8d6015e5",
+    "code\\cnn_ps\\wavlm_backend.py": "c56776104a242292e0917ac9ec759f6c4d18eb29b10c7f9251dd4c7fdb62d09b",
+    "code\\cnn_ps\\wavlm_frontend.py": "644c4abcd3e65f31472cc74b5951ebe962b0ba1e600ac9f34ddb7f084f5a9008",
+    "code\\cnn_ps\\wavlm_multilayer.py": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+    "code\\launch_wavlm_ablation_b.py": "1f985cf4b2ce2e0c5767a46d8bcc573e144db9a374fac4d8fbc9495327288caf",
+    "code\\prevent_sleep_8h.py": "06652edc8a47fa4f02a6c20ea80bbc9fb543974cb0f17b71a90e703e20b8c1eb",
+    "code\\report_multilayer_experiment.py": "deb86a3aa2c9b068c8226035c18db06da79ded1706b879df191ececcee3a2d41",
+    "code\\report_wavlm_ablation_a.py": "5fb1e678fa45450b4145e3c827106a32b08ee9f2e4e9bc104e4e0c6925c22349",
+    "code\\report_wavlm_ablation_b.py": "73f7f4b24334ff2e59f54474df4f87ea4391c18831b699ec9b101895b896e7ec",
+    "code\\run_multilayer_experiment.py": "fc1f3039530ab25b23fe7609c2bb64ce3e7254c8f46e31e8c683eeb3cfa04b2e",
+    "code\\run_wavlm_ablation_a.py": "efa7bda3103fedbf094724468b9a70416b48370590d4810310f961c3f79c7ad7",
+    "code\\run_wavlm_ablation_b.py": "c36648218b81fbf1264849355d8374749edf335e8d738e117792f8d0b5c641cc",
+    "code\\tests\\test_cnn_ps.py": "0f3188e06ffb9995ddda939bfd1ad03b6c82f2a222945c5f443be4f5c53168eb",
+    "code\\tests\\test_dual_resolution.py": "a4c9dd07573a5b1d2afc4fd539615cb4d17a9773b4419311986de9e23735f18d",
+    "code\\tests\\test_dual_training.py": "248a2de6ac53e73b628573cf81262b525e53e4569fa706cb6e5e585a4f6ed383",
+    "code\\tests\\test_four_training.py": "d3b9da64ceb8ee13792188fb7e289662ca00221b4e77f3a30f72729c2bd6782f",
+    "code\\tests\\test_main_prediction.py": "5735e2f25660d8d0f1b10e765b9683004ef478993a1cc7bf736126d4ff36f422",
+    "code\\tests\\test_manifests.py": "59a3cf3870e4894efe691a8e4fa5cdc60ca7a0c05a46dbb648651abc9ecc8c18",
+    "code\\tests\\test_native20_report.py": "a5f5f9dc924b531ac4ceb57291fc703607fa329be310e0603abfb6e2806a3c21",
+    "code\\tests\\test_wavlm_ablation_a.py": "c198de3bbe6987fec13f3bee83fbb5953e8ba80fc5efc2113ee0499d00c09569",
+    "code\\tests\\test_wavlm_ablation_b.py": "ba55f994054676b3e5b23b527dd9b35e4312c0f42835b0de85f63d66b8a67eed",
+    "code\\tests\\test_wavlm_main.py": "eda1fcf6f61ad013ceaa70dec3c3bbf8922ec9e56f2b861f7ad8b9edd655ae5e",
+    "code\\tests\\test_wavlm_multilayer.py": "01f67ae4f869440668486d228fac91150cde13144afee6404a242332bb26a90a",
+    "code\\train_ablation_a_awake.py": "9771a533acbcce51ed36b791a98fff77dd5ba78e902f125596d3f728ccd75fa5",
+    "code\\verify_multilayer_smoke.py": "9efcb13bd2087984b70b2bef08e161f4ca00e78941970514c22af527c3da3451",
+    "code\\verify_wavlm_ablation_a.py": "8e838a33a19a215b7a094eb6f4215affe4ce23c50274c6c98e6ac86ab98b60e2",
+    "code\\verify_wavlm_ablation_b.py": "44873b7023d8b268f144ef143492310de80b974712ba12cbeccc5185ef9342b3"
+  },
+  "reference_metadata_sha256": {
+    "train": "e82d9fc9b2326c49222785f60ddb7aa564c6236d48c63823154c17480ac6170b",
+    "dev": "31257179886083d2505e8ab6ecaa44b27370858e77681faf7b874519ea82c432"
+  },
+  "training": "Exact archived train_wavlm_ablation_a.py. Random initialization (not fine-tuning); frozen WavLM6/9/12; seed-specific paired initialization/data order/channel assignment.20epochs,batch8,15880updates,AdamW lr0.001 wd0.0001 clip5,threads4. Two independent trainer processes.",
+  "selection": "Unchanged: each epoch clean dev duration FPR<=5% threshold; highest dev eventF1, epoch0 eligible, earliest tie. No test threshold/epoch selection.",
+  "evaluation": "Do not load eval data until all four completed checkpoints/thresholds frozen. Historical eval already inspected: exploratory follow-up, not new blind test. No LPS.",
+  "decision": "Report per-seed A5-A0 eventF1/FPR and three-seed mean/sampleSD, without selecting the best seed. Per-record bootstrap conditions on each trained pair; three seeds cannot establish general training stability. FPR +0.5pp reported only as pre-existing reference guard, not new tuning criterion.",
+  "cache": "Rebuild full float32 three-layer frozen features on local GPU with unchanged encoder/augmentation/grid. Compare dev predictions of fixed seed666 A0/A5 with their archived scores before training.",
+  "cache_location": "D:\\SAL_精简实验\\data\\wavlm_multilayer_full_a0a5_20261119",
+  "data_location": "D:\\SAL_精简实验\\data\\cnn_ps_features_v2",
+  "source_model_unchanged": true
+}

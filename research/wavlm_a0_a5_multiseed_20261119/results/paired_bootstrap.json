@@ -1,0 +1,95 @@
+{
+  "per_seed": {
+    "666": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261120,
+      "difference": "A5_fixed_pool minus A0_full, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 1.3077431556454542,
+          "ci95_pp": [
+            0.4597711125014005,
+            2.153910442710101
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": 3.275279438523526,
+          "ci95_pp": [
+            2.2303526408751377,
+            4.319896484440419
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": 0.588309705135333,
+          "ci95_pp": [
+            0.14725591754005446,
+            1.0004713052064433
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "667": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261120,
+      "difference": "A5_fixed_pool minus A0_full, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": 0.06011132103782302,
+          "ci95_pp": [
+            -0.7708381706209035,
+            0.8088681705943976
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -3.4312451260722696,
+          "ci95_pp": [
+            -4.517965760750977,
+            -2.402429249288009
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": 0.2113302790385232,
+          "ci95_pp": [
+            -0.2205324675185696,
+            0.6469395615212059
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    },
+    "668": {
+      "method": "paired recording percentile bootstrap",
+      "repetitions": 2000,
+      "seed": 20261120,
+      "difference": "A5_fixed_pool minus A0_full, percentage points",
+      "metrics": {
+        "event_f1_iou05_percent": {
+          "delta_pp": -1.632156396109437,
+          "ci95_pp": [
+            -2.4623293724992092,
+            -0.8196641234113167
+          ]
+        },
+        "short_event_recall_le320ms_percent": {
+          "delta_pp": -3.353262282297891,
+          "ci95_pp": [
+            -4.386673810235084,
+            -2.334206174940926
+          ]
+        },
+        "real_duration_fpr_percent": {
+          "delta_pp": 0.4983336938267744,
+          "ci95_pp": [
+            0.07877491780167356,
+            0.9097681759022495
+          ]
+        }
+      },
+      "limitation": "Conditional on two fixed trained models; not training-seed variability"
+    }
+  },
+  "caveat": "Intervals condition on each fixed trained pair and resample recordings, not speakers; no multiplicity correction. Three training seeds are insufficient for strong training-distribution inference. Do not pool three predictions per recording as independent observations."
+}

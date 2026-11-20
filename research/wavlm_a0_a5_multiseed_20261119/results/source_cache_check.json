@@ -1,0 +1,16 @@
+{
+  "A0_full": {
+    "recordings": 2484,
+    "max_raw_score_difference": 0.00067901611328125,
+    "threshold_decision_changes": 1,
+    "event_f1": 83.40817915094904,
+    "archived_event_f1": 83.40817915094904
+  },
+  "A5_fixed_pool": {
+    "recordings": 2484,
+    "max_raw_score_difference": 0.000431060791015625,
+    "threshold_decision_changes": 0,
+    "event_f1": 83.86637393935798,
+    "archived_event_f1": 83.86637393935798
+  }
+}

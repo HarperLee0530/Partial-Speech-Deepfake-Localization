@@ -1,0 +1,12 @@
+[
+  {
+    "arm": "A0_full",
+    "selected_epoch": 19,
+    "checkpoint_valid": true
+  },
+  {
+    "arm": "A5_fixed_pool",
+    "selected_epoch": 18,
+    "checkpoint_valid": true
+  }
+]

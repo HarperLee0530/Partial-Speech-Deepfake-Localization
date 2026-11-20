@@ -1,0 +1,17 @@
+{
+  "666": {
+    "event_f1_delta": 1.3077431556454542,
+    "fpr_delta": 0.588309705135333,
+    "fpr_increase_le_half_pp": false
+  },
+  "667": {
+    "event_f1_delta": 0.06011132103782302,
+    "fpr_delta": 0.2113302790385232,
+    "fpr_increase_le_half_pp": true
+  },
+  "668": {
+    "event_f1_delta": -1.632156396109437,
+    "fpr_delta": 0.4983336938267744,
+    "fpr_increase_le_half_pp": true
+  }
+}

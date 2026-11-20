@@ -1,0 +1,10 @@
+{
+  "pid": 49112,
+  "started_utc": "2026-11-19T09:14:13.661421+00:00",
+  "expires_utc": "2026-11-19T17:14:13.661421+00:00",
+  "duration_seconds": 28800.0,
+  "display_required": false,
+  "state": "released_after_experiment",
+  "updated_utc": "2026-11-19T11:44:13.563184+00:00",
+  "release_method": "experiment-owned helper process stopped; Windows releases execution-state request on termination"
+}

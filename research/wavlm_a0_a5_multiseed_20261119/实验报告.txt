@@ -1,0 +1,55 @@
+﻿A0/A5多训练种子对照：seed666历史结果＋seed667/668完整补跑
+
+源代码固定于GitHub483c0252cf8b7104376399008d21d414fdced0b6，未改变架构或训练配方。
+A5唯一改变是固定有效时长平均池化；保留可学习层融合、注意力、门控、边界、一致性和粗辅助损失。
+每组6345训练/2484开发，20轮、batch8、15880更新，AdamW lr0.001、wd0.0001、clip5。同seed内公共参数初始化、数据顺序和增强分配相同。
+每轮dev真实时长FPR<=5%校准，再按dev事件F1选轮次，epoch0可选、平分取早。四次训练全部完成并冻结后才打开eval特征；不在测试集重新调阈值或选轮次。
+eval3562条已被历史项目查看；seed666及A5选择参考历史结果，此次是配对多种子复核，不是全新盲测。未使用LPS。
+本机RTX4060，历史seed666来自RTX4080；重新生成完整float32特征，并先验证两历史模型的全dev归档分数。数值差异见source_cache_check.json。
+历史A0协议未记录投影/适配器初始化哈希，无法用该归档字段核验；新增667/668两组的全部公共初始化哈希均已核验一致。
+
+逐seed结果：
+seed | arm | selected epoch | eventF1 | real durationFPR | short recall | frameF1 | EER
+666 | A0_full | 18 | 73.6767 | 5.7043 | 72.6020 | 90.0013 | 8.4517
+666 | A5_fixed_pool | 15 | 74.9844 | 6.2927 | 75.8773 | 90.0436 | 8.0846
+667 | A0_full | 19 | 74.2224 | 6.2438 | 74.2917 | 89.7239 | 8.4393
+667 | A5_fixed_pool | 18 | 74.2825 | 6.4551 | 70.8604 | 90.1620 | 7.9919
+668 | A0_full | 14 | 74.9048 | 5.7881 | 75.8253 | 89.9426 | 8.0260
+668 | A5_fixed_pool | 17 | 73.2726 | 6.2864 | 72.4721 | 89.4258 | 8.8611
+
+三seed均值±样本标准差（%，不挑最佳seed）：
+A0_full: event_f1_iou05_percent=74.2680±0.6153, event_precision_percent=71.1560±0.5364, event_recall_percent=77.6669±0.8716, real_duration_fpr_percent=5.9121±0.2903, short_event_recall_le320ms_percent=74.2397±1.6123, frame_f1_percent=89.8892±0.1462, eer_percent=8.3057±0.2423
+A5_fixed_pool: event_f1_iou05_percent=74.1799±0.8605, event_precision_percent=71.4514±1.1414, event_recall_percent=77.1477±1.6385, real_duration_fpr_percent=6.3447±0.0957, short_event_recall_le320ms_percent=73.0699±2.5613, frame_f1_percent=89.8771±0.3953, eer_percent=8.3125±0.4774
+
+A5-A0逐seed配对差值及按录音95%区间（pp）：
+seed666 event_f1_iou05_percent: +1.3077 [+0.4598, +2.1539]
+seed666 short_event_recall_le320ms_percent: +3.2753 [+2.2304, +4.3199]
+seed666 real_duration_fpr_percent: +0.5883 [+0.1473, +1.0005]
+seed667 event_f1_iou05_percent: +0.0601 [-0.7708, +0.8089]
+seed667 short_event_recall_le320ms_percent: -3.4312 [-4.5180, -2.4024]
+seed667 real_duration_fpr_percent: +0.2113 [-0.2205, +0.6469]
+seed668 event_f1_iou05_percent: -1.6322 [-2.4623, -0.8197]
+seed668 short_event_recall_le320ms_percent: -3.3533 [-4.3867, -2.3342]
+seed668 real_duration_fpr_percent: +0.4983 [+0.0788, +0.9098]
+
+原先误报+0.5pp参考线（仅作为取舍报告，不修改训练选择）：
+{
+  "666": {
+    "event_f1_delta": 1.3077431556454542,
+    "fpr_delta": 0.588309705135333,
+    "fpr_increase_le_half_pp": false
+  },
+  "667": {
+    "event_f1_delta": 0.06011132103782302,
+    "fpr_delta": 0.2113302790385232,
+    "fpr_increase_le_half_pp": true
+  },
+  "668": {
+    "event_f1_delta": -1.632156396109437,
+    "fpr_delta": 0.4983336938267744,
+    "fpr_increase_le_half_pp": true
+  }
+}
+
+不能把逐录音bootstrap区间当作包含训练随机性的区间，不能把同一录音的三份预测当作三倍独立样本。三个训练seed只能提供有限的稳定性证据。
+原方案、权重和GitHub默认分支均未修改。完整数值见summary.csv、three_seed_summary.json、paired_bootstrap.json。

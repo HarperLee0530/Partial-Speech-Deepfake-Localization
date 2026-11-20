@@ -1,0 +1,2198 @@
+{
+  "schema": "a0_a5_research_archive_v1",
+  "experiment_date": "2026-11-19",
+  "publication_date": "2026-11-20",
+  "included_original_files": [
+    {
+      "path": "code/benchmark_wavlm_ablation_a.py",
+      "bytes": 6494,
+      "sha256": "bf7eb069b0a5f585c06bcb861dc3f88911f197b6fa6650fd29d39cc817bdcf81"
+    },
+    {
+      "path": "code/benchmark_wavlm_ablation_b.py",
+      "bytes": 6937,
+      "sha256": "3a30765b04b2b35c828adfe475a5ec382cb3a85a1993dca6049fdc099aa64364"
+    },
+    {
+      "path": "code/cnn_ps/__init__.py",
+      "bytes": 92,
+      "sha256": "0aec19536565f40d22757b4f6a9a94dbe00b081458aec91f757700f4095aa9d2"
+    },
+    {
+      "path": "code/cnn_ps/augmentation.py",
+      "bytes": 1786,
+      "sha256": "bb390573b4225fc074a18fb5024a51a6ae9b11fa57548632f11faa5041922ae0"
+    },
+    {
+      "path": "code/cnn_ps/backbone.py",
+      "bytes": 6580,
+      "sha256": "41f5b196ea4da0d16b7c1194ef9d3f72b8e11342583c1f57f10823414d797f61"
+    },
+    {
+      "path": "code/cnn_ps/baseline.py",
+      "bytes": 14392,
+      "sha256": "df1ea264f7865cfde2a43d75bb5c44279fba7fd56bed9028485c16855d5619df"
+    },
+    {
+      "path": "code/cnn_ps/cache_wavlm_ablation_b.py",
+      "bytes": 5001,
+      "sha256": "02be7531df9d1ffb1c1b9a69b327ed03d9f2a86dc7efd3d56ee228f6834dfef3"
+    },
+    {
+      "path": "code/cnn_ps/diagnose_events.py",
+      "bytes": 5742,
+      "sha256": "45c61758b60ba7d1a4789e28109e2a85c2ad4d78b1f44bc6139bfcd829ec1050"
+    },
+    {
+      "path": "code/cnn_ps/download_wavlm.py",
+      "bytes": 823,
+      "sha256": "161f7f031f272f277aec9ee000609dac50bdc17d11e041d7211715ba996bd14c"
+    },
+    {
+      "path": "code/cnn_ps/dual_cache.py",
+      "bytes": 18928,
+      "sha256": "0708265c646f2b47de29f3b48ef15485d20e497db5eb0b64b6d60944006bbae9"
+    },
+    {
+      "path": "code/cnn_ps/dual_features.py",
+      "bytes": 15369,
+      "sha256": "7a755887889605e336c2aca94a7df4590383cb361bec89ef246abde31d22e53f"
+    },
+    {
+      "path": "code/cnn_ps/dual_resolution.py",
+      "bytes": 15758,
+      "sha256": "6e71e877d6a26084493402794c79118e8fd5525bf7be686a5bffac6cb6e2f229"
+    },
+    {
+      "path": "code/cnn_ps/evaluate_cnn.py",
+      "bytes": 15357,
+      "sha256": "b465e7832e9f57cd2d2aa836d4c955432fb21fa82bca9eb88b37a518ffab8c11"
+    },
+    {
+      "path": "code/cnn_ps/finetune.py",
+      "bytes": 16876,
+      "sha256": "ef03f3224dab65713f6ca23000029b9381cd2105afa052cf2bca2208ef75a18e"
+    },
+    {
+      "path": "code/cnn_ps/io.py",
+      "bytes": 3825,
+      "sha256": "d23dad5219835272621722a1ab8e3a49fc297af7e579f4188ea3dc8a8ff27919"
+    },
+    {
+      "path": "code/cnn_ps/main_method.py",
+      "bytes": 2338,
+      "sha256": "964c4cc3976c9ad194a8cad7d346170a3707408cfcbf98f839fe3bee81d448f7"
+    },
+    {
+      "path": "code/cnn_ps/manifests.py",
+      "bytes": 6199,
+      "sha256": "b005f9714464395632d78037c3578ac08f51c38818474327de2e9050878fdbd5"
+    },
+    {
+      "path": "code/cnn_ps/mel_main_method.py",
+      "bytes": 2202,
+      "sha256": "74821572b3e0df6013239bd2335ecd84dbbb938442ecf1a673037b022cbf6ac0"
+    },
+    {
+      "path": "code/cnn_ps/metrics160.py",
+      "bytes": 5335,
+      "sha256": "fbcac4d65b9e4410342b1badcde2982cb1ff40096b5d519573663a07aa578f21"
+    },
+    {
+      "path": "code/cnn_ps/metrics20.py",
+      "bytes": 12214,
+      "sha256": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc"
+    },
+    {
+      "path": "code/cnn_ps/predict.py",
+      "bytes": 4263,
+      "sha256": "1994e3e27965536f81879ad3d176c0d52e874738267a86f8b5548698f14beb2f"
+    },
+    {
+      "path": "code/cnn_ps/predict_main.py",
+      "bytes": 1572,
+      "sha256": "68d6712f1f913875fe56108ad9846b2d6164523c8437a273f4e423f1c9fe0cd5"
+    },
+    {
+      "path": "code/cnn_ps/predict_mel.py",
+      "bytes": 7711,
+      "sha256": "0884e3fd1619774f1c3b443cb1596dde5dd2098c275640a64e2765077a796489"
+    },
+    {
+      "path": "code/cnn_ps/predict_wavlm.py",
+      "bytes": 3990,
+      "sha256": "dfd57fe13db93628377c51d8c26bdb5ed6c193dbcc73687e93f77dc66bf3921d"
+    },
+    {
+      "path": "code/cnn_ps/predict_wavlm_multilayer.py",
+      "bytes": 4192,
+      "sha256": "9c14ccd750bda039830c92b4346f46f683bb796657acd370152fcf59896b7385"
+    },
+    {
+      "path": "code/cnn_ps/report_native20.py",
+      "bytes": 6638,
+      "sha256": "40e4375ae49f1302b4bd35b4eb1c53683eea73eae17daa1f1cf3d8ea55a1e985"
+    },
+    {
+      "path": "code/cnn_ps/train_dual.py",
+      "bytes": 19075,
+      "sha256": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f"
+    },
+    {
+      "path": "code/cnn_ps/train_four.py",
+      "bytes": 19966,
+      "sha256": "63aea5eb8a1ac8ced11df3920378c72e4bf16f5d5870cd469c60526ffcc22246"
+    },
+    {
+      "path": "code/cnn_ps/train_wavlm.py",
+      "bytes": 21226,
+      "sha256": "e65798e21ff72f08475ab716c7b6710bdfd45aff1d1996c0092e85177c4f2ffb"
+    },
+    {
+      "path": "code/cnn_ps/train_wavlm_ablation_a.py",
+      "bytes": 20581,
+      "sha256": "e550bfdc5400cf601807ae5b8248cf00d514c2004c19082315ee3670caf898f8"
+    },
+    {
+      "path": "code/cnn_ps/train_wavlm_ablation_b.py",
+      "bytes": 22116,
+      "sha256": "5cb01e0e5d1639e44c5710ff14d65422ecd3a22e295a842d6192a4d52c441d84"
+    },
+    {
+      "path": "code/cnn_ps/train_wavlm_multilayer.py",
+      "bytes": 21069,
+      "sha256": "1dfe771284b9e76a0e1ee98df2c87a8a41f7299885d821e2d199872960ef5a0b"
+    },
+    {
+      "path": "code/cnn_ps/wavlm_ablation_a.py",
+      "bytes": 9743,
+      "sha256": "3a5ab9ae1dedd9a5ad6d8ca9c20be8e670245c92f3d93ced20639d516a4fa402"
+    },
+    {
+      "path": "code/cnn_ps/wavlm_ablation_b.py",
+      "bytes": 6111,
+      "sha256": "293f835490b7a5db2e25d49cac84ada3a296819527efe3291f605dcc8d6015e5"
+    },
+    {
+      "path": "code/cnn_ps/wavlm_backend.py",
+      "bytes": 1347,
+      "sha256": "c56776104a242292e0917ac9ec759f6c4d18eb29b10c7f9251dd4c7fdb62d09b"
+    },
+    {
+      "path": "code/cnn_ps/wavlm_frontend.py",
+      "bytes": 7860,
+      "sha256": "644c4abcd3e65f31472cc74b5951ebe962b0ba1e600ac9f34ddb7f084f5a9008"
+    },
+    {
+      "path": "code/cnn_ps/wavlm_multilayer.py",
+      "bytes": 7525,
+      "sha256": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f"
+    },
+    {
+      "path": "code/configs/cnn_ps_structure.json",
+      "bytes": 315,
+      "sha256": "bd66501bf38f72865a8c2c46885ceb182eb600377c621cdea27a9f695c2106a4"
+    },
+    {
+      "path": "code/launch_wavlm_ablation_b.py",
+      "bytes": 777,
+      "sha256": "1f985cf4b2ce2e0c5767a46d8bcc573e144db9a374fac4d8fbc9495327288caf"
+    },
+    {
+      "path": "code/manifests/ps_fixed_ids.json",
+      "bytes": 897279,
+      "sha256": "fd133d1251411ae1c9591655e4f73ee8e0d2c7e567f2fd2c6eeea4aa2de8f021"
+    },
+    {
+      "path": "code/manifests/ps_sources.json",
+      "bytes": 2323,
+      "sha256": "e705a4d9d30b2d4909970e904ebca558751387556730dc7098a4392306da0904"
+    },
+    {
+      "path": "code/prevent_sleep_8h.py",
+      "bytes": 1983,
+      "sha256": "06652edc8a47fa4f02a6c20ea80bbc9fb543974cb0f17b71a90e703e20b8c1eb"
+    },
+    {
+      "path": "code/report_multilayer_experiment.py",
+      "bytes": 11558,
+      "sha256": "deb86a3aa2c9b068c8226035c18db06da79ded1706b879df191ececcee3a2d41"
+    },
+    {
+      "path": "code/report_wavlm_ablation_a.py",
+      "bytes": 13859,
+      "sha256": "5fb1e678fa45450b4145e3c827106a32b08ee9f2e4e9bc104e4e0c6925c22349"
+    },
+    {
+      "path": "code/report_wavlm_ablation_b.py",
+      "bytes": 4157,
+      "sha256": "73f7f4b24334ff2e59f54474df4f87ea4391c18831b699ec9b101895b896e7ec"
+    },
+    {
+      "path": "code/requirements-release.txt",
+      "bytes": 47,
+      "sha256": "16ca550c0b7583096a9835c5f8d0d8c3cb4b2237b204bbd0c1c6cc7e035e423f"
+    },
+    {
+      "path": "code/requirements-wavlm.txt",
+      "bytes": 108,
+      "sha256": "50a4688ff82d8a0661700c98a5b58a5f674c1150a61b195fc9780cab5f5e13df"
+    },
+    {
+      "path": "code/requirements.txt",
+      "bytes": 103,
+      "sha256": "de9fdba11578b296c411910720567f88296ac242afd0c435cfff39032ed6a420"
+    },
+    {
+      "path": "code/run_multilayer_experiment.py",
+      "bytes": 4905,
+      "sha256": "fc1f3039530ab25b23fe7609c2bb64ce3e7254c8f46e31e8c683eeb3cfa04b2e"
+    },
+    {
+      "path": "code/run_wavlm_ablation_a.py",
+      "bytes": 11440,
+      "sha256": "efa7bda3103fedbf094724468b9a70416b48370590d4810310f961c3f79c7ad7"
+    },
+    {
+      "path": "code/run_wavlm_ablation_b.py",
+      "bytes": 9147,
+      "sha256": "c36648218b81fbf1264849355d8374749edf335e8d738e117792f8d0b5c641cc"
+    },
+    {
+      "path": "code/tests/test_cnn_ps.py",
+      "bytes": 10523,
+      "sha256": "0f3188e06ffb9995ddda939bfd1ad03b6c82f2a222945c5f443be4f5c53168eb"
+    },
+    {
+      "path": "code/tests/test_dual_resolution.py",
+      "bytes": 14547,
+      "sha256": "a4c9dd07573a5b1d2afc4fd539615cb4d17a9773b4419311986de9e23735f18d"
+    },
+    {
+      "path": "code/tests/test_dual_training.py",
+      "bytes": 10465,
+      "sha256": "248a2de6ac53e73b628573cf81262b525e53e4569fa706cb6e5e585a4f6ed383"
+    },
+    {
+      "path": "code/tests/test_four_training.py",
+      "bytes": 10863,
+      "sha256": "d3b9da64ceb8ee13792188fb7e289662ca00221b4e77f3a30f72729c2bd6782f"
+    },
+    {
+      "path": "code/tests/test_main_prediction.py",
+      "bytes": 5574,
+      "sha256": "5735e2f25660d8d0f1b10e765b9683004ef478993a1cc7bf736126d4ff36f422"
+    },
+    {
+      "path": "code/tests/test_manifests.py",
+      "bytes": 2326,
+      "sha256": "59a3cf3870e4894efe691a8e4fa5cdc60ca7a0c05a46dbb648651abc9ecc8c18"
+    },
+    {
+      "path": "code/tests/test_native20_report.py",
+      "bytes": 6763,
+      "sha256": "a5f5f9dc924b531ac4ceb57291fc703607fa329be310e0603abfb6e2806a3c21"
+    },
+    {
+      "path": "code/tests/test_wavlm_ablation_a.py",
+      "bytes": 7047,
+      "sha256": "c198de3bbe6987fec13f3bee83fbb5953e8ba80fc5efc2113ee0499d00c09569"
+    },
+    {
+      "path": "code/tests/test_wavlm_ablation_b.py",
+      "bytes": 7342,
+      "sha256": "ba55f994054676b3e5b23b527dd9b35e4312c0f42835b0de85f63d66b8a67eed"
+    },
+    {
+      "path": "code/tests/test_wavlm_main.py",
+      "bytes": 4460,
+      "sha256": "eda1fcf6f61ad013ceaa70dec3c3bbf8922ec9e56f2b861f7ad8b9edd655ae5e"
+    },
+    {
+      "path": "code/tests/test_wavlm_multilayer.py",
+      "bytes": 2268,
+      "sha256": "01f67ae4f869440668486d228fac91150cde13144afee6404a242332bb26a90a"
+    },
+    {
+      "path": "code/train_ablation_a_awake.py",
+      "bytes": 1470,
+      "sha256": "9771a533acbcce51ed36b791a98fff77dd5ba78e902f125596d3f728ccd75fa5"
+    },
+    {
+      "path": "code/verify_multilayer_smoke.py",
+      "bytes": 2392,
+      "sha256": "9efcb13bd2087984b70b2bef08e161f4ca00e78941970514c22af527c3da3451"
+    },
+    {
+      "path": "code/verify_wavlm_ablation_a.py",
+      "bytes": 3609,
+      "sha256": "8e838a33a19a215b7a094eb6f4215affe4ce23c50274c6c98e6ac86ab98b60e2"
+    },
+    {
+      "path": "code/verify_wavlm_ablation_b.py",
+      "bytes": 1960,
+      "sha256": "44873b7023d8b268f144ef143492310de80b974712ba12cbeccc5185ef9342b3"
+    },
+    {
+      "path": "code/WAVLM_ABLATION_A_RUNNING.md",
+      "bytes": 6630,
+      "sha256": "5b6617f740473a0215d72d259b4f9fd9d610e20663938d73ad8c72332b3b6c35"
+    },
+    {
+      "path": "code/WAVLM_ABLATION_B_RUNNING.md",
+      "bytes": 6576,
+      "sha256": "4aed6603d30591986809ffeb2cd8d6fe4068524f7bf8328bdbe2a3f0a686e770"
+    },
+    {
+      "path": "reference/seed666/A0_full/best.pt",
+      "bytes": 4574818,
+      "sha256": "160a4b3cacbee48398d11f218e3ca2dff76615670ae05255f6775119dd37b50e"
+    },
+    {
+      "path": "reference/seed666/A0_full/complete.json",
+      "bytes": 933,
+      "sha256": "37028a1ed5fd5d0868e5c5747d07a7c5822ed6df9b50b865f397a35d3f24efde"
+    },
+    {
+      "path": "reference/seed666/A0_full/dev_metrics.json",
+      "bytes": 1755848,
+      "sha256": "946794d1c012fd3fff5b58a2f5112afb1c959188080162e38b059d29704046b5"
+    },
+    {
+      "path": "reference/seed666/A0_full/dev_scores20.npz",
+      "bytes": 1650865,
+      "sha256": "d2528fa96e67653060d94d2cbb20280b439014498d4e7075a8adff179151f772"
+    },
+    {
+      "path": "reference/seed666/A0_full/eval_metrics.json",
+      "bytes": 3682,
+      "sha256": "19e670ce043618a85690390d2bb95e4f1a227aade50831a88103bbe99c2adfeb"
+    },
+    {
+      "path": "reference/seed666/A0_full/eval_per_recording.json",
+      "bytes": 2284391,
+      "sha256": "328f2c22b9435a26a0f8a5bda3a9262aa24e0a12d7ed21357752391ba144c8ad"
+    },
+    {
+      "path": "reference/seed666/A0_full/history.json",
+      "bytes": 12483,
+      "sha256": "18de6b56e07e1847d6a58f6d01fbad14095455bc8ac8deff4398d1792ba238b5"
+    },
+    {
+      "path": "reference/seed666/A0_full/protocol.json",
+      "bytes": 4909,
+      "sha256": "f6a3dc2dd3da94267e4c5766beeaf26cd943fc0c18db78d5580872421c719e3a"
+    },
+    {
+      "path": "reference/seed666/A0_full/reuse.json",
+      "bytes": 289,
+      "sha256": "00c9ade295449d4b5e2c9afc2b30a0f346271c50f6376064771aa4e4f66bb530"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/best.pt",
+      "bytes": 4575266,
+      "sha256": "f9e074245e75b61705b80abf239bf39816c0de22d603be97eea660ab7019b1f7"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/complete.json",
+      "bytes": 930,
+      "sha256": "8ca0e7593f83dcb6704e1c1b16d7210be30665edbb9cd0aea915d814297d2f74"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/dev_metrics.json",
+      "bytes": 1754854,
+      "sha256": "9bcb17b4337f842aea861e3044953f6db38c2d72e9029392a65886dcdb558adf"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/dev_scores20.npz",
+      "bytes": 1652237,
+      "sha256": "389fee3f72e3929ea3d85a13dc6f745b5ba6d4d5cebd6093edc37b74cbf63703"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/eval_metrics.json",
+      "bytes": 3682,
+      "sha256": "a7cb7d13fe4ecd571fdad057d7128b694de07430c3d6a5dbe2033f8e66debe39"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/eval_per_recording.json",
+      "bytes": 2283336,
+      "sha256": "b784c290e3a75310ef9486d029de61ca658f5b292a44060ca4ac1164033cae49"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/history.json",
+      "bytes": 12520,
+      "sha256": "0a4bf6404a9d767b98ac1e173e8b6052dbd8842d8f8116259483dc29c5f38560"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/progress.json",
+      "bytes": 603,
+      "sha256": "7deeeeb14543d9db02d1bbab8abea1d13d9001037687f0e758936d3b069db66c"
+    },
+    {
+      "path": "reference/seed666/A5_fixed_pool/protocol.json",
+      "bytes": 5376,
+      "sha256": "d2b390e78a290c21af3d2b7990a8770b4f159335e05a9c3bac9399d70fa35bdf"
+    },
+    {
+      "path": "report.py",
+      "bytes": 7825,
+      "sha256": "d2cf763ed5668dc3f722685a3049bb39fc81e6aa953d0ec0054e6b9f5541f6b3"
+    },
+    {
+      "path": "results/all_four_frozen.json",
+      "bytes": 4456,
+      "sha256": "e1d325591c52cc3662221ccb067be5e081c18c42d47b6d2ae320888cd2e64001"
+    },
+    {
+      "path": "results/awake.json",
+      "bytes": 406,
+      "sha256": "0a4f27432a86087b1ae753fb38f955b8b08e26a0190127d1b5b2124b70b07257"
+    },
+    {
+      "path": "results/final_integrity.json",
+      "bytes": 261,
+      "sha256": "444382b1712765d0a5ecf5e525e4bcf0158b8f192428034aa4dae57008e66ad6"
+    },
+    {
+      "path": "results/logs/evaluate_seed667.log",
+      "bytes": 170,
+      "sha256": "c4493cd8b5336daf2d7c3ddea2eb60b53f800544cc247e7069a2ddf9d4192846"
+    },
+    {
+      "path": "results/logs/evaluate_seed668.log",
+      "bytes": 169,
+      "sha256": "1be9f5ce3c447cd78b66b45ffc8283de01e3b17a2e26944ae5fe348fd960db96"
+    },
+    {
+      "path": "results/logs/seed667_A0_full.log",
+      "bytes": 55388,
+      "sha256": "5f48a3e93f41c806814a8eca322b97933741911bbfe0503954afc2a9818fa85e"
+    },
+    {
+      "path": "results/logs/seed667_A5_fixed_pool.log",
+      "bytes": 56717,
+      "sha256": "8cf808dfc0c9057bd286b3d3beeb53097e840c7114f2b33085b18150b640494f"
+    },
+    {
+      "path": "results/logs/seed668_A0_full.log",
+      "bytes": 31279,
+      "sha256": "487be00c6ed7e7b4d2d3a8082c19185514863c41947803f7857f9eba85f512b1"
+    },
+    {
+      "path": "results/logs/seed668_A5_fixed_pool.log",
+      "bytes": 32158,
+      "sha256": "341768f27dc20c0cd7712753fcc917c3681cbd47dc3a4b0014d48bc4530cd682"
+    },
+    {
+      "path": "results/paired_bootstrap.json",
+      "bytes": 3088,
+      "sha256": "0b07ac7d37a0a1617d045ff194eaf341fea59787ac25722503ecdb543dfc9317"
+    },
+    {
+      "path": "results/plan.json",
+      "bytes": 10017,
+      "sha256": "9407b76cb940aa9adae90fa89515a1754af4eee22391bb26391d1378135a26e3"
+    },
+    {
+      "path": "results/reference_fpr_guard.json",
+      "bytes": 414,
+      "sha256": "be49204199d104205e7627b68a303a9eac14f740536f39e666fbc884e92e7d98"
+    },
+    {
+      "path": "results/seed667/A0_full/best.pt",
+      "bytes": 4575074,
+      "sha256": "4682d49a6df0ad6b6ca92705182dcbe1b34b6af9f31a0132d5f81fe20d301236"
+    },
+    {
+      "path": "results/seed667/A0_full/complete.json",
+      "bytes": 921,
+      "sha256": "3b51d170e7d170cc400707d10c78430ddf3702c22a16bfa6846208041dab5854"
+    },
+    {
+      "path": "results/seed667/A0_full/dev_metrics.json",
+      "bytes": 1755169,
+      "sha256": "455559670fabd0ec35b37137b2db4fe13e50a942ca512b6409c374758696d877"
+    },
+    {
+      "path": "results/seed667/A0_full/dev_scores20.npz",
+      "bytes": 1653280,
+      "sha256": "2bb3c0dfff47972c740a61c35f1c4c755fd8f61701ee94c3ae51c02359871a27"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_00_metrics.json",
+      "bytes": 1754295,
+      "sha256": "dd672d82eb536729d137e9ef81239291ed419fad3a84a845520aebba3d596403"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_01_metrics.json",
+      "bytes": 1763008,
+      "sha256": "3dc6acbc9c70a0a79bbad314ce750e819700948687c6490c3f308a58576dd5c7"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_02_metrics.json",
+      "bytes": 1761690,
+      "sha256": "f85cd06a816af98e1a7b391b8f491e0dede9333b6058d1462590c666ea9d1be2"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_03_metrics.json",
+      "bytes": 1760472,
+      "sha256": "60352e5b18330095cd75be9ebc5ce7ead2073fe4f92458a8687cdddd3aafd15b"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_04_metrics.json",
+      "bytes": 1758673,
+      "sha256": "e915a0c7b5371ec91cd7e65f0edad70c95632f15659c718c922a97089643dc26"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_05_metrics.json",
+      "bytes": 1757166,
+      "sha256": "0b0956e9b502232449305e67368c14767ab0576db299da11e9a540f17145eab3"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_06_metrics.json",
+      "bytes": 1755512,
+      "sha256": "72f84687dce9d3030c402bf327c0e367134a4297e9869ee7d65089e7c29a28c3"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_07_metrics.json",
+      "bytes": 1757262,
+      "sha256": "cf3ecca33b2ccd8423ad4364c49036eed4841a76995cf388f533b85fa3b266fc"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_08_metrics.json",
+      "bytes": 1756675,
+      "sha256": "6194d98d0813953214d1419429e01b03b1df1874dd91afcfef4ec90f3012fe0b"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_09_metrics.json",
+      "bytes": 1755494,
+      "sha256": "efb9fb2128d24da35c0f42be7ba83f2f6d51bfddd2c7d56c6adfba234e75a61d"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_10_metrics.json",
+      "bytes": 1757427,
+      "sha256": "d817c4493af8649ba4337c1518bafb6f1205a524a7fa32ac616025f9f9f203bb"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_11_metrics.json",
+      "bytes": 1754771,
+      "sha256": "bd22d8bb5944dc3f7a48e3bd4610f67511763ae937516dc303cdfb900c5a9d38"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_12_metrics.json",
+      "bytes": 1754558,
+      "sha256": "d8594e88b74ea57b0adcadca00a7c6be4b874add0a26c6970228441a29470f9b"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_13_metrics.json",
+      "bytes": 1754714,
+      "sha256": "996141e3b279e21c89e1acf6d037f3238ef86d285b6faac0622f794af22943b0"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_14_metrics.json",
+      "bytes": 1753502,
+      "sha256": "af295a4491be7711fa272372721d1473f220914d16da3d94736183abb5ec36fb"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_15_metrics.json",
+      "bytes": 1755501,
+      "sha256": "33c6a2d71f8283b3db5339a461744f7874a2ad7a4d9d5ab380a3e0b4d363e7c2"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_16_metrics.json",
+      "bytes": 1755505,
+      "sha256": "ed964d1f84f359652ee06df224bf6565b732bc7303b6edd916fda7f7be89e34f"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_17_metrics.json",
+      "bytes": 1754560,
+      "sha256": "a87daf76a23b6b90c782de489ce76200c1ce344349f362bcd2b89551d1a7b075"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_18_metrics.json",
+      "bytes": 1754723,
+      "sha256": "977c45274cbbfc93d2f4784e08c3707cfc2bb3af56937b4cf4aae8e3f921f4ce"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_19_metrics.json",
+      "bytes": 1755169,
+      "sha256": "455559670fabd0ec35b37137b2db4fe13e50a942ca512b6409c374758696d877"
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_20_metrics.json",
+      "bytes": 1753948,
+      "sha256": "b4415bf100c79c7536dd178b70113f27941c8bd436aa8f54ee10775609920bfe"
+    },
+    {
+      "path": "results/seed667/A0_full/eval_metrics.json",
+      "bytes": 3680,
+      "sha256": "f6eadabcd552951f63028dc1fff8561f5566a6666c49e2f8c957b722fc454876"
+    },
+    {
+      "path": "results/seed667/A0_full/eval_per_recording.json",
+      "bytes": 2283134,
+      "sha256": "e4daf13f3ef165387867b622be09dbf858cf79c0e1ca7d6626d40374b79b9fa4"
+    },
+    {
+      "path": "results/seed667/A0_full/eval_scores20.npz",
+      "bytes": 2302591,
+      "sha256": "3a96f884d25b3217359b240755210a30fb5dce41c0155eb78c5b09beaac63bd5"
+    },
+    {
+      "path": "results/seed667/A0_full/history.json",
+      "bytes": 12387,
+      "sha256": "d3ddd38835b97e64428b7aeafe5eacf6ac825a93c26ef234ff69901ca9cb7676"
+    },
+    {
+      "path": "results/seed667/A0_full/progress.json",
+      "bytes": 593,
+      "sha256": "6fe43ad1df578237ba430400c9c10bead4044b5243c652eebdbeb60daf672e7b"
+    },
+    {
+      "path": "results/seed667/A0_full/protocol.json",
+      "bytes": 5170,
+      "sha256": "966ae47f47ab4c95a89be7a913b7d3615accef87565beb82c73f59bbe05c1baa"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/best.pt",
+      "bytes": 4575074,
+      "sha256": "63e45a029ed7b91169d44daa13949d43a2f1342b4eb09ed259182a1a1dd55ea6"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/complete.json",
+      "bytes": 917,
+      "sha256": "7170b6ad72ab7348fc5ae45b2a34daaa953ca56dcc24ef7273770ce47c5bdd2b"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/dev_metrics.json",
+      "bytes": 1754402,
+      "sha256": "7afd3417ce57b9d067837b795d2f6050e9a37d1caa6ab581454ad897dc0fedb7"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/dev_scores20.npz",
+      "bytes": 1644731,
+      "sha256": "b24a4a42aa72b8f965ef821d04b5825d425d346b46ffa7c57c7754127fbe51ce"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_00_metrics.json",
+      "bytes": 1754295,
+      "sha256": "dd672d82eb536729d137e9ef81239291ed419fad3a84a845520aebba3d596403"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_01_metrics.json",
+      "bytes": 1763509,
+      "sha256": "280932f8286be39f6fe852db8155f9415239d5cd345e10d0e537f4199afc9775"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_02_metrics.json",
+      "bytes": 1762084,
+      "sha256": "4d5e7539509b4d63060b5c5eac4b22e0956a81e5e41fa6f5cf88b25b0dfb02ec"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_03_metrics.json",
+      "bytes": 1760319,
+      "sha256": "05bac920d947955cd98b9ac546d426a544a4d38345a2122aa27e4041312a22b4"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_04_metrics.json",
+      "bytes": 1759476,
+      "sha256": "a23116665631e6a30f75c9f4d56f32b1c208da19b0c9c08256768cc49139e43e"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_05_metrics.json",
+      "bytes": 1756917,
+      "sha256": "cb65650e7403bf8b3202d312327e3c5fe0e817cc9a2e17986f7f3ef93f4c253a"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_06_metrics.json",
+      "bytes": 1756286,
+      "sha256": "bab6f4794c46bc9aa3d7dbed550f2d07f5813c32c4f2b78b55a249f89c32db57"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_07_metrics.json",
+      "bytes": 1756888,
+      "sha256": "8e9665b250762e808d1b06328a7589bfd4ff66d575db0dbc083d5beef484349a"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_08_metrics.json",
+      "bytes": 1756826,
+      "sha256": "70dbd75100618108e2acc0f49ff4dc1f33f9903eb99204fd7565eb3b61af4705"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_09_metrics.json",
+      "bytes": 1757617,
+      "sha256": "6bd2db202a464cfb11e38f780a41408a61b63027239893b2db919d3614c06a32"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_10_metrics.json",
+      "bytes": 1755676,
+      "sha256": "c2927b4883e6de94e8071141970106a734aeb00d2ce18aa805b53ceead78f9f0"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_11_metrics.json",
+      "bytes": 1755579,
+      "sha256": "253b2e95af6ee2728da931ecabde68e3b0ee12cde59e8b7887ac8d1e0530cada"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_12_metrics.json",
+      "bytes": 1755123,
+      "sha256": "65f1ad9a0deffa338a5fdc406be6ae30b89062dbdb34f25b3a67f4b1e79c75ac"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_13_metrics.json",
+      "bytes": 1754778,
+      "sha256": "cba3b0e56304496a12360271ad3322c699e1367c0b04a978264d981b0b9a1882"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_14_metrics.json",
+      "bytes": 1754962,
+      "sha256": "dc9130a2064f7b0f05550288a87180d2a97e7e40a0dff286eb9e97eede44e369"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_15_metrics.json",
+      "bytes": 1754235,
+      "sha256": "feec0d13fa9cdd86d6d728f9c45efec5e5f825badbe5c70cd0d609091901e588"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_16_metrics.json",
+      "bytes": 1754755,
+      "sha256": "1364e7c0044d3b8f5176c3080ba03ed40d1b16ee89b86d698c3ed289f5957646"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_17_metrics.json",
+      "bytes": 1755061,
+      "sha256": "c0ed34038fd982266f21c57265a245f1a17ee28ba31ed5138ede67e5da33b8d5"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_18_metrics.json",
+      "bytes": 1754402,
+      "sha256": "7afd3417ce57b9d067837b795d2f6050e9a37d1caa6ab581454ad897dc0fedb7"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_19_metrics.json",
+      "bytes": 1754101,
+      "sha256": "4558d4e706b4ea64071e9f31f7915bcc69de8a7fd98f866542dff767a1cb8711"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_20_metrics.json",
+      "bytes": 1754235,
+      "sha256": "664e9730ed32579c9de093e9be9ac31aeae5456508c04c8e4eb7cd6701d7ff02"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/eval_metrics.json",
+      "bytes": 3680,
+      "sha256": "60649e4caa48b4b511fde7fc9ca94f534e1e19fef23a8eadfc19170ecf8aa29c"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/eval_per_recording.json",
+      "bytes": 2283096,
+      "sha256": "1240027d73675a1fed30d23389787bfbbfbbb3d0968338421f1a99ea1553a80b"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/eval_scores20.npz",
+      "bytes": 2295987,
+      "sha256": "35f9de21969cd40d7bfc561c3721f99ff1d1b16c9deb2f8b7864cf35ff4ac5a9"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/history.json",
+      "bytes": 12530,
+      "sha256": "b30e920b9e2b062f3d34798c27c0790a02c00ff68f03276fa47508a8fdffcdd5"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/progress.json",
+      "bytes": 590,
+      "sha256": "deda8a8dbd018ef74e88a122c22275c6b1d14d044c27bd8fe2f48a12679b065c"
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/protocol.json",
+      "bytes": 5205,
+      "sha256": "6f9ceed4e74ee88eeef823b888bd75e057fe5131a17ac450a9cbb4710bd60e21"
+    },
+    {
+      "path": "results/seed667/comparison.json",
+      "bytes": 10536,
+      "sha256": "ab91b1b9f674ed514c06c5704012660aff005d3030271932f97925116b7fa6a8"
+    },
+    {
+      "path": "results/seed667/frozen_eval_plan.json",
+      "bytes": 2225,
+      "sha256": "b0bba6b5c5de962a6d673282d5cba83690b37e19ae4b732fea11e506a237daec"
+    },
+    {
+      "path": "results/seed667_integrity.json",
+      "bytes": 191,
+      "sha256": "3128aaf3d6442bef51b3f9cf9b884c14c225eff170b1cb410c310e032e70aeab"
+    },
+    {
+      "path": "results/seed668/A0_full/best.pt",
+      "bytes": 4575074,
+      "sha256": "33166d7239e33c206b1a3c90145a5109092ee32c0865eccd5caae9bb5b2ec8a3"
+    },
+    {
+      "path": "results/seed668/A0_full/complete.json",
+      "bytes": 921,
+      "sha256": "9af4c75a64efe2537a024434a80b64c4f3718a07fc8a0766dd140ad03de1f685"
+    },
+    {
+      "path": "results/seed668/A0_full/dev_metrics.json",
+      "bytes": 1755154,
+      "sha256": "4593dcec072c3e501b3369e10fea6a11d739b76bb5763ecf83161ca0d171d179"
+    },
+    {
+      "path": "results/seed668/A0_full/dev_scores20.npz",
+      "bytes": 1646421,
+      "sha256": "e1c2f816d4d58fa9a5f0345bf6173518ae5275a677ea9b637123d011e6766654"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_00_metrics.json",
+      "bytes": 1760667,
+      "sha256": "1f6b9d931f098e636a0bff0cdea7f09e333ca7cad7301682b8a99ebf46d8a734"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_01_metrics.json",
+      "bytes": 1764840,
+      "sha256": "bd777bcbeb4518f8f6fdbb2f06261f5ed7c95c92462edafb4b48be8a76f55ad6"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_02_metrics.json",
+      "bytes": 1760810,
+      "sha256": "0d81724edfa600a7c4b1c0553e4ab555ed8b46833861a582bbbe764539309e17"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_03_metrics.json",
+      "bytes": 1760199,
+      "sha256": "60b50c9e1e5a0a43e78b4ea6d10470f46c6791913f036e119287c165a6b27449"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_04_metrics.json",
+      "bytes": 1760180,
+      "sha256": "d072ffe92f3b7353ee72f0de07e94abb5c9fff691ac9e5535fcc0e1e985e9dd7"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_05_metrics.json",
+      "bytes": 1757492,
+      "sha256": "4486bcb3eeaf6e68759661aec765577628a2e42b5dd3dece561ec7965cb8f847"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_06_metrics.json",
+      "bytes": 1756270,
+      "sha256": "8c0f4497239962b551ac98ed61a1082b8fac8debfba62c2f72e1ac641e460050"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_07_metrics.json",
+      "bytes": 1756561,
+      "sha256": "c47e04bb67073a27877b78804061b7ae0a2ffc54ada6111637ee7cb53acdd179"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_08_metrics.json",
+      "bytes": 1756819,
+      "sha256": "924629bc542f69f40fe18acaeb7367dc6bbe4894129bfc5214ab7f79bd771277"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_09_metrics.json",
+      "bytes": 1757478,
+      "sha256": "6446ea1403878ec263b8ec36e212f40fa3f8c0bbe3baa8d869958732649c7d32"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_10_metrics.json",
+      "bytes": 1756360,
+      "sha256": "e93ea8d49d7890fe3a2bafd721357d940827816299952b6deec0c909186c64ff"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_11_metrics.json",
+      "bytes": 1756186,
+      "sha256": "e1e06be764e5ce234f9288ac79da5dd54fe72816fad391f3224ff13ca9ebe9f0"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_12_metrics.json",
+      "bytes": 1756169,
+      "sha256": "73d8527b9e0a940651922500e4cfeaf88556fed2a878ca2daf511b444023e02f"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_13_metrics.json",
+      "bytes": 1756759,
+      "sha256": "15fcc1ee668881929d1ff70390e5a04b00cb4ad2f1ee63c5d85278ff4bf4f552"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_14_metrics.json",
+      "bytes": 1755154,
+      "sha256": "4593dcec072c3e501b3369e10fea6a11d739b76bb5763ecf83161ca0d171d179"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_15_metrics.json",
+      "bytes": 1755951,
+      "sha256": "5bb92b85990ad6024a629253773f8f59d0d4d233ea097be108cd606507f00b62"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_16_metrics.json",
+      "bytes": 1754952,
+      "sha256": "68366269df1c7487ba1034c936c8e237e0257d873b2e45bb7b65987a3f4a8015"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_17_metrics.json",
+      "bytes": 1755389,
+      "sha256": "a2f7a495b6ca5b303e59e08aaed4ba2adf723f932345c91ef6a8b91ea15943df"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_18_metrics.json",
+      "bytes": 1755511,
+      "sha256": "b4599c9760ec223795a6fdc67a977d952d8e1086434a4d054be6725bc7df73d2"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_19_metrics.json",
+      "bytes": 1755918,
+      "sha256": "56cea3fae8a3f1d11df39ed1e245dbcba3eb891c5adb4ffce6ff15521bea9681"
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_20_metrics.json",
+      "bytes": 1755841,
+      "sha256": "8c73d03dbbaa04b65e5dd6689a35956b21a6e436a0fcc1206a5c24f420d6d744"
+    },
+    {
+      "path": "results/seed668/A0_full/eval_metrics.json",
+      "bytes": 3680,
+      "sha256": "5515467be56fa32476acef580a987c73aec1ae978aa24df97ea8833a55339a19"
+    },
+    {
+      "path": "results/seed668/A0_full/eval_per_recording.json",
+      "bytes": 2282857,
+      "sha256": "0712ca0637c0ee6b032564900ebd7627d5e730c6460ca979ce1bd8e66f286ff6"
+    },
+    {
+      "path": "results/seed668/A0_full/eval_scores20.npz",
+      "bytes": 2298016,
+      "sha256": "bdbc67c6aa9e7e106cab162bc151aa8e6a80114c003df032f6cdbd4b7105a22c"
+    },
+    {
+      "path": "results/seed668/A0_full/history.json",
+      "bytes": 12339,
+      "sha256": "02a77efad6c00861e68f971e0f3abde5172ce83c16526e897b3472435819ebf2"
+    },
+    {
+      "path": "results/seed668/A0_full/progress.json",
+      "bytes": 582,
+      "sha256": "0297af1b3e65e1aecc53cc0c76d8bfeaa21707fe1b05ac41b4fcc5f4e1ce6c1d"
+    },
+    {
+      "path": "results/seed668/A0_full/protocol.json",
+      "bytes": 5170,
+      "sha256": "4de7822dcef98049f01f7158d6d3d3c0fc68d58308c5eb9c9f723a41e59017b5"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/best.pt",
+      "bytes": 4575074,
+      "sha256": "e2cffd8a03e56e5de4a66fe00f210f07444f18dea0446a3feb5cfeb1b84cdcea"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/complete.json",
+      "bytes": 928,
+      "sha256": "eea380c08f74e509bf9dbdafec16bce7d637fe4d54545505810c80acb7d973e4"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/dev_metrics.json",
+      "bytes": 1754812,
+      "sha256": "a25e0499a5f4cf495109d4045d0f693b951572a954e17b6692e91b48f53571c7"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/dev_scores20.npz",
+      "bytes": 1647981,
+      "sha256": "7a28ee48bff42b14758c110e4df9cb16ad7671f00b733b1d38480f05c5d7b0d8"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_00_metrics.json",
+      "bytes": 1760667,
+      "sha256": "1f6b9d931f098e636a0bff0cdea7f09e333ca7cad7301682b8a99ebf46d8a734"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_01_metrics.json",
+      "bytes": 1763801,
+      "sha256": "a3d8b816826a461c7f3ac4f434ef37706f08696819ed2209229d86e4d7d923eb"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_02_metrics.json",
+      "bytes": 1758495,
+      "sha256": "58735bb919f8a43399d4eba673ba274d287cdb2f3063c0ca9c5ed90ff1f8f4ce"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_03_metrics.json",
+      "bytes": 1759486,
+      "sha256": "a4ba0a2c1f7fa7c7c3cb1782347e6131703cd369d799bd85eab324c0f035bfa0"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_04_metrics.json",
+      "bytes": 1758062,
+      "sha256": "33abeee56c4b63a7dc255ace097841b19140c186a9d419f57b2fedb1eb6d4174"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_05_metrics.json",
+      "bytes": 1757305,
+      "sha256": "9a594b1dbdb81c737819bbe87cdf94e39a933b8dc9d178377b935df868f441c1"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_06_metrics.json",
+      "bytes": 1756521,
+      "sha256": "2b4140e9585fd1d44feb0e938b7f2faebca168099dcce3a13302b6c505488b35"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_07_metrics.json",
+      "bytes": 1755621,
+      "sha256": "c61c76f46e4a6e1cf2c41f31d5b2b1f987df3a02cabc52b62c03d3b6e1f12d36"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_08_metrics.json",
+      "bytes": 1756092,
+      "sha256": "5b0592487dc4fa588c84750e4a14f17a0fcbce5bb65729c988a45d3b7db5e137"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_09_metrics.json",
+      "bytes": 1756556,
+      "sha256": "61581ad1f3faff4d30ee524c4dd3d8ff1edc95f70ac516a88972dc6ed4c8bcdf"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_10_metrics.json",
+      "bytes": 1755718,
+      "sha256": "46173260169b6dd1a2512b76a9ed13ea7f79b683d5ff1805c48aee3844f5f31f"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_11_metrics.json",
+      "bytes": 1756767,
+      "sha256": "1922e0f5ebe4b73060131e500a2fb3ed56cfe02756e3b86b33891cca93ad2482"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_12_metrics.json",
+      "bytes": 1756149,
+      "sha256": "ad26b1c05112a6dcabcb6e8c5f16515cefbcbc2490344ab287745fb492623ccb"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_13_metrics.json",
+      "bytes": 1755974,
+      "sha256": "f32b83777cd12b016e63a08490e6809298ff5f4197d85f5e3346f5050c6c2b45"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_14_metrics.json",
+      "bytes": 1755533,
+      "sha256": "422f260eb7baf42534ec32d659d58c1f2bc786f70ae90441b490e52dca715fd1"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_15_metrics.json",
+      "bytes": 1755372,
+      "sha256": "d4304a660d2bc2a80caa3ba0c72e145bb19379f10d8c7340d4daf1b159335444"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_16_metrics.json",
+      "bytes": 1754468,
+      "sha256": "116c05c6cf0c484f4f75aae259e335b1d095fa3fa76acab50b67a5dad73257d9"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_17_metrics.json",
+      "bytes": 1754812,
+      "sha256": "a25e0499a5f4cf495109d4045d0f693b951572a954e17b6692e91b48f53571c7"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_18_metrics.json",
+      "bytes": 1755935,
+      "sha256": "cb034a8a544ced2247633918baa718db64307c7dd0d4fe78f420dc67c64c2890"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_19_metrics.json",
+      "bytes": 1754334,
+      "sha256": "69582717409818c829238fae0bfc08ca027324cac20ce00ac31130634ec7f4d7"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_20_metrics.json",
+      "bytes": 1754324,
+      "sha256": "1dc43cb85da98329cc8d82c400281b63666abba3c3d5fc29369a3cfb9c0ebfce"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/eval_metrics.json",
+      "bytes": 3679,
+      "sha256": "c5b3b4eec72cb0c3646b28fc8759fb1046cf6a92e9f9a115bd548da77c681387"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/eval_per_recording.json",
+      "bytes": 2285171,
+      "sha256": "c0f8975249556fbe722f2e460e086724cae51c9340e5a6eb9bc0500d18a8b517"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/eval_scores20.npz",
+      "bytes": 2295508,
+      "sha256": "900335fe173622d2729357df3e034f9e0dd43b2e67997a0e6369598ec7c39d1d"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/history.json",
+      "bytes": 12551,
+      "sha256": "559bed2371802c5a787732d2ec3dbe820822dc866970738a62f66720e460f511"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/progress.json",
+      "bytes": 590,
+      "sha256": "6c190ddc9ebebd5aaf501b8463b3af06ebf1907952b13f2e19ae7617a4fbc601"
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/protocol.json",
+      "bytes": 5205,
+      "sha256": "1304e8691161b079a4aee05288cc9bdcfad26b379496dd42f6b8d389de335443"
+    },
+    {
+      "path": "results/seed668/comparison.json",
+      "bytes": 10546,
+      "sha256": "5b6f5c153f5cc7bb984c427b6fbd68593cbc589104b9adce18fc8779f74ac9cd"
+    },
+    {
+      "path": "results/seed668/frozen_eval_plan.json",
+      "bytes": 2236,
+      "sha256": "d5a6faa43c9ba87f84630aa2e115c1d5118385a72f2eb0ac67d8ec07b9eb4bf5"
+    },
+    {
+      "path": "results/source_cache_check.json",
+      "bytes": 450,
+      "sha256": "f4843f39cd4c69dc4ecd602c85054ec1ef95d73b590b0c6909843cdd2c0e4c62"
+    },
+    {
+      "path": "results/split_integrity.json",
+      "bytes": 120,
+      "sha256": "80b2d6fd30d514128db44e7be20396d3999f47794d3ff7781973173442905a3c"
+    },
+    {
+      "path": "results/status.json",
+      "bytes": 85,
+      "sha256": "3c39a725ce5a554bf5dcc5defc82a87551a87bff8c62ea473a985c32d150a801"
+    },
+    {
+      "path": "results/summary.csv",
+      "bytes": 1291,
+      "sha256": "062450383e67aaeea1a0301273d9f9b0ad277457cb449b091048c776a2876b0c"
+    },
+    {
+      "path": "results/three_seed_summary.json",
+      "bytes": 5295,
+      "sha256": "f7dee26e6fb3519b5188d343c19e1b2938941a09092b194e8280a893fa2b54c3"
+    },
+    {
+      "path": "run.py",
+      "bytes": 12527,
+      "sha256": "a1840e0b4d017bf63104009a6b5d58a228ef8779ea7bbd889791fc721ce2d3bd"
+    },
+    {
+      "path": "实验报告.txt",
+      "bytes": 3819,
+      "sha256": "95a11dc45b9126ea1cdc008c2e703c0e53feb3323487c3a93759066989c58005"
+    },
+    {
+      "path": "结论摘要.txt",
+      "bytes": 3723,
+      "sha256": "8d80bc87106a1190426d6108f57c9fff0c745d15fa441596dd7c410281779c88"
+    }
+  ],
+  "omitted_local_artifacts": [
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_00.pt",
+      "bytes": 4575074,
+      "sha256": "c6518be26bd11aec103d3720dd2e5ea6af73a4e7443359ca88ca0f7b5ab1889c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_00_scores20.npz",
+      "bytes": 1545003,
+      "sha256": "a91f9ae7e17112710481b17229accac6f8ff11ff58adef38cfd6e11655d3003c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_01.pt",
+      "bytes": 4575074,
+      "sha256": "bbc94de0d1a349465cbecdc033f39abcc2c60aa64a51345c9df32f9e6774accf",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_01_scores20.npz",
+      "bytes": 1632272,
+      "sha256": "19849866ea543c150d976579d3cd965c5a3e0a4c286118acc530e86e39a07e0d",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_02.pt",
+      "bytes": 4575074,
+      "sha256": "7e7f73742c33ada5f32a143261a9a5c4856a3190b67cf0c27afb6a4651b34040",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_02_scores20.npz",
+      "bytes": 1634424,
+      "sha256": "43a9db572ffc6c2e522fa071adc25738219442f083cdb38dd47e680cdb2cb14f",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_03.pt",
+      "bytes": 4575074,
+      "sha256": "be90f6c455373919a2e3bc11848ff4960a9855cb8488163a5c2db32ae70dad11",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_03_scores20.npz",
+      "bytes": 1643029,
+      "sha256": "72c2f0389ce31786711a56d72179ea1f2d5255ca1684ea41c2f60e3cb5460ef2",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_04.pt",
+      "bytes": 4575074,
+      "sha256": "c8fcc1c6c2c2f21e4388e67937a48f398c6d070ed2b399517b6d764b86bc5dcc",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_04_scores20.npz",
+      "bytes": 1634585,
+      "sha256": "25870d29afeb3fad29ec82b147f9a49a346172a32306e307f2c83208d94b33e6",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_05.pt",
+      "bytes": 4575074,
+      "sha256": "1e5794e24360c2368fcfe3668ae8f0d053d03d73cd0dfa214d4dd6555339590c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_05_scores20.npz",
+      "bytes": 1646551,
+      "sha256": "4c27934a5244e11cdf55f2c124e82204bb466e0608af5b1f3fba5cdef7e5e07c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_06.pt",
+      "bytes": 4575074,
+      "sha256": "1e15b970d6e52c36131857885279167d6526e6db00bc8014142f9e33a57102ee",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_06_scores20.npz",
+      "bytes": 1646680,
+      "sha256": "d5a9629ab03863279ddb1fbccfa7bc93558a611207c534900101ee36c22067bb",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_07.pt",
+      "bytes": 4575074,
+      "sha256": "cb0383fb8e4a40653d388d6fab79f8cdf4809fa06bc5b3fd65cb88ea684b5508",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_07_scores20.npz",
+      "bytes": 1651700,
+      "sha256": "fdb0b25de60f95fa85581e2f99248eca1640328a34bc2966db84e450f9cd0c7f",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_08.pt",
+      "bytes": 4575074,
+      "sha256": "7a98ee63927c0b8001f9a0a5fbb51588708fda53af8b29620e6a35c45db84268",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_08_scores20.npz",
+      "bytes": 1645607,
+      "sha256": "0e91a3d374eed0abf39d3598ae60d066d264bef2c1dbb04e7461729b4d958ff7",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_09.pt",
+      "bytes": 4575074,
+      "sha256": "3aad851a79046a5ac73b3c9a07b9f5aad7447a73cb85a7fb5530de7fee4a1033",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_09_scores20.npz",
+      "bytes": 1647028,
+      "sha256": "65af99d082ad0dda1035100e29c880e9f6a53ffd9c53aef2c663c943874a075d",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_10.pt",
+      "bytes": 4575074,
+      "sha256": "c829a17cf5c4d49eed330a70748c97173179458c2dc1d4f582e24f0ab6c4dbea",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_10_scores20.npz",
+      "bytes": 1641317,
+      "sha256": "d523cf13523f163eec08922c92c5a2ced10178f286ea4870f7cf67531a489e49",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_11.pt",
+      "bytes": 4575074,
+      "sha256": "178cf058982127c902a43d94edf784108c51c53c4e16d301bd6c4f286056388d",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_11_scores20.npz",
+      "bytes": 1647803,
+      "sha256": "17b68ed574973401dbc8f206dd1ae4ed74b5cd5caa03cd7466ba019a62813d51",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_12.pt",
+      "bytes": 4575074,
+      "sha256": "5ab0eba0d22cf031e700354a598d83b2180c10508f13dce6cf6cce27a743781b",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_12_scores20.npz",
+      "bytes": 1648976,
+      "sha256": "afb65a7679989577d8f5cd1841e3e76f07b495146f909229f3d3224a95db56e7",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_13.pt",
+      "bytes": 4575074,
+      "sha256": "12e29d3c04e27fd92dd06d8056386a3042333f38a12bb7948f9a4c21a4171b72",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_13_scores20.npz",
+      "bytes": 1647269,
+      "sha256": "eb5ac5194a50ffc76b104868e3e7dd843108173a5ffce95e7d43de6b658f380c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_14.pt",
+      "bytes": 4575074,
+      "sha256": "cd95578b2477c993649be24c94a33113e04b3d8edb4bdbc3a05c29ad24d1d5ee",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_14_scores20.npz",
+      "bytes": 1649172,
+      "sha256": "abe95a516607d603c5bfcecc3b04cf980810e79a27f5257e2e003e85a6f17589",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_15.pt",
+      "bytes": 4575074,
+      "sha256": "fb4d2329539168eba3d6ff861f4012d91c590fd7d08c0e192e4ffedcddd02740",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_15_scores20.npz",
+      "bytes": 1649701,
+      "sha256": "d681af9d25119e594f84b6ae1e0435fc5799f344ecde3a30b4b92d4d985d1c74",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_16.pt",
+      "bytes": 4575074,
+      "sha256": "021a1fca9e40811040177b8b339083745b4072faf5e0617e2b353ba6bb850cdb",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_16_scores20.npz",
+      "bytes": 1650928,
+      "sha256": "b78b9604f781e068672a19a1ea4c31c1905cda99ff38d50e80059065dfda0ba3",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_17.pt",
+      "bytes": 4575074,
+      "sha256": "2f5d8fd790e72754b2b4da89b55bd03283c72abaac2743b47149771c76d4a9d7",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_17_scores20.npz",
+      "bytes": 1645773,
+      "sha256": "b1077a7814d48a7e043918d85167fb53f72d50f1008074498ed6ebf1e78f1e0d",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_18.pt",
+      "bytes": 4575074,
+      "sha256": "7db573de119d9218636ac47b8438664f7e46d43b0f671da28e7ccf3015e73536",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_18_scores20.npz",
+      "bytes": 1648598,
+      "sha256": "6d799220cd91175c89f1dcb1f112dfc5d8ae8d0c285d9459522b848a6476cdf9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_19.pt",
+      "bytes": 4575074,
+      "sha256": "4682d49a6df0ad6b6ca92705182dcbe1b34b6af9f31a0132d5f81fe20d301236",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_19_scores20.npz",
+      "bytes": 1653280,
+      "sha256": "2bb3c0dfff47972c740a61c35f1c4c755fd8f61701ee94c3ae51c02359871a27",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_20.pt",
+      "bytes": 4575074,
+      "sha256": "4fec6f7305bb83229996228ccac68f322383dcd9a46be9fd3471609a28db9b9b",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A0_full/epochs/epoch_20_scores20.npz",
+      "bytes": 1650494,
+      "sha256": "fed31f1cc5e39234fa4dd431a20876e7ce0a0ad47d1d00e813dc3280029625fe",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_00.pt",
+      "bytes": 4575074,
+      "sha256": "fc9c8e6c10e2a7d37774ea96c28daefaf284e272fbecacd92674ec0b967d9d93",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_00_scores20.npz",
+      "bytes": 1545003,
+      "sha256": "a91f9ae7e17112710481b17229accac6f8ff11ff58adef38cfd6e11655d3003c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_01.pt",
+      "bytes": 4575074,
+      "sha256": "97f213e0a8f3592934cdde54e8ec37f63a845f006f529ca8d0c0375e3b0303c6",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_01_scores20.npz",
+      "bytes": 1630839,
+      "sha256": "479780a7dd8ccbe9074e553f64fc2c78d189afe35515c24f315db79b85bf5bb9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_02.pt",
+      "bytes": 4575074,
+      "sha256": "b7666f9b1ae5a3f37fa3e4e5c68f20095692bf01741bdac1af1f10af831fb19d",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_02_scores20.npz",
+      "bytes": 1639468,
+      "sha256": "39b8d0dc97c035547fb48ca5b2bad5b3d42556ef68bbcd23a3ed8d01b7da0492",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_03.pt",
+      "bytes": 4575074,
+      "sha256": "58db7bc22634ea4031c1f735762ee4b3f3d951f4fb5dbe267d009fb9d92dc039",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_03_scores20.npz",
+      "bytes": 1636099,
+      "sha256": "aafec09169e71da0d156ac7f003e0ef686769afd9c586d5df606f6b49f37bd50",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_04.pt",
+      "bytes": 4575074,
+      "sha256": "5f7964bf31ab257540398a6954fc7c9a8390d7792abda357a118f3bfd5672c6e",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_04_scores20.npz",
+      "bytes": 1638328,
+      "sha256": "a2fa782eb145f7d2ce124df457f79cad666dc7fe490e43eff46c66ab4713bcf5",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_05.pt",
+      "bytes": 4575074,
+      "sha256": "e5cb354ba57dd00463fc6e785b3a587d8a88f069e1c612dadd239f07568ebb58",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_05_scores20.npz",
+      "bytes": 1648208,
+      "sha256": "e70fd9c14b6a8c1d6c6593682c81082902cf9fbd6c7451fba2c7dea94f169641",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_06.pt",
+      "bytes": 4575074,
+      "sha256": "31c3c6b4e77c7410983f18e88be7b7c6a1ca1630f67ad10d4eed0b4a72d9cc9e",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_06_scores20.npz",
+      "bytes": 1649374,
+      "sha256": "f7d069a7f4a891e7eb61218c9a9f23876c17b1253ac92ebef44d94fc37c27bd4",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_07.pt",
+      "bytes": 4575074,
+      "sha256": "da5edebe93d4f4203126b9dc0f583bab5a28e3ba8736e0490d0c43d07df5c930",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_07_scores20.npz",
+      "bytes": 1652186,
+      "sha256": "0800941dd3d3d3083ac1af60db720629d379f4eaa5a92e421a102de1b26dcb29",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_08.pt",
+      "bytes": 4575074,
+      "sha256": "af933c27915f17d01eca3f8532252e79557492f50efa7a539963978cca2b9f12",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_08_scores20.npz",
+      "bytes": 1648698,
+      "sha256": "df88d4ce33f715aeb6775d934db17cdc48ef7a4c5b95be0a1287c1a73e3b27ee",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_09.pt",
+      "bytes": 4575074,
+      "sha256": "2cfe9c71f7e9ec18bf3740e79f6cc040cfc6882d5d245d3907165a1255b5fa4b",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_09_scores20.npz",
+      "bytes": 1652192,
+      "sha256": "833c68fb59a0d8564ed34e6ee3fd7344e258e866ca84161abe5fe9a075f17a97",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_10.pt",
+      "bytes": 4575074,
+      "sha256": "e9ffd51db9de4a065356e935bf125e6ebbd19fd7fe8f0949afb114ca9ad1aba9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_10_scores20.npz",
+      "bytes": 1648937,
+      "sha256": "43db85e3f6921e5ffd03cdc6ff80248cdd81eb693d087288538e9611548c0d4b",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_11.pt",
+      "bytes": 4575074,
+      "sha256": "0e2f221e95d64ab9c56f1ba82d5de2106603b5a2db478ab8701a91aad54be33f",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_11_scores20.npz",
+      "bytes": 1650851,
+      "sha256": "0a975a7e7bd239296234d6a6c5bf3f2d429335751717af3d91e5e1f4f22058cb",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_12.pt",
+      "bytes": 4575074,
+      "sha256": "98bdaf9c6203d0cde040764591741d00a7ded0985440f52dcdfed98468d504f2",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_12_scores20.npz",
+      "bytes": 1649520,
+      "sha256": "758c2a64b5a9de62d94a8b1aa7d66f8fbc7518d1ad9485758d746663c5e1884a",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_13.pt",
+      "bytes": 4575074,
+      "sha256": "c5dfa04bcfcd9d53cc1382e60d4b84ea3c25085cd1e4e27ef9cd914ec808cb78",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_13_scores20.npz",
+      "bytes": 1645263,
+      "sha256": "bdf46bd927d1477defe85918c8f6a6dcb3a8e2599485574bfea29bfb07baac63",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_14.pt",
+      "bytes": 4575074,
+      "sha256": "463132a1ca96212b561e832f47430ddbee86762cf4c7ace6bb133d602b59f8fc",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_14_scores20.npz",
+      "bytes": 1645459,
+      "sha256": "c876ac09daea0dad0175f7bc209f3e7f11d4046ac3687d119c2d66100e30bb01",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_15.pt",
+      "bytes": 4575074,
+      "sha256": "6eaa5bcebf865fbeb3d7e1d6fc2a31e12c889260fcf36e820ed273b859ee4532",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_15_scores20.npz",
+      "bytes": 1646835,
+      "sha256": "4c9a440806c24c967663053ffbf9c731874b7edce3cd02673a6fa2ba786914dc",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_16.pt",
+      "bytes": 4575074,
+      "sha256": "26b85542f6f7cecd980ab914a1059215bde9f69b87e6ab18f3d38e424320daab",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_16_scores20.npz",
+      "bytes": 1647321,
+      "sha256": "ba8f639f76083b2a9b23f910b746dc5cb45b43053fbcdbf7cc3f10f7aaba5ca7",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_17.pt",
+      "bytes": 4575074,
+      "sha256": "d61ce1adddd657770eaf11fdac94efc71e5fb99639648ecaadeaa4f88e4cfd02",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_17_scores20.npz",
+      "bytes": 1650413,
+      "sha256": "99dede2ca1760d90b6646d5cbbd20875eee3afa1df26ceb1fb231f84e9456d30",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_18.pt",
+      "bytes": 4575074,
+      "sha256": "63e45a029ed7b91169d44daa13949d43a2f1342b4eb09ed259182a1a1dd55ea6",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_18_scores20.npz",
+      "bytes": 1644731,
+      "sha256": "b24a4a42aa72b8f965ef821d04b5825d425d346b46ffa7c57c7754127fbe51ce",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_19.pt",
+      "bytes": 4575074,
+      "sha256": "ab60e8f2b5b36fe4ccab6bf753de7f26dc3593bab8703438deaff8309f749190",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_19_scores20.npz",
+      "bytes": 1645312,
+      "sha256": "01655cb80c80fa9e6e9904b3972ed258fcf86c3cef86d3bf25b8a6596701c112",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_20.pt",
+      "bytes": 4575074,
+      "sha256": "458dc38d71dfc170142207d94662d0d5c3dc05bd19ca8c38b5ebd1c1198f8ce9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed667/A5_fixed_pool/epochs/epoch_20_scores20.npz",
+      "bytes": 1644320,
+      "sha256": "f45a4bff66927deb629d743c73a7b58feaa9b025f907463155b2edf0b9c974a3",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_00.pt",
+      "bytes": 4575074,
+      "sha256": "79e4b579a7e7de64a5b4c55851691af5d82ebb65d37824df54ee8f1eba6a1e78",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_00_scores20.npz",
+      "bytes": 1639787,
+      "sha256": "6033d6b02a69f622bf8f63ce9ac11cc5ec2b1916272284122c247d4c7ceae49e",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_01.pt",
+      "bytes": 4575074,
+      "sha256": "08239af802e00a37ea3c1dd0c2c84f109792d99af64bbe91ee779e1b19f43134",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_01_scores20.npz",
+      "bytes": 1645114,
+      "sha256": "e9f0515b506e84bf0e5cf13e6371783ff1a455c7609639c0a99aa3b8a1cecf05",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_02.pt",
+      "bytes": 4575074,
+      "sha256": "64014d5ef34a5f9118fd2ae1d49902549b26a2c526d9007eb773965c87539118",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_02_scores20.npz",
+      "bytes": 1645662,
+      "sha256": "79cb6d87900c8f2cb73f6f345bc985e82d193e845d82b8436654dba66ac0e05c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_03.pt",
+      "bytes": 4575074,
+      "sha256": "1517b156d037ea89aa824c2b50fdae17a429df3ac95100a8628a300c496dbfc9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_03_scores20.npz",
+      "bytes": 1637541,
+      "sha256": "1c3289b698dff0f3de057c1da81962c6a5d61df3668bbaf8a0957ac1d8856a50",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_04.pt",
+      "bytes": 4575074,
+      "sha256": "013339b6d441afe40f9e15ff721efb6cf5e5f1279f759327794a57684cb9bf7f",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_04_scores20.npz",
+      "bytes": 1647674,
+      "sha256": "04d70b9fe31431620ac4874a5600db6ebbac646e078aac3a93ddaa3c3f2b937f",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_05.pt",
+      "bytes": 4575074,
+      "sha256": "5be76e0618bc4fac8793a69a58ec5f97d19194a58d4ca1f2d0d6cb7a661d7bfa",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_05_scores20.npz",
+      "bytes": 1649145,
+      "sha256": "4beed655e6872a7fbfe6aa6f3511c25a460211f2ab811c6d0ba6fc50d0741790",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_06.pt",
+      "bytes": 4575074,
+      "sha256": "ebfca33fe04ceb44659456262ef36f7f5bd97485090939956ccc9803bd13b0c9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_06_scores20.npz",
+      "bytes": 1644151,
+      "sha256": "f18eaabf5da4215a87e731522f8c6407c1d3ffb4569a9732892001fe5b14defe",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_07.pt",
+      "bytes": 4575074,
+      "sha256": "a263270cb0983a783ddaf9af671f44555e5a93e0622536e7fd103c92b049fd3f",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_07_scores20.npz",
+      "bytes": 1646474,
+      "sha256": "f825b40085d51708f9918742c445afab53589b549af681b7b25ce12fb8d150da",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_08.pt",
+      "bytes": 4575074,
+      "sha256": "bfc934d32e9178864472bd33be71db1edc3602fe7a5608fd1e9938360a81f88c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_08_scores20.npz",
+      "bytes": 1649685,
+      "sha256": "f09281ce045144d248ca80438c2591752618686662ae2ad1089a4f949920336a",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_09.pt",
+      "bytes": 4575074,
+      "sha256": "643959f23ed278c58f09e2c57d4e866c74b58c4c58f195d3782d2f4fefe162a3",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_09_scores20.npz",
+      "bytes": 1651088,
+      "sha256": "bd05f26c1efa420deee012a742e426814e14cbb7606f0c1b49317669504f4b6a",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_10.pt",
+      "bytes": 4575074,
+      "sha256": "bc7dbe757468556d48d2b97f05b31eae72eaba681cea95e15de76c1b2a56eaef",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_10_scores20.npz",
+      "bytes": 1652069,
+      "sha256": "747a1bcbce46152d2d17c24c8539bde5095288c37588a7001c6fb379c73a640f",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_11.pt",
+      "bytes": 4575074,
+      "sha256": "bad2ec72a69d4dbbbe956307604f0109f0f106b48b4478bc6ae2e0e5f7d5e9d3",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_11_scores20.npz",
+      "bytes": 1649872,
+      "sha256": "5587683d99a7fd82e26622204db44a5cb53e19ba24b2107a3f7640ea0e755beb",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_12.pt",
+      "bytes": 4575074,
+      "sha256": "3a06ac20ceeac2e0731cf55bfe404f38965f7412021c9a9dc81817f40ef283ae",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_12_scores20.npz",
+      "bytes": 1650186,
+      "sha256": "f671eb05e24d367ff6f2e9ddeba22b42dc001d70f54272dffe59c8ab7b9da0a2",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_13.pt",
+      "bytes": 4575074,
+      "sha256": "5d655f9913cf309313c95af4b6f0cc4877588877e93606bed4c87bffec2edcab",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_13_scores20.npz",
+      "bytes": 1652455,
+      "sha256": "25b6bb0b18781a47e9f91d7898c506958865adaee462ebdcac45e7f8e235df79",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_14.pt",
+      "bytes": 4575074,
+      "sha256": "33166d7239e33c206b1a3c90145a5109092ee32c0865eccd5caae9bb5b2ec8a3",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_14_scores20.npz",
+      "bytes": 1646421,
+      "sha256": "e1c2f816d4d58fa9a5f0345bf6173518ae5275a677ea9b637123d011e6766654",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_15.pt",
+      "bytes": 4575074,
+      "sha256": "09945216288b4c6a269d6f6187a43fde5998aa57eff5fee3f950b11bd97bfb85",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_15_scores20.npz",
+      "bytes": 1650279,
+      "sha256": "5758b8f065ebbb127bd846246d7d737b54e6a56c7f217fddd4d31bdf707a9941",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_16.pt",
+      "bytes": 4575074,
+      "sha256": "a8e0941ee8a6faaf6e52652cad8b86e4c8146a62717eb546920ca1f03b4bd2ce",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_16_scores20.npz",
+      "bytes": 1650967,
+      "sha256": "431f72546d2ba624095f4cbd3f27f63aeea49b04de2c430abce3a8f30320df88",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_17.pt",
+      "bytes": 4575074,
+      "sha256": "03eace1ddb588b5deb731a364005d4e2dbf71406a388177ef0f6b65953218b8a",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_17_scores20.npz",
+      "bytes": 1650940,
+      "sha256": "5ff5147dc7b51e06a4659539c58226260ab7db640c576a22c0675c8461fcf900",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_18.pt",
+      "bytes": 4575074,
+      "sha256": "07db2bbae8c38dd50ce57c120c65c2a5a1ae99e0a67df05324b41ff40bad7e56",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_18_scores20.npz",
+      "bytes": 1649475,
+      "sha256": "2ba7432848f7514efcc74ee16670e411ade6968afd2af1b5190025f83ef52ba8",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_19.pt",
+      "bytes": 4575074,
+      "sha256": "088992a044fed75b07c761361d2444e4e752fc2bb32d54104822573c5e184b08",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_19_scores20.npz",
+      "bytes": 1648907,
+      "sha256": "3005c0d8e9f4f0880ecb8e108215d155a8cb90128825d1979f1cca9478340645",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_20.pt",
+      "bytes": 4575074,
+      "sha256": "33cc0d85bb882c40990b0c4eb922476204e5935c1c4d4343eb9fd634b3a976c0",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A0_full/epochs/epoch_20_scores20.npz",
+      "bytes": 1653889,
+      "sha256": "f2010580511cb1a102ec7665c31beeeafbebe2162ea6eb1945eebc4db9368da9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_00.pt",
+      "bytes": 4575074,
+      "sha256": "7a4ea8e1df13c2165ee736988d2e2a97df22d134fd583bb74680d662ac6f88c4",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_00_scores20.npz",
+      "bytes": 1639787,
+      "sha256": "6033d6b02a69f622bf8f63ce9ac11cc5ec2b1916272284122c247d4c7ceae49e",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_01.pt",
+      "bytes": 4575074,
+      "sha256": "1ee01012863c002dae5e053fbd55cfc48eaa6aebbce95a174e556541bba5473b",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_01_scores20.npz",
+      "bytes": 1633479,
+      "sha256": "ba66c74f4be5f768527f7cd3f24bbfd9a078d58e4b921d7837f43f6b6201881c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_02.pt",
+      "bytes": 4575074,
+      "sha256": "1c65f4a80ed9795ed57b255326f44dac7d89c4117bddcb665a2e89795a8bad78",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_02_scores20.npz",
+      "bytes": 1647347,
+      "sha256": "0640d556f7d67a7ea81a98e4a861fdca0272076b88af97234259fc8fa97d2e7a",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_03.pt",
+      "bytes": 4575074,
+      "sha256": "b2174931f87c959da7ea5dcd70914a9e789a6cf501964d1e54785270a3d3763e",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_03_scores20.npz",
+      "bytes": 1639156,
+      "sha256": "060456e3e9897c79b2fd99d034ea4e2608fdc9a1fee72b846bc9e01d4419daf6",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_04.pt",
+      "bytes": 4575074,
+      "sha256": "48da0d05aa1e68beea41033099a149bf57bfaabdeed2b8f81a7e6e3854a5f6ca",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_04_scores20.npz",
+      "bytes": 1643156,
+      "sha256": "bbc31a8dcb6b10dc0a8b6251becbc7089e57f6cbeec1723d1d012a6b80a10638",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_05.pt",
+      "bytes": 4575074,
+      "sha256": "19adc027a1a059cb82ac796517ce02c5af177547e813a811cf02ae24b7b40108",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_05_scores20.npz",
+      "bytes": 1650010,
+      "sha256": "94a79d07c87ea008798466ce6d8ec62025545d78319d9fd1114766017af36a08",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_06.pt",
+      "bytes": 4575074,
+      "sha256": "c3eebf19794519d1f9023fc1788139eb7e058c9c9e05157ab4b8a96225570695",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_06_scores20.npz",
+      "bytes": 1651481,
+      "sha256": "39d8cbf0146092e41134ae83903a8e9ab137adf5e9fe38e152d3f9955056e7c6",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_07.pt",
+      "bytes": 4575074,
+      "sha256": "f803ee6c5ba9762725870fc16098d5a2cedc4b8618f35124118b062f87ccafa3",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_07_scores20.npz",
+      "bytes": 1645679,
+      "sha256": "2cd0226494657a99aa8da41c641a842c95f19a5f435ead48cdc4d7ffc4361152",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_08.pt",
+      "bytes": 4575074,
+      "sha256": "4c439b1ca7d3483a505c55a03a5953b091c8b456ed8446d6960fcabef0cb3008",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_08_scores20.npz",
+      "bytes": 1654173,
+      "sha256": "a752923891142defcf7a9fb876a3f99f204411567da38a1c39bccb44a5a3f978",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_09.pt",
+      "bytes": 4575074,
+      "sha256": "121fc2590c83dc06103fc33964debb737508c1bf43def180cde5301bd294dfca",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_09_scores20.npz",
+      "bytes": 1651743,
+      "sha256": "e810e8ab5d84f22e3a8d9a978af40b75c817b23cc08242047ebefe910a54d12e",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_10.pt",
+      "bytes": 4575074,
+      "sha256": "6d9cc61c9ecd5ca5f17598655f48eda97de01f26c690eaeda9e3d9e5b71bc57a",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_10_scores20.npz",
+      "bytes": 1649527,
+      "sha256": "00faea6f1348439f046055bf2391ea6bc1224ba7b203d9ecffbc2ebb748e19a0",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_11.pt",
+      "bytes": 4575074,
+      "sha256": "b67740532d78226e7aadc6c4b318aaa133b18bd21c6753bfdc7fc9aab8f22004",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_11_scores20.npz",
+      "bytes": 1653393,
+      "sha256": "7cd875172c28119db39ec7eb83cc5d07714c410be0aa1848ce517d7da4e1113c",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_12.pt",
+      "bytes": 4575074,
+      "sha256": "891caf905f2197fd2ff960fd49dd0885ad6bdf6cd9c5a6c4b38d29a29b002167",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_12_scores20.npz",
+      "bytes": 1652300,
+      "sha256": "a410fecb4056732e62c5d61e3cd0757211b9106b66e2bee7f69e87377cff80c4",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_13.pt",
+      "bytes": 4575074,
+      "sha256": "60ca24e1418ee76b7c9b5072922c6e163476b5afe2e50a3153e8714a70fc3d2a",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_13_scores20.npz",
+      "bytes": 1645190,
+      "sha256": "24f32cced0ab153fd5e0245c6f0eb91c96991f028350ff1ec5f653c9787e4a37",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_14.pt",
+      "bytes": 4575074,
+      "sha256": "5a57508caeb47ef850bbbde2c686806b32b6bf2af4c76d8364046039000fdce6",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_14_scores20.npz",
+      "bytes": 1653983,
+      "sha256": "ecf83f1bb493454c9fe16cfade79d07e9af58b41adcd2b71c45f05b764dff008",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_15.pt",
+      "bytes": 4575074,
+      "sha256": "077e0c823614547c74d9b49f2dbedc5b41de97ecb699dc4f7b2b7bcb85674a02",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_15_scores20.npz",
+      "bytes": 1649806,
+      "sha256": "b76523775f9a009bdd7633842146c1bb575733bd2b15a7eb65c1589771ca43af",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_16.pt",
+      "bytes": 4575074,
+      "sha256": "1ef709d8d94956f527f704e87eac00095a9fafb93340fde4da84006e35e4cd47",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_16_scores20.npz",
+      "bytes": 1650354,
+      "sha256": "ed30c0a6a3baffef558cbd0a4a15b51a262ae485a88502e6b2f58bc02aaeee10",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_17.pt",
+      "bytes": 4575074,
+      "sha256": "e2cffd8a03e56e5de4a66fe00f210f07444f18dea0446a3feb5cfeb1b84cdcea",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_17_scores20.npz",
+      "bytes": 1647981,
+      "sha256": "7a28ee48bff42b14758c110e4df9cb16ad7671f00b733b1d38480f05c5d7b0d8",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_18.pt",
+      "bytes": 4575074,
+      "sha256": "84cb24fc91139f5781c6570eb2bbe4c0d682e4b36c17c95c0440367bc91d3dd9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_18_scores20.npz",
+      "bytes": 1652454,
+      "sha256": "a14200ea7943b4ef2008a3c0848b5a0ac035f9a6ed19368b85ae8b278c77abf9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_19.pt",
+      "bytes": 4575074,
+      "sha256": "ca12376cef833200cc21066f73b803179da8426fd245c845b14f047c08ea2656",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_19_scores20.npz",
+      "bytes": 1648469,
+      "sha256": "d4d676d0919c6774fb4fcddae6f43b0cbd546660a66f6283788d6ae2ef65b06b",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_20.pt",
+      "bytes": 4575074,
+      "sha256": "ae14391d70493645d219e914c59e8437dff1fdfb5db263ba51efb0b960293e35",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    },
+    {
+      "path": "results/seed668/A5_fixed_pool/epochs/epoch_20_scores20.npz",
+      "bytes": 1647533,
+      "sha256": "cf06fefffa4acc67c2aa2144d80e4122c8c07b9552093076743b718f13c842e9",
+      "reason": "Non-selected per-epoch weights/scores omitted; selected best.pt, dev/eval scores, all epoch metrics and history are included."
+    }
+  ],
+  "raw_audio_and_feature_caches_included": false
+}

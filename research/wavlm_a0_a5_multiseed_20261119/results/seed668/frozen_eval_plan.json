@@ -1,0 +1,48 @@
+{
+  "schema": "ps_frozen_wavlm_ablation_a_v1",
+  "arms": {
+    "A0_full": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A0_full",
+      "epoch": 14,
+      "threshold": 0.7046750187873841,
+      "event_f1_iou05_percent": 83.39408425455632,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "33166d7239e33c206b1a3c90145a5109092ee32c0865eccd5caae9bb5b2ec8a3",
+      "initial_backbone_sha256": "3694a89defbb4f7163deab0fd94c96e8796f83f336495f904f4b56088de71f1d",
+      "last_backbone_sha256": "b539069a8dc0158d725a300e50dd06c1263a8a6b5e15386d6659597b2becc84d",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "4de7822dcef98049f01f7158d6d3d3c0fc68d58308c5eb9c9f723a41e59017b5",
+      "eval_read": false,
+      "dev_scores20_sha256": "e1c2f816d4d58fa9a5f0345bf6173518ae5275a677ea9b637123d011e6766654",
+      "dev_metrics_sha256": "4593dcec072c3e501b3369e10fea6a11d739b76bb5763ecf83161ca0d171d179",
+      "total_seconds": 4408.171999999991
+    },
+    "A5_fixed_pool": {
+      "status": "complete",
+      "schema": "ps_frozen_wavlm_ablation_a_v1",
+      "arm": "A5_fixed_pool",
+      "epoch": 17,
+      "threshold": -0.3367625176906585,
+      "event_f1_iou05_percent": 83.68395888118575,
+      "checkpoint": "best.pt",
+      "checkpoint_sha256": "e2cffd8a03e56e5de4a66fe00f210f07444f18dea0446a3feb5cfeb1b84cdcea",
+      "initial_backbone_sha256": "3694a89defbb4f7163deab0fd94c96e8796f83f336495f904f4b56088de71f1d",
+      "last_backbone_sha256": "d60496c0f6d808529fbbe3e38be224b0eacd12f2769e76fda4ced418e7c63703",
+      "trained_epochs": 20,
+      "updates": 15880,
+      "archived_epochs": 21,
+      "protocol_sha256": "1304e8691161b079a4aee05288cc9bdcfad26b379496dd42f6b8d389de335443",
+      "eval_read": false,
+      "dev_scores20_sha256": "7a28ee48bff42b14758c110e4df9cb16ad7671f00b733b1d38480f05c5d7b0d8",
+      "dev_metrics_sha256": "a25e0499a5f4cf495109d4045d0f693b951572a954e17b6692e91b48f53571c7",
+      "total_seconds": 4412.608999999997
+    }
+  },
+  "calibration": "Completed dev calibration only",
+  "test_threshold_selection": false,
+  "eval_previously_inspected": true
+}

@@ -1,0 +1,20 @@
+{
+  "phase": "epoch_complete",
+  "arm": "A0_full",
+  "epoch": 20,
+  "updates": 15880,
+  "loss": 0.20174372716518282,
+  "loss_components": {
+    "main": 0.16579507116078204,
+    "coarse_aux": 0.061557505857750716,
+    "boundary": 0.0489385919258355,
+    "consistency": 0.005520877947823217
+  },
+  "train_seconds": 147.17199999999139,
+  "total_seconds": 208.25,
+  "best_epoch": 14,
+  "threshold": 0.7661128044128419,
+  "event_f1_iou05_percent": 81.5422477440525,
+  "short_event_recall_le320ms_percent": 78.78902554399244,
+  "real_fpr_percent": 4.999628938631308
+}

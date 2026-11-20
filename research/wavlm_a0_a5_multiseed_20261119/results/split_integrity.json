@@ -1,0 +1,8 @@
+{
+  "recordings": {
+    "train": 6345,
+    "dev": 2484,
+    "eval": 3562
+  },
+  "pairwise_uid_disjoint": true
+}
