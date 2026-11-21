@@ -1,0 +1,37 @@
+{
+  "official_label_archive": "714975e4d7b943ce665caec11d6f48726d39652b9441dfcbeb327240459602b2",
+  "encoder_hash": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+  "audio_verified": 8829,
+  "fixed_uids_and_native_labels": {
+    "train": {
+      "count": 6345,
+      "order_hash": "3b02c95393d0de6c632e7313312f53650879c369efe1923baf78566772b186f7"
+    },
+    "dev": {
+      "count": 2484,
+      "order_hash": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1"
+    },
+    "eval": {
+      "count": 3562,
+      "order_hash": "203792d5718e75e54614ad005386a3037cd9ddb83dd6dc7a93266dfc9c4252b1"
+    }
+  },
+  "feature_digests": {
+    "layers/train": {
+      "published": "6de23f8706802fad06ac44a292abe8551103e6bd71e15f5ae0e26101b1860997",
+      "local": "ec9357e01cb0b14151d8567a921c9fedd62e73c169e1865d2c33924eefa47f6d"
+    },
+    "layers/dev": {
+      "published": "1747e956c26afb5e24366bbfe4e87dd5e5a4400560176843bd69935021096029",
+      "local": "da1ed0c36d64fc21ccecf6097607395d6f6576b8fa336a6e20b334f43fb72f43"
+    }
+  },
+  "environment": {
+    "python": "3.10.18",
+    "torch": "2.2.1+cu121",
+    "gpu": "NVIDIA GeForce RTX 4080 Laptop GPU",
+    "cuda": "12.1",
+    "platform": "Windows-10-10.0.22621-SP0"
+  },
+  "comparability": "Local feature files differ from AutoDL; strict byte replay cannot be claimed."
+}

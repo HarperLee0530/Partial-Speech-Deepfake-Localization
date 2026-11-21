@@ -1,0 +1,26 @@
+{
+  "A0_666": {
+    "threshold": 0.18779975175857547,
+    "event_f1_percent": 83.91260583811949,
+    "dev_real_duration_fpr_percent": 4.999979942628752,
+    "stored_logits": 442776
+  },
+  "S1_666": {
+    "threshold": -0.6446576714515685,
+    "event_f1_percent": 84.68211527035056,
+    "dev_real_duration_fpr_percent": 4.999896370248417,
+    "stored_logits": 442776
+  },
+  "A0_667": {
+    "threshold": 0.021871685981750492,
+    "event_f1_percent": 84.29821407167685,
+    "dev_real_duration_fpr_percent": 4.999853941193769,
+    "stored_logits": 442776
+  },
+  "S1_667": {
+    "threshold": -0.712909162044525,
+    "event_f1_percent": 84.97895956577423,
+    "dev_real_duration_fpr_percent": 4.999923370555904,
+    "stored_logits": 442776
+  }
+}

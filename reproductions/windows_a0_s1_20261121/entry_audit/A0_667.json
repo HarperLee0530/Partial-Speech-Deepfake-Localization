@@ -1,0 +1,10 @@
+{
+  "trainer.py": {
+    "published_record": "cb7bcced87ffed23bafb10729478ccb4042d03443c623d92e4daac13b0cf0d00",
+    "used": "436587217e307a7fe8e14f8e0562a2fce067db84049eef64cbe14375d3ed41c3"
+  },
+  "supervision.py": {
+    "published_record": "b20763a8d926ef089b6a2ec3602ffdad0c0394e5c31f3b1130225d199c9fc20b",
+    "used": "b20763a8d926ef089b6a2ec3602ffdad0c0394e5c31f3b1130225d199c9fc20b"
+  }
+}

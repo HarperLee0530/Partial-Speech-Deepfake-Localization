@@ -1,0 +1,136 @@
+{
+  "schema": "nndl_cross_resolution_v1",
+  "arm": "S1",
+  "mode": "formal",
+  "seed": 666,
+  "epochs": 20,
+  "batch_size": 8,
+  "batches_per_epoch": 794,
+  "gpu_uuid": "GPU-1f0c1f69-68fa-0a50-2773-439b5bb9e0f4",
+  "physical_gpu_index": 0,
+  "device": "cuda:0",
+  "gpu_name": "NVIDIA GeForce RTX 4080 Laptop GPU",
+  "torch_version": "2.2.1+cu121",
+  "torch_cuda": "12.1",
+  "cudnn_version": 8801,
+  "started_at": 1795253231.1927004,
+  "pid": 32580,
+  "initial_backbone_sha256": "08dc704a6080b0fa2b447049d7131d8d454bb9089bc74e729d3a10a4b8e354bd",
+  "model_config": {
+    "sample_rate": 16000,
+    "hop_length": 320,
+    "n_fft": 512,
+    "win_length": 400,
+    "n_mels": 80,
+    "channels": [
+      16,
+      32,
+      64
+    ],
+    "hidden_size": 128,
+    "gru_layers": 2,
+    "dropout": 0.4
+  },
+  "adapter_options": {
+    "variant": "fusion",
+    "normalize_mode": "layernorm",
+    "learned_pool": true,
+    "boundary_head": true,
+    "relative_position": false,
+    "reliability_gate": false
+  },
+  "layers": [
+    6,
+    9,
+    12
+  ],
+  "optimizer": "AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "gradient_clip": 5.0,
+  "losses": {
+    "main20": 1.0,
+    "main160": 0.0,
+    "coarse_aux": 0.5,
+    "boundary": 0.1,
+    "consistency": 0.05,
+    "C1": 0.0,
+    "C2": 0.0
+  },
+  "train_cache_sha256": "9083878e88dd11820ef56bea0e842e5b7b20699fa436a2a96ba4e2de3afe737b",
+  "dev_cache_sha256": "d1b3da1a9b38b82505351c1c794088dcc55aa322e6a04deb2a483aa3ad8a7675",
+  "train_ssl": {
+    "schema": "ps_frozen_wavlm_multilayer_cache_v1",
+    "split": "train",
+    "layers": [
+      6,
+      9,
+      12
+    ],
+    "frozen": true,
+    "model_id": "microsoft/wavlm-base-plus",
+    "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+    "model_sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+    "reference": "C:\\Users\\ROG\\OneDrive\\文档\\ChatGPT\\NNDLproject\\handoff_audit\\multilayer_20261117\\full\\reference\\train",
+    "reference_sha256": "9083878e88dd11820ef56bea0e842e5b7b20699fa436a2a96ba4e2de3afe737b",
+    "recordings": 6345,
+    "channels": 3,
+    "dtype": "float32",
+    "source_sha256": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+    "test_read": false,
+    "normalization": "none; unchanged official preprocessor",
+    "grid": "stride320/receptive400/sidepad40; unchanged full recording storage grid",
+    "status": "complete",
+    "shape": [
+      3,
+      1110368,
+      3,
+      768
+    ],
+    "features_sha256": "ec9357e01cb0b14151d8567a921c9fedd62e73c169e1865d2c33924eefa47f6d",
+    "elapsed_seconds": 318.5,
+    "source_unchanged": true
+  },
+  "dev_ssl": {
+    "schema": "ps_frozen_wavlm_multilayer_cache_v1",
+    "split": "dev",
+    "layers": [
+      6,
+      9,
+      12
+    ],
+    "frozen": true,
+    "model_id": "microsoft/wavlm-base-plus",
+    "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+    "model_sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+    "reference": "C:\\Users\\ROG\\OneDrive\\文档\\ChatGPT\\NNDLproject\\handoff_audit\\multilayer_20261117\\full\\reference\\dev",
+    "reference_sha256": "d1b3da1a9b38b82505351c1c794088dcc55aa322e6a04deb2a483aa3ad8a7675",
+    "recordings": 2484,
+    "channels": 1,
+    "dtype": "float32",
+    "source_sha256": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+    "test_read": false,
+    "normalization": "none; unchanged official preprocessor",
+    "grid": "stride320/receptive400/sidepad40; unchanged full recording storage grid",
+    "status": "complete",
+    "shape": [
+      1,
+      442776,
+      3,
+      768
+    ],
+    "features_sha256": "da1ed0c36d64fc21ccecf6097607395d6f6576b8fa336a6e20b334f43fb72f43",
+    "elapsed_seconds": 46.73500000000058,
+    "source_unchanged": true
+  },
+  "train_uid_sha256": "3b02c95393d0de6c632e7313312f53650879c369efe1923baf78566772b186f7",
+  "dev_uid_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+  "selection": "Epoch 0 eligible. DEV real-duration FPR <=5%; maximum Event-F1 at IoU 0.5; earliest tie.",
+  "augmentation": "Three original clean/noise20dB/EQ views, rotated by epoch",
+  "historical_base_commit": "483c0252cf8b7104376399008d21d414fdced0b6",
+  "eval_read": false,
+  "implementation_sha256": {
+    "trainer.py": "344b0b641bb39413147466329f9ebbd2d87f2d322a93cf60e0961bb6cf29368d",
+    "supervision.py": "b20763a8d926ef089b6a2ec3602ffdad0c0394e5c31f3b1130225d199c9fc20b"
+  }
+}

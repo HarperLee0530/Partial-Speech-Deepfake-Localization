@@ -1,0 +1,13 @@
+{
+  "matched": 8762,
+  "predicted": 12358,
+  "truth": 11427,
+  "unmatched_predictions": 3596,
+  "missed_truth": 2665,
+  "unmatched_pred_no_truth_overlap": 833,
+  "unmatched_pred_with_truth_overlap": 2763,
+  "unmatched_pred_overlap_below_iou_threshold": 2763,
+  "unmatched_pred_eligible_but_unmatched": 0,
+  "truth_with_multiple_overlapping_predictions": 828,
+  "prediction_with_multiple_overlapping_truths": 492
+}

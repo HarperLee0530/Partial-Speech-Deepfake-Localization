@@ -1,0 +1,11 @@
+{
+  "status": "verified",
+  "scope": "local integrity, UID, labels and train/dev audio",
+  "audio_audit_sha256": "48a44564412042860613bf7f4ab452882493c3f7f0ee63302812b44709631fe3",
+  "cache_metadata": {
+    "reference/train": "9083878e88dd11820ef56bea0e842e5b7b20699fa436a2a96ba4e2de3afe737b",
+    "reference/dev": "d1b3da1a9b38b82505351c1c794088dcc55aa322e6a04deb2a483aa3ad8a7675",
+    "layers/train": "fc4e1a7c3f91899fbeac88004d508e9ad508ce5f4d6a8518bd827ee722e4b8d8",
+    "layers/dev": "3fc4bd4b99895697befdd2ecd3aa88a2409694d137c2abe7ddaf9d9d11c9cd9c"
+  }
+}
