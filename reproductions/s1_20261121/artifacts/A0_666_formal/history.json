@@ -1,0 +1,354 @@
+[
+  {
+    "epoch": 0,
+    "updates": 0,
+    "loss": null,
+    "loss_components": {},
+    "train_seconds": 6.407499313354492e-07,
+    "total_seconds": 19.6118206679821,
+    "cuda_peak_reserved_mib": 150.0,
+    "event_f1_iou05_percent": 1.5431705139650556,
+    "real_fpr_percent": 4.99995037086337,
+    "threshold": 0.048065096139907844
+  },
+  {
+    "epoch": 1,
+    "updates": 794,
+    "loss": 0.8548987368004448,
+    "loss_components": {
+      "main": 0.6858568273916352,
+      "coarse_aux": 0.31551874372685884,
+      "boundary": 0.11053927915560208,
+      "consistency": 0.004572187937952704
+    },
+    "train_seconds": 79.10142008960247,
+    "total_seconds": 99.6520859003067,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 70.69605568445476,
+    "real_fpr_percent": 4.99996322815268,
+    "threshold": 0.9796548485755922
+  },
+  {
+    "epoch": 2,
+    "updates": 1588,
+    "loss": 0.541890912302195,
+    "loss_components": {
+      "main": 0.4405023317493179,
+      "coarse_aux": 0.18815616669804233,
+      "boundary": 0.06962668104551765,
+      "consistency": 0.00695657409404169
+    },
+    "train_seconds": 78.52301426976919,
+    "total_seconds": 99.48969765007496,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 73.99777608708375,
+    "real_fpr_percent": 4.999810226410215,
+    "threshold": 1.44359827041626
+  },
+  {
+    "epoch": 3,
+    "updates": 2382,
+    "loss": 0.44952473939591153,
+    "loss_components": {
+      "main": 0.36545700573313145,
+      "coarse_aux": 0.15478228630383103,
+      "boundary": 0.06344597118083266,
+      "consistency": 0.006639850274712476
+    },
+    "train_seconds": 78.869817212224,
+    "total_seconds": 99.30001769214869,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 78.79286049788634,
+    "real_fpr_percent": 4.999621224257745,
+    "threshold": 0.572392225265503
+  },
+  {
+    "epoch": 4,
+    "updates": 3176,
+    "loss": 0.4133332217069957,
+    "loss_components": {
+      "main": 0.33613108688735543,
+      "coarse_aux": 0.1417399972081372,
+      "boundary": 0.06011089783570065,
+      "consistency": 0.006420938947627447
+    },
+    "train_seconds": 78.46863380819559,
+    "total_seconds": 99.54233358055353,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 80.35428712018698,
+    "real_fpr_percent": 4.999987657002315,
+    "threshold": 0.14669933915138247
+  },
+  {
+    "epoch": 5,
+    "updates": 3970,
+    "loss": 0.36541969418732134,
+    "loss_components": {
+      "main": 0.2974256591106617,
+      "coarse_aux": 0.12384134330212018,
+      "boundary": 0.05761936150247264,
+      "consistency": 0.006228544322219008
+    },
+    "train_seconds": 78.00817187875509,
+    "total_seconds": 98.79821751266718,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 80.60925600468659,
+    "real_fpr_percent": 4.999598081137038,
+    "threshold": 0.46489346027374273
+  },
+  {
+    "epoch": 6,
+    "updates": 4764,
+    "loss": 0.33161118379805793,
+    "loss_components": {
+      "main": 0.27010108466243715,
+      "coarse_aux": 0.11124037777868942,
+      "boundary": 0.05577530878213626,
+      "consistency": 0.006247567325937198
+    },
+    "train_seconds": 78.49848340451717,
+    "total_seconds": 99.17022905498743,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 81.486271973661,
+    "real_fpr_percent": 4.999839798175554,
+    "threshold": 0.7600857615470887
+  },
+  {
+    "epoch": 7,
+    "updates": 5558,
+    "loss": 0.3219030658181954,
+    "loss_components": {
+      "main": 0.262528283404238,
+      "coarse_aux": 0.10714749021394653,
+      "boundary": 0.05496201860326664,
+      "consistency": 0.006096709185040624
+    },
+    "train_seconds": 78.79972812533379,
+    "total_seconds": 99.86139149218798,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 81.66114529105538,
+    "real_fpr_percent": 4.999709939553803,
+    "threshold": 0.49869722127914434
+  },
+  {
+    "epoch": 8,
+    "updates": 6352,
+    "loss": 0.30007266951373,
+    "loss_components": {
+      "main": 0.24447937860559457,
+      "coarse_aux": 0.09978309519218295,
+      "boundary": 0.05405260675987909,
+      "consistency": 0.005929650323317675
+    },
+    "train_seconds": 78.34404961764812,
+    "total_seconds": 99.32985942810774,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 81.41071007313046,
+    "real_fpr_percent": 4.999789654747351,
+    "threshold": -0.29179093241691584
+  },
+  {
+    "epoch": 9,
+    "updates": 7146,
+    "loss": 0.2837735483474485,
+    "loss_components": {
+      "main": 0.23185831303203885,
+      "coarse_aux": 0.09264299312784742,
+      "boundary": 0.05297788885194499,
+      "consistency": 0.005918989007998145
+    },
+    "train_seconds": 78.31982185691595,
+    "total_seconds": 99.54316126555204,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 80.71116292626057,
+    "real_fpr_percent": 4.99983465525985,
+    "threshold": -0.6494194269180297
+  },
+  {
+    "epoch": 10,
+    "updates": 7940,
+    "loss": 0.2810650440636713,
+    "loss_components": {
+      "main": 0.2295091925775374,
+      "coarse_aux": 0.09206802709971176,
+      "boundary": 0.05233713937219542,
+      "consistency": 0.005762470739345847
+    },
+    "train_seconds": 77.6494093388319,
+    "total_seconds": 99.03373642265797,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 82.65269674961304,
+    "real_fpr_percent": 4.999747225692727,
+    "threshold": 0.7071914076805116
+  },
+  {
+    "epoch": 11,
+    "updates": 8734,
+    "loss": 0.2598342265809419,
+    "loss_components": {
+      "main": 0.21234227197305758,
+      "coarse_aux": 0.08413095475568598,
+      "boundary": 0.05148197786873136,
+      "consistency": 0.005565587077987725
+    },
+    "train_seconds": 77.93460613489151,
+    "total_seconds": 98.64492008835077,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 83.91260583811949,
+    "real_fpr_percent": 4.999979942628752,
+    "threshold": 0.18779975175857547
+  },
+  {
+    "epoch": 12,
+    "updates": 9528,
+    "loss": 0.2487812320413232,
+    "loss_components": {
+      "main": 0.20346201884018383,
+      "coarse_aux": 0.07991057144324307,
+      "boundary": 0.05088713076857085,
+      "consistency": 0.005504292453391717
+    },
+    "train_seconds": 78.16321060806513,
+    "total_seconds": 99.08972422033548,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 83.03981851829741,
+    "real_fpr_percent": 4.9999902284601765,
+    "threshold": 0.8848341703414918
+  },
+  {
+    "epoch": 13,
+    "updates": 10322,
+    "loss": 0.24830231922080445,
+    "loss_components": {
+      "main": 0.20324919098092042,
+      "coarse_aux": 0.07936650049117316,
+      "boundary": 0.05093483287390669,
+      "consistency": 0.0055279000893924905
+    },
+    "train_seconds": 78.03601236641407,
+    "total_seconds": 98.91564686596394,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 82.32659555660322,
+    "real_fpr_percent": 4.9997099395538065,
+    "threshold": 0.3298018574714661
+  },
+  {
+    "epoch": 14,
+    "updates": 11116,
+    "loss": 0.23728883278647658,
+    "loss_components": {
+      "main": 0.19417207277091383,
+      "coarse_aux": 0.07576230741563425,
+      "boundary": 0.04965817087191516,
+      "consistency": 0.00539578195309128
+    },
+    "train_seconds": 78.24927309155464,
+    "total_seconds": 99.34840308874846,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 83.24648098233004,
+    "real_fpr_percent": 4.99962765290238,
+    "threshold": 0.010276079177856447
+  },
+  {
+    "epoch": 15,
+    "updates": 11910,
+    "loss": 0.232093248544472,
+    "loss_components": {
+      "main": 0.19015556433582936,
+      "coarse_aux": 0.07340781580802212,
+      "boundary": 0.049618546609351555,
+      "consistency": 0.005438448959329313
+    },
+    "train_seconds": 77.73737688362598,
+    "total_seconds": 99.36574342101812,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 83.09393593364986,
+    "real_fpr_percent": 4.999952942321248,
+    "threshold": -0.21440714597702024
+  },
+  {
+    "epoch": 16,
+    "updates": 12704,
+    "loss": 0.22342450341039105,
+    "loss_components": {
+      "main": 0.18293829924123178,
+      "coarse_aux": 0.07063698726250223,
+      "boundary": 0.04900159689477778,
+      "consistency": 0.005351019574432643
+    },
+    "train_seconds": 77.72320661693811,
+    "total_seconds": 98.65919014811516,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 82.85748275041637,
+    "real_fpr_percent": 4.9999722282551815,
+    "threshold": -0.640080153942108
+  },
+  {
+    "epoch": 17,
+    "updates": 13498,
+    "loss": 0.216342472820836,
+    "loss_components": {
+      "main": 0.1777933675945931,
+      "coarse_aux": 0.06680720966070026,
+      "boundary": 0.04879848307505325,
+      "consistency": 0.005313046709241425
+    },
+    "train_seconds": 77.68464656919241,
+    "total_seconds": 98.60069769620895,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 81.45066791656902,
+    "real_fpr_percent": 4.999824369428419,
+    "threshold": 1.2269042730331423
+  },
+  {
+    "epoch": 18,
+    "updates": 14292,
+    "loss": 0.21727084649975414,
+    "loss_components": {
+      "main": 0.1782941496872369,
+      "coarse_aux": 0.06764748614218076,
+      "boundary": 0.048851933982457865,
+      "consistency": 0.005355217417975376
+    },
+    "train_seconds": 78.33659727871418,
+    "total_seconds": 99.28077203035355,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 83.28368878827594,
+    "real_fpr_percent": 4.999748511421656,
+    "threshold": 0.0792757272720337
+  },
+  {
+    "epoch": 19,
+    "updates": 15086,
+    "loss": 0.2010421701179118,
+    "loss_components": {
+      "main": 0.16536364595520706,
+      "coarse_aux": 0.061230568441630384,
+      "boundary": 0.04801876735533365,
+      "consistency": 0.005227257881310044
+    },
+    "train_seconds": 78.29271233081818,
+    "total_seconds": 99.21782507002354,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 82.97567954220315,
+    "real_fpr_percent": 4.999880941501271,
+    "threshold": -0.12013247609138487
+  },
+  {
+    "epoch": 20,
+    "updates": 15880,
+    "loss": 0.1996971773744915,
+    "loss_components": {
+      "main": 0.16425983744769612,
+      "coarse_aux": 0.06079489315648256,
+      "boundary": 0.0477587703048892,
+      "consistency": 0.0052803159095094745
+    },
+    "train_seconds": 78.50437071919441,
+    "total_seconds": 99.96055368334055,
+    "cuda_peak_reserved_mib": 644.0,
+    "event_f1_iou05_percent": 82.0450040806809,
+    "real_fpr_percent": 4.999892513061612,
+    "threshold": -0.23571193218231198
+  }
+]

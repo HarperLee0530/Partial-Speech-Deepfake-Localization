@@ -1,0 +1,32 @@
+{
+  "schema": "ps_frozen_wavlm_multilayer_cache_v1",
+  "split": "train",
+  "layers": [
+    6,
+    9,
+    12
+  ],
+  "frozen": true,
+  "model_id": "microsoft/wavlm-base-plus",
+  "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+  "model_sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+  "reference": "/root/research/nndl_partial_speech/cache/fixed_ps/reference/train",
+  "reference_sha256": "9d508c83a0e7e334b6ba586ced79cb82d31782d823113e98a961ff5733db669b",
+  "recordings": 6345,
+  "channels": 3,
+  "dtype": "float32",
+  "source_sha256": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+  "test_read": false,
+  "normalization": "none; unchanged official preprocessor",
+  "grid": "stride320/receptive400/sidepad40; unchanged full recording storage grid",
+  "status": "complete",
+  "shape": [
+    3,
+    1110368,
+    3,
+    768
+  ],
+  "features_sha256": "6de23f8706802fad06ac44a292abe8551103e6bd71e15f5ae0e26101b1860997",
+  "elapsed_seconds": 199.93809601664543,
+  "source_unchanged": true
+}

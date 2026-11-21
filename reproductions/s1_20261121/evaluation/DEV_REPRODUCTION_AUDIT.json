@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "inference_source_sha256": "d2885e069030928b6ec4104aee41bf9e4b8c4a4666bf5d5caadbdddcaf9f8991",
+  "training_infer_sha256": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f",
+  "metrics20_sha256": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+  "models": {
+    "A0_666": {
+      "checkpoint_sha256": "b04de5392e0aa7db67bb3368988fd7c80584811dd905f183ad34a2b28f1a1349",
+      "epoch": 11,
+      "threshold": 0.18779975175857547,
+      "recordings": 2484,
+      "storage_logits": 442776,
+      "exact_logits": true,
+      "max_abs_logit_error": 0.0,
+      "valid_frame_counts_equal": true,
+      "event_boundaries_equal": true,
+      "event_matches_equal": true,
+      "metrics": {
+        "event_f1_iou05_percent": 83.91260583811949,
+        "event_precision_percent": 82.25188624492165,
+        "event_recall_percent": 85.64176939811458,
+        "real_fpr_percent": 4.999979942628752
+      },
+      "metric_deltas": {
+        "event_f1_iou05_percent": 0.0,
+        "event_precision_percent": 0.0,
+        "event_recall_percent": 0.0,
+        "real_fpr_percent": 0.0
+      }
+    },
+    "S1_666": {
+      "checkpoint_sha256": "7c8b087b7ef76f68727c0c50d3e34d29924f6ce630accf2828326742c6ec45c2",
+      "epoch": 17,
+      "threshold": -0.6446576714515685,
+      "recordings": 2484,
+      "storage_logits": 442776,
+      "exact_logits": true,
+      "max_abs_logit_error": 0.0,
+      "valid_frame_counts_equal": true,
+      "event_boundaries_equal": true,
+      "event_matches_equal": true,
+      "metrics": {
+        "event_f1_iou05_percent": 84.68211527035056,
+        "event_precision_percent": 83.28658251519401,
+        "event_recall_percent": 86.12521150592217,
+        "real_fpr_percent": 4.999896370248417
+      },
+      "metric_deltas": {
+        "event_f1_iou05_percent": 0.0,
+        "event_precision_percent": 0.0,
+        "event_recall_percent": 0.0,
+        "real_fpr_percent": 0.0
+      }
+    },
+    "A0_667": {
+      "checkpoint_sha256": "dc6855d42ff0f62a009c7fed23f9273b9bdddef1798d3003c09176bffed1f7b5",
+      "epoch": 19,
+      "threshold": 0.021871685981750492,
+      "recordings": 2484,
+      "storage_logits": 442776,
+      "exact_logits": true,
+      "max_abs_logit_error": 0.0,
+      "valid_frame_counts_equal": true,
+      "event_boundaries_equal": true,
+      "event_matches_equal": true,
+      "metrics": {
+        "event_f1_iou05_percent": 84.29821407167685,
+        "event_precision_percent": 83.60675225867809,
+        "event_recall_percent": 85.00120860526953,
+        "real_fpr_percent": 4.999853941193769
+      },
+      "metric_deltas": {
+        "event_f1_iou05_percent": 0.0,
+        "event_precision_percent": 0.0,
+        "event_recall_percent": 0.0,
+        "real_fpr_percent": 0.0
+      }
+    },
+    "S1_667": {
+      "checkpoint_sha256": "d88ad635536286bc7375bdc3cac6667e006c05c157e6e51385300ada5517ebb3",
+      "epoch": 19,
+      "threshold": -0.712909162044525,
+      "recordings": 2484,
+      "storage_logits": 442776,
+      "exact_logits": true,
+      "max_abs_logit_error": 0.0,
+      "valid_frame_counts_equal": true,
+      "event_boundaries_equal": true,
+      "event_matches_equal": true,
+      "metrics": {
+        "event_f1_iou05_percent": 84.97895956577423,
+        "event_precision_percent": 85.76880462883172,
+        "event_recall_percent": 84.203529127387,
+        "real_fpr_percent": 4.999923370555904
+      },
+      "metric_deltas": {
+        "event_f1_iou05_percent": 0.0,
+        "event_precision_percent": 0.0,
+        "event_recall_percent": 0.0,
+        "real_fpr_percent": 0.0
+      }
+    }
+  }
+}

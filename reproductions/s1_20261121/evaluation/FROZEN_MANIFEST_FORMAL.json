@@ -1,0 +1,190 @@
+{
+  "status": "formal_eval_complete",
+  "branch": "codex/event-aware-c",
+  "git_head": "483c0252cf8b7104376399008d21d414fdced0b6",
+  "environment": {
+    "python": "3.10.8",
+    "torch": "2.2.1+cu121",
+    "cuda": "12.1",
+    "gpu_available": true
+  },
+  "models": {
+    "A0_666": {
+      "checkpoint": "/root/autodl-tmp/nndl_partial_speech/experiments/event_aware_c/plan_c_666/A0_666_formal/best.pt",
+      "checkpoint_sha256": "b04de5392e0aa7db67bb3368988fd7c80584811dd905f183ad34a2b28f1a1349",
+      "best_epoch": 11,
+      "dev_threshold_full_precision": 0.18779975175857547,
+      "dev_event_f1_percent": 83.91260583811949,
+      "protocol_path": "/root/autodl-tmp/nndl_partial_speech/experiments/event_aware_c/plan_c_666/A0_666_formal/protocol.json",
+      "protocol_sha256": "296e5fd4de22ecfca219dbd28ddc6f6f0126deed9c2377f0858c0862e100c51f",
+      "dev_metrics_sha256": "abf699c076f168dd6886acdcc2f586f93b695b1c040c8dd8aab36c7bd305b8d1",
+      "schema": "nndl_event_aware_c_v1",
+      "losses": {
+        "main20": 1.0,
+        "main160": 1.0,
+        "coarse_aux": 0.5,
+        "boundary": 0.1,
+        "consistency": 0.05,
+        "C1": 0.0,
+        "C2": 0.0
+      }
+    },
+    "S1_666": {
+      "checkpoint": "/root/autodl-tmp/nndl_partial_speech/experiments/cross_resolution_supervision/S1_666_formal/best.pt",
+      "checkpoint_sha256": "7c8b087b7ef76f68727c0c50d3e34d29924f6ce630accf2828326742c6ec45c2",
+      "best_epoch": 17,
+      "dev_threshold_full_precision": -0.6446576714515685,
+      "dev_event_f1_percent": 84.68211527035056,
+      "protocol_path": "/root/autodl-tmp/nndl_partial_speech/experiments/cross_resolution_supervision/S1_666_formal/protocol.json",
+      "protocol_sha256": "c9c5e92c4b4d5b11a19d091a47dc3801b056352181c3d2c317afe11e485a46c7",
+      "dev_metrics_sha256": "228f88bc0a4e4f1ebbf37e5e51559f85e67074d8bdeaa37cfc7061ee204d0963",
+      "schema": "nndl_cross_resolution_v1",
+      "losses": {
+        "main20": 1.0,
+        "main160": 0.0,
+        "coarse_aux": 0.5,
+        "boundary": 0.1,
+        "consistency": 0.05,
+        "C1": 0.0,
+        "C2": 0.0
+      }
+    },
+    "A0_667": {
+      "checkpoint": "/root/autodl-tmp/nndl_partial_speech/experiments/cross_resolution_supervision/A0_667_formal/best.pt",
+      "checkpoint_sha256": "dc6855d42ff0f62a009c7fed23f9273b9bdddef1798d3003c09176bffed1f7b5",
+      "best_epoch": 19,
+      "dev_threshold_full_precision": 0.021871685981750492,
+      "dev_event_f1_percent": 84.29821407167685,
+      "protocol_path": "/root/autodl-tmp/nndl_partial_speech/experiments/cross_resolution_supervision/A0_667_formal/protocol.json",
+      "protocol_sha256": "f66a4e48cf5124700237a65d713cedcb4579193feb2f0147c67b452b37c2b5a7",
+      "dev_metrics_sha256": "c36828b97fb8aeb0a458bb236c6494c447e869c9ad7b835601d2414191d93221",
+      "schema": "nndl_cross_resolution_v1",
+      "losses": {
+        "main20": 1.0,
+        "main160": 1.0,
+        "coarse_aux": 0.5,
+        "boundary": 0.1,
+        "consistency": 0.05,
+        "C1": 0.0,
+        "C2": 0.0
+      }
+    },
+    "S1_667": {
+      "checkpoint": "/root/autodl-tmp/nndl_partial_speech/experiments/cross_resolution_supervision/S1_667_formal/best.pt",
+      "checkpoint_sha256": "d88ad635536286bc7375bdc3cac6667e006c05c157e6e51385300ada5517ebb3",
+      "best_epoch": 19,
+      "dev_threshold_full_precision": -0.712909162044525,
+      "dev_event_f1_percent": 84.97895956577423,
+      "protocol_path": "/root/autodl-tmp/nndl_partial_speech/experiments/cross_resolution_supervision/S1_667_formal/protocol.json",
+      "protocol_sha256": "5fc10d5585e9207bca939221faf2f48a2b6cb7cb8f540be952ffb548e9ebebeb",
+      "dev_metrics_sha256": "5ee0e08003dc759316c0b1d024ba12419c14a10402c5871ac11312a41f134c91",
+      "schema": "nndl_cross_resolution_v1",
+      "losses": {
+        "main20": 1.0,
+        "main160": 0.0,
+        "coarse_aux": 0.5,
+        "boundary": 0.1,
+        "consistency": 0.05,
+        "C1": 0.0,
+        "C2": 0.0
+      }
+    }
+  },
+  "shared_protocol": {
+    "model_config": {
+      "sample_rate": 16000,
+      "hop_length": 320,
+      "n_fft": 512,
+      "win_length": 400,
+      "n_mels": 80,
+      "channels": [
+        16,
+        32,
+        64
+      ],
+      "hidden_size": 128,
+      "gru_layers": 2,
+      "dropout": 0.4
+    },
+    "adapter_options": {
+      "variant": "fusion",
+      "normalize_mode": "layernorm",
+      "learned_pool": true,
+      "boundary_head": true,
+      "relative_position": false,
+      "reliability_gate": false
+    },
+    "layers": [
+      6,
+      9,
+      12
+    ],
+    "train_cache_sha256": "9d508c83a0e7e334b6ba586ced79cb82d31782d823113e98a961ff5733db669b",
+    "dev_cache_sha256": "89369466558991ecaebc4907f3e512ff8c3e1e0019192a193196410662c267e6",
+    "train_uid_sha256": "3b02c95393d0de6c632e7313312f53650879c369efe1923baf78566772b186f7",
+    "dev_uid_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+    "selection": "Epoch 0 eligible. DEV real-duration FPR <=5%; maximum Event-F1 at IoU 0.5; earliest tie.",
+    "augmentation": "Three original clean/noise20dB/EQ views, rotated by epoch",
+    "historical_base_commit": "483c0252cf8b7104376399008d21d414fdced0b6"
+  },
+  "internal_label_convention": "1=fake (metrics20.py); native 160ms source is 1=real; explicit inversion required",
+  "evaluation_code": {
+    "metrics20.py": "3d3ec4e6371f2acd21d80eaca6d4fa09626baefaec98152c2253e52e67f1acfc",
+    "train_dual.py": "b5135e70014946c6cc2ce07090146998eadb63f938f9bbb305045a197bae7d8f",
+    "evaluate_cnn.py": "b465e7832e9f57cd2d2aa836d4c955432fb21fa82bca9eb88b37a518ffab8c11"
+  },
+  "eval_data": {
+    "source_archive": "/Users/cheeseowl/Downloads/reduced_data_and_wavlm/reduced_data_and_wavlm.zip",
+    "reduced_eval_manifest_sha256": "203792d5718e75e54614ad005386a3037cd9ddb83dd6dc7a93266dfc9c4252b1",
+    "recordings": 3562,
+    "available_reference_resolution_seconds": 0.16,
+    "native20_reference_available": false,
+    "historical_eval_version_match": "not_provable_without_historical_eval_20ms_manifest_and_labels"
+  },
+  "inference_started": false,
+  "reason": "Native20 event ground truth unavailable; 160ms label expansion changes event boundaries and short-event counts. Existing evaluate_cnn.py also targets a different checkpoint type.",
+  "formal_status": "complete",
+  "eval_label_sha256": "63a02187f759f7684f4c8e88e26d0e873b02e0dbe3d690fe0f4546d6e8de66b6",
+  "eval_uid_order_sha256": "203792d5718e75e54614ad005386a3037cd9ddb83dd6dc7a93266dfc9c4252b1",
+  "eval_feature_audit_sha256": "9e53861ca9383d478c2cb7226a41477f15928bb22a401479a16fecc133a1ba9d",
+  "dev_reproduction_audit_sha256": "bcd0d8f6f956c45f224f92f1712bbe4596d86e0362f70492d86765e0781b450f",
+  "eval_code_sha256": {
+    "evaluate_frozen.py": "d2885e069030928b6ec4104aee41bf9e4b8c4a4666bf5d5caadbdddcaf9f8991",
+    "prepare_eval_cache.py": "0778862507c3f1214f2e83e91d3a4bd1a4cf9f21a8c5feb02b9811c99989d9fc",
+    "run_eval.py": "b69c91e44e1f2199346cc9f1039fff94bbed41b24efdae3859c2fcad2b8d7e91"
+  },
+  "metric_protocol_version": "ps_native20_event_v2",
+  "evaluated_utc": "2026-11-21T04:55:26.909235+00:00",
+  "elapsed_seconds": 116.69642782211304,
+  "results": {
+    "A0_666": {
+      "checkpoint_sha256": "b04de5392e0aa7db67bb3368988fd7c80584811dd905f183ad34a2b28f1a1349",
+      "threshold": 0.18779975175857547,
+      "eval_scores_sha256": "33a7789f5cd0b28588c4fec7b6084a4eee8f3fc8ca284d0f58c7acfb368ed707",
+      "elapsed_seconds": 27.762950658798218
+    },
+    "S1_666": {
+      "checkpoint_sha256": "7c8b087b7ef76f68727c0c50d3e34d29924f6ce630accf2828326742c6ec45c2",
+      "threshold": -0.6446576714515685,
+      "eval_scores_sha256": "edb99abcdf4a9d71a82ed662735337d1a0910264ddd87843a1fa28bc41d26320",
+      "elapsed_seconds": 26.95539355278015
+    },
+    "A0_667": {
+      "checkpoint_sha256": "dc6855d42ff0f62a009c7fed23f9273b9bdddef1798d3003c09176bffed1f7b5",
+      "threshold": 0.021871685981750492,
+      "eval_scores_sha256": "dbaab52a9176fb70b1f42a620fc02efea7d967a5df1523b60b6c4f491c3a4099",
+      "elapsed_seconds": 26.81475591659546
+    },
+    "S1_667": {
+      "checkpoint_sha256": "d88ad635536286bc7375bdc3cac6667e006c05c157e6e51385300ada5517ebb3",
+      "threshold": -0.712909162044525,
+      "eval_scores_sha256": "ad8f48c1c15cea9bc1564cb8373f03e8d89ef1015853d7bd95f8a75bf2dc0675",
+      "elapsed_seconds": 26.934360027313232
+    }
+  },
+  "eval_threshold_selection": false,
+  "eval_checkpoint_selection": false,
+  "training_performed": false,
+  "prior_preflight_status": "frozen_models_eval_blocked_missing_native20_ground_truth",
+  "manifest_status_amended_utc": "2026-11-21T04:57:33.355475+00:00"
+}

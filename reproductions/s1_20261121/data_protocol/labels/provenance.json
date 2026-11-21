@@ -1,0 +1,9 @@
+{
+  "official_archive_sha256": "714975e4d7b943ce665caec11d6f48726d39652b9441dfcbeb327240459602b2",
+  "files": {
+    "dev.npz": "30f5daae76de8a7413d94a453e3f585727b48de8f4870884ce30162cf8263e6c",
+    "dev_seglab_0.16.npy": "28fd0e07e8e1d12f489e48b04a1f2a0d807404e99b904edc14175f2ee19d586a",
+    "train.npz": "97ffc5bb4dae6a955ab5cab4967a0e8c06b720a0e4800458200532cb2f159d63",
+    "train_seglab_0.16.npy": "685647460758d1d72e7cdecba7db5e79fabcb31e2f8f0e1ab091b4d58706491c"
+  }
+}

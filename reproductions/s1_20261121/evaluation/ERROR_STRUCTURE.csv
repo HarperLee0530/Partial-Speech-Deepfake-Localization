@@ -1,0 +1,5 @@
+model,seed,matched,predicted,truth,unmatched_predictions,missed_truth,unmatched_pred_no_truth_overlap,unmatched_pred_with_truth_overlap,unmatched_pred_overlap_below_iou_threshold,unmatched_pred_eligible_but_unmatched,truth_with_multiple_overlapping_predictions,prediction_with_multiple_overlapping_truths,fully_genuine_false_alarm_recordings,fully_genuine_recordings,fully_genuine_predicted_events,adjacent_truth_gaps,adjacent_gap_bridged
+A0_666,666,8748,12840,11427,4092,2679,948,3144,3144,0,1041,421,31,365,66,8230,461
+S1_666,666,8847,12653,11427,3806,2580,956,2850,2850,0,895,457,43,365,90,8230,486
+A0_667,667,8724,12270,11427,3546,2703,818,2728,2728,0,778,531,27,365,51,8230,587
+S1_667,667,8591,11878,11427,3287,2836,624,2663,2663,0,736,558,24,365,38,8230,616

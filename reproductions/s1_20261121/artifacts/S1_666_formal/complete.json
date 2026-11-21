@@ -1,0 +1,21 @@
+{
+  "epoch": 17,
+  "threshold": -0.6446576714515685,
+  "event_f1_iou05_percent": 84.68211527035056,
+  "real_fpr_percent": 4.999896370248417,
+  "mode": "formal",
+  "status": "complete",
+  "arm": "S1",
+  "seed": 666,
+  "trained_epochs": 20,
+  "updates": 15880,
+  "actual_device": "cuda:0",
+  "gpu_uuid": "GPU-8a300eaa-6c96-9b7b-bdbc-ec174c306d3e",
+  "checkpoint_sha256": "7c8b087b7ef76f68727c0c50d3e34d29924f6ce630accf2828326742c6ec45c2",
+  "total_seconds": 2018.4192246198654,
+  "dev_scores20_sha256": "a010e2a9401bd50ceb4c5cf542b017b163754d79396016eb7dd5b25ce391a641",
+  "protocol_sha256": "c9c5e92c4b4d5b11a19d091a47dc3801b056352181c3d2c317afe11e485a46c7",
+  "active_auxiliary_terms": [],
+  "gpu_peak_reserved_mib": 644.0,
+  "optimizer_and_loading_seconds": 1587.0171373337507
+}

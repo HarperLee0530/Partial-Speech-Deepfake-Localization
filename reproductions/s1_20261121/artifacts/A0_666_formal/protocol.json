@@ -1,0 +1,136 @@
+{
+  "schema": "nndl_event_aware_c_v1",
+  "arm": "A0",
+  "mode": "formal",
+  "seed": 666,
+  "epochs": 20,
+  "batch_size": 8,
+  "batches_per_epoch": 794,
+  "gpu_uuid": "GPU-8a300eaa-6c96-9b7b-bdbc-ec174c306d3e",
+  "physical_gpu_index": 0,
+  "device": "cuda:0",
+  "gpu_name": "NVIDIA GeForce RTX 4090 D",
+  "torch_version": "2.2.1+cu121",
+  "torch_cuda": "12.1",
+  "cudnn_version": 8902,
+  "started_at": 1795192316.003057,
+  "pid": 5035,
+  "initial_backbone_sha256": "434f8701795e7d02d56a59ef184aba890f60d9afd9218ac1f43d84a25baa319d",
+  "model_config": {
+    "sample_rate": 16000,
+    "hop_length": 320,
+    "n_fft": 512,
+    "win_length": 400,
+    "n_mels": 80,
+    "channels": [
+      16,
+      32,
+      64
+    ],
+    "hidden_size": 128,
+    "gru_layers": 2,
+    "dropout": 0.4
+  },
+  "adapter_options": {
+    "variant": "fusion",
+    "normalize_mode": "layernorm",
+    "learned_pool": true,
+    "boundary_head": true,
+    "relative_position": false,
+    "reliability_gate": false
+  },
+  "layers": [
+    6,
+    9,
+    12
+  ],
+  "optimizer": "AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "gradient_clip": 5.0,
+  "losses": {
+    "main20": 1.0,
+    "main160": 1.0,
+    "coarse_aux": 0.5,
+    "boundary": 0.1,
+    "consistency": 0.05,
+    "C1": 0.0,
+    "C2": 0.0
+  },
+  "train_cache_sha256": "9d508c83a0e7e334b6ba586ced79cb82d31782d823113e98a961ff5733db669b",
+  "dev_cache_sha256": "89369466558991ecaebc4907f3e512ff8c3e1e0019192a193196410662c267e6",
+  "train_ssl": {
+    "schema": "ps_frozen_wavlm_multilayer_cache_v1",
+    "split": "train",
+    "layers": [
+      6,
+      9,
+      12
+    ],
+    "frozen": true,
+    "model_id": "microsoft/wavlm-base-plus",
+    "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+    "model_sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+    "reference": "/root/research/nndl_partial_speech/cache/fixed_ps/reference/train",
+    "reference_sha256": "9d508c83a0e7e334b6ba586ced79cb82d31782d823113e98a961ff5733db669b",
+    "recordings": 6345,
+    "channels": 3,
+    "dtype": "float32",
+    "source_sha256": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+    "test_read": false,
+    "normalization": "none; unchanged official preprocessor",
+    "grid": "stride320/receptive400/sidepad40; unchanged full recording storage grid",
+    "status": "complete",
+    "shape": [
+      3,
+      1110368,
+      3,
+      768
+    ],
+    "features_sha256": "6de23f8706802fad06ac44a292abe8551103e6bd71e15f5ae0e26101b1860997",
+    "elapsed_seconds": 199.93809601664543,
+    "source_unchanged": true
+  },
+  "dev_ssl": {
+    "schema": "ps_frozen_wavlm_multilayer_cache_v1",
+    "split": "dev",
+    "layers": [
+      6,
+      9,
+      12
+    ],
+    "frozen": true,
+    "model_id": "microsoft/wavlm-base-plus",
+    "revision": "4c66d4806a428f2e922ccfa1a962776e232d487b",
+    "model_sha256": "3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51",
+    "reference": "/root/research/nndl_partial_speech/cache/fixed_ps/reference/dev",
+    "reference_sha256": "89369466558991ecaebc4907f3e512ff8c3e1e0019192a193196410662c267e6",
+    "recordings": 2484,
+    "channels": 1,
+    "dtype": "float32",
+    "source_sha256": "80f91b86e0eb79f77c6169c9333419acf6d3b15d76d51c8a4eda545673dd5a0f",
+    "test_read": false,
+    "normalization": "none; unchanged official preprocessor",
+    "grid": "stride320/receptive400/sidepad40; unchanged full recording storage grid",
+    "status": "complete",
+    "shape": [
+      1,
+      442776,
+      3,
+      768
+    ],
+    "features_sha256": "1747e956c26afb5e24366bbfe4e87dd5e5a4400560176843bd69935021096029",
+    "elapsed_seconds": 24.669814735651016,
+    "source_unchanged": true
+  },
+  "train_uid_sha256": "3b02c95393d0de6c632e7313312f53650879c369efe1923baf78566772b186f7",
+  "dev_uid_sha256": "10bfc5d5e8ff2cf86b67702e48876b1115e23ec8f30352d73276958ea38c53e1",
+  "selection": "Epoch 0 eligible. DEV real-duration FPR <=5%; maximum Event-F1 at IoU 0.5; earliest tie.",
+  "augmentation": "Three original clean/noise20dB/EQ views, rotated by epoch",
+  "historical_base_commit": "483c0252cf8b7104376399008d21d414fdced0b6",
+  "eval_read": false,
+  "implementation_sha256": {
+    "trainer.py": "b4145be65976d3a5193ade15eb5ce3a29e1c5c76227905f519c023b03d947e9d",
+    "event_losses.py": "7616c21927cfae816ac67571ae4dfb0c433af4d68f4d5957df9d861dd7183c36"
+  }
+}

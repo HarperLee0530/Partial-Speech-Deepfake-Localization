@@ -1,5 +1,7 @@
 # PS 部分伪造语音定位：冻结 WavLM＋边界辅助双分辨率 CNN-BiGRU
 
+> **本分支说明：** `reproduce/s1-seed666-667-20261121` 仅归档已评价的 S1 研究候选与 A0 配对对照，**不将 S1 设为当前主基线**。代码入口、训练环境、冻结权重、结果及复现限制见 [S1 复现包](reproductions/s1_20261121/README.md)。
+
 **当前默认主方案为 `wavlm_frozen`**：用冻结的 WavLM-Base-Plus 替换 Log-Mel 前端，再训练投影层、CNN-BiGRU 和双分辨率边界辅助模块。训练保留信道增强，输出原生 20 ms 伪造区间。这是离线定位模型。
 
 2026-11-16 按已完成的对照结果切换工程主线；不重训、不重新选择轮次或测试阈值。原 Mel 方案及其权重保留作对照。[中文方法论](docs/main_methodology_zh.md) · [完整结果与审计](docs/results_wavlm_frozen_20261116.json) · [中文结果](docs/results_wavlm_frozen_20261116.txt)。

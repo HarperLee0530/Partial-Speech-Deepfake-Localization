@@ -1,0 +1,12 @@
+{
+  "status": "verified",
+  "historical": false,
+  "audio_audit_sha256": "8e0b55dda935656d7bd224b54774772a12e714edcc7fde07dd0cb9ed81c91d25",
+  "gpu_uuid": "GPU-8a300eaa-6c96-9b7b-bdbc-ec174c306d3e",
+  "cache_metadata": {
+    "reference/train": "9d508c83a0e7e334b6ba586ced79cb82d31782d823113e98a961ff5733db669b",
+    "reference/dev": "89369466558991ecaebc4907f3e512ff8c3e1e0019192a193196410662c267e6",
+    "layers/train": "847d5f9656f33cef93fd72ebede36616aa5b4254e74453fdb11f114b49998eba",
+    "layers/dev": "d2ac963d3f3fde2dd52304fb67369190c05986b9897ba2804461c1c6748d8997"
+  }
+}
